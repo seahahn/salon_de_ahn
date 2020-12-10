@@ -134,5 +134,5 @@
 ?>
 	<script>
 		alert("글이 작성되었습니다.");
-		// location.href = 'board_list.php?ctgr=<?=$category?>';
+		location.href = 'board_list.php?ctgr=<?=$category?>';
 	</script>

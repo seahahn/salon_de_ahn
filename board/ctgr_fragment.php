@@ -1,11 +1,11 @@
 
-    <select class="custom-select col-8 mr-2" name="category" <?php if(isset($_GET['num'])) echo 'disabled';?>>
+    <select class="custom-select col-8 mr-2" name="category" id="category" <?php if(isset($_GET['num'])) echo 'disabled';?>>
         <?php
         if(isset($_POST['category'])){ // 글 읽기 상태에서 글쓰기 누른 경우. 읽던 글의 카테고리 선택하게 함
             $category = $_POST['category'];
         ?>
         <script>console.log('post ctgr');</script>
-        <option>게시판 분류</option> <!-- 마이페이지 내가 쓴 글 목록에서 글쓰기 누른 경우는 이게 초기값으로 지정됨(해당되는 카테고리가 없기 때문)-->
+        <option value="none_category">게시판 분류</option> <!-- 마이페이지 내가 쓴 글 목록에서 글쓰기 누른 경우는 이게 초기값으로 지정됨(해당되는 카테고리가 없기 때문)-->
         <option disabled>- IT 개발 -</option>
         <?php
         if($role == "ADMIN") {

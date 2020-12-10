@@ -109,7 +109,7 @@ input, select, textarea {
 
 	html, body {
 		background-color: #101010;
-		overflow: hidden;
+		/* overflow-x: hidden; */
 	}
 
 /* Type */
@@ -833,14 +833,14 @@ input, select, textarea {
 		-ms-transition: opacity 0.75s ease, right 0.75s ease, left 0.75s ease, visibility 0.75s;
 		transition: opacity 0.75s ease, right 0.75s ease, left 0.75s ease, visibility 0.75s;
 		-webkit-overflow-scrolling: touch;
-		position: fixed;
-		top: 0;
+		position: absolute;
+		/* top: 0; */
 		width: 22.5em;
-		height: 100%;
+		height: 70vh;
 		background: #fff;
 		outline: 0;
 		overflow-x: hidden;
-		overflow-y: auto;
+		/* overflow-y: auto; */
 		text-align: right;
 		visibility: visible;
 		z-index: 10000;
@@ -936,6 +936,111 @@ input, select, textarea {
 			font-size: 2.25em;
 			font-weight: 700;
 		}
+
+	#header_top {
+		position: relative;
+		background-image: url("/images/header.jpg");
+		background-size: cover;
+		background-position: center center;
+		background-attachment: fixed;
+		color: #fff;
+		text-align: center;
+		padding: 7.5em 0 2em 0;
+		cursor: default;
+	}
+
+		#header_top:before {
+			content: '';
+			display: inline-block;
+			vertical-align: middle;
+			height: 100%;
+		}
+
+		#header_top .inner {
+			position: relative;
+			z-index: 1;
+			margin: 0;
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		#header_top header {
+			display: inline-block;
+		}
+
+			#header_top header > p {
+				font-size: 1.25em;
+				margin: 0;
+			}
+
+		#header_top h1 {
+			color: #fff;
+			font-size: 3em;
+			line-height: 1em;
+		}
+
+			#header_top h1 a {
+				color: inherit;
+			}
+
+		#header_top .button {
+			display: inline-block;
+			border-radius: 100%;
+			width: 4.5em;
+			height: 4.5em;
+			line-height: 4.5em;
+			text-align: center;
+			font-size: 1.25em;
+			padding: 0;
+		}
+
+		#header_top hr {
+			top: 1.5em;
+			margin-bottom: 3em;
+			border-bottom-color: rgba(192, 192, 192, 0.35);
+			box-shadow: inset 0 1px 0 0 rgba(192, 192, 192, 0.35);
+		}
+
+			#header_top hr:before, #header_top hr:after {
+				background: rgba(192, 192, 192, 0.35);
+			}
+
+		#header_top footer {
+			margin: 1em 0 0 0;
+		}
+
+	body.homepage #header_top {
+		height: 100vh;
+		min-height: 40em;
+	}
+
+		body.homepage #header_top h1 {
+			font-size: 4em;
+		}
+
+		body.homepage #header_top:after {
+			content: '';
+			background: #1C0920;
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			-moz-transition: opacity 2.5s ease-in-out;
+			-webkit-transition: opacity 2.5s ease-in-out;
+			-ms-transition: opacity 2.5s ease-in-out;
+			transition: opacity 2.5s ease-in-out;
+			-moz-transition-delay: 0.5s;
+			-webkit-transition-delay: 0.5s;
+			-ms-transition-delay: 0.5s;
+			transition-delay: 0.5s;
+		}
+
+	body.homepage.is-preload #header_top:after {
+		opacity: 1;
+	}
 
 /* Footer */
 
@@ -1101,10 +1206,10 @@ input, select, textarea {
 		-webkit-transition: opacity 0.75s ease, width 0.75s ease;
 		-ms-transition: opacity 0.75s ease, width 0.75s ease;
 		transition: opacity 0.75s ease, width 0.75s ease;
-		position: absolute;
+		position: relative;
 		top: 0;
 		width: calc(100% - 22.5em);
-		height: 100%;
+		height: 70vh;
 		left: 0;
 	}
 

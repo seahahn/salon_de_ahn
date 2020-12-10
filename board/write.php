@@ -101,7 +101,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
 								
 
                                 <div id="board_write">
-                                    <form action="write_ok.php" method="post" enctype="multipart/form-data">
+                                    <form name="write" id="write" action="write_ok.php" method="post" enctype="multipart/form-data">
                                         <table class="table table-striped" style="border: 1px solid #ddddda">
                                             <thead>                                                
                                             </thead>	
@@ -153,7 +153,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                                                 <?php if(isset($_GET['num'])) {;?>
                                                 <input type="hidden" name="category" value="<?=$category?>"/> <!-- 게시물의 카테고리. 사용자가 답글로 눌러서 들어올 경우 상단의 select가 비활성화되어 값이 안 넘어가기에 별도로 만들어서 넘겨줌 -->
                                                 <?php } ?>
-                                                <button type="submit" class="btn-lg">글쓰기</button>
+                                                <button type="button" class="btn-lg" onclick="check_ctgr()">글쓰기</button>
                                                 <a href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg">목록</button></a>
                                             </div>
                                         </div>
@@ -194,6 +194,18 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                 // Replace the <textarea id="editor1"> with a CKEditor 4
                 // instance, using default configuration.
                 CKEDITOR.replace( 'ucontent' );
+            </script>
+
+        <!-- 게시판 분류 선택 여부 검증 후 선택 안했으면 alert 띄우기 -->
+            <script>
+                function check_ctgr(){
+                    if($("#category").val() == "none_category"){                        
+                        alert("게시판 분류를 선택해주세요.");
+                        return;
+                    }
+
+                    document.write.submit();
+                }
             </script>
 	</body>
 </html>

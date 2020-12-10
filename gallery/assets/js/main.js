@@ -42,6 +42,12 @@ var main = (function($) { var _ = {
 	$body: null,
 
 	/**
+	 * mid.
+	 * @var {jQuery}
+	 */
+	$mid: null,
+
+	/**
 	 * Main wrapper.
 	 * @var {jQuery}
 	 */
@@ -141,20 +147,22 @@ var main = (function($) { var _ = {
 		// Window, body.
 			_.$window = $(window);
 			_.$body = $('body');
+			_.$mid = $('#mid');
+			_.$viewer = $('#viewer');
 
 		// Thumbnails.
 			_.$thumbnails = $('#thumbnails');
 
 		// Viewer.
-			_.$viewer = $(
-				'<div id="viewer">' +
-					'<div class="inner">' +
-						'<div class="nav-next"></div>' +
-						'<div class="nav-previous"></div>' +
-						'<div class="toggle"></div>' +
-					'</div>' +
-				'</div>'
-			).appendTo(_.$body);
+			// _.$viewer = $(
+			// 	'<div class="col" id="viewer">' +
+			// 		'<div class="inner">' +
+			// 			'<div class="nav-next"></div>' +
+			// 			'<div class="nav-previous"></div>' +
+			// 			'<div class="toggle"></div>' +
+			// 		'</div>' +
+			// 	'</div>'
+			// ).appendTo(_.$mid);
 
 		// Nav.
 			_.$navNext = _.$viewer.find('.nav-next');

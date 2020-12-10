@@ -6,31 +6,65 @@
 -->
 <html>
 	<head>
-		<title>Lens by HTML5 UP</title>
+		<title>Salon de Ahn</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="/bootstrap/bootstrap_custom.css"/>
+		
+		<link rel="stylesheet" href="assets/css/main_gal.css" />
+		<link rel="stylesheet" href="/assets/css/main_custom.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript_gal.css" /></noscript>
+		<style>
+			section, article {
+				margin-bottom: 0;
+			}
+			.row {
+				margin-top: 0;
+				margin-left: 0;
+			}
+			#header {
+				padding: 3em 2.25em 1.75em 2.25em;
+				margin: 0 0 0 0;
+				color: #0c0a0a;
+				background-image: none;
+			}
+			#header h1 {
+				color: #151010;
+			}
+			#footer {
+				padding: 0 0 0 0;
+			}
+			#main::-webkit-scrollbar { 
+				display: none !important; /* 윈도우 크롬 등 */
+			}
+		</style>
 	</head>
-	<body class="is-preload-0 is-preload-1 is-preload-2">
+	<body class="is-preload-0 is-preload-1 is-preload-2" style="overflow-x: hidden;">
 
+			<div id="header_top">
+				<?php include_once "../fragments/header.php"; ?>
+			</div>
+
+		<div id="mid" class="row">
+
+
+			<div class="" id="viewer">
+				<div class="inner">
+					<div class="nav-next"></div>
+					<div class="nav-previous"></div>
+					<div class="toggle"></div>
+				</div>
+			</div>
 		<!-- Main -->
-			<div id="main">
-
+			<div id="main" class="main p-0">
 				<!-- Header -->
 					<header id="header">
-						<h1>Lens</h1>
-						<p>Just another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-							<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
+						<h1>Gallery</h1>
+						<p>멋진 갤러리</p>						
 					</header>
 
 				<!-- Thumbnail -->
-					<section id="thumbnails">
+					<section id="thumbnails" class="p-0 m-0">
 						<article>
 							<a class="thumbnail" href="images/fulls/01.jpg" data-position="left center"><img src="images/thumbs/01.jpg" alt="" /></a>
 							<h2>Diam tempus accumsan</h2>
@@ -93,20 +127,38 @@
 						</article>
 					</section>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<ul class="copyright">
-							<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a>.</li>
-						</ul>
-					</footer>
+				
 
-			</div>
+			</div>					
 
-		<!-- Scripts -->
+		</div>
+
+			<!-- Footer -->
+			<footer id="footer" class="m-0">
+				<?php include_once "../fragments/footer.php"; ?>
+			</footer>			
+
+			<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/main.js"></script>
 
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+			<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+			
+		<!-- Bootstrap Stripts-->
+			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="/bootstrap/bootstrap.bundle.js"></script>
+            <script src="/bootstrap/bootstrap.bundle.min.js"></script>
+			
 	</body>
 </html>
