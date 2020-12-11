@@ -126,9 +126,7 @@
 		content = '".$content."',  		
 		wsecret = '".$wsecret."',
 		att_file = '".$filepath_array_str."'
-		");
-		echo '들어옴';
-		print_r($mq);
+		");		
 	}
 	
 ?>

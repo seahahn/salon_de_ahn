@@ -391,7 +391,8 @@ var main = (function($) { var _ = {
 			_.$thumbnails
 				.on('click', '.thumbnail', function(event) {
 
-					var $this = $(this);
+					var $this = $(this);					
+					// console.log($this);
 
 					// Stop other events.
 						event.preventDefault();
@@ -413,6 +414,7 @@ var main = (function($) { var _ = {
 					var	$this = $(this),
 						$thumbnail = $this.children('.thumbnail'),
 						s;
+						console.log($this);
 
 					// Slide object.
 						s = {
@@ -549,7 +551,7 @@ var main = (function($) { var _ = {
 			// Thumbnail.
 				newSlide.$parent
 					.addClass('active')
-					.focus();
+					.focus();					
 
 			// Slide.
 				var f = function() {

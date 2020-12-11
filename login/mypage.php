@@ -21,35 +21,45 @@ foreach (mq("SELECT nickname FROM user WHERE email = '$email'") as $field){
                 <?php include_once "../fragments/header.php"; ?>
             </div>
 
-            <div class="container">
-                <div class="row">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light flex-fill">
-                        <a class="col navbar-brand" href="#">카테고리 목록</a>
+            <div class="container">                
+                <div class="row">                                        
+                    <nav class="mt-sm-4 navbar navbar-expand-lg navbar-light bg-light flex-fill p-0 d-flex justify-content-center">
+                        <!-- <a class="col navbar-brand" href="#">카테고리 목록</a> -->
                         <button class="col-3 navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
                             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">                                
+                            <ul class="col-auto navbar-nav mt-2 mt-lg-0">                                
                                 <li class="nav-item">                                    
-                                    <a class="nav-link" href="/board/board_list.php?ctgr=<?=$useremail?>&unum=<?=$usernum?>">내가 쓴 게시물</a>
+                                    <a class="nav-link px-4 mx-4" href="/board/board_list.php?ctgr=<?=$useremail?>&unum=<?=$usernum?>">내가 쓴 게시물</a>
                                 </li>
                                 <li class="nav-item">
                                     <input type="hidden" name="useremail" value="<?=$useremail?>"/>
                                     <input type="hidden" name="usernum" value="<?=$usernum?>"/>
-                                    <a class="nav-link" href="/board/reply_list.php?ctgr=<?=$useremail?>&unum=<?=$usernum?>">내가 쓴 댓글</a>
+                                    <a class="nav-link px-4 mx-4" href="/board/reply_list.php?ctgr=<?=$useremail?>&unum=<?=$usernum?>">내가 쓴 댓글</a>
                                 </li>
                                 <li class="nav-item">
-                                    <form name="deleteSbmt" id="deleteSbmt" action="./delete_ok.php"><a class="nav-link" href="javascript:;" onclick="deleteUser();">회원 탈퇴</a></form>
+                                    <form name="deleteSbmt" id="deleteSbmt" action="./delete_ok.php"><a class="nav-link px-4 mx-4" href="javascript:;" onclick="deleteUser();">회원 탈퇴</a></form>
                                 </li>
-                            </ul>
-                            <form class="form-inline my-2 my-lg-0">
+                            </ul>                            
+                            <form class="col d-flex justify-content-end" action="../board/search_result.php" method="get">
+                                <select class="custom-select col-auto" name="search_category" style="display: inline-block; width: 18%;">
+                                    <option value="title">제목</option>
+                                    <option value="writer">글쓴이</option>
+                                    <option value="content">내용</option>
+                                </select>
+                                <input class="form-control mr-sm-2 col-auto" placeholder="Search" type="search" name="search" size="50" required="required" style="display: inline-block; width: 30%;">
+                                <button type="submit" class="btn-sm col-auto">검색</button>
+                            </form>
+                            
+                            <!-- <form class="form-inline my-2 my-lg-0">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </form>
+                            </form> -->
                         </div>
-                    </nav>
+                    </nav>                    
                 </div>
                 <br/>
 
@@ -78,7 +88,7 @@ foreach (mq("SELECT nickname FROM user WHERE email = '$email'") as $field){
                                 <span id="pw_check_msg" data-check="0"></span>
                             </div>                            
                             <div>                                
-                                <button class="col-3" type="button" onclick="check_input()">정보 수정</button>                                
+                                <button class="col-auto" type="button" onclick="check_input()">정보 수정</button>                                
                             </div>
                         </form>
                     </fieldset>

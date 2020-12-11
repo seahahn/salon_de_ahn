@@ -55,8 +55,8 @@
                             <li><a href="/intro/it_dev_portfolio.php">IT개발 포트폴리오</a></li>
                         </ul>
                     </li>
-                    <li><a href="/board/board_list.php?ctgr=<?=$it_dev_learnings?>">학습 내용</a></li>
-                    <li><a href="/board/board_list.php?ctgr=<?=$it_dev_usefulinfo?>">유용한 정보</a></li>
+                    <li><a href="/board_ahn/board_list.php?ctgr=<?=$it_dev_learnings?>">학습 내용</a></li>
+                    <li><a href="/board_ahn/board_list.php?ctgr=<?=$it_dev_usefulinfo?>">유용한 정보</a></li>
                     <li><a href="/board/board_list.php?ctgr=<?=$it_dev_discussion?>">IT 주제 게시판</a>
                         <ul>
                             <li><a href="/board/board_list.php?ctgr=<?=$it_dev_discussion?>">토론</a></li>
@@ -75,7 +75,7 @@
                             <li><a href="/intro/tradingrecord.php">거래 기록</a></li>
                         </ul>
                     </li>                    
-                    <li><a href="/board/board_list.php?ctgr=<?=$finance_usefulinfo?>">유용한 정보</a></li>                        
+                    <li><a href="/board_ahn/board_list.php?ctgr=<?=$finance_usefulinfo?>">유용한 정보</a></li>                        
                     <li><a href="/board/board_list.php?ctgr=<?=$finance_discussion?>">금융 주제 게시판</a>
                         <ul>
                             <li><a href="/board/board_list.php?ctgr=<?=$finance_discussion?>">토론</a></li>
@@ -101,12 +101,12 @@
                             </li>
                         </ul>
                     </li>                    
-                    <li><a href="/board/board_list.php?ctgr=<?=$languages_usefuldata?>">학습 자료</a>
+                    <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>">학습 자료</a>
                         <ul>
-                            <li><a href="/board/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=en">영어</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=cn">중국어</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=ru">러시아어</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=ge">독일어</a></li>
+                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=en">영어</a></li>
+                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=cn">중국어</a></li>
+                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=ru">러시아어</a></li>
+                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=ge">독일어</a></li>
                         </ul>
                     </li>                        
                     <li><a href="/board/board_list.php?ctgr=<?=$languages_discussion?>">언어 학습 주제 게시판</a>
@@ -119,9 +119,9 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="/board/board_list.php?ctgr=<?=$daily_life?>">Daily Life</a>
+            <li><a href="/board_ahn/board_list.php?ctgr=<?=$daily_life?>">Daily Life</a>
                 <ul>                
-                    <li><a href="/board/board_list.php?ctgr=<?=$daily_life?>">일상 기록</a></li>
+                    <li><a href="/board_ahn/board_list.php?ctgr=<?=$daily_life?>">일상 기록</a></li>
                     <li><a href="/board/board_list.php?ctgr=<?=$daily_life_share?>">자유 주제 글</a></li>
                     <li><a href="/gallery/gallery.php">일상 사진 모음</a></li>
                 </ul>

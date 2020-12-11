@@ -108,7 +108,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                             <tbody>                                                
                                                 <tr>
                                                     <td>
-                                                        <div class="row">                                                        
+                                                        <div class="d-flex">                                                        
                                                             <?php include_once "./ctgr_fragment.php"; ?>                                                        
                                                         </div>
                                                     </td>
@@ -150,10 +150,10 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                 <input type="checkbox" class="custom-control-input" value="1" id="wsecret" name="wsecret">
                                                 <label class="custom-control-label" for="wsecret">비밀글</label>
                                             </div>
-                                            <div class="row justify-content-end">
-                                                <a href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg">목록</button></a>
-                                                <button type="button" class="btn-lg" onclick="history.go(-1);">취소</button></a>
-                                                <button type="submit" class="btn-lg">수정하기</button>
+                                            <div class="row col justify-content-end">
+                                                <a href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg ml-1 px-3">목록</button></a>
+                                                <button type="button" class="btn-lg ml-1 px-3" onclick="history.go(-1);">취소</button></a>
+                                                <button type="submit" class="btn-lg ml-1 px-3">수정</button>
                                             </div>
                                         </div>
                                     </form>

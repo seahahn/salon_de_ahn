@@ -288,7 +288,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                 <!-- 목록, 수정, 삭제 -->
                                 <div class="row justify-content-between" method="POST" action="update.php">
                                     <div class="row col-auto">
-                                        <form action="write.php" method="POST">
+                                        <form action="write.php" method="POST" class="pl-0">
                                             <input type="hidden" name="category" value="<?=$board['category']?>"/>
                                             <a class="a_padding"><button type="submit" class="col-auto mr-auto btn-lg">글쓰기</button></a>
                                         </form>

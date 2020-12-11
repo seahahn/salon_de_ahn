@@ -1,5 +1,5 @@
 
-    <select class="custom-select col-8 mr-2" name="category" id="category" <?php if(isset($_GET['num'])) echo 'disabled';?>>
+    <select class="custom-select col-8 mr-2 p-0" name="category" id="category" <?php if(isset($_GET['num'])) echo 'disabled';?>>
         <?php
         if(isset($_POST['category'])){ // 글 읽기 상태에서 글쓰기 누른 경우. 읽던 글의 카테고리 선택하게 함
             $category = $_POST['category'];
@@ -10,8 +10,8 @@
         <?php
         if($role == "ADMIN") {
         ?>
-        <option <?php if($category == 'it_dev_learnings') echo 'selected'?> value="it_dev_learnings">학습 내용</option>
-        <option <?php if($category == 'it_dev_usefulinfo') echo 'selected'?> value="it_dev_usefulinfo">유용한 정보</option>
+        <!-- <option <?php if($category == 'it_dev_learnings') echo 'selected'?> value="it_dev_learnings">학습 내용</option>
+        <option <?php if($category == 'it_dev_usefulinfo') echo 'selected'?> value="it_dev_usefulinfo">유용한 정보</option> -->
         <?php }?>
         <option <?php if($category == 'it_dev_discussion') echo 'selected'?> value="it_dev_discussion">토론</option>
         <option <?php if($category == 'it_dev_recordshare') echo 'selected'?> value="it_dev_recordshare">경험 공유</option>
@@ -22,7 +22,7 @@
         <?php
         if($role == "ADMIN") {
         ?>
-        <option <?php if($category == 'finance_usefulinfo') echo 'selected'?> value="finance_usefulinfo">유용한 정보</option>
+        <!-- <option <?php if($category == 'finance_usefulinfo') echo 'selected'?> value="finance_usefulinfo">유용한 정보</option> -->
         <?php }?>
         <option <?php if($category == 'finance_discussion') echo 'selected'?> value="finance_discussion">토론</option>
         <option <?php if($category == 'finance_recordshare') echo 'selected'?> value="finance_recordshare">거래 기록 공유</option>
@@ -33,7 +33,7 @@
         <?php
         if($role == "ADMIN") {
         ?>
-        <option <?php if($category == 'languages_usefuldata') echo 'selected'?> value="languages_usefuldata">학습 자료</option>        
+        <!-- <option <?php if($category == 'languages_usefuldata') echo 'selected'?> value="languages_usefuldata">학습 자료</option>         -->
         <?php }?>
         <option <?php if($category == 'languages_discussion') echo 'selected'?> value="languages_discussion">토론</option>
         <option <?php if($category == 'languages_recordshare') echo 'selected'?> value="languages_recordshare">학습 기록</option>
@@ -44,7 +44,7 @@
         <?php
         if($role == "ADMIN") {
         ?>
-        <option <?php if($category == 'daily_life') echo 'selected'?> value="daily_life">일상 기록</option>
+        <!-- <option <?php if($category == 'daily_life') echo 'selected'?> value="daily_life">일상 기록</option> -->
         <?php }?>
         <option <?php if($category == 'daily_life_share') echo 'selected'?> value="daily_life_share">자유 주제 글</option>
 
@@ -173,7 +173,7 @@
         // }
         ?>
     </select>
-    <select class="custom-select col" name="headpiece" <?php if(isset($_GET['num'])) echo 'disabled';?>>
+    <select class="custom-select col p-0" name="headpiece" <?php if(isset($_GET['num'])) echo 'disabled';?>>
         <option selected>말머리</option>
         <!-- <option value="1">One</option>
         <option value="2">Two</option>

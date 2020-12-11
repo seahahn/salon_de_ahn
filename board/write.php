@@ -68,31 +68,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
 
 			<!-- Main -->
 				<!-- <div class="wrapper style1"> -->
-					<div class="container">
-                        <!-- <div class="row">
-							<nav class="navbar navbar-expand-lg navbar-light bg-light flex-fill">
-								<a class="col navbar-brand" href="#">카테고리 목록</a>
-								<button class="col-3 navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-									aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-							
-								<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-										<li class="nav-item">
-											<a class="nav-link" href="#">글 목록 <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#">의견/정보 공유</a>
-										</li>										
-									</ul>
-									<form class="form-inline my-2 my-lg-0">
-										<input class="form-control mr-sm-2" type="search" placeholder="Search">
-										<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-									</form>
-								</div>
-							</nav>
-						</div>									 -->
+					<div class="container">                        
                         <br/>                       
 
 						<div class="row"> <!-- 메인 글 영역-->
@@ -108,7 +84,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <div class="row">
+                                                        <div class="d-flex">
                                                             <?php include_once "./ctgr_fragment.php"; ?>
                                                         </div>
                                                     </td>
@@ -154,7 +130,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                                                 <input type="hidden" name="category" value="<?=$category?>"/> <!-- 게시물의 카테고리. 사용자가 답글로 눌러서 들어올 경우 상단의 select가 비활성화되어 값이 안 넘어가기에 별도로 만들어서 넘겨줌 -->
                                                 <?php } ?>
                                                 <button type="button" class="btn-lg" onclick="check_ctgr()">글쓰기</button>
-                                                <a href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg">목록</button></a>
+                                                <a class="pl-1" href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg">목록</button></a>
                                             </div>
                                         </div>
                                     </form>

@@ -1,3 +1,6 @@
+<?php 
+include_once "../db_con.php";
+?>
 <!DOCTYPE HTML>
 <!--
 	Lens by HTML5 UP
@@ -32,22 +35,89 @@
 				color: #151010;
 			}
 			#footer {
-				padding: 0 0 0 0;
+				padding: 1em 0 0 0;
 			}
-			#main::-webkit-scrollbar { 
-				display: none !important; /* 윈도우 크롬 등 */
+			#main {
+				overflow : hidden;
+				/* display : flex; */
+				/* flex-direction: column; */
+			}
+			#main #header {
+				height: 30%;
+				overflow-y: auto;
+			}
+			#main #header::-webkit-scrollbar { 
+				display: none !important;
+			}
+			#main #thumbnails {
+				/* overflow-x : hidden; */
+				height: 70%;
+    			overflow-y: auto;
+				/* flex: 1; */
+				/* display: none !important; 윈도우 크롬 등 */
+			}
+			#main #thumbnails::-webkit-scrollbar { 
+				display: none !important;
 			}
 		</style>
+
+		<!-- 사진 업로드 기능 -->            
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+        <script type="text/javascript">
+        $(document).ready (function(){            
+            $("#fileAdd").click(function(){
+                $("#fileList").append(					
+					'<input type="file" class="col-8 btn-sm" id="fileUpload" name="photos[]">\
+					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
+					<input type="text" class="form-control form-control-sm" name="title[]">\
+					<input type="text" class="form-control form-control-sm" name="caption[]">'
+                );
+                $(".btnRemove").on('click', function(){
+                    // $(this).prev().remove();
+					// $(this).next().remove();					
+					$(this).siblings().remove();
+					$(this).remove();
+					
+                });                            
+            });
+		});
+		</script>
+
+		<!-- 사진 불러오기 무한 스크롤 기능 -->
+		<script>
+			$(function (e) {
+				append_list();
+				// 스크롤 이벤트
+				$(window).scroll(function() {
+					var dh = $(document).height();
+					var wh = $(window).height();
+					var wt = $(window).scrollTop();
+					if(dh == (wh + wt)){
+						append_list();
+					}
+				});
+			});
+
+			var start = 0;
+			var list = 8;
+			function append_list() {
+				$.post("./list_append.php", {start:start, list:list}, function(data) {
+					if(data){
+						$("#thumbnails").append(data);
+						start += list;
+					}
+				});
+			}
+		</script>
 	</head>
 	<body class="is-preload-0 is-preload-1 is-preload-2" style="overflow-x: hidden;">
+	<div id="page-wrapper">
 
-			<div id="header_top">
-				<?php include_once "../fragments/header.php"; ?>
-			</div>
+		<div id="header_top">
+			<?php include_once "../fragments/header.php"; ?>
+		</div>
 
 		<div id="mid" class="row">
-
-
 			<div class="" id="viewer">
 				<div class="inner">
 					<div class="nav-next"></div>
@@ -58,87 +128,51 @@
 		<!-- Main -->
 			<div id="main" class="main p-0">
 				<!-- Header -->
-					<header id="header">
+					<header id="header" class="d-flex flex-column">
 						<h1>Gallery</h1>
-						<p>멋진 갤러리</p>						
+						<p class="mt-3 mb-1">멋진 갤러리</p>						
+						<?php 
+							if($role == "ADMIN") {
+						?>							
+							<form action="photo_upload.php" method="post" enctype="multipart/form-data">
+								<button type="submit" class="btn-sm">사진 업로드하기</button>
+								<button type="button" id="fileAdd" class="btn-sm">사진 추가</button>
+								<ul id="fileList"></ul>
+							</form>
+						<?php
+							}
+						?>
 					</header>
 
 				<!-- Thumbnail -->
+				<!-- <div id="thumbnail_area"> -->
 					<section id="thumbnails" class="p-0 m-0">
 						<article>
-							<a class="thumbnail" href="images/fulls/01.jpg" data-position="left center"><img src="images/thumbs/01.jpg" alt="" /></a>
-							<h2>Diam tempus accumsan</h2>
+							<a class="thumbnail" href="../images/1607669888_91298.jpg"><img src="../images/1607669888_91298.jpg" alt="" /></a>
+							<h2>1</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						</article>
+						</article>						
 						<article>
-							<a class="thumbnail" href="images/fulls/02.jpg"><img src="images/thumbs/02.jpg" alt="" /></a>
-							<h2>Vivamus convallis libero</h2>
-							<p>Sed velit lacus, laoreet at venenatis convallis in lorem tincidunt.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/03.jpg" data-position="top center"><img src="images/thumbs/03.jpg" alt="" /></a>
-							<h2>Nec accumsan enim felis</h2>
-							<p>Maecenas eleifend tellus ut turpis eleifend, vitae pretium faucibus.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/04.jpg"><img src="images/thumbs/04.jpg" alt="" /></a>
-							<h2>Donec maximus nisi eget</h2>
-							<p>Tristique in nulla vel congue. Sed sociis natoque parturient nascetur.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/05.jpg" data-position="top center"><img src="images/thumbs/05.jpg" alt="" /></a>
-							<h2>Nullam vitae nunc vulputate</h2>
-							<p>In pellentesque cursus velit id posuere. Donec vehicula nulla.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/06.jpg"><img src="images/thumbs/06.jpg" alt="" /></a>
-							<h2>Phasellus magna faucibus</h2>
-							<p>Nulla dignissim libero maximus tellus varius dictum ut posuere magna.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/07.jpg"><img src="images/thumbs/07.jpg" alt="" /></a>
-							<h2>Proin quis mauris</h2>
-							<p>Etiam ultricies, lorem quis efficitur porttitor, facilisis ante orci urna.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/08.jpg"><img src="images/thumbs/08.jpg" alt="" /></a>
-							<h2>Gravida quis varius enim</h2>
-							<p>Nunc egestas congue lorem. Nullam dictum placerat ex sapien tortor mattis.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/09.jpg"><img src="images/thumbs/09.jpg" alt="" /></a>
-							<h2>Morbi eget vitae adipiscing</h2>
-							<p>In quis vulputate dui. Maecenas metus elit, dictum praesent lacinia lacus.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/10.jpg"><img src="images/thumbs/10.jpg" alt="" /></a>
-							<h2>Habitant tristique senectus</h2>
-							<p>Vestibulum ante ipsum primis in faucibus orci luctus ac tincidunt dolor.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/11.jpg"><img src="images/thumbs/11.jpg" alt="" /></a>
-							<h2>Pharetra ex non faucibus</h2>
-							<p>Ut sed magna euismod leo laoreet congue. Fusce congue enim ultricies.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/12.jpg"><img src="images/thumbs/12.jpg" alt="" /></a>
-							<h2>Mattis lorem sodales</h2>
-							<p>Feugiat auctor leo massa, nec vestibulum nisl erat faucibus, rutrum nulla.</p>
-						</article>
+							<a class="thumbnail" href="../images/1607669888_91298.jpg"><img src="../images/1607669888_91298.jpg" alt="" /></a>
+							<h2>2</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						</article>											
+
+						<?php 
+						
+						?>
 					</section>
-
-				
-
+				<!-- </div>			 -->
 			</div>					
-
 		</div>
 
 			<!-- Footer -->
 			<footer id="footer" class="m-0">
 				<?php include_once "../fragments/footer.php"; ?>
 			</footer>			
+	</div>
 
-			<!-- Scripts -->
+		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
