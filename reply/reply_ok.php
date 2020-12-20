@@ -64,10 +64,10 @@
 		in_num = '".$max_in_num."',
 		unum = '".$unum."',
 		con_num = '".$bno."',
-		email = '".$_POST['dat_mail']."',								
+		email = '".$_POST['dat_mail']."',
 		writer = '".$_POST['dat_user']."',
-		wdate ='".$date."',
-		content = '".$_POST['rep_con']."'
+		content = '".$_POST['rep_con']."',
+		wdate ='".$date."'
 		");
 
 		echo '<script>console.log("'.$max_in_num.' '.$unum.' '.$bno.' '.$_POST['dat_mail'].' '.$_POST['dat_user'].' '.$date.' '.$_POST['rep_con'].'");</script>';

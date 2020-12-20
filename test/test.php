@@ -2,18 +2,22 @@
 	include_once "../util/config.php";
 	include_once "../db_con.php";	
 	
-	// $max_in_num_result = mq("SELECT MAX(in_num) FROM reply");
-	// $max_in_num_fetch = mysqli_fetch_row($max_in_num_result);
-	// if($max_in_num_fetch[0]%1000 != 0){
-	// 	$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000;
-	// } else {
-	// 	$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000+1000;
-	// }	
+	$max_in_num_result = mq("SELECT MAX(in_num) FROM test");
+	$max_in_num_fetch = mysqli_fetch_row($max_in_num_result);
+	if($max_in_num_fetch[0]%1000 != 0){
+		$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000;
+	} else {
+		$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000+1000;
+	}	
 	
 	// $unum = $_POST['unum'];
 	$bno = $_POST['bno'];
+	$unum = $_POST['unum'];
+	$dat_mail = $_POST['dat_mail'];
+	$dat_user = $_POST['dat_user'];
+	$rep_con = $_POST['rep_con'];
 	// $rno = $_POST['rno'];
-	// $date = date('Y-m-d H:i:s');
+	$date = date('Y-m-d H:i:s');
 
 	// $query = mq("SELECT * FROM reply");
 	// $exists = (mysqli_num_rows($query));
@@ -48,10 +52,10 @@
 	// 		$ans_depth = $depth;
 	// 	}
 		mq("INSERT test SET
-		email = '".$bno."',
-        a = '".$bno."',
-        b = '".$bno."',
-        c = '".$bno."'
+		email = '".$dat_mail."',
+        a = '".$unum."',
+        b = '".$date."',
+        c = '".$max_in_num."'
 		");
 	// } else {
 	// 	mq("INSERT reply SET
