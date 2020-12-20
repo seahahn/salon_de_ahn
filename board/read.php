@@ -328,16 +328,6 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                         }
                         $('#rep_con_new').val().replace(/\n/g, "<br>");
 
-                        // $.post("../reply/reply_ok.php", {
-                        //         "bno" : $(".bno").val(),
-                        //         "unum" : <?=$usernum?>,
-                        //         "dat_mail" : $(".dat_mail").val(),
-                        //         "dat_user" : $(".dat_user").val(),				
-                        //         "rep_con" : $("#rep_con_new").val()
-                        //     }, function(data) {
-                        //         location.reload();
-                        //     });
-
                         $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
                             url : "../reply/reply_ok.php",
                             type : "POST",                            
@@ -360,31 +350,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                 // location.href='/reply/reply_ok.php';
                                 
                             }
-                        });                                              
-
-                        // $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
-                        //     url : "../test/test.php",
-                        //     type : "POST",                            
-                        //     // contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                        //     data : {
-                        //         "bno" : $(".bno").val(),
-                        //         "unum" : <?=$usernum?>,
-                        //         "dat_mail" : $(".dat_mail").val(),
-                        //         "dat_user" : $(".dat_user").val(),				
-                        //         "rep_con" : $("#rep_con_new").val()
-                        //     },                            
-                        //     success : function(data){                
-                        //         console.log($(".bno").val());
-                        //         console.log(<?=$usernum?>);
-                        //         console.log($(".dat_mail").val());
-                        //         console.log($(".dat_user").val());
-                        //         console.log($("#rep_con_new").val());
-                        //         // alert("댓글이 작성되었습니다");
-                        //         location.reload();
-                        //         // location.href='/reply/reply_ok.php';
-                                
-                        //     }
-                        // });                                              
+                        });
                     });                    
 
                 /* 댓글 삭제 이벤트 */

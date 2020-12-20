@@ -1,10 +1,7 @@
 <?php
 include_once "../util/config.php";
 include_once "../login/login_check.php";
-// include_once "../util/ctgr_list.php";
 
-
-// $session = mt_rand(1,999);
 $session = $usernickname;
 ?>
 <!DOCTYPE html>
@@ -14,11 +11,7 @@ $session = $usernickname;
 	<script src="./js/jquery.js" type="text/javascript"></script>
 	<style type="text/css">
 	* {margin:0;padding:0;box-sizing:border-box;font-family:arial,sans-serif;resize:none;}
-	html,body {width:100%;height:100%;}
-	/* #wrapper {position:relative;margin:auto;max-width:1000px;height:100%;}
-	#chat_output {position:relative;top:0;left:0;padding:20px;width:70%;height:calc(70% - 100px);}
-	#chat_input {position:relative;bottom:100px;left:0;padding:10px;width:100%;height:100px;border:1px solid #ccc;}
-	#chat_btn {position:relative;bottom:100px;left:1000px;padding:10px;width:10%;height:100px;border:1px solid #ccc;} */
+	html,body {width:100%;height:100%;}	
 	</style>
 </head>
 <body>	
@@ -58,7 +51,7 @@ $session = $usernickname;
 			// Websocket
 			var websocket_server = new WebSocket("wss://salondeahn.me:777/");
 
-			websocket_server.onopen = function(e) {
+			websocket_server.onopen = function(e) { // 사용자 접속 시 서버에 사용자 정보 전달
 				websocket_server.send(					
 					JSON.stringify({
 						'type':'noti_in',
@@ -113,23 +106,19 @@ $session = $usernickname;
 					case 'user_list_set':
 						$('#user_list').append(json.msg); // 사용자 접속 시작
 						break;
-					case 'user_list_in':
-						// $('#user_list').text(json.msg); // 사용자 접속 목록
-						$('#user_list').append(json.msg); // 새로운 사용자 접속
-						// $('#user_list').remove(json.msg); // 사용자 접속 종료
+					case 'user_list_in':						
+						$('#user_list').append(json.msg); // 새로운 사용자 접속						
 						break;
-					case 'user_list_out':
-						// $('#user_list').text(json.msg); // 사용자 접속 목록
-						// $('#user_list').append(json.msg); // 사용자 접속 시작
+					case 'user_list_out':						
 						$(json.msg).remove(); // 사용자 접속 종료
 						break;
 					case 'double':
 						alert('동일한 계정이 채팅중입니다.');
 						location.href='/index.php';						
 						break;
-					case 'double_msgdel':						
-						$(json.msg).remove();
-						break;
+					// case 'double_msgdel':						
+					// 	$(json.msg).remove();
+					// 	break;
 				}
 			}
 			// Events
