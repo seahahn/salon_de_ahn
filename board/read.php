@@ -315,6 +315,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
             <script src="/bootstrap/bootstrap.bundle.min.js"></script>                    
 
         <!-- 댓글 작성 기능-->
+            <script type="text/javascript" src="/assets/js/jquery.ajax-cross-origin.min.js"></script>
             <script>
             /* 댓글 작성 이벤트(ajax) */
                 var session = "<?php echo $useremail; ?>"
@@ -337,28 +338,56 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                         //         location.reload();
                         //     });
 
+                        // $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
+                        //     url : "../reply/reply_ok.php",
+                        //     type : "POST",                            
+                        //     // contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                        //     data : {
+                        //         "bno" : $(".bno").val(),
+                        //         "unum" : <?=$usernum?>,
+                        //         "dat_mail" : $(".dat_mail").val(),
+                        //         "dat_user" : $(".dat_user").val(),				
+                        //         "rep_con" : $("#rep_con_new").val()
+                        //     },                            
+                        //     success : function(data){                
+                        //         console.log($(".bno").val());
+                        //         console.log(<?=$usernum?>);
+                        //         console.log($(".dat_mail").val());
+                        //         console.log($(".dat_user").val());
+                        //         console.log($("#rep_con_new").val());
+                        //         // alert("댓글이 작성되었습니다");
+                        //         location.reload();
+                        //         // location.href='/reply/reply_ok.php';
+                                
+                        //     }
+                        // });
+
                         $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
-                            url : "../reply/reply_ok.php",
+                            crossOrigin : true,
+                            url : "../test/test.php",
                             type : "POST",                            
+                            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                             data : {
-                                "bno" : $(".bno").val(),
-                                "unum" : <?=$usernum?>,
-                                "dat_mail" : $(".dat_mail").val(),
-                                "dat_user" : $(".dat_user").val(),				
-                                "rep_con" : $("#rep_con_new").val()
+                                "bno" : $(".bno").val()
+                                // "unum" : <?=$usernum?>,
+                                // "dat_mail" : $(".dat_mail").val(),
+                                // "dat_user" : $(".dat_user").val(),				
+                                // "rep_con" : $("#rep_con_new").val()
                             },                            
                             success : function(data){                
-                                console.log($(".bno").val());
-                                console.log(<?=$usernum?>);
-                                console.log($(".dat_mail").val());
-                                console.log($(".dat_user").val());
-                                console.log($("#rep_con_new").val());
+                                // console.log($(".bno").val());
+                                // console.log(<?=$usernum?>);
+                                // console.log($(".dat_mail").val());
+                                // console.log($(".dat_user").val());
+                                // console.log($("#rep_con_new").val());
                                 // alert("댓글이 작성되었습니다");
                                 location.reload();
                                 // location.href='/reply/reply_ok.php';
+                                // location.href='/test/test.php';
                                 
                             }
                         });
+                        
                     });                    
 
                 /* 댓글 삭제 이벤트 */
