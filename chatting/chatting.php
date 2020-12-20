@@ -115,10 +115,7 @@ $session = $usernickname;
 					case 'double':
 						alert('동일한 계정이 채팅중입니다.');
 						location.href='/index.php';						
-						break;
-					// case 'double_msgdel':						
-					// 	$(json.msg).remove();
-					// 	break;
+						break;					
 				}
 			}
 			// Events

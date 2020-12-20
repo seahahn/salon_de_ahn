@@ -122,7 +122,7 @@
             <li><a href="/board_ahn/board_list.php?ctgr=<?=$daily_life?>">Daily Life</a>
                 <ul>                
                     <li><a href="/board_ahn/board_list.php?ctgr=<?=$daily_life?>">일상 기록</a></li>
-                    <li><a href="/board/board_list.php?ctgr=<?=$daily_life_share?>">자유 주제 글</a></li>
+                    <li><a href="/board/board_list.php?ctgr=<?=$daily_life_share?>">자유게시판</a></li>
                     <li><a href="/gallery/gallery.php">일상 사진 모음</a></li>
                 </ul>
             </li>            

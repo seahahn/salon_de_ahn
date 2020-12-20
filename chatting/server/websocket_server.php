@@ -1,15 +1,10 @@
 <?php
-//namespace salon_de_ahn;
-
-// include_once "../../util/config.php";
-
 set_time_limit(0);
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
-// require_once '../vendor/autoload.php';
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 class Chat implements MessageComponentInterface {
@@ -63,9 +58,8 @@ class Chat implements MessageComponentInterface {
 		$conn->send(json_encode(array("type"=>$type,"msg"=>$noti)));
 		
 		if($double == 1) {
-			// $type_double_msgdel = 'double_msgdel';
-			// $client->send(json_encode(array("type"=>$type_double,"msg"=>$user_res+'out')));
-			// $this->conlog($user_res+'out');
+			// 사용자가 동일한 계정으로 2개 이상의 창에서 채팅방 들어온 경우 동일 계정으로 접속했다는 안내 팝업 이후 메인화면으로 보냄
+			// 다만 이와 같이 if문으로 구분해놓지 않은 경우, 동일 계정으로 2개 이상 들어왔다가 나가면 퇴장 메세지가 출력됨
 		} else {
 			foreach($this->clients as $client) {
 				if($conn!=$client) {
