@@ -1,5 +1,5 @@
 
-    <select class="custom-select col-8 mr-2" name="category" id="category" <?php if(isset($_GET['num'])) echo 'disabled';?>>
+    <select class="custom-select col-8 mr-2" name="category" id="category" <?php if(isset($_GET['num'])) echo 'readonly';?>>
         <?php
         if(isset($_POST['category'])){ // 글 읽기 상태에서 글쓰기 누른 경우. 읽던 글의 카테고리 선택하게 함
             $category = $_POST['category'];

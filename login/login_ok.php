@@ -44,8 +44,8 @@
         if(!password_verify($password, $db_password)){
             echo("
                 <script>
-                window.alert('비밀번호가 틀립니다.')
-                history.go(-1)
+                window.alert('비밀번호가 틀립니다.');
+                history.go(-1);
                 </script>
                 ");
         } else {

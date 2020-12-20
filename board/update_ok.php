@@ -4,6 +4,7 @@
 
 	$bno = $_POST['num']; // $bno(hidden)에 num값을 받아와 넣음	    
 	$category = $_POST['category']; // 게시물 수정 시 카테고리 선택한 것 받아옴
+	echo $category;
 	
 	
     /* wsecret 값이 1이면 잠금 0이면 공개 */
@@ -83,6 +84,6 @@
 ?>
 	<script>
 		alert("수정되었습니다.");
-		location.href = '/board/read.php?num=<?=$bno?>';
+		// location.href = '/board/read.php?num=<?=$bno?>';
 	</script>
 	<!-- <meta http-equiv="refresh" content="0 url=./read.php?num=<?=$bno?>"> -->

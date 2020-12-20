@@ -5,22 +5,24 @@ include_once "../db_con.php";
 // echo $useremail;
 
 $bno = $_GET['num']; // $bno에 num값을 받아와 넣음 
-	/* 조회수 올리기  */
-	$views = mysqli_fetch_array(mq("SELECT 
-									* 
-                                FROM 
-									board 
-                                WHERE 
-                                    num ='".$bno."'
-								"));
-	$views = $views['views'] + 1;
-	mq("UPDATE 
-            board 
-        SET 
-            views = '".$views."' 
-        WHERE 
-            num = '".$bno."'
-	");
+    /* 조회수 올리기  */
+    if(empty($_COOKIE["read_".$bno])){
+        $views = mysqli_fetch_array(mq("SELECT 
+                                        * 
+                                    FROM 
+                                        board 
+                                    WHERE 
+                                        num ='".$bno."'
+                                    "));
+        $views = $views['views'] + 1;
+        mq("UPDATE 
+                board 
+            SET 
+                views = '".$views."' 
+            WHERE 
+                num = '".$bno."'
+        ");
+    }
 	/* 조회수 올리기 끝 */
 	
 	/* 받아온 num값을 선택해서 게시글 정보 가져오기 */
@@ -353,7 +355,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                         $('#rep_con_new').val().replace(/\n/g, "<br>");
 
                         $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
-                            url : "../reply/reply_ok.php",
+                            url : "../reply_ahn/reply_ok.php",
                             type : "post",                            
                             data : {
                                 "bno" : $(".bno").val(),
@@ -423,7 +425,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 
                         $(rep_ans).click(function(){
                             $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
-                                url : "../reply/reply_ok.php",
+                                url : "../reply_ahn/reply_ok.php",
                                 type : "post",                            
                                 data : {
                                     "in_num" : in_num,
@@ -476,7 +478,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 
                         $(rep_edit).click(function(){
                             $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
-                                url : "../reply/reply_update.php",
+                                url : "../reply_ahn/reply_update.php",
                                 type : "post",                            
                                 data : {                                
                                     "rno" : num,

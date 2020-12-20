@@ -2,25 +2,27 @@
 include_once "../util/config.php";
 include_once "../db_con.php";
 // include_once "../login/login_check.php";
-// echo $useremail;
 
 $bno = $_GET['num']; // $bno에 num값을 받아와 넣음 
-	/* 조회수 올리기  */
-	$views = mysqli_fetch_array(mq("SELECT 
-									* 
-                                FROM 
-									board 
-                                WHERE 
-                                    num ='".$bno."'
-								"));
-	$views = $views['views'] + 1;
-	mq("UPDATE 
-            board 
-        SET 
-            views = '".$views."' 
-        WHERE 
-            num = '".$bno."'
-	");
+    /* 조회수 올리기  */
+    if(empty($_COOKIE["read_".$bno])){
+        $views = mysqli_fetch_array(mq("SELECT 
+                                        * 
+                                    FROM 
+                                        board 
+                                    WHERE 
+                                        num ='".$bno."'
+                                    "));
+        $views = $views['views'] + 1;
+        mq("UPDATE 
+                board 
+            SET 
+                views = '".$views."' 
+            WHERE 
+                num = '".$bno."'
+        ");
+        setcookie("read_".$bno, $bno, time() + 60 * 60 * 24);
+    }
 	/* 조회수 올리기 끝 */
 	
 	/* 받아온 num값을 선택해서 게시글 정보 가져오기 */
@@ -56,31 +58,6 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 			<!-- Main -->
 				<!-- <div class="wrapper style1"> -->
 					<div class="container">
-
-                        <!-- <div class="row">
-							<nav class="navbar navbar-expand-lg navbar-light bg-light flex-fill">
-								<a class="col navbar-brand" href="#">카테고리 목록</a>
-								<button class="col-3 navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-									aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-							
-								<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-										<li class="nav-item">
-											<a class="nav-link" href="#">글 목록 <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#">의견/정보 공유</a>
-										</li>										
-									</ul>
-									<form class="form-inline my-2 my-lg-0">
-										<input class="form-control mr-sm-2" type="search" placeholder="Search">
-										<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-									</form>
-								</div>
-							</nav>
-						</div>									 -->
                         <br/>                       
 
 						<div class="row"> <!-- 메인 글 영역-->
@@ -263,7 +240,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                 <!-- 댓글 달기 -->
                                 <div class="row dat_ins dat_view rep_area">
                                     <input type="hidden" name="bno" class="bno" value="<?=$bno?>">
-                                    <input type="hidden" name="dat_mail" id="dat_mail" class="dat_mail" value="<?=$useremail?>"">
+                                    <input type="hidden" name="dat_mail" id="dat_mail" class="dat_mail" value="<?=$useremail?>">
                                     <input type="hidden" name="dat_user" id="dat_user" class="dat_user" value="<?=$usernickname?>">                                    
                                     <!-- <div class="row justify-content-start"> -->
                                     <?php 
@@ -327,11 +304,13 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
             <script src="/assets/js/main.js"></script>            
-            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+            <script src="/assets/js/jquery-3.5.1.js"></script>            
+            <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script> -->
 
         <!-- Bootstrap Stripts-->
-			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+            <script src="/assets/js/ajax.js"></script>            
+			<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
             <script src="/bootstrap/bootstrap.bundle.js"></script>
             <script src="/bootstrap/bootstrap.bundle.min.js"></script>                    
 
@@ -348,20 +327,35 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                         }
                         $('#rep_con_new').val().replace(/\n/g, "<br>");
 
+                        // $.post("../reply/reply_ok.php", {
+                        //         "bno" : $(".bno").val(),
+                        //         "unum" : <?=$usernum?>,
+                        //         "dat_mail" : $(".dat_mail").val(),
+                        //         "dat_user" : $(".dat_user").val(),				
+                        //         "rep_con" : $("#rep_con_new").val()
+                        //     }, function(data) {
+                        //         location.reload();
+                        //     });
+
                         $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
                             url : "../reply/reply_ok.php",
-                            type : "post",                            
+                            type : "POST",                            
                             data : {
                                 "bno" : $(".bno").val(),
                                 "unum" : <?=$usernum?>,
                                 "dat_mail" : $(".dat_mail").val(),
                                 "dat_user" : $(".dat_user").val(),				
                                 "rep_con" : $("#rep_con_new").val()
-                            },
+                            },                            
                             success : function(data){                
+                                console.log($(".bno").val());
+                                console.log(<?=$usernum?>);
+                                console.log($(".dat_mail").val());
+                                console.log($(".dat_user").val());
                                 console.log($("#rep_con_new").val());
                                 // alert("댓글이 작성되었습니다");
                                 location.reload();
+                                // location.href='/reply/reply_ok.php';
                                 
                             }
                         });

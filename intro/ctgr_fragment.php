@@ -1,5 +1,5 @@
 
-    <select class="custom-select col-8 mr-2" name="category" id="category" <?php if(isset($_GET['num'])) echo 'disabled';?>>
+    <select class="custom-select col-8 mr-2" name="category" id="category" <?php if(isset($_GET['num'])) echo 'readonly';?>>
         <?php
         if(isset($_POST['category'])){ // 글 읽기 상태에서 글쓰기 누른 경우. 읽던 글의 카테고리 선택하게 함
             $category = $_POST['category'];
@@ -49,7 +49,7 @@
         <!-- <option <?php if($category == 'daily_life_share') echo 'selected'?> value="daily_life_share">자유 주제 글</option> -->
 
         <?php                                                                
-        } else if(isset($_GET['num'])) { // 글 읽기 상태에서 답글 누른 경우. 읽던 글의 카테고리 선택 후 고정되게 함            
+        } else if(isset($_GET['num'])) { // 글 읽기 상태에서 답글 누른 경우 & 수정하는 경우. 읽던 글의 카테고리 선택 후 고정되게 함            
         ?>
         <!-- <option selected value="<?=$category?>"><?=$category?></option> -->
         <script>console.log('get num');</script>
@@ -66,74 +66,87 @@
         $board = $sql->fetch_array();	
         $category = $board['category'];                
         echo '<script>console.log("'.$category.'");</script>';
-            switch ($category){
+            switch ("'.$category.'"){
                 case 'it_dev_discussion': 
         ?>            
             <option value="it_dev_discussion" selected>IT - 토론</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';
                 break;                                                                    
                 case 'it_dev_recordshare': 
         ?>
             <option selected value="it_dev_recordshare">IT - 경험 공유</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';
                 break;
                 case 'it_dev_infoshare': 
         ?>
             <option selected value="it_dev_infoshare">IT - 정보 공유</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;
                 case 'it_dev_qna': 
         ?>
             <option selected value="it_dev_qna">IT - Q & A</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;                
 
                 case 'finance_discussion': 
         ?>
             <option selected value="finance_discussion">금융 - 토론</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;                                                                    
                 case 'finance_recordshare': 
         ?>
             <option selected value="finance_recordshare">금융 - 경험 공유</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;
                 case 'finance_infoshare': 
         ?>
             <option selected value="finance_infoshare">금융 - 정보 공유</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;
                 case 'finance_qna': 
         ?>
             <option selected value="finance_qna">금융 - Q & A</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;
 
                 case 'languages_discussion': 
         ?>
             <option selected value="languages_discussion">언어 학습 - 토론</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;                                                                    
                 case 'languages_recordshare': 
         ?>
             <option selected value="languages_recordshare">언어 학습 - 경험 공유</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;
                 case 'languages_infoshare': 
         ?>
             <option selected value="languages_infoshare">언어 학습 - 정보 공유</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;
                 case 'languages_qna': 
         ?>
             <option selected value="languages_qna">언어 학습 - Q & A</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;
 
                 case 'daily_life_share': 
         ?>
             <option selected value="daily_life_share">자유 주제 글</option>
         <?php
+                echo '<script>console.log("'.$category.'");</script>';        
                 break;
 
                 default : break;

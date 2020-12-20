@@ -9,15 +9,11 @@ $mq = mq("INSERT user set
                 pw = '$password',
                 nickname = '$email'
                 ");
-print_r($mq);
 
-$mq2 = mq("INSERT oard set email = '$email'
-	");
-print_r($mq2);
 echo "
     <script>
     alert('회원가입이 완료되었습니다.');
-    //location.href = 'login.php';
+    location.href = 'login.php';
     </script>";
     
 ?>

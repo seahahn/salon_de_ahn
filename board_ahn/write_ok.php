@@ -126,13 +126,11 @@
 		content = '".$content."',  		
 		wsecret = '".$wsecret."',
 		att_file = '".$filepath_array_str."'
-		");		
-		echo $max_in_num.' '.$unum.' '.$category.' '.$email.' '.$title.' '.$nickname.' '.
-		$date.' '.$content.' '.$wsecret.' '.$filepath_array_str;
+		");				
 	}
 	
 ?>
 	<script>
 		alert("글이 작성되었습니다.");
-		// location.href = 'board_list.php?ctgr=<?=$category?>';
+		location.href = 'board_list.php?ctgr=<?=$category?>';
 	</script>
