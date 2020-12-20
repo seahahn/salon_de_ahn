@@ -19,6 +19,7 @@
                             <div class="form-group">
                                 <label for="email">Email address</label>
                                 <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                                <!-- <button type="button" class="btn-sm" onclick="checkEmailAjax()">중복 확인</button> -->
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                                 <span id="email_check_msg" data-check="0"></span>
                             </div>
@@ -149,8 +150,7 @@
             function checkEmailAjax(){
                 $.ajax({
                     url : "./check_email.php",
-                    type : "POST",
-                    dataType : "json",
+                    type : "POST",                    
                     data : {
                         "email" : $("#email").val()
                     },
