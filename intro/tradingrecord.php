@@ -13,7 +13,7 @@ if(isset($_GET["page"])){
 // 마이페이지에서 '내가 쓴 글'을 클릭한 경우, 카테고리 값으로 사용자의 이메일 주소를 가져옴
 $category = "tradingrecord";
 // 마이페이지로부터 사용자 고유번호를 전달받음. 카테고리로 전달된 이메일 주소와 사용자의 고유 번호 둘 다 일치하는 게시물만 가져오기 위함 (탈퇴 후 동일 메일로 재가입 시에(동일인이든 타인이든) 이전 계정의 게시물을 볼 수 없도록 하게 만듦)
-if(isset($_GET["unum"])) $unum = $_GET["unum"];
+// if(isset($_GET["unum"])) $unum = $_GET["unum"];
 ?>
 
 <!DOCTYPE HTML>
@@ -58,28 +58,32 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
 				<!-- <div class="wrapper style1"> -->
 					<div class="container">			                        
                         <br/>                       
-
+                        <?php include_once "./ctgr_explain.php" ?>
 						<div class="row"> <!-- 메인 글 영역-->
 							<div class="col-12" id="content">
                                 <!-- 게시물 목록 -->
 								<table class="table table-sm">
 									<thead>
 										<tr>
-											<th scope="col" class="text-center">번호</th>
-											<th scope="col" class="text-center">제목</th>
-											<th scope="col" class="text-center">작성자</th>
-                                            <th scope="col" class="text-center">작성일</th>
-                                            <th scope="col" class="text-center">조회수</th>
+											<th scope="col" class="text-center">분류</th>
+											<th scope="col" class="text-center">종목명</th>
+											<th scope="col" class="text-center">포지션</th>
+                                            <th scope="col" class="text-center">진입 포인트</th>
+                                            <th scope="col" class="text-center">진입 시점</th>
+                                            <th scope="col" class="text-center">청산 포인트</th>
+                                            <th scope="col" class="text-center">청산 시점</th>
+                                            <th scope="col" class="text-center">손익</th>
 										</tr>
                                     </thead>
 
                                     <?php
                                     // 페이징 구현
-                                    if(isset($unum)){
-                                        $sql = mq("SELECT * FROM board_ahn WHERE email='".$category."' AND unum='".$unum."'");
-                                    } else {
-                                        $sql = mq("SELECT * FROM board_ahn WHERE category='".$category."'");
-                                    }
+                                    // if(isset($unum)){
+                                    //     $sql = mq("SELECT * FROM tdrecord WHERE email='".$category."' AND unum='".$unum."'");
+                                    // } else {
+                                        // $sql = mq("SELECT * FROM tdrecord WHERE category='".$category."'");
+                                        $sql = mq("SELECT * FROM tdrecord");
+                                    // }
                                     $total_record = mysqli_num_rows($sql);
 
                                     $list = 10; // 한 페이지에 보여줄 게시물 개수
@@ -96,72 +100,75 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                     $page_start = ($page - 1) * $list; // 페이지의 시작 (SQL문에서 LIMIT 조건 걸 때 사용)
 
                                     // 게시물 목록 가져오기
-                                    if(isset($unum)){
-                                        $sql2 = mq("SELECT * FROM board_ahn WHERE email='".$category."' AND unum='".$unum."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
-                                    } else {
-                                        $sql2 = mq("SELECT * FROM board_ahn WHERE category='".$category."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
-                                    }
+                                    // if(isset($unum)){
+                                    //     $sql2 = mq("SELECT * FROM tdrecord WHERE email='".$category."' AND unum='".$unum."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                    // } else {
+                                        // $sql2 = mq("SELECT * FROM tdrecord WHERE category='".$category."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                        $sql2 = mq("SELECT * FROM tdrecord ORDER BY num DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                    // }
 
                                     $post_count = 0;
                                     while($board = $sql2->fetch_array()){
-                                        $title=$board["title"];
+                                        $title=$board["item"];
                                         /* 글자수가 30이 넘으면 ... 처리해주기 */
                                         if(strlen($title)>30){
-                                            $title=str_replace($board["title"],mb_substr($board["title"],0,30,"utf-8")."...",$board["title"]);
+                                            $title=str_replace($board["item"],mb_substr($board["item"],0,30,"utf-8")."...",$board["item"]);
                                         }
                                         
                                         /* 댓글 수 구하기 */
-                                        $sql3 = mq("SELECT
-                                                        *
-                                                    FROM
-                                                        reply
-                                                    WHERE
-                                                        con_num='".$board['num']."'
-                                                ");
-                                        $rep_count = mysqli_num_rows($sql3); // 레코드의 수(댓글의 수)                                        
+                                        // $sql3 = mq("SELECT
+                                        //                 *
+                                        //             FROM
+                                        //                 reply
+                                        //             WHERE
+                                        //                 con_num='".$board['num']."'
+                                        //         ");
+                                        // $rep_count = mysqli_num_rows($sql3); // 레코드의 수(댓글의 수)                                        
                                     ?>
 
 									<tbody>                                        
 										<tr>                                                                                  
-                                            <td width="70" class="text-center"><?=$board['num'];?></td>
-                                            <td width="300">
+                                            <td width="70" class="text-center align-middle"><?=$board['category'];?></td>
+                                            <td width="200" class="align-middle">
                                             <!-- 비밀 글 가져오기 -->	 
                                             <?php 
                                                 // $lockimg="<img src='./img/lock.png' alt='lock' title='lock' width='18' height='18'>";
-                                                $lockimg="※";
-                                                if($board['wsecret']=="1"){ // lock_post 값이 1이면 잠금
-                                                    if($board['depth']>0) {                                                        
-                                                        // if($board['depth']>1){
-                                                            // echo "<img height=1 width=" . $board['depth']*10 . ">└";
-                                                            // echo "<img height=1 width='10'>└";
-                                                        // } else {
-                                                            echo "└";
-                                                        // }                                                    
-                                                    }
+                                                // $lockimg="※";
+                                                // if($board['wsecret']=="1"){ // lock_post 값이 1이면 잠금
+                                                //     if($board['depth']>0) {                                                        
+                                                //         // if($board['depth']>1){
+                                                //             // echo "<img height=1 width=" . $board['depth']*10 . ">└";
+                                                //             // echo "<img height=1 width='10'>└";
+                                                //         // } else {
+                                                //             echo "└";
+                                                //         // }                                                    
+                                                //     }
                                             ?>                                                
-                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check="<?=$role?>" data-num="<?=$board['num']?>"><?=$title?> <?=$lockimg?></span>
+                                                <!-- <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check="<?=$role?>" data-num="<?=$board['num']?>"><?=$title?> <?=$lockimg?></span> -->
                                             <!-- 일반 글 가져오기 -->
                                             <?php                                                     
-                                                }else{	// 아니면 공개 글
-                                                    if($board['depth']>0) {                                                        
-                                                        // if($board['depth']>1){
-                                                            // echo "<img height=1 width=" . $board['depth']*10 . ">└";
-                                                            // echo "<img height=1 width=10>└";
-                                                        // } else {
-                                                            echo "└";
-                                                        // }                                                    
-                                                    }
+                                                // }else{	// 아니면 공개 글
+                                                    // if($board['depth']>0) {                                                        
+                                                    //     // if($board['depth']>1){
+                                                    //         // echo "<img height=1 width=" . $board['depth']*10 . ">└";
+                                                    //         // echo "<img height=1 width=10>└";
+                                                    //     // } else {
+                                                    //         echo "└";
+                                                    //     // }                                                    
+                                                    // }
                                             ?>
-                                                <span class="read_check" style="cursor:pointer" data-action="./read.php?num=<?=$board['num']?>"><?=$title?></span>
-                                                <?php if($rep_count>0) {?>
-                                                <span style="color:blue;">[<?=$rep_count?>]</span></td>                                                    
+                                                <span class="read_check" style="cursor:pointer" data-action="./read_tdr.php?num=<?=$board['num']?>"><?=$title?></span>
+                                                <?php // if($rep_count>0) {?>                                                
                                             <?php                       
-                                                    }                             
-                                                }
+                                                    // }                             
+                                                // }
                                             ?>
-                                            <td width="70" class="text-center"><?=$board["writer"];?></td>
-                                            <td width="90" class="text-center"><?=$board["wdate"];?></td>
-                                            <td width="50" class="text-center"><?=$board["views"];?></td>
+                                            <td width="70" class="text-center align-middle"><?=$board["position"];?></td>
+                                            <td width="70" class="text-center align-middle"><?=$board["in_pos"];?></td>
+                                            <td width="70" class="text-center align-middle"><?=$board["in_date"];?></td>
+                                            <td width="70" class="text-center align-middle"><?=$board["out_pos"];?></td>
+                                            <td width="70" class="text-center align-middle"><?=$board["out_date"];?></td>
+                                            <td width="50" class="text-center align-middle"><?=$board["pl"];?></td>
                                             
 										</tr>
                                     </tbody>
@@ -183,8 +190,8 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                     <?php
                                         if($role == "ADMIN") {
                                     ?>
-                                    <form action="write.php" method="POST">
-                                        <input type="hidden" name="category" value="<?=$category?>"/>
+                                    <form action="write_tdr.php" method="POST">
+                                        <!-- <input type="hidden" name="category" value="<?=$category?>"/> -->
                                         <button type="submit" class="btn-lg">글쓰기</button>
                                     </form>
                                     <?php } ?>
@@ -197,76 +204,40 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                         <?php
                                             if ($page <= 1){
                                                 // 빈 값
-                                            } else {
-                                                if(isset($unum)){
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=1' aria-label='Previous'>처음</a></li>";
-                                                } else {
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=1' aria-label='Previous'>처음</a></li>";
-                                                }
+                                            } else {                                                
+                                                echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=1' aria-label='Previous'>처음</a></li>";                                                
                                             }
                                             
                                             if ($page <= 1){
                                                 // 빈 값
                                             } else {
-                                                $pre = $page - 1;
-                                                if(isset($unum)){
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=$pre'>◀ 이전 </a></li>";
-                                                } else {
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$pre'>◀ 이전 </a></li>";
-                                                }
+                                                $pre = $page - 1;                                                
+                                                echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$pre'>◀ 이전 </a></li>";                                                
                                             }
                                             
                                             for($i = $block_start; $i <= $block_end; $i++){
                                                 if($page == $i){
                                                     echo "<li class='page-item'><a class='page-link' disabled><b style='color: #df7366;'> $i </b></a></li>";
-                                                } else {
-                                                    if(isset($unum)){
-                                                        echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=$i'> $i </a></li>";
-                                                    } else {
-                                                        echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$i'> $i </a></li>";
-                                                    }
+                                                } else {                                                    
+                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$i'> $i </a></li>";                                                    
                                                 }
                                             }
                                             
                                             if($page >= $total_page){
                                                 // 빈 값
                                             } else {
-                                                $next = $page + 1;
-                                                if(isset($unum)){
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=$next'> 다음 ▶</a></li>";
-                                                } else {
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$next'> 다음 ▶</a></li>";
-                                                }
+                                                $next = $page + 1;                                                
+                                                echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$next'> 다음 ▶</a></li>";                                                
                                             }
                                             
                                             if($page >= $total_page){
                                                 // 빈 값
-                                            } else {
-                                                if(isset($unum)){
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=$total_page'>마지막</a>";
-                                                } else {
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$total_page'>마지막</a>";
-                                                }
+                                            } else {                                                
+                                                echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$total_page'>마지막</a>";                                                
                                             }
                                         ?>                                        
                                     </ul>                                                                  
                                 </nav>
-
-                                <!-- 페이징 하단 게시물 검색 -->
-                                <div class="row justify-content-center">
-                                    <div id="search_box">
-                                        <form action="search_result.php" method="get">
-                                            <select class="custom-select" name="search_category" style="display: inline-block; width: 12%;">
-                                                <option value="title">제목</option>
-                                                <option value="writer">글쓴이</option>
-                                                <option value="content">내용</option>
-                                            </select>
-                                            <input type="text" name="search" size="70" required="required" style="display: inline-block; width: 70%;">
-                                            <button type="submit" style="padding: 0.65em 2em 0.65em 2em;">검색</button>
-                                        </form>
-                                    </div>
-                                </div>
-
 							</div>											
 						</div>																	
 					</div>

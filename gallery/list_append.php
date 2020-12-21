@@ -5,13 +5,13 @@ $start = $_POST['start'];
 $list = $_POST['list'];
 
 $q = mq("SELECT * FROM photosave WHERE num>0 ORDER BY num DESC LIMIT {$start}, {$list}");
-while($d = mysqli_fetch_array($q)){
-?>
-    <article>
-        <a class="thumbnail" href="<?php echo $d['filepath']; ?>"><img src="<?php echo $d['filepath']; ?>" alt="" /></a>
-        <!-- <h2><?php echo $d['title']; ?></h2>
-        <p><?php echo $d['caption']; ?></p> -->
-    </article>
+while($p = mysqli_fetch_array($q)){
+?>    
+    <li>        
+        <div data-alt="<?=$p['title']?>" data-description="<h3><?=$p['caption']?></h3>" data-max-width="1800" data-max-height="1350">								
+            <div data-src="<?=$p['filepath']?>" data-min-width="200"></div>
+        </div>
+    </li>
 <?php
 }
 ?>

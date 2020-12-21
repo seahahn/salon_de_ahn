@@ -27,7 +27,7 @@ $category = "it_dev_portfolio";
 				<!-- <div class="wrapper style1"> -->
 					<div class="container">			                        
                         <br/>                       
-
+                        <?php include_once "./ctgr_explain.php" ?>
                         <div class="row my-5"> <!-- 메인 글 영역-->
                             <div class="col">
                                 <video class="my-2" src="../video/stocking.mp4" width="640px" height="360px" controls></video>

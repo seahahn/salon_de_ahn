@@ -20,24 +20,23 @@
 			<!-- 메인 페이지에서 Start 버튼 누르면 보이는 화면 중 위쪽의 문장 두 개-->
 				<section id="banner">
 					<header>
-						<h2>Greetings and Welcome to <strong>Salon de Ahn</strong>.</h2>
-						<p class="mb-5">IT 개발자 안경호의 포트폴리오 웹사이트에 오신 것을 환영합니다 !
+						<h2>소개글 - <strong>IT 개발자</strong>로서</h2>
+						<p class="mb-5">소통하는 개발자, 틀림을 받아들이고 다름을 인정하는 개발자, 세상에 도움을 주는 개발자, 성장하는 개발자
 						</p>
 					</header>
 					<article id="main" class="container special">
 						<div class="row">
-						
+						<img class="col" src="" alt="it_dev" style=" display: inline; width: 50%; height: 50%;"/></a>
 						<p class="col mr-3">
-							Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-							posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-							sit arcu sociis. Nunc fermentum adipiscing tempor cursus nascetur adipiscing adipiscing. Primis aliquam
-							mus lacinia lobortis phasellus suscipit. Fermentum lobortis non tristique ante proin sociis accumsan
-							lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-							consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-							interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-							natoque aenean scelerisque.
-						</p>
-						<img class="col" src="" alt="메인 사진" style=" display: inline; width: 50%; height: 50%;"/></a>
+							저는 2020년 8월 5일부터 IT 개발 공부를 시작하였습니다. 이때부터 지금까지 서울에 위치한 '팀노바'라는 훌륭한 개발자 양성 교육기관에서 공부를 하고 있습니다.
+							<br/><br/>
+							처음 5주간은 JAVA를 배우면서 코드를 어떻게 쓰는지, 프로그램은 어떻게 만들어지는지에 대한 기본적인 내용을 배웠고,
+							다음 6주 동안은 Android Application을 만들면서 앱이 어떻게 만들어지고 작동하는지를 배웠습니다.
+							그 다음 5주간 HTML, CSS, JS, PHP를 다루면서 웹사이트를 만드는 법, 그리고 어떻게 돌아가는지 알게 되었습니다.
+							JAVA와 Android 과정을 거치면서 만든 작품은 이 웹사이트에 제가 올려둔 '<a href="./it_dev_portfolio.php">IT개발 포트폴리오</a>'에서 확인하실 수 있습니다.
+							<br/><br/>
+							공부 시작한지 4개월뿐이 되지 않은, 신입 개발자라고 부르기에도 민망한 지금의 제 자신이지만, 앞으로 더욱 더 성장하면서 이 공간에 더 많은 소개를 남길 수 있도록 하겠습니다. :)
+						</p>						
 						</div>						
 					</article>
 				</section>				
@@ -51,7 +50,7 @@
 		</div>
 
 		<!-- Scripts -->
-		<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>

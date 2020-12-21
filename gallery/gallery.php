@@ -12,12 +12,9 @@ include_once "../db_con.php";
 		<title>Salon de Ahn</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/bootstrap/bootstrap_custom.css"/>
-		
-		<link rel="stylesheet" href="assets/css/main_gal.css" />
-		<link rel="stylesheet" href="/assets/css/main_custom.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript_gal.css" /></noscript>
-		<style>
+		<link rel="stylesheet" href="/bootstrap/bootstrap_custom.css"/>	
+		<link rel="stylesheet" href="/assets/css/main_custom.css" />		
+		<!-- <style>
 			section, article {
 				margin-bottom: 0;
 			}
@@ -59,7 +56,7 @@ include_once "../db_con.php";
 			#main #thumbnails::-webkit-scrollbar { 
 				display: none !important;
 			}
-		</style>
+		</style> -->
 
 		<!-- 사진 업로드 기능 -->            
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>

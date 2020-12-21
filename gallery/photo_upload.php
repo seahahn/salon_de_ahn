@@ -2,19 +2,8 @@
 	include "../util/config.php";
 	include "../db_con.php";
 	
-	// $query = mq("SELECT * FROM photosave");
-    // $exists = (mysqli_num_rows($query));
-    // print_r($query);
-	
-	// if($exists == 0)	{
-	// 	mq("ALTER TABLE photosave AUTO_INCREMENT = 1"); // 게시판에 게시물 없는 경우 auto_increment 값 초기화
-	// }	
-
-	// 첨부파일이 존재한다면 실행
-	$filepath_array = array();
-	// print_r($_FILES['files']['type']);
-	// print_r(strpos($_FILES['files']['type'], "image"));
-	// if(strpos($_FILES['file']['type'], 'image') != 0){ // 이미지를 제외한 파일 형식만 별도 첨부 가능
+	$filepath_array = array();	
+	$folder = $_POST['folder'];
 	if($_FILES) {
 		if(count($_FILES['photos']['name']) > 0 ) { 
 			$baseDownFolder = "../images/";
@@ -49,7 +38,8 @@
 				filename_tmp = '".$tmp_filename."',
 				filepath = '".$baseDownFolder.$tmp_filename."',
                 title = '".$title."',
-                caption = '".$caption."'
+                caption = '".$caption."',
+				folder = '".$folder."'
 				");
 
                 // $filepath_array[$i] = $baseDownFolder.$tmp_filename;                
@@ -59,5 +49,5 @@
 ?>
 	<script>
 		alert("사진 업로드 완료");
-		location.href = 'gallery.php';
+		location.href = 'test.php';
 	</script>

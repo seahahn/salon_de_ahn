@@ -20,24 +20,27 @@
 			<!-- 메인 페이지에서 Start 버튼 누르면 보이는 화면 중 위쪽의 문장 두 개-->
 				<section id="banner">
 					<header>
-						<h2>Greetings and Welcome to <strong>Salon de Ahn</strong>.</h2>
-						<p class="mb-5">IT 개발자 안경호의 포트폴리오 웹사이트에 오신 것을 환영합니다 !
+						<h2>소개글 - <strong>다국어 학습자</strong>로서</h2>
+						<p class="mb-5">영어 OPIc IH(2019.03.16), 중국어 OPIc NM(2019.06.23), 러시아어 X, 독일어 X...
 						</p>
 					</header>
 					<article id="main" class="container special">
 						<div class="row">
-						
+						<img class="col" src="" alt="languages" style=" display: inline; width: 50%; height: 50%;"/></a>
 						<p class="col mr-3">
-							Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-							posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-							sit arcu sociis. Nunc fermentum adipiscing tempor cursus nascetur adipiscing adipiscing. Primis aliquam
-							mus lacinia lobortis phasellus suscipit. Fermentum lobortis non tristique ante proin sociis accumsan
-							lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-							consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-							interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-							natoque aenean scelerisque.
-						</p>
-						<img class="col" src="" alt="메인 사진" style=" display: inline; width: 50%; height: 50%;"/></a>
+							외국어 학습에 관심을 갖기 시작한 것은 군 복무 시절부터였습니다.
+							카투사(KATUSA, Korean Augmentation to The US Army)로서 일단 영어 능력은 필수였기에 영어는 복무 초기부터 꾸준히 학습해야만 했습니다.
+							이와 더불어 함께 복무하고 있던 미군 친구들 중에 영어 외에도 다른 언어를 구사하는 친구들이 여럿 있었기에 이들의 언어에도 관심을 갖게 되었습니다.
+							영어 다음으로 가장 흔하게 들었던 스페인어를 시작으로 독일어, 프랑스어, 러시아어, 중국어, 일본어 등 다양한 언어를 접할 수 있었습니다.
+							<br/><br/>
+							하지만 군 복무를 마칠 때까지도 "영어 하나도 완벽하게 못하는데 다른 나라 말을 배울 수가 있을까"라는 생각에서 벗어나지 못했고, 결국 그때까지 할 수 있는 외국어는 영어 하나뿐이었습니다.
+							그러나 몇 개월이 지난 후 "굳이 영어를 완벽하게 해야만 다른 언어를 배울 수 있나"라는 일종의 반항심(?)이 들었고, 그렇게 중국어, 러시아어 공부를 시작하게 되었습니다.
+							<br/><br/>
+							이후 아르바이트로 게스트하우스에서 일을 하며 다양한 국적의 사람들과 만나며 조금이나마 그들의 언어로 말을 주고 받는 즐거움을 느낄 수 있었습니다.
+							그리고 독일에서 온, 지금의 저에게 매우 소중한 사람 덕분에 독일어 공부도 하게 되었습니다.
+							<br/><br/>
+							현재는 개발 공부를 우선시하여 외국어 공부를 하고 있지 않지만, 후에 개발자로서 자리잡고 나면 다시 외국어 학습을 하여 보다 많은 사람들과 그들의 언어로 이야기할 수 있는 사람이 되고자 합니다.
+						</p>						
 						</div>						
 					</article>
 				</section>				

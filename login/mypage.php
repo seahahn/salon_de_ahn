@@ -152,7 +152,7 @@ foreach (mq("SELECT nickname FROM user WHERE email = '$email'") as $field){
                     if($(this).val()==""){
                         $("#nickname_check_msg").html("닉네임을 입력해주세요.").css("color", "red").attr("data-check", "0");                                                
                     } else {
-                        checkEmailAjax();
+                        checkNickAjax();
                     }
                 });
             });
@@ -175,11 +175,11 @@ foreach (mq("SELECT nickname FROM user WHERE email = '$email'") as $field){
             // });
 
         /* 닉네임 중복 체크(비동기통신)*/
-            function checkEmailAjax(){
+            function checkNickAjax(){
                 $.ajax({
                     url : "./check_nickname.php",
                     type : "POST",
-                    dataType : "json",
+                    dataType : "JSON",
                     data : {
                         "nickname" : $("#nickname").val()
                     },

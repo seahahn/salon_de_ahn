@@ -7,6 +7,7 @@
 	$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000+1000;
 
 	$category = $_POST['category'];
+	$board_class = $_POST['board_class'];
 
 	$unum = $_POST['unum'];
 	$email = $useremail;
@@ -112,7 +113,7 @@
 		wdate ='".$date."',
 		content = '".$content."',  		
 		wsecret = '".$wsecret."',
-		att_file = '".$filepath_array_str."'
+		att_file = '".$filepath_array_str."'		
 		");
 	} else { // 일반적인 글 작성인 경우
 		$mq = mq("INSERT board_ahn SET
@@ -125,7 +126,7 @@
 		wdate ='".$date."',
 		content = '".$content."',  		
 		wsecret = '".$wsecret."',
-		att_file = '".$filepath_array_str."'
+		att_file = '".$filepath_array_str."'		
 		");				
 	}
 	

@@ -128,7 +128,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                                                 <input type="hidden" name="unum" value="<?=$usernum?>"/> <!-- 게시물을 작성한 사용자의 고유 번호-->
                                                 <?php if(isset($_GET['num'])) {;?>
                                                 <input type="hidden" name="category" value="<?=$category?>"/> <!-- 게시물의 카테고리. 사용자가 답글로 눌러서 들어올 경우 상단의 select가 비활성화되어 값이 안 넘어가기에 별도로 만들어서 넘겨줌 -->
-                                                <?php } ?>
+                                                <?php } ?>                                                
                                                 <button type="button" class="btn-lg" onclick="check_ctgr()">글쓰기</button>
                                                 <a class="pl-1" href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg">목록</button></a>
                                             </div>

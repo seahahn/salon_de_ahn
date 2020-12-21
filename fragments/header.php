@@ -67,7 +67,7 @@
                     </li>                    
                 </ul>
             </li>
-            <li><a href="">Finance</a>
+            <li><a href="/intro/finance.php">Finance</a>
                 <ul>
                     <li><a href="/intro/finance.php">경력 소개 - 트레이더로서</a>
                         <ul>
@@ -79,7 +79,7 @@
                     <li><a href="/board/board_list.php?ctgr=<?=$finance_discussion?>">금융 주제 게시판</a>
                         <ul>
                             <li><a href="/board/board_list.php?ctgr=<?=$finance_discussion?>">토론</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$finance_recordshare?>">거래 기록 공유</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$finance_recordshare?>">경험 공유</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$finance_infoshare?>">정보 공유</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$finance_qna?>">Q & A</a></li>
                         </ul>
@@ -112,7 +112,7 @@
                     <li><a href="/board/board_list.php?ctgr=<?=$languages_discussion?>">언어 학습 주제 게시판</a>
                         <ul>
                             <li><a href="/board/board_list.php?ctgr=<?=$languages_discussion?>">토론</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$languages_recordshare?>">학습 기록 공유</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$languages_recordshare?>">경험 공유</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$languages_infoshare?>">정보 공유</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$languages_qna?>">Q & A</a></li>
                         </ul>
@@ -123,7 +123,7 @@
                 <ul>                
                     <li><a href="/board_ahn/board_list.php?ctgr=<?=$daily_life?>">일상 기록</a></li>
                     <li><a href="/board/board_list.php?ctgr=<?=$daily_life_share?>">자유게시판</a></li>
-                    <li><a href="/gallery/gallery.php">일상 사진 모음</a></li>
+                    <li><a href="/gallery/test2.php">일상 사진 모음</a></li>
                 </ul>
             </li>            
             <li><a href="/chatting/chatting.php">Chatting</a></li>                

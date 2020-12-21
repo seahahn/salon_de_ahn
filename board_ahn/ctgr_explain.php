@@ -1,6 +1,13 @@
 
 <?php
 switch ($category){
+        case 'it_dev_portfolio': 
+?>            
+        <!-- <option value="it_dev_learnings" selected>IT - 학습 내용</option> -->
+        <h1 class="fs-1">IT 개발 포트폴리오</h1>
+        <p class="fs-1">IT 개발을 공부하면서 만든 작품들에 대한 기록입니다.</p>
+<?php
+        break; 
         case 'it_dev_learnings': 
 ?>            
     <!-- <option value="it_dev_learnings" selected>IT - 학습 내용</option> -->
@@ -44,6 +51,14 @@ switch ($category){
 <?php
         break;                
 
+        case 'tradingrecord': 
+?>            
+        <!-- <option value="finance_usefulinfo" selected>금융 - 유용한 정보</option> -->
+        <h1 class="fs-1">금융 거래 기록</h1>
+        <p class="fs-1">주식, 선물, 외환 등을 거래한 기록들입니다.</p>
+<?php
+        break;
+
         case 'finance_usefulinfo': 
 ?>            
     <!-- <option value="finance_usefulinfo" selected>금융 - 유용한 정보</option> -->
@@ -80,6 +95,13 @@ switch ($category){
 <?php
         break;
 
+        case 'langstudyrecord': 
+?>
+        <!-- <option selected value="languages_usefuldata">언어 학습 - 학습 자료</option> -->
+        <h1 class="fs-1">언어 학습 공부 기록</h1>
+        <p class="fs-1">언어 학습을 하면서 쓴 노트 및 녹음 등을 모아두었습니다.</p>
+<?php
+        break;
         case 'languages_usefuldata': 
 ?>
     <!-- <option selected value="languages_usefuldata">언어 학습 - 학습 자료</option> -->

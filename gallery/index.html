@@ -1,112 +1,401 @@
-<!DOCTYPE HTML>
-<!--
-	Lens by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Lens by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload-0 is-preload-1 is-preload-2">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Gamma Gallery - A Responsive Image Gallery Experiment</title>
+        <meta name="description" content="Gamma Gallery - A Responsive Image Gallery Experiment"/>
+        <meta name="keywords" content="html5, responsive, image gallery, masonry, picture, images, sizes, fluid, history api, visibility api"/>
+        <meta name="author" content="Codrops"/>
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script src="js/modernizr.custom.70736.js"></script>
+		<noscript><link rel="stylesheet" type="text/css" href="css/noJS.css"/></noscript>
+		<!--[if lte IE 7]><style>.main{display:none;} .support-note .note-ie{display:block;}</style><![endif]-->
+    </head>
+    <body>
+        <div class="container">
+		
+			<!-- Codrops top bar -->
+            <div class="codrops-top clearfix">
+                <a href="http://tympanus.net/Tutorials/HeadingSets/">
+                    <strong>&laquo; Previous Demo: </strong>Heading Set Styling
+                </a>
+                <span class="right">
+                	<a href="http://www.idleformat.com/">Images by Idleformat</a>
+                    <a href="http://tympanus.net/codrops/?p=11836">
+                        <strong>Back to the Codrops Article</strong>
+                    </a>
+                </span>
+            </div><!--/ Codrops top bar -->
+			
+			<div class="main">
+				<header class="clearfix">
+				
+					<h1>Gamma Gallery<span>A responsive image gallery experiment</span></h1>
 
-		<!-- Main -->
-			<div id="main">
+					<div class="support-note">
+						<span class="note-ie">Sorry, only modern browsers.</span>
+					</div>
+					
+				</header>
+				
+				<div class="gamma-container gamma-loading" id="gamma-container">
 
-				<!-- Header -->
-					<header id="header">
-						<h1>Lens</h1>
-						<p>Just another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-							<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-					</header>
+					<ul class="gamma-gallery">
 
-				<!-- Thumbnail -->
-					<section id="thumbnails">
-						<article>
-							<a class="thumbnail" href="images/fulls/01.jpg" data-position="left center"><img src="images/thumbs/01.jpg" alt="" /></a>
-							<h2>Diam tempus accumsan</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/02.jpg"><img src="images/thumbs/02.jpg" alt="" /></a>
-							<h2>Vivamus convallis libero</h2>
-							<p>Sed velit lacus, laoreet at venenatis convallis in lorem tincidunt.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/03.jpg" data-position="top center"><img src="images/thumbs/03.jpg" alt="" /></a>
-							<h2>Nec accumsan enim felis</h2>
-							<p>Maecenas eleifend tellus ut turpis eleifend, vitae pretium faucibus.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/04.jpg"><img src="images/thumbs/04.jpg" alt="" /></a>
-							<h2>Donec maximus nisi eget</h2>
-							<p>Tristique in nulla vel congue. Sed sociis natoque parturient nascetur.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/05.jpg" data-position="top center"><img src="images/thumbs/05.jpg" alt="" /></a>
-							<h2>Nullam vitae nunc vulputate</h2>
-							<p>In pellentesque cursus velit id posuere. Donec vehicula nulla.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/06.jpg"><img src="images/thumbs/06.jpg" alt="" /></a>
-							<h2>Phasellus magna faucibus</h2>
-							<p>Nulla dignissim libero maximus tellus varius dictum ut posuere magna.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/07.jpg"><img src="images/thumbs/07.jpg" alt="" /></a>
-							<h2>Proin quis mauris</h2>
-							<p>Etiam ultricies, lorem quis efficitur porttitor, facilisis ante orci urna.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/08.jpg"><img src="images/thumbs/08.jpg" alt="" /></a>
-							<h2>Gravida quis varius enim</h2>
-							<p>Nunc egestas congue lorem. Nullam dictum placerat ex sapien tortor mattis.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/09.jpg"><img src="images/thumbs/09.jpg" alt="" /></a>
-							<h2>Morbi eget vitae adipiscing</h2>
-							<p>In quis vulputate dui. Maecenas metus elit, dictum praesent lacinia lacus.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/10.jpg"><img src="images/thumbs/10.jpg" alt="" /></a>
-							<h2>Habitant tristique senectus</h2>
-							<p>Vestibulum ante ipsum primis in faucibus orci luctus ac tincidunt dolor.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/11.jpg"><img src="images/thumbs/11.jpg" alt="" /></a>
-							<h2>Pharetra ex non faucibus</h2>
-							<p>Ut sed magna euismod leo laoreet congue. Fusce congue enim ultricies.</p>
-						</article>
-						<article>
-							<a class="thumbnail" href="images/fulls/12.jpg"><img src="images/thumbs/12.jpg" alt="" /></a>
-							<h2>Mattis lorem sodales</h2>
-							<p>Feugiat auctor leo massa, nec vestibulum nisl erat faucibus, rutrum nulla.</p>
-						</article>
-					</section>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+						<li>
+							<div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+								<div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div>
+								<div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div>
+								<div data-src="images/xlarge/3.jpg" data-min-width="700"></div>
+								<div data-src="images/large/3.jpg" data-min-width="300"></div>
+								<div data-src="images/medium/3.jpg" data-min-width="200"></div>
+								<div data-src="images/small/3.jpg" data-min-width="140"></div>
+								<div data-src="images/xsmall/3.jpg"></div>
+								<noscript>
+									<img src="images/xsmall/3.jpg" alt="img03"/>
+								</noscript>
+							</div>
+						</li>
+					</ul>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<ul class="copyright">
-							<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a>.</li>
-						</ul>
-					</footer>
+					<div class="gamma-overlay"></div>
 
-			</div>
+					<div id="loadmore" class="loadmore">Example for loading more items...</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/main.js"></script>
+				</div>
 
+			</div><!--/main-->
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="js/jquery.masonry.min.js"></script>
+		<script src="js/jquery.history.js"></script>
+		<script src="js/js-url.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/gamma.js"></script>
+		<script type="text/javascript">
+			
+			$(function() {
+
+				var GammaSettings = {
+						// order is important!
+						viewport : [ {
+							width : 1200,
+							columns : 5
+						}, {
+							width : 900,
+							columns : 4
+						}, {
+							width : 500,
+							columns : 3
+						}, { 
+							width : 320,
+							columns : 2
+						}, { 
+							width : 0,
+							columns : 2
+						} ]
+				};
+
+				Gamma.init( GammaSettings, fncallback );
+
+
+				// Example how to add more items (just a dummy):
+
+				var page = 0,
+					items = ['<li><div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350"><div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div><div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div><div data-src="images/xlarge/3.jpg" data-min-width="700"></div><div data-src="images/large/3.jpg" data-min-width="300"></div><div data-src="images/medium/3.jpg" data-min-width="200"></div><div data-src="images/small/3.jpg" data-min-width="140"></div><div data-src="images/xsmall/3.jpg"></div><noscript><img src="images/xsmall/3.jpg" alt="img03"/></noscript></div></li><li><div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350"><div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div><div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div><div data-src="images/xlarge/3.jpg" data-min-width="700"></div><div data-src="images/large/3.jpg" data-min-width="300"></div><div data-src="images/medium/3.jpg" data-min-width="200"></div><div data-src="images/small/3.jpg" data-min-width="140"></div><div data-src="images/xsmall/3.jpg"></div><noscript><img src="images/xsmall/3.jpg" alt="img03"/></noscript></div></li><li><div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350"><div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div><div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div><div data-src="images/xlarge/3.jpg" data-min-width="700"></div><div data-src="images/large/3.jpg" data-min-width="300"></div><div data-src="images/medium/3.jpg" data-min-width="200"></div><div data-src="images/small/3.jpg" data-min-width="140"></div><div data-src="images/xsmall/3.jpg"></div><noscript><img src="images/xsmall/3.jpg" alt="img03"/></noscript></div></li><li><div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350"><div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div><div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div><div data-src="images/xlarge/3.jpg" data-min-width="700"></div><div data-src="images/large/3.jpg" data-min-width="300"></div><div data-src="images/medium/3.jpg" data-min-width="200"></div><div data-src="images/small/3.jpg" data-min-width="140"></div><div data-src="images/xsmall/3.jpg"></div><noscript><img src="images/xsmall/3.jpg" alt="img03"/></noscript></div></li><li><div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350"><div data-src="images/xxxlarge/3.jpg" data-min-width="1300"></div><div data-src="images/xxlarge/3.jpg" data-min-width="1000"></div><div data-src="images/xlarge/3.jpg" data-min-width="700"></div><div data-src="images/large/3.jpg" data-min-width="300"></div><div data-src="images/medium/3.jpg" data-min-width="200"></div><div data-src="images/small/3.jpg" data-min-width="140"></div><div data-src="images/xsmall/3.jpg"></div><noscript><img src="images/xsmall/3.jpg" alt="img03"/></noscript></div></li>']
+
+				function fncallback() {
+
+					$( '#loadmore' ).show().on( 'click', function() {
+
+						++page;
+						var newitems = items[page-1]
+						if( page <= 1 ) {
+							
+							Gamma.add( $( newitems ) );
+
+						}
+						if( page === 1 ) {
+
+							$( this ).remove();
+
+						}
+
+					} );
+
+				}
+
+			});
+
+		</script>	
 	</body>
 </html>

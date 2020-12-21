@@ -58,7 +58,7 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
 				<!-- <div class="wrapper style1"> -->
 					<div class="container">			                        
                         <br/>                       
-
+                        <?php include_once "./ctgr_explain.php" ?>
 						<div class="row"> <!-- 메인 글 영역-->
 							<div class="col-12" id="content">
                                 <!-- 게시물 목록 -->

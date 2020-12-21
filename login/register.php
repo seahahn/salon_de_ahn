@@ -33,13 +33,13 @@
                                 <span id="pw_check_msg" data-check="0"></span>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="infoAgree">
+                                <input class="form-check-input" type="checkbox" name="infoAgree" id="infoAgree">
                                 <label class="form-check-label" for="infoAgree">
                                     <a href="#">개인정보처리방침</a>에 동의합니다.
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="serviceAgree">
+                                <input class="form-check-input" type="checkbox" name="serviceAgree" id="serviceAgree">
                                 <label class="form-check-label" for="serviceAgree">
                                     <a href="#">서비스 이용약관</a>에 동의합니다.
                                 </label>
@@ -87,7 +87,7 @@
             /* 필수 입력 채우지 않았을 경우 경고창 띄우기*/
             function check_input() {
                 if(!$("#email").val()){
-                    alert("이메일 주소를 입력해주세요.");
+                    alert("이메일 주소를 입력해주세요.");                    
                     $("#email").focus();
                     return;
                 }
@@ -110,6 +110,16 @@
                     $("#password").select();
                     return;
                 }
+
+                if(!$("#infoAgree").prop("checked")){
+                    alert("개인정보처리방침에 동의해주세요.");                    
+                    return;
+                }
+
+                if(!$("#serviceAgree").prop("checked")){
+                    alert("서비스 이용약관에 동의해주세요.");
+                    return;
+                }               
 
                 document.rgSbmt.submit();
             }
@@ -151,15 +161,16 @@
                 $.ajax({
                     url : "./check_email.php",
                     type : "POST",                    
+                    dataType : "JSON",
                     data : {
                         "email" : $("#email").val()
                     },
                     success : function(data){
                         if(data.check){
-                            $("#email_check_msg").html("사용 가능한 이메일입니다.").css("color", "blue").attr("data-check", "1");            
+                            $("#email_check_msg").html("사용 가능한 이메일입니다.").css("color", "blue").attr("data-check", "1");                            
                         } else {
                             $("#email_check_msg").html("중복된 이메일입니다.").css("color", "red").attr("data-check", "0");
-                            $("#email").focus();
+                            $("#email").focus();                            
                         }
                     }
                 });

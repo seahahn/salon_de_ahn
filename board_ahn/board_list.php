@@ -114,7 +114,7 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                         $sql3 = mq("SELECT
                                                         *
                                                     FROM
-                                                        reply
+                                                        reply_ahn
                                                     WHERE
                                                         con_num='".$board['num']."'
                                                 ");

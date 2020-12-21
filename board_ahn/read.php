@@ -10,13 +10,13 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
         $views = mysqli_fetch_array(mq("SELECT 
                                         * 
                                     FROM 
-                                        board 
+                                        board_ahn 
                                     WHERE 
                                         num ='".$bno."'
                                     "));
         $views = $views['views'] + 1;
         mq("UPDATE 
-                board 
+                board_ahn 
             SET 
                 views = '".$views."' 
             WHERE 
@@ -29,7 +29,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 	$sql = mq("SELECT 
 				 * 
                 FROM 
-                    board 
+                    board_ahn 
                 WHERE 
                     num='".$bno."'
 			"); 
@@ -85,7 +85,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                     <div class="row justify-content-start">
                                                     <p class="col-12" style="margin-bottom: 0px;"><b>첨부파일 목록</b></p>
                                                     <?php
-                                                        $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");                                                        
+                                                        $sql = mq("SELECT att_file FROM board_ahn WHERE num='".$bno."'");                                                        
                                                         while($row = mysqli_fetch_assoc($sql)){
                                                             $filepath_array = unserialize($row['att_file']);
                                                         }                                                        
@@ -146,7 +146,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                     $sql2=mq("SELECT
                                         *
                                     FROM
-                                        reply
+                                        reply_ahn
                                     WHERE
                                         con_num='".$bno."'
                                     ORDER BY

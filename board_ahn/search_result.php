@@ -166,14 +166,25 @@
                                                 $title=str_replace($board["title"],mb_substr($board["title"],0,30,"utf-8")."...",$board["title"]);
                                             }
 
-                                            $sql3 = mq("SELECT 
+                                            if($board["board_class"] == "public"){
+                                                $sql3 = mq("SELECT 
                                                             * 
                                                         FROM 
                                                             reply
                                                         WHERE 
                                                             con_num='".$board['num']."'
                                                     ");
-                                            $rep_count = mysqli_num_rows($sql3);
+                                                $rep_count = mysqli_num_rows($sql3);
+                                            } else if($board["board_class"] == "private") {
+                                                $sql3 = mq("SELECT 
+                                                            * 
+                                                        FROM 
+                                                            reply_ahn
+                                                        WHERE 
+                                                            con_num='".$board['num']."'
+                                                    ");
+                                                $rep_count = mysqli_num_rows($sql3);
+                                            }
                                     ?>
 
 									<tbody>
