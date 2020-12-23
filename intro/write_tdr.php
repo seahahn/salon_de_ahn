@@ -110,7 +110,7 @@ include_once "../login/login_check.php";
                                                     <td>
                                                         <div class="d-flex">
                                                             <span class="pos_input">진입 포인트 : </span><input type="text" class="form-control col mx-2" placeholder="진입 당시의 가격" name="in_pos" id="in_pos" required>
-                                                            <span class="pos_input">진입 일자 : </span><input type="text" class="form-control col mx-2" placeholder="진입일" name="in_date" id="in_date" required>                                                    
+                                                            <span class="pos_input">진입 일자 : </span><input type="text" class="form-control col mx-2" placeholder="진입일" name="in_date" id="in_date" required>
                                                         </div>
                                                     </td>
                                                 </tr>

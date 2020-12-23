@@ -123,7 +123,7 @@
                 <ul>                
                     <li><a href="/board_ahn/board_list.php?ctgr=<?=$daily_life?>">일상 기록</a></li>
                     <li><a href="/board/board_list.php?ctgr=<?=$daily_life_share?>">자유게시판</a></li>
-                    <li><a href="/gallery/test2.php">일상 사진 모음</a></li>
+                    <li><a href="/gallery/albums.php">일상 사진 모음</a></li>
                 </ul>
             </li>            
             <li><a href="/chatting/chatting.php">Chatting</a></li>                

@@ -1,8 +1,11 @@
 <?php
-	include "../util/config.php";
-	include "../db_con.php";
+	include_once "../util/config.php";
+	include_once "../db_con.php";
+	include_once "../s3.php";
+
+	$s3 = new aws_s3;
 	
-	$filepath_array = array();	
+	$filepath_array = array();
 	if($_FILES) {
 		if(count($_FILES['folders']['name']) > 0 ) { 
 			$baseDownFolder = "../images/";
@@ -28,24 +31,34 @@
 				// 파일 권한 변경 (생략가능_추후 변경할 수 있게 권한 변경함) 
                 chmod($baseDownFolder.$tmp_filename, 0755);	
                 
-                // 파일 제목과 설명
+                // 사진첩 제목과 날짜, 설명
 				$title = $_POST['title'][$i];
 				$rcday = $_POST['rcday'][$i];
-                $caption = $_POST['caption'][$i];
+				$caption = $_POST['caption'][$i];
+				
+				// S3에 파일 업로드
+				$s3path = "albumThumbnails/";				
+				$bucket = $s3->bucket;
 
+				$exist = $s3->exist($bucket, $s3path.$title.'/');
+				if(!$exist) {
+					$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$title.'/');
+				}
+				$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$title.'/'.$tmp_filename);
+
+				// DB에 사진첩 제목, 날짜, 설명과 함께 S3 경로 업로드
 				mq("INSERT photofolder SET				
                 title = '".$title."',
 				rcday = '".$rcday."',
                 caption = '".$caption."',
-				thumb = '".$baseDownFolder.$tmp_filename."'
+				thumb = '".$s3path.$title.'/'.$tmp_filename."',
+				bucket_folder = '".$s3path.$title.'/'."'
 				");
-
-                // $filepath_array[$i] = $baseDownFolder.$tmp_filename;                
 			}			
 		}
 	}	
 ?>
 	<script>
 		alert("사진첩 등록 완료");
-		location.href = 'test2.php';
+		location.href = 'albums.php';
 	</script>
