@@ -18,7 +18,7 @@ while($f = mysqli_fetch_array($q)){
             <input type="hidden" name="folder" value="<?=$f['title']?>">
         </form>
         <!-- <a class="location-title" href="photos.php?folder=<?=$f['title']?>"><?=$f['title']?></a> -->
-        <a class="location-title" href="javascript:document.gotophotos__<?=$f['title']?>.submit();"><?=$f['title']?></a>
+        <a class="location-title" href="javascript:document.gotophotos_<?=$f['title']?>.submit();"><?=$f['title']?></a>
         <div class="location-image" data-num="<?=$f['num']?>">
             <a href="javascript:document.gotophotos.submit();">
                 <img width="300" height="169" src="<?=$url.$f['thumb']?>" alt="<?=$f['title']?>">
