@@ -8,7 +8,7 @@
 	$filepath_array = array();
 	if($_FILES) {
 		if(count($_FILES['folders']['name']) > 0 ) { 
-			$baseDownFolder = "../images/";
+			$baseDownFolder = "/htdocs/images/";
 
 			for($i = 0; $i < count($_FILES['folders']['name']); $i++){
 				// 실제 파일명 
@@ -24,12 +24,12 @@
 				// 저장 파일명 (실제파일명@@@임시파일명) 
 				// $thumbnail_file = $real_filename . '@@@' . $tmp_filename;
 
+				// 파일 권한 변경 (생략가능_추후 변경할 수 있게 권한 변경함) 
+                chmod($baseDownFolder.$tmp_filename, 0755);
+
 				if(!move_uploaded_file($_FILES["folders"]["tmp_name"][$i], $baseDownFolder.$tmp_filename) ) {
 					echo 'upload error';
 				}
-
-				// 파일 권한 변경 (생략가능_추후 변경할 수 있게 권한 변경함) 
-                chmod($baseDownFolder.$tmp_filename, 0755);	
                 
                 // 사진첩 제목과 날짜, 설명
 				$title = $_POST['title'][$i];

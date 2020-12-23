@@ -12,7 +12,7 @@
 	$folder = $_POST['folder']; // 사진이 들어가 있는 사진첩 제목
 	if($_FILES) {
 		if(count($_FILES['photos']['name']) > 0 ) { 
-			$baseDownFolder = "../images/";
+			$baseDownFolder = "../image/";
 
 			for($i = 0; $i < count($_FILES['photos']['name']); $i++){
 				// 실제 사진명 
@@ -55,7 +55,7 @@
 		}
 
 		if(count($_FILES['photos_multi']['name']) > 0 ) {
-			$baseDownFolder = "../images/";
+			$baseDownFolder = "../image/";
 
 			for($i = 0; $i < count($_FILES['photos_multi']['name']); $i++){
 				// 실제 사진명 
