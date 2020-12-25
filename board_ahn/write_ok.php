@@ -7,7 +7,9 @@
 	$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000+1000;
 
 	$category = $_POST['category'];
-	$board_class = $_POST['board_class'];
+	$sub_ctgr = $_POST['sub_ctgr'];
+	$headpiece = $_POST['headpiece'];
+	// $board_class = $_POST['board_class'];
 
 	$unum = $_POST['unum'];
 	$email = $useremail;
@@ -68,28 +70,7 @@
 				$filepath_array[$i] = $baseDownFolder.$tmp_filename;
 			}			
 		}
-	} 
-
-	// if(strpos($_FILES['file']['type'], 'image') == 0) {
-		// print_r($_FILES['files']['error']) ;
-	// if($_FILES['files'] != 'undefined') {
-	// 	if($_FILES['files']['name'] > 0 ) { 
-	// 		if ($_FILES['files']['name']) {
-	// 			if (!$_FILES['files']['error']) {
-	// 				$name = md5(rand(100, 200));
-	// 				$ext = pathinfo($_FILES['files']['name'], PATHINFO_EXTENSION);
-	// 				$filename = $name.
-	// 				'.'.$ext;
-	// 				$destination = '/assets/images/'.$filename; //change this directory
-	// 				$location = $_FILES["files"]["tmp_name"];
-	// 				move_uploaded_file($location, $destination);
-	// 				echo '127.0.0.1/image/'.$filename; //change this URL
-	// 			} else {
-	// 				echo $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['files']['error'];
-	// 			}
-	// 		}
-	// 	}
-	// }
+	}
 
 	// 첨부파일 경로를 담은 배열을 직렬화하여 문자열 형태로 바꿈. 그리고 해당 게시물 첨부파일 경로 테이블에 넣음
 	$filepath_array_str = serialize($filepath_array);
@@ -107,6 +88,8 @@
 		unum = '".$unum."',
 		depth = '".$ans_depth."',
 		category = '".$category."',
+		sub_ctgr = '".$sub_ctgr."',
+		headpiece = '".$headpiece."',
 		email = '".$email."',						
 		title = '".$title."', 
 		writer = '".$nickname."', 
@@ -120,6 +103,8 @@
 		in_num = '".$max_in_num."',
 		unum = '".$unum."',
 		category = '".$category."',
+		sub_ctgr = '".$sub_ctgr."',
+		headpiece = '".$headpiece."',
 		email = '".$email."',						
 		title = '".$title."', 
 		writer = '".$nickname."', 

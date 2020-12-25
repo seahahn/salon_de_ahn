@@ -1,12 +1,23 @@
 <?php
 include_once "../util/config.php";
 include_once "../db_con.php";
-// include_once "../login/login_check.php";
-// echo $useremail;
 
-$bno = $_GET['num']; // $bno에 num값을 받아와 넣음 
+$bno = $_GET['num']; // $bno에 num값을 받아와 넣음     
+	
+	/* 받아온 num값을 선택해서 게시글 정보 가져오기 */
+	$sql = mq("SELECT 
+				 * 
+                FROM 
+                    board_ahn 
+                WHERE 
+                    num='".$bno."'
+			"); 
+    $board = $sql->fetch_array();
+    $board_class = $board['board_class'];
+    $category = $board['category'];
+
     /* 조회수 올리기  */
-    if(empty($_COOKIE["read_".$bno])){
+    if(empty($_COOKIE["read_".$bno.$board_class])){
         $views = mysqli_fetch_array(mq("SELECT 
                                         * 
                                     FROM 
@@ -22,18 +33,10 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
             WHERE 
                 num = '".$bno."'
         ");
+        setcookie("read_".$bno.$board_class, $bno.$board_class, time() + 60 * 60 * 24);
     }
 	/* 조회수 올리기 끝 */
-	
-	/* 받아온 num값을 선택해서 게시글 정보 가져오기 */
-	$sql = mq("SELECT 
-				 * 
-                FROM 
-                    board_ahn 
-                WHERE 
-                    num='".$bno."'
-			"); 
-	$board = $sql->fetch_array();
+include_once "headpiece.php";
 ?>
 
 <!DOCTYPE HTML>
@@ -57,16 +60,15 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 
 			<!-- Main -->
 				<!-- <div class="wrapper style1"> -->
-					<div class="container">
-                        
+					<div class="container">                        
                         <br/>                       
-
+                        <?php include_once "./ctgr_explain.php" ?>
 						<div class="row"> <!-- 메인 글 영역-->
 							<div class="col" id="content">
                                 <!-- 글 내용 영역 -->								
                                 <!-- 글 불러오기 -->
                                 <div id="board_read">
-                                    <h3><?=$board['title']?></h3>
+                                    <h3>[<?=$sub_ctgr.' - '.$headpiece?>] <?=$board['title']?></h3>
                                     <div><?=$board['writer']?></div>
                                     <div class="row justify-content-start">                                        
                                         <div class="col-2"><?=$board['wdate']?></div>
@@ -273,7 +275,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                             <input type="hidden" name="category" value="<?=$board['category']?>"/>
                                             <a class="a_padding"><button type="submit" class="col-auto mr-auto btn-lg">글쓰기</button></a>
                                         </form>
-                                        <a href="write.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" class="col-auto mr-auto btn-lg">답글</button></a>                                        
+                                        <!-- <a href="write.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" class="col-auto mr-auto btn-lg">답글</button></a>                                         -->
                                         <?php } ?>
                                         <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
                                         <?php                                             

@@ -4,6 +4,8 @@
 
 	$bno = $_POST['num']; // $bno(hidden)에 num값을 받아와 넣음	    
 	$category = $_POST['category']; // 게시물 수정 시 카테고리 선택한 것 받아옴
+	$sub_ctgr = $_POST['sub_ctgr'];
+	$headpiece = $_POST['headpiece'];
 	
 	
     /* wsecret 값이 1이면 잠금 0이면 공개 */
@@ -73,6 +75,8 @@
 			board_ahn 
         SET 
 			category = '".$category."',
+			sub_ctgr = '".$sub_ctgr."',
+			headpiece = '".$headpiece."',
             title='".$_POST['title']."',            
 			content='".$_POST['content']."',            
             wsecret = '".$wsecret."',

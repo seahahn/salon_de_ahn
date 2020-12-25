@@ -42,7 +42,7 @@ if(mysqli_num_rows($q) != 0) {
             $("#fileAdd").click(function(){ // 사진 한 장씩 업로드
                 $("#fileList").append(					
 					'<div>\
-					<input type="file" class="col-8 btn-sm" id="fileUpload" name="photos[]">\
+					<input type="file" accept="image/*" class="col-8 btn-sm" id="fileUpload" name="photos[]">\
 					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
 					<div class="d-flex">\
 					<input type="text" class="form-control form-control-sm col-4" placeholder="제목" name="title[]">\
@@ -62,7 +62,7 @@ if(mysqli_num_rows($q) != 0) {
 			$("#filesAdd").click(function(){ // 사진 여러 장 업로드
                 $("#fileList").append(					
 					'<div>\
-					<input type="file" class="col-8 btn-sm" id="filesUpload" name="photos_multi[]" multiple>\
+					<input type="file" accept="image/*" class="col-8 btn-sm" id="filesUpload" name="photos_multi[]" multiple>\
 					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
 					<div class="d-flex">\
 					<input type="text" class="form-control form-control-sm col-4" placeholder="제목(여러 장 공통)" name="title_multi">\

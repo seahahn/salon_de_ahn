@@ -8,13 +8,15 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 	$sql = mq("SELECT 
 				 * 
                 FROM 
-                    board 
+                    board_ahn 
                 WHERE 
                     num='$bno'
 			");
     $board = $sql->fetch_array();	
     $category = $board['category'];
     $depth = $board['depth']; // 1 이상이면 답글임. 답글인 경우 카테고리 고정을 위해서 정보 가져옴
+    $sub_ctgr = $board['sub_ctgr'];
+    $headpiece = $board['headpiece'];
 ?>
 
 <!DOCTYPE HTML>
@@ -125,7 +127,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                         <button type="button" id="fileAdd" class="btn-sm">첨부파일 추가</button>
                                                         <ul id="fileList"></ul>
                                                         <?php
-                                                        $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");                                                        
+                                                        $sql = mq("SELECT att_file FROM board_ahn WHERE num='".$bno."'");                                                        
                                                         while($row = mysqli_fetch_assoc($sql)){
                                                             $filepath_array = unserialize($row['att_file']);
                                                         }                                                        
@@ -152,8 +154,8 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                             </div>
                                             <div class="row justify-content-end">
                                                 <a href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg ml-1 px-3">목록</button></a>
-                                                <button type="button" class="btn-lg ml-1 px-3" onclick="history.go(-1);">취소</button></a>
-                                                <button type="submit" class="btn-lg ml-1 px-3">수정하기</button>
+                                                <a class="a_nopadding"><button type="button" class="btn-lg ml-1 px-3" onclick="history.go(-1);">취소</button></a>
+                                                <a class="a_nopadding"><button type="submit" class="btn-lg ml-1 px-3">수정하기</button></a>
                                             </div>
                                         </div>
                                     </form>

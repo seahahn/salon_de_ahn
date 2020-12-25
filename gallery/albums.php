@@ -46,7 +46,7 @@ $row = mysqli_num_rows($q); // 사진첩 총 갯수 불러오기
             $("#folderAdd").click(function(){
                 $("#folderList").append(
 					'<div>\
-					<input type="file" class="col-8 btn-sm" id="folderUpload" name="folders[]">\
+					<input type="file" accept="image/*" class="col-8 btn-sm" id="folderUpload" name="folders[]">\
 					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
 					<div class="row">\
 					<input type="text" class="form-control form-control-sm col" placeholder="제목" name="title[]">\

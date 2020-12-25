@@ -55,14 +55,13 @@
                             <li><a href="/intro/it_dev_portfolio.php">IT개발 포트폴리오</a></li>
                         </ul>
                     </li>
-                    <li><a href="/board_ahn/board_list.php?ctgr=<?=$it_dev_learnings?>">학습 내용</a></li>
-                    <li><a href="/board_ahn/board_list.php?ctgr=<?=$it_dev_usefulinfo?>">유용한 정보</a></li>
-                    <li><a href="/board/board_list.php?ctgr=<?=$it_dev_discussion?>">IT 주제 게시판</a>
+                    <li><a href="/board_ahn/board_list.php?ctgr=<?=$it_dev_learnings?>">학습 내용 / 자료</a></li>                    
+                    <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>">IT 주제 게시판</a>
                         <ul>
-                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev_discussion?>">토론</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev_recordshare?>">경험 공유</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev_infoshare?>">정보 공유</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev_qna?>">Q & A</a></li>                            
+                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$disc?>">토론</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$exp?>">경험 공유</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$info?>">정보 공유</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$qna?>">Q & A</a></li>                            
                         </ul>
                     </li>                    
                 </ul>
@@ -76,12 +75,12 @@
                         </ul>
                     </li>                    
                     <li><a href="/board_ahn/board_list.php?ctgr=<?=$finance_usefulinfo?>">유용한 정보</a></li>                        
-                    <li><a href="/board/board_list.php?ctgr=<?=$finance_discussion?>">금융 주제 게시판</a>
+                    <li><a href="/board/board_list.php?ctgr=<?=$finance?>">금융 주제 게시판</a>
                         <ul>
-                            <li><a href="/board/board_list.php?ctgr=<?=$finance_discussion?>">토론</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$finance_recordshare?>">경험 공유</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$finance_infoshare?>">정보 공유</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$finance_qna?>">Q & A</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$finance?>&hp=<?=$disc?>">토론</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$finance?>&hp=<?=$exp?>">경험 공유</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$finance?>&hp=<?=$info?>">정보 공유</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$finance?>&hp=<?=$qna?>">Q & A</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -103,18 +102,18 @@
                     </li>                    
                     <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>">학습 자료</a>
                         <ul>
-                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=en">영어</a></li>
-                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=cn">중국어</a></li>
-                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=ru">러시아어</a></li>
-                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>?lang=ge">독일어</a></li>
+                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>&lang=en">영어</a></li>
+                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>&lang=cn">중국어</a></li>
+                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>&lang=ru">러시아어</a></li>
+                            <li><a href="/board_ahn/board_list.php?ctgr=<?=$languages_usefuldata?>&lang=ge">독일어</a></li>
                         </ul>
                     </li>                        
-                    <li><a href="/board/board_list.php?ctgr=<?=$languages_discussion?>">언어 학습 주제 게시판</a>
+                    <li><a href="/board/board_list.php?ctgr=<?=$languages?>">언어 학습 주제 게시판</a>
                         <ul>
-                            <li><a href="/board/board_list.php?ctgr=<?=$languages_discussion?>">토론</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$languages_recordshare?>">경험 공유</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$languages_infoshare?>">정보 공유</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$languages_qna?>">Q & A</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$languages?>&hp=<?=$disc?>">토론</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$languages?>&hp=<?=$exp?>">경험 공유</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$languages?>&hp=<?=$info?>">정보 공유</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$languages?>&hp=<?=$qna?>">Q & A</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -126,7 +125,7 @@
                     <li><a href="/gallery/albums.php">일상 사진 모음</a></li>
                 </ul>
             </li>            
-            <li><a href="/chatting/chatting.php">Chatting</a></li>                
+            <li><a href="/chatting/chatting.php">Chatting</a></li>
 
             <?php
                 if(!$useremail){ // 로그인 하지 않은 경우

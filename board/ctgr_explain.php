@@ -10,46 +10,18 @@ switch ($category){
         break; 
         case 'it_dev_learnings': 
 ?>            
-    <!-- <option value="it_dev_learnings" selected>IT - 학습 내용</option> -->
-    <h1 class="fs-1">IT - 학습 내용</h1>
-    <p class="fs-1">IT 개발을 공부하면서 배운 내용을 기록한 게시판입니다.</p>                       
+        <!-- <option value="it_dev_learnings" selected>IT - 학습 내용</option> -->
+        <h1 class="fs-1">IT - 학습 내용 / 자료</h1>
+        <p class="fs-1">IT 개발을 공부하면서 배운 내용 및 유용한 자료들을 기록한 게시판입니다.</p>                       
 <?php
-        break; 
-        case 'it_dev_usefulinfo': 
-?>            
-    <!-- <option value="it_dev_usefulinfo" selected>IT - 유용한 정보</option> -->
-    <h1 class="fs-1">IT - 유용한 정보</h1>
-    <p class="fs-1">IT 개발을 공부하면서 알게된 정보들을 모아둔 게시판입니다.</p>                       
-<?php
-        break; 
-        case 'it_dev_discussion': 
+        break;          
+        case 'it_dev': 
 ?>            
     <!-- <option value="it_dev_discussion" selected>IT - 토론</option> -->
-    <h1 class="fs-1">IT - 토론</h1>
-    <p class="fs-1">IT 개발에 대한 토론을 하는 공간입니다.</p>
+    <h1 class="fs-1">IT 주제 게시판</h1>
+    <p class="fs-1">IT 개발에 대한 이야기를 나누는 공간입니다.</p>
 <?php
-        break;                                                                    
-        case 'it_dev_recordshare': 
-?>
-    <!-- <option selected value="it_dev_recordshare">IT - 경험 공유</option> -->
-    <h1 class="fs-1">IT - 경험 공유</h1>
-    <p class="fs-1">IT 개발을 하면서 겪었던 경험들을 공유해주세요!</p>
-<?php
-        break;
-        case 'it_dev_infoshare': 
-?>
-    <!-- <option selected value="it_dev_infoshare">IT - 정보 공유</option> -->
-    <h1 class="fs-1">IT - 정보 공유</h1>
-    <p class="fs-1">IT 개발에 대한 정보를 공유해주세요!</p>                       
-<?php
-        break;
-        case 'it_dev_qna': 
-?>
-    <!-- <option selected value="it_dev_qna">IT - Q & A</option> -->
-    <h1 class="fs-1">IT - Q & A</h1>
-    <p class="fs-1">IT 개발에 대한 질의응답을 하는 게시판입니다.</p>                       
-<?php
-        break;                
+        break;                                                                   
 
         case 'tradingrecord': 
 ?>            
@@ -66,40 +38,19 @@ switch ($category){
     <p class="fs-1">금융과 관련된 유용한 정보를 모아둔 게시판입니다.</p>                       
 <?php
         break;
-        case 'finance_discussion': 
+        case 'finance': 
 ?>
     <!-- <option selected value="finance_discussion">금융 - 토론</option> -->
-    <h1 class="fs-1">금융 - 토론</h1>
-    <p class="fs-1">금융에 대한 토론을 하는 공간입니다.</p>                       
+    <h1 class="fs-1">금융 주제 게시판</h1>
+    <p class="fs-1">금융에 대한 이야기를 나누는 공간입니다.</p>                       
 <?php
         break;                                                                    
-        case 'finance_recordshare': 
-?>
-    <!-- <option selected value="finance_recordshare">금융 - 경험 공유</option> -->
-    <h1 class="fs-1">금융 - 경험 공유</h1>
-    <p class="fs-1">금융 관련하여 겪은 경험들을 공유해주세요!</p>                       
-<?php
-        break;
-        case 'finance_infoshare': 
-?>
-    <!-- <option selected value="finance_infoshare">금융 - 정보 공유</option> -->
-    <h1 class="fs-1">금융 - 정보 공유</h1>
-    <p class="fs-1">금융 관련하여 알게된 정보들을 공유해주세요!</p>                       
-<?php
-        break;
-        case 'finance_qna': 
-?>
-    <!-- <option selected value="finance_qna">금융 - Q & A</option> -->
-    <h1 class="fs-1">금융 - Q & A</h1>
-    <p class="fs-1">금융에 대한 질의응답을 하는 게시판입니다.</p>                       
-<?php
-        break;
-
+        
         case 'langstudyrecord': 
 ?>
         <!-- <option selected value="languages_usefuldata">언어 학습 - 학습 자료</option> -->
-        <h1 class="fs-1">언어 학습 공부 기록</h1>
-        <p class="fs-1">언어 학습을 하면서 쓴 노트 및 녹음 등을 모아두었습니다.</p>
+        <h1 class="fs-1">언어 학습 녹음 기록</h1>
+        <p class="fs-1">언어 학습을 하면서 녹음한 음성 파일을 모아두었습니다.</p>
 <?php
         break;
         case 'languages_usefuldata': 
@@ -108,35 +59,14 @@ switch ($category){
     <h1 class="fs-1">언어 학습 - 학습 자료</h1>
     <p class="fs-1">언어 학습과 관련된 학습 자료를 모아둔 게시판입니다.</p>                       
 <?php
-        break; 
-        case 'languages_discussion': 
+        break;         
+        case 'languages': 
 ?>
     <!-- <option selected value="languages_discussion">언어 학습 - 토론</option> -->
-    <h1 class="fs-1">언어 학습 - 토론</h1>
-    <p class="fs-1">언어 학습에 대한 토론을 하는 곳입니다.</p>                       
+    <h1 class="fs-1">언어 학습 주제 게시판</h1>
+    <p class="fs-1">언어 학습에 대한 이야기를 나누는 공간입니다.</p>                       
 <?php
-        break;                                                                    
-        case 'languages_recordshare': 
-?>
-    <!-- <option selected value="languages_recordshare">언어 학습 - 경험 공유</option> -->
-    <h1 class="fs-1">언어 학습 - 경험 공유</h1>
-    <p class="fs-1">언어 학습에 대한 경험을 공유해주세요!</p>                       
-<?php
-        break;
-        case 'languages_infoshare': 
-?>
-    <!-- <option selected value="languages_infoshare">언어 학습 - 정보 공유</option> -->
-    <h1 class="fs-1">언어 학습 - 정보 공유</h1>
-    <p class="fs-1">언어 학습에 대한 정보를 공유해주세요!</p>                       
-<?php
-        break;
-        case 'languages_qna': 
-?>
-    <!-- <option selected value="languages_qna">언어 학습 - Q & A</option> -->
-    <h1 class="fs-1">언어 학습 - Q & A</h1>
-    <p class="fs-1">언어 학습에 대한 질의응답을 하는 게시판입니다.</p>                       
-<?php
-        break;
+        break;                                                                            
 
         case 'daily_life': 
 ?>
@@ -152,8 +82,6 @@ switch ($category){
     <p class="fs-1">누구나 자유로운 주제로 글을 작성할 수 있는 게시판입니다.</p>                       
 <?php
         break;
-
-        default : break;
 }
 ?>                                                                
 

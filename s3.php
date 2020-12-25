@@ -53,6 +53,17 @@ class aws_s3 {
         return $result['Body'];
     }
 
+    // S3 버킷 내 파일 복사하기
+    public function copy($bucket, $keyname, $original) {
+        $options = [
+            'Bucket'     => $bucket,
+            'Key'        => "{$keyname}",
+            'CopySource' => "{$bucket}/{$original}",
+        ];
+
+        return $this->s3Client->copyObject($options);
+    }
+
     /** 파일 존재 확인
      * 
      * @param string $bucket

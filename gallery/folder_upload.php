@@ -8,7 +8,7 @@
 	$filepath_array = array();
 	if($_FILES) {
 		if(count($_FILES['folders']['name']) > 0 ) { 
-			$baseDownFolder = "/htdocs/images/";
+			$baseDownFolder = "../images/";
 
 			for($i = 0; $i < count($_FILES['folders']['name']); $i++){
 				// 실제 파일명 

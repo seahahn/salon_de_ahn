@@ -88,7 +88,7 @@
                     $.ajax({
                         url : "./check_email.php",
                         type : "POST",
-                        dataType : "json",
+                        dataType : "JSON",
                         data : {
                             "email" : $("#email").val()
                         },

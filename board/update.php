@@ -15,6 +15,8 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
     $board = $sql->fetch_array();	
     $category = $board['category'];
     $depth = $board['depth']; // 1 이상이면 답글임. 답글인 경우 카테고리 고정을 위해서 정보 가져옴
+    $sub_ctgr = $board['sub_ctgr'];
+    $headpiece = $board['headpiece'];
 ?>
 
 <!DOCTYPE HTML>

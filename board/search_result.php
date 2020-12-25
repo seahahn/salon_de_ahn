@@ -101,6 +101,7 @@
 									<thead>
 										<tr>
 											<th scope="col" class="text-center">번호</th>
+                                            <th scope="col" class="text-center">분류</th>                                            
 											<th scope="col" class="text-center">제목</th>
 											<th scope="col" class="text-center">작성자</th>
                                             <th scope="col" class="text-center">작성일</th>
@@ -160,6 +161,7 @@
                                                 ");
 
                                         while($board = $sql2->fetch_array()){
+                                            include "headpiece.php";
                                             $title=$board["title"];
                                             /* 글자수가 30이 넘으면 ... 처리해주기 */
                                             if(strlen($title)>30){
@@ -190,7 +192,8 @@
 									<tbody>
 										<tr>                                           
                                             <td width="70" class="text-center"><?=$board['num'];?></td>
-                                            <td width="300">
+                                            <td width="100" class="text-center"><?=$sub_ctgr;?></td>
+                                            <td width="270">
                                             <!-- 비밀 글 가져오기 -->	 
                                             <?php 
                                                 // $lockimg="<img src='./img/lock.png' alt='lock' title='lock' width='18' height='18'>";
@@ -204,7 +207,7 @@
                                                         // }                                                    
                                                     }
                                             ?>                                                
-                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check=<?=$role?> data-num="<?=$board['num']?>" ><?=$title?> <?=$lockimg?></span>
+                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check=<?=$role?> data-num="<?=$board['num']?>">[<?=$headpiece?>] <?=$title?> <?=$lockimg?></span>
                                             <!-- 일반 글 가져오기 -->
                                             <?php                                                     
                                                 }else{	// 아니면 공개 글
@@ -216,7 +219,7 @@
                                                         // }                                                    
                                                     }
                                             ?>
-                                                <span class="read_check" style="cursor:pointer" data-action="./read.php?num=<?=$board['num']?>"><?=$title?>
+                                                <span class="read_check" style="cursor:pointer" data-action="./read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?>
                                                 <?php if($rep_count>0) {?>
                                                 <span style="color:blue;">[<?=$rep_count?>]</span></td>
                                             <?php
@@ -224,7 +227,7 @@
                                                 }
                                             ?>
                                             <td width="70" class="text-center"><?=$board["writer"];?></td>
-                                            <td width="90" class="text-center"><?=$board["wdate"];?></td>
+                                            <td width="100" class="text-center"><?=$board["wdate"];?></td>
                                             <td width="50" class="text-center"><?=$board["views"];?></td>
                                             
 										</tr>

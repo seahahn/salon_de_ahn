@@ -126,9 +126,9 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                 <a href="delete_article_tdr.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">삭제</button></a>                                    
                                 <?php } ?>
                             </div>
-                            <div class="col-auto d-flex justify-content-end">
+                            <!-- <div class="col-auto d-flex justify-content-end"> -->
                                 <a href="tradingrecord.php" class="a_nopadding"><button type="button" class="btn-lg">목록</button></a>
-                            </div>                                                                                                      
+                            <!-- </div>                                                                                                       -->
                         </div>
 
                     </div>

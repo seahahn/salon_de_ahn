@@ -12,11 +12,6 @@ $bucket = $s3->bucket;
 $url = $s3->url;
 ?>
 <!DOCTYPE HTML>
-<!--
-	Lens by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>Salon de Ahn</title>
@@ -45,7 +40,7 @@ $url = $s3->url;
 						<!-- <button type="submit" class="btn-sm">사진첩 등록하기</button>
 						<button type="button" id="folderAdd" class="btn-sm">사진첩 만들기</button> -->
 						<button type="button" class="btn-sm" id="del_modal" onclick="javascript:document.photos.submit();">사진 삭제하기</button>
-						<ul id="folderList"></ul>
+						<!-- <ul id="folderList"></ul> -->
 					</form>
 				<?php
 					}
@@ -60,23 +55,23 @@ $url = $s3->url;
 					$q = mq("SELECT * FROM photosave WHERE folder = '".$folder."'");
 					while($f = mysqli_fetch_array($q)){
 				?>			
-			<article class="location-listing">
+				<article class="location-listing">
 				
 				
-				<a class="location-title" href="javascript:document.gotophotos.submit();"><?=$f['title']?></a>
-				<div class="location-image" data-num="<?=$f['num']?>">
-					<a href="javascript:document.gotophotos.submit();">
-						<img width="300" height="169" src="<?=$url.$f['filepath']?>" alt="<?=$f['title']?>">
-					</a>
-					<input type="checkbox" class="del_photo" name="del_photo[]" value="<?=$f['num']?>" style="z-index: 1;
-					position: absolute;
-					top: 0px;
-					right: 0px;
-					width: 26px;
-    				height: 26px;">
-					
-				</div>        
-			</article>
+					<a class="location-title" href="javascript:document.gotophotos.submit();"><?=$f['title']?></a>
+					<div class="location-image" data-num="<?=$f['num']?>">
+						<a href="javascript:document.gotophotos.submit();">
+							<img width="300" height="169" src="<?=$url.$f['filepath']?>" alt="<?=$f['title']?>">
+						</a>
+						<input type="checkbox" class="del_photo" name="del_photo[]" value="<?=$f['num']?>" style="z-index: 1;
+						position: absolute;
+						top: 0px;
+						right: 0px;
+						width: 26px;
+						height: 26px;">
+						
+					</div>        
+				</article>
 			<?php
 			}
 			?>

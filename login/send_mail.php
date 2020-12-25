@@ -11,7 +11,7 @@ $nameFrom  = "Salon de Ahn";
 
 // 여기의 이메일은 발송하는 서버에 기본 셋팅된 도메인이나 이메일주소가 들어가지 않으면 발송되지 않는 경우가 생길 수 있음
 // 보내는 사람의 이메일
-$mailFrom = "no-reply@salondeahn.com";
+$mailFrom = "salon.de.ahn.noreply@gmail.com";
 
 // 받는사람 닉네임
 $nameTo  = mq("SELECT nickname FROM user WHERE email = '$email'");

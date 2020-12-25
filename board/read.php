@@ -1,11 +1,23 @@
 <?php
 include_once "../util/config.php";
 include_once "../db_con.php";
-// include_once "../login/login_check.php";
 
-$bno = $_GET['num']; // $bno에 num값을 받아와 넣음 
+$bno = $_GET['num']; // $bno에 num값을 받아와 넣음     
+	
+	/* 받아온 num값을 선택해서 게시글 정보 가져오기 */
+	$sql = mq("SELECT 
+				 * 
+                FROM 
+                    board 
+                WHERE 
+                    num='".$bno."'
+			"); 
+    $board = $sql->fetch_array();
+    $board_class = $board['board_class'];
+    $category = $board['category'];
+    
     /* 조회수 올리기  */
-    if(empty($_COOKIE["read_".$bno])){
+    if(empty($_COOKIE["read_".$bno.$board_class])){
         $views = mysqli_fetch_array(mq("SELECT 
                                         * 
                                     FROM 
@@ -21,19 +33,48 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
             WHERE 
                 num = '".$bno."'
         ");
-        setcookie("read_".$bno, $bno, time() + 60 * 60 * 24);
+        setcookie("read_".$bno.$board_class, $bno.$board_class, time() + 60 * 60 * 24);
     }
-	/* 조회수 올리기 끝 */
-	
-	/* 받아온 num값을 선택해서 게시글 정보 가져오기 */
-	$sql = mq("SELECT 
-				 * 
-                FROM 
-                    board 
-                WHERE 
-                    num='".$bno."'
-			"); 
-	$board = $sql->fetch_array();
+    /* 조회수 올리기 끝 */   
+
+    //최근 게시물 목록에 지금 보는 게시물 집어넣기    
+    $count = 0;
+    $recent = $_SERVER['REQUEST_URI'];
+    $recenthp = $board['headpiece'];
+    $recenttitle = $board['title'];
+    for($i=5; $i>0; $i--){        
+        if(!isset($_COOKIE['recent_'.$i])) {                        
+            setcookie("recent_".$i, $recent, time() + 60 * 60 * 24);
+            setcookie("recenthp_".$i, $recenthp, time() + 60 * 60 * 24);           
+            setcookie("recenttitle_".$i, $recenttitle, time() + 60 * 60 * 24);
+            // if($i<=4) $i_ = $i+1;
+            // if(isset($i_) && $_COOKIE['recent_'.$i] == $_COOKIE['recent_'.$i_]) {
+            //     setcookie("recent_".$i, '', -1);
+            //     setcookie("recenthp_".$i, '', -1);           
+            //     setcookie("recenttitle_".$i, '', -1);
+            //     break;
+            // }
+            break;
+        }
+        $count++;
+    }
+
+    if($count == 5) {
+        for($i=1; $i<5; $i++){
+            $num = $i+1;
+            $curl = $_COOKIE["recent_".$num];
+            $chp = $_COOKIE["recenthp_".$num];
+            $ctitle = $_COOKIE["recenttitle_".$num];            
+            setcookie("recent_".$i, $curl, time() + 60 * 60 * 24);
+            setcookie("recenthp_".$i, $chp, time() + 60 * 60 * 24);           
+            setcookie("recenttitle_".$i, $ctitle, time() + 60 * 60 * 24);
+        }
+        setcookie("recent_".$count, $recent, time() + 60 * 60 * 24);
+        setcookie("recenthp_".$i, $recenthp, time() + 60 * 60 * 24);           
+        setcookie("recenttitle_".$count, $recenttitle, time() + 60 * 60 * 24);
+    }
+    
+    include_once "headpiece.php";
 ?>
 
 <!DOCTYPE HTML>
@@ -59,13 +100,13 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 				<!-- <div class="wrapper style1"> -->
 					<div class="container">
                         <br/>                       
-
+                        <?php include_once "./ctgr_explain.php" ?>
 						<div class="row"> <!-- 메인 글 영역-->
 							<div class="col" id="content">
                                 <!-- 글 내용 영역 -->								
                                 <!-- 글 불러오기 -->
                                 <div id="board_read">
-                                    <h3><?=$board['title']?></h3>
+                                    <h3>[<?=$sub_ctgr.' - '.$headpiece?>] <?=$board['title']?></h3>
                                     <div><?=$board['writer']?></div>
                                     <div class="row justify-content-start">                                        
                                         <div class="col-2"><?=$board['wdate']?></div>
@@ -267,19 +308,19 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                     <div class="row col-auto">
                                         <form action="write.php" method="POST" class="pl-0">
                                             <input type="hidden" name="category" value="<?=$board['category']?>"/>
-                                            <a class="a_padding"><button type="submit" class="col-auto mr-auto btn-lg">글쓰기</button></a>
+                                            <a class="a_padding"><button type="submit" class="col-auto mr-auto btn-lg recent">글쓰기</button></a>
                                         </form>
-                                            <a href="write.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" class="col-auto mr-auto btn-lg">답글</button></a>                                        
+                                            <a href="write.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" class="col-auto mr-auto btn-lg recent">답글</button></a>                                        
                                         <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
                                         <?php                                             
                                             if($useremail==$board['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
                                         ?>
-                                        <a href="update.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">수정</button></a>
+                                        <a href="update.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg recent">수정</button></a>
                                         <a href="delete_article.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">삭제</button></a>                                    
                                         <?php } ?>
                                     </div>
                                     <div class="col-auto d-flex justify-content-end">
-                                        <a href="board_list.php?ctgr=<?=$board['category']?>"><button type="button" class="btn-lg">목록</button></a>
+                                        <a href="board_list.php?ctgr=<?=$board['category']?>"><button type="button" class="btn-lg recent">목록</button></a>
                                     </div>                                                                                                      
                                 </div>
 
@@ -409,7 +450,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                 type : "post",                            
                                 data : {
                                     "in_num" : in_num,
-                                    "unum" : <?=$usernum?>,
+                                    "unum" : <?=$usernum;?>,
                                     "depth" : depth,
                                     "ori_writer" : ori_writer,
                                     "rno" : num,
@@ -477,5 +518,25 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
             </script>
             <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
             <script>autosize($('.rep_con'));</script>
+
+            <script>            
+            // $(".recent").click(function(){
+            //     $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
+            //         url : "../util/recent.php",
+            //         type : "POST",                            
+            //         dataType : "JSON",
+            //         data : {
+            //             "recent_" : "<?=$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']?>",
+            //             "recenthp_" : "<?=$headpiece?>",
+            //             "recenttitle_" : "<?=$title?>"
+            //         },
+            //         success : function(data){                                            
+            //             alert(data);
+            //             // location.reload();
+                        
+            //         }
+            //     });
+            // });            
+            </script>            
 	</body>
 </html>

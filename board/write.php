@@ -11,8 +11,12 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
     $depth = $fetch['depth'];
     $category = $fetch['category'];
     $ori_title = $fetch['title'];
+    $sub_ctgr = '';
+    $headpiece = '';
 } else if(isset($_POST['category'])) {
     $category = $_POST['category'];
+    $sub_ctgr = '';
+    $headpiece = '';
 }
 ?>
 
@@ -175,8 +179,16 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
         <!-- 게시판 분류 선택 여부 검증 후 선택 안했으면 alert 띄우기 -->
             <script>
                 function check_ctgr(){
-                    if($("#category").val() == "none_category"){                        
+                    if($("#category option:selected").val() == "none_category"){                        
                         alert("게시판 분류를 선택해주세요.");
+                        return;
+                    }
+                    if($("#sub_ctgr option:selected").val() == "none_subctgr"){                        
+                        alert("게시판 소분류를 선택해주세요.");
+                        return;
+                    }
+                    if($("#headpiece option:selected").val() == "none_headpiece"){
+                        alert("말머리를 선택해주세요.");
                         return;
                     }
 

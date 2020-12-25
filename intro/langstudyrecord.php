@@ -1,6 +1,7 @@
 <?php
 include_once "../util/config.php";
 include_once "../db_con.php";
+include_once "../s3.php";
 
 // 페이징 구현
 if(isset($_GET["page"])){
@@ -13,7 +14,11 @@ if(isset($_GET["page"])){
 // 마이페이지에서 '내가 쓴 글'을 클릭한 경우, 카테고리 값으로 사용자의 이메일 주소를 가져옴
 $category = "langstudyrecord";
 // 마이페이지로부터 사용자 고유번호를 전달받음. 카테고리로 전달된 이메일 주소와 사용자의 고유 번호 둘 다 일치하는 게시물만 가져오기 위함 (탈퇴 후 동일 메일로 재가입 시에(동일인이든 타인이든) 이전 계정의 게시물을 볼 수 없도록 하게 만듦)
-if(isset($_GET["unum"])) $unum = $_GET["unum"];
+if(isset($_GET["lang"])) $lang = $_GET["lang"];
+
+$s3 = new aws_s3;
+$bucket = $s3->bucket;
+$url = $s3->url;
 ?>
 
 <!DOCTYPE HTML>
@@ -25,6 +30,54 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
 <html>
 	<head>
         <?php include_once "../fragments/head.php"; ?>             
+        <!-- 파일 업로드 기능 -->            
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+        <script type="text/javascript">
+        $(document).ready (function(){            
+            $("#fileAdd").click(function(){
+                $("#fileList").append(
+                    '<div>\
+                    <input type="file" accept="audio/*" class="col-8 btn-sm" id="fileUpload" name="record[]">\
+                    <button type="button" class="btn-sm btnRemove">첨부 취소</button><br/>\
+                    <div class="d-flex">\
+					<input type="text" class="form-control form-control-sm col" placeholder="언어" name="lang[]">\
+                    <input type="text" class="form-control form-control-sm col" placeholder="분류" name="ctgr[]">\
+                    <input type="text" class="form-control form-control-sm col" placeholder="기록명" name="title[]">\
+                    <input type="text" class="form-control form-control-sm col" placeholder="기록일" name="date[]">\
+					</div>\
+                    </div>'
+                );
+                $(".btnRemove").on('click', function(){
+                    // $(this).prev().remove();
+                    // $(this).next().remove();
+                    $(this).siblings().remove();
+                    $(this).remove();
+                });                            
+            });
+
+            $("#filesAdd").click(function(){ // 사진 여러 장 업로드
+                $("#fileList").append(					
+					'<div>\
+					<input type="file" accept="audio/*" class="col-8 btn-sm" id="filesUpload" name="records[]" multiple>\
+					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
+					<div class="d-flex">\
+					<input type="text" class="form-control form-control-sm col" placeholder="언어(여러 개 공통)" name="langs">\
+                    <input type="text" class="form-control form-control-sm col" placeholder="분류(여러 개 공통)" name="ctgrs">\
+                    <input type="text" class="form-control form-control-sm col" placeholder="기록명(여러 개 공통)" name="titles">\
+                    <input type="text" class="form-control form-control-sm col" placeholder="기록일(여러 개 공통)" name="dates">\
+					</div>\
+					</div>'
+                );
+                $(".btnRemove").on('click', function(){
+                    // $(this).prev().remove();
+					// $(this).next().remove();					
+					$(this).siblings().remove();
+					$(this).remove();
+					
+                });                            
+            });
+        });
+        </script>
 	</head>
 	<body class="right-sidebar is-preload">
 		<div id="page-wrapper">
@@ -32,28 +85,37 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
 			<!-- Header -->
 				<div class="mb-4" id="header">
                     <?php include_once "../fragments/header.php"; ?>
-                </div>
-                
-                <!-- 비밀 글 모달창 양식 구현-->
+                </div>              
+
+                <!-- 녹음 기록 정보 수정 모달창 양식 구현-->
                 <div class="modal fade modal-center" id="modal_div">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <!-- header -->
                             <div class="modal-header">                                
                                 <!-- header title -->
-                                <h4 class="modal-title"><b>비밀글입니다.</b></h4>
+                                <h4 class="modal-title"><b>녹음 기록 정보 수정</b></h4>
                                 <!-- 닫기(x) 버튼 -->
                                 <button type="button" class="close" data-dismiss="modal">X</button>
                             </div>
                             <!-- body -->
                             <div class="modal-body">
-                                <p>작성자 또는 관리자만 조회 가능합니다.<br/><br/><input type="submit" class="btn-sm float-right" data-dismiss="modal" value="확인"></p>
+                                <form name="edit" id="edit" action="langrecord_edit.php" method="POST">
+                                    <input id="edit_num" name="edit_num" type="hidden" value="">
+                                    <div class="d-flex">                                        
+                                        <input type="text" class="form-control form-control-sm col" placeholder="언어" name="lang_input" id="lang_input" value="">
+                                        <input type="text" class="form-control form-control-sm col" placeholder="분류" name="ctgr_input" id="ctgr_input" value="">
+                                    </div>                                    
+                                    <input type="text" class="form-control form-control-sm col" placeholder="기록명" name="title_input" id="title_input" value="">
+                                    <input type="text" class="form-control form-control-sm col" placeholder="기록일" name="date_input" id="date_input" value="">
+                                    <button type="button" class="btn-sm float-right" onclick="document.edit.submit();">수정</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- 비밀 글 모달창 구현 끝-->
-
+                <!-- 녹음 기록 정보 수정 모달창 구현 끝-->
+                
 			<!-- Main -->
 				<!-- <div class="wrapper style1"> -->
 					<div class="container">			                        
@@ -62,23 +124,33 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
 						<div class="row"> <!-- 메인 글 영역-->
 							<div class="col-12" id="content">
                                 <!-- 게시물 목록 -->
+                                <form id="record_list" name="record_list" action="langrecord_delete.php" method="post" enctype="multipart/form-data">
 								<table class="table table-sm">
 									<thead>
 										<tr>
+                                            <?php
+                                            if($role == "ADMIN") {
+                                            ?>
+                                            <th scope="col" class="text-center">수정</th>
+                                            <th scope="col" class="text-center">삭제</th>
+                                            <?php
+                                            }
+                                            ?>
 											<th scope="col" class="text-center">번호</th>
-											<th scope="col" class="text-center">제목</th>
-											<th scope="col" class="text-center">작성자</th>
-                                            <th scope="col" class="text-center">작성일</th>
-                                            <th scope="col" class="text-center">조회수</th>
+                                            <th scope="col" class="text-center">언어</th>
+											<th scope="col" class="text-center">분류</th>
+                                            <th scope="col" class="text-center">기록명</th>
+                                            <th scope="col" class="text-center">녹음 파일</th>
+                                            <th scope="col" class="text-center">기록일</th>                                            
 										</tr>
                                     </thead>
 
                                     <?php
                                     // 페이징 구현
-                                    if(isset($unum)){
-                                        $sql = mq("SELECT * FROM board_ahn WHERE email='".$category."' AND unum='".$unum."'");
+                                    if(isset($lang)){
+                                        $sql = mq("SELECT * FROM langrecord WHERE lang_key='".$lang."'");
                                     } else {
-                                        $sql = mq("SELECT * FROM board_ahn WHERE category='".$category."'");
+                                        $sql = mq("SELECT * FROM langrecord");
                                     }
                                     $total_record = mysqli_num_rows($sql);
 
@@ -96,72 +168,43 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                     $page_start = ($page - 1) * $list; // 페이지의 시작 (SQL문에서 LIMIT 조건 걸 때 사용)
 
                                     // 게시물 목록 가져오기
-                                    if(isset($unum)){
-                                        $sql2 = mq("SELECT * FROM board_ahn WHERE email='".$category."' AND unum='".$unum."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                    if(isset($lang)){
+                                        $sql2 = mq("SELECT * FROM langrecord WHERE lang_key='".$lang."' ORDER BY wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
                                     } else {
-                                        $sql2 = mq("SELECT * FROM board_ahn WHERE category='".$category."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                        $sql2 = mq("SELECT * FROM langrecord ORDER BY wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
                                     }
 
                                     $post_count = 0;
                                     while($board = $sql2->fetch_array()){
                                         $title=$board["title"];
-                                        /* 글자수가 30이 넘으면 ... 처리해주기 */
-                                        if(strlen($title)>30){
-                                            $title=str_replace($board["title"],mb_substr($board["title"],0,30,"utf-8")."...",$board["title"]);
-                                        }
-                                        
-                                        /* 댓글 수 구하기 */
-                                        $sql3 = mq("SELECT
-                                                        *
-                                                    FROM
-                                                        reply
-                                                    WHERE
-                                                        con_num='".$board['num']."'
-                                                ");
-                                        $rep_count = mysqli_num_rows($sql3); // 레코드의 수(댓글의 수)                                        
+                                        /* 글자수가 50이 넘으면 ... 처리해주기 */
+                                        if(strlen($title)>50){
+                                            $title=str_replace($board["title"],mb_substr($board["title"],0,50,"utf-8")."...",$board["title"]);
+                                        }                                        
                                     ?>
 
 									<tbody>                                        
-										<tr>                                                                                  
-                                            <td width="70" class="text-center"><?=$board['num'];?></td>
-                                            <td width="300">
-                                            <!-- 비밀 글 가져오기 -->	 
-                                            <?php 
-                                                // $lockimg="<img src='./img/lock.png' alt='lock' title='lock' width='18' height='18'>";
-                                                $lockimg="※";
-                                                if($board['wsecret']=="1"){ // lock_post 값이 1이면 잠금
-                                                    if($board['depth']>0) {                                                        
-                                                        // if($board['depth']>1){
-                                                            // echo "<img height=1 width=" . $board['depth']*10 . ">└";
-                                                            // echo "<img height=1 width='10'>└";
-                                                        // } else {
-                                                            echo "└";
-                                                        // }                                                    
-                                                    }
-                                            ?>                                                
-                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check="<?=$role?>" data-num="<?=$board['num']?>"><?=$title?> <?=$lockimg?></span>
-                                            <!-- 일반 글 가져오기 -->
-                                            <?php                                                     
-                                                }else{	// 아니면 공개 글
-                                                    if($board['depth']>0) {                                                        
-                                                        // if($board['depth']>1){
-                                                            // echo "<img height=1 width=" . $board['depth']*10 . ">└";
-                                                            // echo "<img height=1 width=10>└";
-                                                        // } else {
-                                                            echo "└";
-                                                        // }                                                    
-                                                    }
+										<tr>
+                                            <?php
+                                            if($role == "ADMIN") {
                                             ?>
-                                                <span class="read_check" style="cursor:pointer" data-action="./read.php?num=<?=$board['num']?>"><?=$title?></span>
-                                                <?php if($rep_count>0) {?>
-                                                <span style="color:blue;">[<?=$rep_count?>]</span></td>                                                    
-                                            <?php                       
-                                                    }                             
-                                                }
+                                            <td width="40" class="text-center align-middle">
+                                                <button type="button" class="btn-sm edit" value="<?=$board['num'];?>">수정</button>
+                                            </td>
+                                            <td width="40" class="text-center align-middle">
+                                                <input type="checkbox" class="del_rec" name="del_rec[]" value="<?=$board['num'];?>" style="width: 26px; height: 26px;">
+                                            </td>
+                                            <?php
+                                            }
                                             ?>
-                                            <td width="70" class="text-center"><?=$board["writer"];?></td>
-                                            <td width="90" class="text-center"><?=$board["wdate"];?></td>
-                                            <td width="50" class="text-center"><?=$board["views"];?></td>
+                                            <td width="40" class="text-center align-middle"><?=$board['num'];?></td>
+                                            <td width="60" id="lang_<?=$board['num'];?>" value="<?=$board['lang'];?>" class="text-center align-middle" style="font-size: 1rem;"><?=$board['lang'];?></td>
+                                            <td width="80" id="ctgr_<?=$board['num'];?>" value="<?=$board['ctgr'];?>" class="text-center align-middle" style="font-size: 1rem;"><?=$board['ctgr'];?></td>
+                                            <td width="300" id="title_<?=$board['num'];?>" value="<?=$board['title'];?>" class="align-middle" style="font-size: 1rem;"><?=$title?></td>
+                                            <td width="50" class="align-middle">
+                                                <audio class="" src="<?=$url.$board['filepath']?>" controls></audio>
+                                            </td>                                            
+                                            <td width="90" id="date_<?=$board['num'];?>" value="<?=$board['wdate'];?>" class="text-center align-middle"><?=$board["wdate"];?></td>                                            
                                             
 										</tr>
                                     </tbody>
@@ -170,6 +213,7 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                     }                                                                                                            
                                     ?>
                                 </table>
+                                </form>
                                 <?php                                    
                                     if($post_count == 0) {
                                     ?>                                    
@@ -179,14 +223,18 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                     <?php
                                     }
                                     ?>
-                                <div class="row justify-content-end">                                                                        
+                                
+                                <div class="row justify-content-between">                                
                                     <?php
                                         if($role == "ADMIN") {
                                     ?>
-                                    <form action="write.php" method="POST">
-                                        <input type="hidden" name="category" value="<?=$category?>"/>
-                                        <button type="submit" class="btn-lg">글쓰기</button>
-                                    </form>
+                                        <form action="langrecord_upload.php" method="POST" enctype="multipart/form-data">                                            
+                                            <button type="submit" class="btn-sm p-2">녹음파일 업로드하기</button>
+                                            <button type="button" id="fileAdd" class="btn-sm p-2">녹음파일 추가</button>
+                                            <button type="button" id="filesAdd" class="btn-sm p-2">녹음파일 여러 개 추가</button>
+                                            <button type="button" class="btn-sm p-2" onclick="javascript:document.record_list.submit();">선택한 녹음파일 삭제</button>
+                                            <ul id="fileList"></ul>
+                                        </form>
                                     <?php } ?>
                                 </div>
                                 <br/>
@@ -198,10 +246,10 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                             if ($page <= 1){
                                                 // 빈 값
                                             } else {
-                                                if(isset($unum)){
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=1' aria-label='Previous'>처음</a></li>";
+                                                if(isset($lang)){
+                                                    echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&unum=$lang&page=1' aria-label='Previous'>처음</a></li>";
                                                 } else {
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=1' aria-label='Previous'>처음</a></li>";
+                                                    echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&page=1' aria-label='Previous'>처음</a></li>";
                                                 }
                                             }
                                             
@@ -209,10 +257,10 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                                 // 빈 값
                                             } else {
                                                 $pre = $page - 1;
-                                                if(isset($unum)){
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=$pre'>◀ 이전 </a></li>";
+                                                if(isset($lang)){
+                                                    echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&unum=$lang&page=$pre'>◀ 이전 </a></li>";
                                                 } else {
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$pre'>◀ 이전 </a></li>";
+                                                    echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&page=$pre'>◀ 이전 </a></li>";
                                                 }
                                             }
                                             
@@ -220,10 +268,10 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                                 if($page == $i){
                                                     echo "<li class='page-item'><a class='page-link' disabled><b style='color: #df7366;'> $i </b></a></li>";
                                                 } else {
-                                                    if(isset($unum)){
-                                                        echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=$i'> $i </a></li>";
+                                                    if(isset($lang)){
+                                                        echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&unum=$lang&page=$i'> $i </a></li>";
                                                     } else {
-                                                        echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$i'> $i </a></li>";
+                                                        echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&page=$i'> $i </a></li>";
                                                     }
                                                 }
                                             }
@@ -232,20 +280,20 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                                 // 빈 값
                                             } else {
                                                 $next = $page + 1;
-                                                if(isset($unum)){
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=$next'> 다음 ▶</a></li>";
+                                                if(isset($lang)){
+                                                    echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&unum=$lang&page=$next'> 다음 ▶</a></li>";
                                                 } else {
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$next'> 다음 ▶</a></li>";
+                                                    echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&page=$next'> 다음 ▶</a></li>";
                                                 }
                                             }
                                             
                                             if($page >= $total_page){
                                                 // 빈 값
                                             } else {
-                                                if(isset($unum)){
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=$total_page'>마지막</a>";
+                                                if(isset($lang)){
+                                                    echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&unum=$lang&page=$total_page'>마지막</a>";
                                                 } else {
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$total_page'>마지막</a>";
+                                                    echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&page=$total_page'>마지막</a>";
                                                 }
                                             }
                                         ?>                                        
@@ -295,47 +343,34 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
 			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
-            <script src="/bootstrap/bootstrap.bundle.min.js"></script>
+            <script src="/bootstrap/bootstrap.bundle.min.js"></script>     
 
-        <!-- 게시물 읽기 페이지 이동 기능-->
+        <!-- 녹음 기록 정보 수정 모달창 띄우는 이벤트-->
             <script>
                 $(function(){
-                    $(".read_check").click(function(){
-                        var action_url = $(this).attr("data-action");
-                        $(location).attr("href", action_url);
+                    $(".edit").click(function(){
+                        var num = $(this).val();                        
+                        $("#modal_div").modal();                        
+                        $("#edit_num").attr("value", num);                        
+                        
+                        $.ajax({
+                            url : "./langrecord_info.php",
+                            type : "POST",
+                            contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+                            dataType : "JSON",
+                            data : {
+                                "num" : num
+                            },                            
+                            success : function(data){
+                                $("#lang_input").attr("value", data.lang);
+                                $("#ctgr_input").attr("value", data.ctgr);
+                                $("#title_input").attr("value", data.title);
+                                $("#date_input").attr("value", data.date);
+                            }
+                        });
+                        
                     });
                 });
             </script>
-
-        <!-- 비밀글 모달 창 관련 이벤트-->
-            <script>
-                // 비밀글 클릭시 모달창을 띄우는 이벤트
-                $(function(){
-                    $(".lock_check").click(function(){
-                        // 관리자 계정일 경우 바로 해당 글로 이동
-                        if($(this).attr("data-check")=="ADMIN") {
-                            var action_url = $(this).attr("data-action")+$(this).attr("data-num");
-                            $(location).attr("href", action_url);
-                        }
-                        $("#modal_div").modal();
-                        //주소에 data-num(num)값을 더하기
-                        var action_url = $("#modal_form").attr("data-action")+$(this).attr("data-num");
-                        console.log($(this).attr("data-check"));
-                        console.log(action_url);
-                        $("#modal_form").attr("action",action_url);                        
-                    });
-                });
-            
-                // 일반 글 클릭시 해당 num의 read 페이지로 이동하는 이벤트
-                $(function(){
-                    $(".read_check").click(function(){
-                        var action_url = $(this).attr("data-action");
-                        console.log(action_url);
-                        $(location).attr("href", action_url);
-                    });
-                });
-            </script>
-
-
 	</body>
 </html>

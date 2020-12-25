@@ -11,17 +11,10 @@ switch ($category){
         case 'it_dev_learnings': 
 ?>            
     <!-- <option value="it_dev_learnings" selected>IT - 학습 내용</option> -->
-    <h1 class="fs-1">IT - 학습 내용</h1>
-    <p class="fs-1">IT 개발을 공부하면서 배운 내용을 기록한 게시판입니다.</p>                       
+    <h1 class="fs-1">IT - 학습 내용 / 자료</h1>
+    <p class="fs-1">IT 개발을 공부하면서 배운 내용 및 유용한 자료들을 기록한 게시판입니다.</p>       
 <?php
-        break; 
-        case 'it_dev_usefulinfo': 
-?>            
-    <!-- <option value="it_dev_usefulinfo" selected>IT - 유용한 정보</option> -->
-    <h1 class="fs-1">IT - 유용한 정보</h1>
-    <p class="fs-1">IT 개발을 공부하면서 알게된 정보들을 모아둔 게시판입니다.</p>                       
-<?php
-        break; 
+        break;         
         case 'it_dev_discussion': 
 ?>            
     <!-- <option value="it_dev_discussion" selected>IT - 토론</option> -->
@@ -98,8 +91,8 @@ switch ($category){
         case 'langstudyrecord': 
 ?>
         <!-- <option selected value="languages_usefuldata">언어 학습 - 학습 자료</option> -->
-        <h1 class="fs-1">언어 학습 공부 기록</h1>
-        <p class="fs-1">언어 학습을 하면서 쓴 노트 및 녹음 등을 모아두었습니다.</p>
+        <h1 class="fs-1">언어 학습 녹음 기록</h1>
+        <p class="fs-1">언어 학습을 하면서 녹음한 음성 파일을 모아두었습니다.</p>
 <?php
         break;
         case 'languages_usefuldata': 
@@ -107,6 +100,34 @@ switch ($category){
     <!-- <option selected value="languages_usefuldata">언어 학습 - 학습 자료</option> -->
     <h1 class="fs-1">언어 학습 - 학습 자료</h1>
     <p class="fs-1">언어 학습과 관련된 학습 자료를 모아둔 게시판입니다.</p>                       
+<?php
+        break; 
+        case 'languages_usefuldata?lang=en': 
+?>
+        <!-- <option selected value="languages_usefuldata">언어 학습 - 학습 자료</option> -->
+        <h1 class="fs-1">언어 학습 - 학습 자료(영어)</h1>
+        <p class="fs-1">영어 학습과 관련된 학습 자료를 모아둔 게시판입니다.</p>                       
+<?php
+        break; 
+        case 'languages_usefuldata?lang=cn': 
+?>
+        <!-- <option selected value="languages_usefuldata">언어 학습 - 학습 자료</option> -->
+        <h1 class="fs-1">언어 학습 - 학습 자료(중국어)</h1>
+        <p class="fs-1">중국어 학습과 관련된 학습 자료를 모아둔 게시판입니다.</p>                       
+<?php
+        break; 
+        case 'languages_usefuldata?lang=ru': 
+?>
+        <!-- <option selected value="languages_usefuldata">언어 학습 - 학습 자료</option> -->
+        <h1 class="fs-1">언어 학습 - 학습 자료(러시아어)</h1>
+        <p class="fs-1">러시아어 학습과 관련된 학습 자료를 모아둔 게시판입니다.</p>                       
+<?php
+        break; 
+        case 'languages_usefuldata?lang=ge': 
+?>
+        <!-- <option selected value="languages_usefuldata">언어 학습 - 학습 자료</option> -->
+        <h1 class="fs-1">언어 학습 - 학습 자료(독일어)</h1>
+        <p class="fs-1">독일어 학습과 관련된 학습 자료를 모아둔 게시판입니다.</p>                       
 <?php
         break; 
         case 'languages_discussion': 

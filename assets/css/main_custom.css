@@ -2868,6 +2868,7 @@ input, select, textarea {
 				-ms-transition: -ms-transform 0.5s ease;
 				transition: transform 0.5s ease;
 				padding-bottom: 1px;
+				height: 100%;
 			}
 
 			#navButton {
