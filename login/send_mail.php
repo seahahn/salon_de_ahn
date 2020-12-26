@@ -1,62 +1,62 @@
 <!-- <?php
-include_once "../db_con.php";
+// include_once "../db_con.php";
 
-$email = $_POST['email'];
+// $email = $_POST['email'];
 
-$rdnum = generateRandomString(12);
-$password = password_hash($rdnum, PASSWORD_DEFAULT);
+// $rdnum = generateRandomString(12);
+// $password = password_hash($rdnum, PASSWORD_DEFAULT);
 
-// 보내는사람 이름
-$nameFrom  = "Salon de Ahn";    
+// // 보내는사람 이름
+// $nameFrom  = "Salon de Ahn";    
 
-// 여기의 이메일은 발송하는 서버에 기본 셋팅된 도메인이나 이메일주소가 들어가지 않으면 발송되지 않는 경우가 생길 수 있음
-// 보내는 사람의 이메일
-$mailFrom = "salon.de.ahn.noreply@gmail.com";
+// // 여기의 이메일은 발송하는 서버에 기본 셋팅된 도메인이나 이메일주소가 들어가지 않으면 발송되지 않는 경우가 생길 수 있음
+// // 보내는 사람의 이메일
+// $mailFrom = "salon.de.ahn.noreply@gmail.com";
 
-// 받는사람 닉네임
-$nameTo  = mq("SELECT nickname FROM user WHERE email = '$email'");
+// // 받는사람 닉네임
+// $nameTo  = mq("SELECT nickname FROM user WHERE email = '$email'");
 
-// 받는사람 이메일
-$mailTo = $email;
+// // 받는사람 이메일
+// $mailTo = $email;
 
-// 메일의 제목
-$subject = "Salon de Ahn - 회원님의 임시 비밀번호입니다";
+// // 메일의 제목
+// $subject = "Salon de Ahn - 회원님의 임시 비밀번호입니다";
 
-// 메일의 내용부분 입니다 html 형식으로 작성 하시면 됩니다.
-$content = '<html><head><title></title></head><body><p>안녕하세요 <?=$nameTo?>님.<br/>요청하신 임시 비밀번호입니다.<br/><?=$rdnum?><br/><br/>임시 비밀번호로 로그인 후, 비밀번호를 꼭 변경해주세요.</p></body></html>';
+// // 메일의 내용부분 입니다 html 형식으로 작성 하시면 됩니다.
+// $content = '<html><head><title></title></head><body><p>안녕하세요 <?=$nameTo?>님.<br/>요청하신 임시 비밀번호입니다.<br/><?=$rdnum?><br/><br/>임시 비밀번호로 로그인 후, 비밀번호를 꼭 변경해주세요.</p></body></html>';
 
-// 인코딩셋, 한글이 포함된 컨텐츠는 웬만하면 UTF-8
-$charset = "UTF-8";
+// // 인코딩셋, 한글이 포함된 컨텐츠는 웬만하면 UTF-8
+// $charset = "UTF-8";
 
-// 위에서 설정한 값을 실제 셋팅하는 부분
-// $nameFrom   = "=?$charset?B?".base64_encode($nameFrom)."?=";
-// $nameTo   = "=?$charset?B?".base64_encode($nameTo)."?=";
-// $subject = "=?$charset?B?".base64_encode($subject)."?=";
-$header  = "Content-Type: text/html; charset=utf-8\r\n";
-$header .= "MIME-Version: 1.0\r\n";
-$header .= "Return-Path: <". $mailFrom .">\r\n";
-$header .= "From: ". $nameFrom ." <". $mailFrom .">\r\n";
-$header .= "Reply-To: <". $mailFrom .">\r\n";
+// // 위에서 설정한 값을 실제 셋팅하는 부분
+// // $nameFrom   = "=?$charset?B?".base64_encode($nameFrom)."?=";
+// // $nameTo   = "=?$charset?B?".base64_encode($nameTo)."?=";
+// // $subject = "=?$charset?B?".base64_encode($subject)."?=";
+// $header  = "Content-Type: text/html; charset=utf-8\r\n";
+// $header .= "MIME-Version: 1.0\r\n";
+// $header .= "Return-Path: <". $mailFrom .">\r\n";
+// $header .= "From: ". $nameFrom ." <". $mailFrom .">\r\n";
+// $header .= "Reply-To: <". $mailFrom .">\r\n";
 
-// php의 메일 발송 함수 mail()
+// // php의 메일 발송 함수 mail()
 
-mail($mailTo, $subject, $content, $header);
+// mail($mailTo, $subject, $content, $header);
 
-echo "
-    <script>
-    alert('임시 비밀번호가 발송되었습니다.');
-    location.href = 'login.php';
-    </script>";
+// echo "
+//     <script>
+//     alert('임시 비밀번호가 발송되었습니다.');
+//     location.href = 'login.php';
+//     </script>";
 
-function generateRandomString($length) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
-    $charactersLength = strlen($characters); 
-    $randomString = ''; 
-    for ($i = 0; $i < $length; $i++) { 
-        $randomString .= $characters[mt_rand(0, $charactersLength - 1)]; 
-    } 
-    return $randomString; 
-}
+// function generateRandomString($length) {
+//     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
+//     $charactersLength = strlen($characters); 
+//     $randomString = ''; 
+//     for ($i = 0; $i < $length; $i++) { 
+//         $randomString .= $characters[mt_rand(0, $charactersLength - 1)]; 
+//     } 
+//     return $randomString; 
+// }
 
 
     
@@ -135,4 +135,17 @@ try {
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error : ", $mail -> ErrorInfo;
 }
+
+function generateRandomString($length) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
+    $charactersLength = strlen($characters); 
+    $randomString = ''; 
+    for ($i = 0; $i < $length; $i++) { 
+        $randomString .= $characters[mt_rand(0, $charactersLength - 1)]; 
+    } 
+    return $randomString; 
+}
+
+
+
 ?>
