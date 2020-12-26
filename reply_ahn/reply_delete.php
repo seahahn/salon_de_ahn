@@ -30,6 +30,7 @@
 	if((($useremail == $reply['email']) || ($role=="ADMIN")) && ($reply['email'] != 'deleted')) {
 		// 테이블 reply에서 인덱스값이 $rno인 값을 찾아 삭제
 		$content_backup = $reply['content'];
+		$content = '삭제된 댓글입니다.';
 		$sql = mq("UPDATE
 						reply_ahn
 					SET
