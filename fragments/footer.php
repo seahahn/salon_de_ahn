@@ -37,7 +37,7 @@ for($i=0; $i<5; $i++){
                 }
             ?>
                 <tr><td>
-                <a class="text-white" href="./read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></a>
+                <a class="text-white" href="../board/read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></a>
                 </td></tr>
             <?php } ?>
             </tbody>
@@ -62,7 +62,7 @@ for($i=0; $i<5; $i++){
                 }            
             ?>
                 <tr><td>
-                <a class="text-white" href="./read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></a>
+                <a class="text-white" href="../board/read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></a>
                 </td></tr>
             <?php } ?>
                             

@@ -72,7 +72,7 @@ include_once "headpiece.php";
                                     <div><?=$board['writer']?></div>
                                     <div class="row justify-content-start">                                        
                                         <div class="col-2"><?=$board['wdate']?></div>
-                                        <div class="co1-1">조회 <?=$board['views']?></div>
+                                        <div class="co1-1">조회 <?=$views?></div>
                                     </div>
 
                                     <table class="table table-striped" style="text-align: center; border: 1px solid #ddddda; min-height: 200px;">
