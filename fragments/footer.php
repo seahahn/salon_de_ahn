@@ -22,32 +22,24 @@ for($i=0; $i<5; $i++){
         <table class="table col-6">
             <thead>
                 <tr>                        
-                    <th scope="col" class="text-center text-white">최근에 조회한 게시물</th>                        
+                    <th scope="col" class="text-center text-white">댓글수 TOP5 게시물</th>                        
                 </tr>
             </thead>
             <tbody>
-                <?php
-                for($i = 5; $i>0; $i--){
-                    if(isset($_COOKIE['recent_'.$i])) {
-                        if($i<=4) $i_ = $i+1;
-                        if(isset($i_) && $_COOKIE['recent_'.$i] == $_COOKIE['recent_'.$i_]) {
-                            setcookie("recent_".$i, ' ', -1);
-                            setcookie("recenthp_".$i, ' ', -1);
-                            setcookie("recenttitle_".$i, ' ', -1);
-                            break;
-                        }
-                        $board['sub_ctgr'] = '';
-                        $board['headpiece'] = $_COOKIE['recenthp_'.$i];
-                        include "headpiece.php";
-                        // echo "쿠키 : ".$_COOKIE['recenttitle_'.$i];
-                ?>
-                <tr>                    
-                <td>
-                <a class="text-white" href="<?=$_COOKIE['recent_'.$i]?>">[<?=$headpiece?>] <?=$_COOKIE['recenttitle_'.$i]?></a>
-                </td>                    
-                </tr>
-                <?php }
-                } ?>
+            <?php
+            $sql = mq("SELECT * FROM board WHERE rep_num>=1 UNION SELECT * FROM board_ahn WHERE rep_num>=1 ORDER BY rep_num DESC LIMIT 5");
+            while($board = $sql->fetch_array()) {
+                include "headpiece.php";
+                $title=$board["title"];
+                /* 글자수가 60이 넘으면 ... 처리해주기 */
+                if(strlen($title)>50){
+                    $title=str_replace($board["title"],mb_substr($board["title"],0,50,"utf-8")."...",$board["title"]);
+                }
+            ?>
+                <tr><td>
+                <a class="text-white" href="./read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></a>
+                </td></tr>
+            <?php } ?>
             </tbody>
         </table>        
         <table class="table col-6">

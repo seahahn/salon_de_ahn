@@ -7,7 +7,7 @@
 	$sql = mq("UPDATE
 					reply
                 SET
-					content = '".$_POST['rep_con']."'					
+					content = '".$_POST['rep_con']."'
                 WHERE
                     num='".$num."'
 			");

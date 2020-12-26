@@ -132,7 +132,8 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                     WHERE
                                                         con_num='".$board['num']."'
                                                 ");
-                                        $rep_count = mysqli_num_rows($sql3); // 레코드의 수(댓글의 수)                                        
+                                        $rep_count = mysqli_num_rows($sql3); // 레코드의 수(댓글의 수)
+                                        mq("UPDATE board SET rep_num='".$rep_count."' WHERE num='".$board["num"]."'");
                                     ?>
 
 									<tbody>                                        

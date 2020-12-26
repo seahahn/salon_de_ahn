@@ -33,9 +33,10 @@
 		$sql = mq("UPDATE
 						reply_ahn
 					SET
-						content_backup = $content_backup,
-						content='삭제된 댓글입니다.',						
-						writer=''
+						writer = '',
+						email = 'deleted',
+						content = '".$content."',
+						content_backup = '".$reply['email'].$reply['writer'].$content_backup."'
 					WHERE
 						num='".$rno."'
 				");

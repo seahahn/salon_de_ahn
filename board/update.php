@@ -130,8 +130,8 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                             </div>
                                             <div class="row col justify-content-end">
                                                 <a href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg ml-1 px-3">목록</button></a>
-                                                <button type="button" class="btn-lg ml-1 px-3" onclick="history.go(-1);">취소</button></a>
-                                                <button type="submit" class="btn-lg ml-1 px-3">수정</button>
+                                                <a class="a_nopadding"><button type="button" class="btn-lg ml-1 px-3" onclick="history.go(-1);">취소</button></a>
+                                                <a class="a_nopadding"><button type="submit" class="btn-lg ml-1 px-3">수정</button></a>
                                             </div>
                                         </div>
                                     </form>

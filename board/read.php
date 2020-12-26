@@ -38,41 +38,41 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
     /* 조회수 올리기 끝 */   
 
     //최근 게시물 목록에 지금 보는 게시물 집어넣기    
-    $count = 0;
-    $recent = $_SERVER['REQUEST_URI'];
-    $recenthp = $board['headpiece'];
-    $recenttitle = $board['title'];
-    for($i=5; $i>0; $i--){        
-        if(!isset($_COOKIE['recent_'.$i])) {                        
-            setcookie("recent_".$i, $recent, time() + 60 * 60 * 24);
-            setcookie("recenthp_".$i, $recenthp, time() + 60 * 60 * 24);           
-            setcookie("recenttitle_".$i, $recenttitle, time() + 60 * 60 * 24);
-            // if($i<=4) $i_ = $i+1;
-            // if(isset($i_) && $_COOKIE['recent_'.$i] == $_COOKIE['recent_'.$i_]) {
-            //     setcookie("recent_".$i, '', -1);
-            //     setcookie("recenthp_".$i, '', -1);           
-            //     setcookie("recenttitle_".$i, '', -1);
-            //     break;
-            // }
-            break;
-        }
-        $count++;
-    }
+    // $count = 0;
+    // $recent = $_SERVER['REQUEST_URI'];
+    // $recenthp = $board['headpiece'];
+    // $recenttitle = $board['title'];
+    // for($i=5; $i>0; $i--){        
+    //     if(!isset($_COOKIE['recent_'.$i])) {                        
+    //         setcookie("recent_".$i, $recent, time() + 60 * 60 * 24);
+    //         setcookie("recenthp_".$i, $recenthp, time() + 60 * 60 * 24);           
+    //         setcookie("recenttitle_".$i, $recenttitle, time() + 60 * 60 * 24);
+    //         // if($i<=4) $i_ = $i+1;
+    //         // if(isset($i_) && $_COOKIE['recent_'.$i] == $_COOKIE['recent_'.$i_]) {
+    //         //     setcookie("recent_".$i, '', -1);
+    //         //     setcookie("recenthp_".$i, '', -1);           
+    //         //     setcookie("recenttitle_".$i, '', -1);
+    //         //     break;
+    //         // }
+    //         break;
+    //     }
+    //     $count++;
+    // }
 
-    if($count == 5) {
-        for($i=1; $i<5; $i++){
-            $num = $i+1;
-            $curl = $_COOKIE["recent_".$num];
-            $chp = $_COOKIE["recenthp_".$num];
-            $ctitle = $_COOKIE["recenttitle_".$num];            
-            setcookie("recent_".$i, $curl, time() + 60 * 60 * 24);
-            setcookie("recenthp_".$i, $chp, time() + 60 * 60 * 24);           
-            setcookie("recenttitle_".$i, $ctitle, time() + 60 * 60 * 24);
-        }
-        setcookie("recent_".$count, $recent, time() + 60 * 60 * 24);
-        setcookie("recenthp_".$i, $recenthp, time() + 60 * 60 * 24);           
-        setcookie("recenttitle_".$count, $recenttitle, time() + 60 * 60 * 24);
-    }
+    // if($count == 5) {
+    //     for($i=1; $i<5; $i++){
+    //         $num = $i+1;
+    //         $curl = $_COOKIE["recent_".$num];
+    //         $chp = $_COOKIE["recenthp_".$num];
+    //         $ctitle = $_COOKIE["recenttitle_".$num];            
+    //         setcookie("recent_".$i, $curl, time() + 60 * 60 * 24);
+    //         setcookie("recenthp_".$i, $chp, time() + 60 * 60 * 24);           
+    //         setcookie("recenttitle_".$i, $ctitle, time() + 60 * 60 * 24);
+    //     }
+    //     setcookie("recent_".$count, $recent, time() + 60 * 60 * 24);
+    //     setcookie("recenthp_".$i, $recenthp, time() + 60 * 60 * 24);           
+    //     setcookie("recenttitle_".$count, $recenttitle, time() + 60 * 60 * 24);
+    // }
     
     include_once "headpiece.php";
 ?>
@@ -238,14 +238,14 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                         <!-- 답글 쓰기 버튼 누르면 나오는 영역-->
                                         <div id="ans_reply_<?=$reply['num']?>" data-num="<?=$reply['num']?>" class="row ans_reply" style="margin-top:10px; display:none">
                                             <input type="hidden" name="rno" value="<?=$reply['num']?>"/>
-                                            <textarea class="col rep_con" name="content" id="rep_con_ans_<?=$reply['num']?>" placeholder="<?=$reply['writer']?> 님에게"></textarea>
+                                            <textarea class="col rep_con p-1" name="content" id="rep_con_ans_<?=$reply['num']?>" placeholder="<?=$reply['writer']?> 님에게"></textarea>
                                             <button class="rep_btn" id="rep_ans_cancel_<?=$reply['num']?>" data-num="<?=$reply['num']?>">취소</button>
                                             <button class="rep_btn" id="rep_ans_<?=$reply['num']?>">등록</button>
                                         </div>  
                                         <!-- 수정 버튼 누르면 나오는 영역-->
                                         <div id="edit_reply_<?=$reply['num']?>" data-num="<?=$reply['num']?>" class="row edit_reply" style="margin-top:10px; display:none">
                                             <input type="hidden" name="rno" value="<?=$reply['num']?>"/>
-                                            <textarea class="col rep_con" name="content" id="rep_con_edit_<?=$reply['num']?>"><?=$reply['content']?></textarea>
+                                            <textarea class="col rep_con p-1" name="content" id="rep_con_edit_<?=$reply['num']?>"><?=$reply['content']?></textarea>
                                             <button class="rep_btn" id="rep_edit_cancel_<?=$reply['num']?>" data-num="<?=$reply['num']?>">취소</button>
                                             <button class="rep_btn" id="rep_edit_<?=$reply['num']?>">수정</button>
                                         </div>
@@ -267,7 +267,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                             <div class="modal-body">
                                                 <form method="post" id="modal_form1" action="/reply/reply_delete.php">
                                                     <input type="hidden" name="r_no" id="r_no" value="<?=$reply['num']?>"/>
-                                                    <input type="hidden" name="b_no" value="<?=$bno;?>">            
+                                                    <input type="hidden" name="b_no" value="<?=$bno;?>">
                                                     <script>console.log((<?=$reply['num'];?>));</script>
                                                     <p>삭제하시겠습니까?<br/> <input type="submit" class="btn-sm float-right" value="확인" /></p>
                                                 </form>

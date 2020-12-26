@@ -227,7 +227,7 @@ include_once "headpiece.php";
                                             </div>
                                             <!-- body -->
                                             <div class="modal-body">
-                                                <form method="post" id="modal_form1" action="/reply/reply_delete.php">
+                                                <form method="post" id="modal_form1" action="/reply_ahn/reply_delete.php">
                                                     <input type="hidden" name="r_no" id="r_no" value="<?=$reply['num']?>"/>
                                                     <input type="hidden" name="b_no" value="<?=$bno;?>">            
                                                     <script>console.log((<?=$reply['num'];?>));</script>

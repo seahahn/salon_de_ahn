@@ -14,11 +14,11 @@ $q = mq("SELECT * FROM photofolder WHERE num>0 ORDER BY num DESC LIMIT {$start},
 while($f = mysqli_fetch_array($q)){
 ?>
     <article class="location-listing">
-        <form name="gotophotos_<?=$f['title']?>" action="photos.php" method="POST">
-            <input type="hidden" name="folder" value="<?=$f['title']?>">
+        <form name="gotophotos_<?=$f['title_key']?>" action="photos.php" method="POST">
+            <input type="hidden" name="folder" value="<?=$f['title_key']?>">
         </form>
         <!-- <a class="location-title" href="photos.php?folder=<?=$f['title']?>"><?=$f['title']?></a> -->
-        <a class="location-title" href="javascript:document.gotophotos_<?=$f['title']?>.submit();"><?=$f['title']?></a>
+        <a class="location-title" href="javascript:document.gotophotos_<?=$f['title_key']?>.submit();"><?=$f['title']?></a>
         <div class="location-image" data-num="<?=$f['num']?>">
             <a href="javascript:document.gotophotos.submit();">
                 <img width="300" height="169" src="<?=$url.$f['thumb']?>" alt="<?=$f['title']?>">

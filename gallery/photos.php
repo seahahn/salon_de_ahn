@@ -4,7 +4,7 @@ include_once "../db_con.php";
 include_once "../s3.php";
 
 $folder = $_POST['folder']; // 사진첩 이름
-$album_q = mq("SELECT * FROM photofolder WHERE title = '".$folder."'");
+$album_q = mq("SELECT * FROM photofolder WHERE title_key = '".$folder."'");
 $album = mysqli_fetch_array($album_q); // 사진첩 이름과 함께 설명을 불러오기 위함
 $q = mq("SELECT * FROM photosave WHERE folder = '".$folder."'");
 if(mysqli_num_rows($q) != 0) {
@@ -90,7 +90,7 @@ if(mysqli_num_rows($q) != 0) {
 			<?php include_once "../fragments/header.php"; ?>
 		</div>
 		
-		<div class="container">			
+		<div class="container" style="height: auto;">			
 			<a href="albums.php"><button type="button" class="btn" style="position: absolute; top: 30px; left: -50px;">◀ 뒤로</button></a>
 			<div class="main">
 				<header class="clearfix m-0 p-0">
@@ -102,7 +102,7 @@ if(mysqli_num_rows($q) != 0) {
 					if($role == "ADMIN") {
 					?>							
 						<form action="photo_upload.php" method="post" enctype="multipart/form-data">
-							<input type="hidden" id="folder" name="folder" value="<?=$album['title']?>">
+							<input type="hidden" id="folder" name="folder" value="<?=$album['title_key']?>">
 							<button type="submit" class="btn-sm">사진 업로드하기</button>
 							<button type="button" id="fileAdd" class="btn-sm">사진 추가</button>
 							<button type="button" id="filesAdd" class="btn-sm">사진 여러 장 추가</button>

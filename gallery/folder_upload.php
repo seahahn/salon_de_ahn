@@ -33,6 +33,7 @@
                 
                 // 사진첩 제목과 날짜, 설명
 				$title = $_POST['title'][$i];
+				$title_key = $_POST['title_key'][$i];
 				$rcday = $_POST['rcday'][$i];
 				$caption = $_POST['caption'][$i];
 				
@@ -40,19 +41,20 @@
 				$s3path = "albumThumbnails/";				
 				$bucket = $s3->bucket;
 
-				$exist = $s3->exist($bucket, $s3path.$title.'/');
+				$exist = $s3->exist($bucket, $s3path.$title_key.'/');
 				if(!$exist) {
-					$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$title.'/');
+					$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$title_key.'/');
 				}
-				$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$title.'/'.$tmp_filename);
+				$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$title_key.'/'.$tmp_filename);
 
 				// DB에 사진첩 제목, 날짜, 설명과 함께 S3 경로 업로드
 				mq("INSERT photofolder SET				
                 title = '".$title."',
+				title_key = '".$title_key."',
 				rcday = '".$rcday."',
                 caption = '".$caption."',
-				thumb = '".$s3path.$title.'/'.$tmp_filename."',
-				bucket_folder = '".$s3path.$title.'/'."'
+				thumb = '".$s3path.$title_key.'/'.$tmp_filename."',
+				bucket_folder = '".$s3path.$title_key.'/'."'
 				");
 			}			
 		}

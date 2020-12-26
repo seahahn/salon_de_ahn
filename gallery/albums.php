@@ -50,6 +50,7 @@ $row = mysqli_num_rows($q); // 사진첩 총 갯수 불러오기
 					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
 					<div class="row">\
 					<input type="text" class="form-control form-control-sm col" placeholder="제목" name="title[]">\
+					<input type="text" class="form-control form-control-sm col" placeholder="제목" name="title_key[]">\
 					<input type="text" class="form-control form-control-sm col" placeholder="날짜" name="rcday[]">\
 					<input type="text" class="form-control form-control-sm col" placeholder="설명" name="caption[]">\
 					</div>\

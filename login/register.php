@@ -35,13 +35,13 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="infoAgree" id="infoAgree">
                                 <label class="form-check-label" for="infoAgree">
-                                    <a href="#">개인정보처리방침</a>에 동의합니다.
+                                    <a href="personalinfoagree.php" target="_blank">개인정보처리방침</a>에 동의합니다.
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="serviceAgree" id="serviceAgree">
                                 <label class="form-check-label" for="serviceAgree">
-                                    <a href="#">서비스 이용약관</a>에 동의합니다.
+                                    <a href="serviceagree.php" target="_blank">서비스 이용약관</a>에 동의합니다.
                                 </label>
                             </div>
                             <br/>     

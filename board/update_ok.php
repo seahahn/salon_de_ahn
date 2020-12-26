@@ -58,13 +58,13 @@
 
 	if(isset($_POST['old_files'])) {
 		$old_filepath_array = $_POST['old_files'];
-		print_r($old_filepath_array) ;
+		// print_r($old_filepath_array) ;
 
 		$filepath_array_result = $old_filepath_array + $filepath_array;
-		print_r($filepath_array_result);
+		// print_r($filepath_array_result);
 	} else {
 		$filepath_array_result = $filepath_array;
-		print_r($filepath_array_result);
+		// print_r($filepath_array_result);
 	}
 
 	$filepath_array_str = serialize($filepath_array_result);
