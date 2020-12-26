@@ -17,6 +17,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
     $category = $board['category'];
 
     /* 조회수 올리기  */
+    $views = $board['views'];
     if(empty($_COOKIE["read_".$bno.$board_class])){
         $views = mysqli_fetch_array(mq("SELECT 
                                         * 
@@ -34,8 +35,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                 num = '".$bno."'
         ");
         setcookie("read_".$bno.$board_class, $bno.$board_class, time() + 60 * 60 * 24);
-    }
-    $views = $board['views']+1;
+    }    
 	/* 조회수 올리기 끝 */
 include_once "headpiece.php";
 ?>
