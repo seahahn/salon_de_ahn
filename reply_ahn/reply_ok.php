@@ -66,7 +66,7 @@
 		con_num = '".$bno."',
 		email = '".$_POST['dat_mail']."',								
 		writer = '".$_POST['dat_user']."',
-		content = '".$_POST['rep_con']."'
+		content = '".$_POST['rep_con']."',
 		wdate ='".$date."'		
 		");
 	}
