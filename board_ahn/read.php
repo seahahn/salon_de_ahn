@@ -35,6 +35,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
         ");
         setcookie("read_".$bno.$board_class, $bno.$board_class, time() + 60 * 60 * 24);
     }
+    $views = $board['views']+1;
 	/* 조회수 올리기 끝 */
 include_once "headpiece.php";
 ?>
