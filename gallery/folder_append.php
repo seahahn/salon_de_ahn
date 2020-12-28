@@ -28,7 +28,12 @@ while($f = mysqli_fetch_array($q)){
             position: absolute;
             top: 0px;
             right: 0px;
-            font-size: 2rem;">X</button>';
+            font-size: 2rem;">X</button>
+            <button class="btn edit_album" style="z-index: 1;
+            position: absolute;
+            top: 0px;
+            right: 15%;
+            font-size: 2rem;">수정</button>';
             } ?>
         </div>        
     </article>
@@ -37,10 +42,17 @@ while($f = mysqli_fetch_array($q)){
 ?>
 <script>
     /* 사진첩 삭제 이벤트 */
-    $(".del_album").click(function(){
-        console.log('작동 확인');
-            num = $(this).parent().data("num");
-            $("#album_no").attr("value", num);
-            $("#album_modal_del").modal();
-        });
+    $(".del_album").click(function(){        
+        num = $(this).parent().data("num");
+        $("#album_no_del").attr("value", num);
+        $("#album_modal_del").modal();
+    });
+
+    /* 사진첩 수정 이벤트 */
+    $(".edit_album").click(function(){
+        num = $(this).parent().data("num");
+        console.log(num);
+        $("#album_no_edit").attr("value", num);
+        $("#album_modal_edit").modal();
+    });
 </script>

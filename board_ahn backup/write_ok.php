@@ -2,7 +2,7 @@
 	include "../util/config.php";
 	include "../db_con.php";
 	
-	$max_in_num_result = mq("SELECT MAX(in_num) FROM board");
+	$max_in_num_result = mq("SELECT MAX(in_num) FROM board_ahn");
 	$max_in_num_fetch = mysqli_fetch_row($max_in_num_result);
 	$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000+1000;
 
@@ -24,11 +24,11 @@
 		$wsecret = '0';
 	}	
 	
-	$query = mq("SELECT * FROM board");
+	$query = mq("SELECT * FROM board_ahn");
 	$exists = (mysqli_num_rows($query));
 	
 	if($exists == 0)	{
-		mq("ALTER TABLE board AUTO_INCREMENT = 1"); // 게시판에 게시물 없는 경우 auto_increment 값 초기화
+		mq("ALTER TABLE board_ahn AUTO_INCREMENT = 1"); // 게시판에 게시물 없는 경우 auto_increment 값 초기화
 	}	
 
 	// 첨부파일이 존재한다면 실행
@@ -83,7 +83,7 @@
 		$ans_in_num = $in_num - 1;
 		$depth = $_POST['depth'];
 		$ans_depth = $depth + 1;
-		mq("INSERT board SET
+		mq("INSERT board_ahn SET
 		in_num = '".$ans_in_num."',
 		unum = '".$unum."',
 		depth = '".$ans_depth."',
@@ -99,7 +99,7 @@
 		att_file = '".$filepath_array_str."'		
 		");
 	} else { // 일반적인 글 작성인 경우
-		$mq = mq("INSERT board SET
+		$mq = mq("INSERT board_ahn SET
 		in_num = '".$max_in_num."',
 		unum = '".$unum."',
 		category = '".$category."',

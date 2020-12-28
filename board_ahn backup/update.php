@@ -16,7 +16,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 	$sql = mq("SELECT 
 				 * 
                 FROM 
-                    board 
+                    board_ahn 
                 WHERE 
                     num='$bno'
 			");
@@ -135,7 +135,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                         <button type="button" id="fileAdd" class="btn-sm">첨부파일 추가</button>
                                                         <ul id="fileList"></ul>
                                                         <?php
-                                                        $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");                                                        
+                                                        $sql = mq("SELECT att_file FROM board_ahn WHERE num='".$bno."'");                                                        
                                                         while($row = mysqli_fetch_assoc($sql)){
                                                             $filepath_array = unserialize($row['att_file']);
                                                         }                                                        

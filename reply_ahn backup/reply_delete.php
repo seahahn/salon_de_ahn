@@ -8,7 +8,7 @@
 	$sql = mq("SELECT 
 					* 
 			   FROM 
-					reply 
+					reply_ahn 
 			   WHERE 
 					num='".$rno."'
 			");
@@ -19,7 +19,7 @@
 	$sql2 = mq("SELECT 
 					* 
                     FROM 
-					board 
+					board_ahn 
                     WHERE 
 					num='".$bno."'
 			");
@@ -32,7 +32,7 @@
 		$content_backup = $reply['content'];
 		$content = '삭제된 댓글입니다.';
 		$sql = mq("UPDATE
-						reply
+						reply_ahn
 					SET
 						writer = '',
 						email = 'deleted',
@@ -50,7 +50,7 @@
 			<?php 
 		}else if(($reply['email'] == 'deleted') && ($role=="ADMIN")){
 			$sql = mq("DELETE FROM
-						reply													
+						reply_ahn													
 						WHERE
 						num='".$rno."'
 				");

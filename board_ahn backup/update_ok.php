@@ -72,7 +72,7 @@
 
 	/* 받아온 num값을 선택해서 게시글 수정 */
 	mq("UPDATE 
-			board 
+			board_ahn 
         SET 
 			category = '".$category."',
 			sub_ctgr = '".$sub_ctgr."',

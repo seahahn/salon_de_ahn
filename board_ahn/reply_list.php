@@ -155,7 +155,7 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                                 // $lockimg="※";
                                                 if($ori_post['wsecret']=="1"){ // lock_post 값이 1이면 잠금
                                             ?>                                                
-                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check="<?=$role?>" data-num="<?=$ori_post['num']?>">원문 보기 ▶</span>
+                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check="<?=$role?>" data-num="<?=$ori_post['num']?>" data-user="<?=$board['email']?>">원문 보기 ▶</span>
                                             <!-- 일반 글 가져오기 -->
                                             <?php                                                     
                                                 }else{                                                 
@@ -284,12 +284,12 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
 
         <!-- 게시물 읽기 페이지 이동 기능-->
             <script>
-                $(function(){
-                    $(".read_check").click(function(){
-                        var action_url = $(this).attr("data-action");
-                        $(location).attr("href", action_url);
-                    });
-                });
+                // $(function(){
+                //     $(".read_check").click(function(){
+                //         var action_url = $(this).attr("data-action");
+                //         $(location).attr("href", action_url);
+                //     });
+                // });
             </script>
 
         <!-- 비밀글 모달 창 관련 이벤트-->
@@ -297,17 +297,18 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                 // 비밀글 클릭시 모달창을 띄우는 이벤트
                 $(function(){
                     $(".lock_check").click(function(){
+                        var user = $(this).attr("data-user");
                         // 관리자 계정일 경우 바로 해당 글로 이동
                         if($(this).attr("data-check")=="ADMIN") {
                             var action_url = $(this).attr("data-action")+$(this).attr("data-num");
+                            $(location).attr("href", action_url);                            
+                        } else if(user == "<?=$useremail?>") {
+                            // 일반 사용자일 경우 사용자 이메일과 게시물 작성한 사용자의 이메일 대조하여 일치하면 해당 글로 이동
+                            var action_url = $(this).attr("data-action")+$(this).attr("data-num");
                             $(location).attr("href", action_url);
+                        } else {
+                            $("#modal_div").modal();
                         }
-                        $("#modal_div").modal();
-                        //주소에 data-num(num)값을 더하기
-                        var action_url = $("#modal_form").attr("data-action")+$(this).attr("data-num");
-                        console.log($(this).attr("data-check"));
-                        console.log(action_url);
-                        $("#modal_form").attr("action",action_url);                        
                     });
                 });
             
@@ -315,7 +316,6 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                 $(function(){
                     $(".read_check").click(function(){
                         var action_url = $(this).attr("data-action");
-                        console.log(action_url);
                         $(location).attr("href", action_url);
                     });
                 });

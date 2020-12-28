@@ -10,12 +10,39 @@ switch ($category){
         break; 
         case 'it_dev_learnings': 
 ?>            
-        <!-- <option value="it_dev_learnings" selected>IT - 학습 내용</option> -->
-        <h1 class="fs-1">IT - 학습 내용 / 자료</h1>
-        <p class="fs-1">IT 개발을 공부하면서 배운 내용 및 유용한 자료들을 기록한 게시판입니다.</p>                       
+    <!-- <option value="it_dev_learnings" selected>IT - 학습 내용</option> -->
+    <h1 class="fs-1">IT - 학습 내용 / 자료</h1>
+    <p class="fs-1">IT 개발을 공부하면서 배운 내용 및 유용한 자료들을 기록한 게시판입니다.</p>                       
 <?php
         break;         
-        
+        case 'it_dev_discussion': 
+?>            
+    <!-- <option value="it_dev_discussion" selected>IT - 토론</option> -->
+    <h1 class="fs-1">IT - 토론</h1>
+    <p class="fs-1">IT 개발에 대한 토론을 하는 공간입니다.</p>
+<?php
+        break;                                                                    
+        case 'it_dev_recordshare': 
+?>
+    <!-- <option selected value="it_dev_recordshare">IT - 경험 공유</option> -->
+    <h1 class="fs-1">IT - 경험 공유</h1>
+    <p class="fs-1">IT 개발을 하면서 겪었던 경험들을 공유해주세요!</p>
+<?php
+        break;
+        case 'it_dev_infoshare': 
+?>
+    <!-- <option selected value="it_dev_infoshare">IT - 정보 공유</option> -->
+    <h1 class="fs-1">IT - 정보 공유</h1>
+    <p class="fs-1">IT 개발에 대한 정보를 공유해주세요!</p>                       
+<?php
+        break;
+        case 'it_dev_qna': 
+?>
+    <!-- <option selected value="it_dev_qna">IT - Q & A</option> -->
+    <h1 class="fs-1">IT - Q & A</h1>
+    <p class="fs-1">IT 개발에 대한 질의응답을 하는 게시판입니다.</p>                       
+<?php
+        break;                
 
         case 'tradingrecord': 
 ?>            

@@ -10,12 +10,10 @@ if(isset($_GET["page"])){
 }
 
 // 사용자가 클릭한 항목에 맞는 카테고리 값을 GET으로 받아서 해당하는 게시물만 보여줌
-// 마이페이지에서 '내가 쓴 글'을 클릭한 경우, 카테고리 값으로 사용자의 이메일 주소를 가져옴
+// 마이페이지에서 '내가 쓴 글' 또는 '내가 쓴 댓글'을 클릭한 경우, 카테고리 값으로 사용자의 이메일 주소를 가져옴
 $category = $_GET["ctgr"];
 // 마이페이지로부터 사용자 고유번호를 전달받음. 카테고리로 전달된 이메일 주소와 사용자의 고유 번호 둘 다 일치하는 게시물만 가져오기 위함 (탈퇴 후 동일 메일로 재가입 시에(동일인이든 타인이든) 이전 계정의 게시물을 볼 수 없도록 하게 만듦)
 if(isset($_GET["unum"])) $unum = $_GET["unum"];
-
-if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에서 소분류로 언어 선택한 경우 그 값을 받아옴
 ?>
 
 <!DOCTYPE HTML>
@@ -58,33 +56,50 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 
 			<!-- Main -->
 				<!-- <div class="wrapper style1"> -->
-					<div class="container">			                        
+					<div class="container">			
+                        <!-- <div class="row">
+							<nav class="navbar navbar-expand-lg navbar-light bg-light flex-fill">
+								<a class="col navbar-brand" href="#">카테고리 목록</a>
+								<button class="col-3 navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+									aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+							
+								<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+										<li class="nav-item">
+											<a class="nav-link" href="#">글 목록 <span class="sr-only">(current)</span></a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#">의견/정보 공유</a>
+										</li>										
+									</ul>
+									<form class="form-inline my-2 my-lg-0">
+										<input class="form-control mr-sm-2" type="search" placeholder="Search">
+										<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+									</form>
+								</div>
+							</nav>
+						</div>									 -->
                         <br/>                       
-                        <?php include_once "./ctgr_explain.php" ?>
-						<div class="row"> <!-- 메인 글 영역-->
-							<div class="col-12" id="content">
-                                <!-- 게시물 목록 -->
+
+						<div class="row">
+							<div class="col" id="content">
+                                <!-- 댓글 목록 -->
 								<table class="table table-sm">
 									<thead>
 										<tr>
-											<th scope="col" class="text-center">번호</th>
-                                            <th scope="col" class="text-center">분류</th>                                            
-											<th scope="col" class="text-center">제목</th>
-											<th scope="col" class="text-center">작성자</th>
+											<th scope="col" class="text-center">ㅁ</th>
+											<th scope="col" class="text-center">댓글</th>
+											<th scope="col" class="text-center">원문 보기</th>
                                             <th scope="col" class="text-center">작성일</th>
-                                            <th scope="col" class="text-center">조회수</th>
+                                            <!-- <th scope="col" class="text-center">조회수</th> -->
 										</tr>
                                     </thead>
 
                                     <?php
                                     // 페이징 구현
-                                    if(isset($unum)){
-                                        $sql = mq("SELECT * FROM board WHERE email='".$category."' AND unum='".$unum."'");
-                                    } else if(isset($lang)) {
-                                        $sql = mq("SELECT * FROM board WHERE category='".$category."' AND sub_ctgr='".$lang."'");
-                                    } else {
-                                        $sql = mq("SELECT * FROM board WHERE category='".$category."'");
-                                    }
+                                    $sql = mq("SELECT * FROM reply WHERE email='".$category."' AND unum='".$unum."'");
                                     $total_record = mysqli_num_rows($sql);
 
                                     $list = 10; // 한 페이지에 보여줄 게시물 개수
@@ -100,103 +115,64 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                     $total_block = ceil($total_page / $block_cnt); // 블록의 총 개수
                                     $page_start = ($page - 1) * $list; // 페이지의 시작 (SQL문에서 LIMIT 조건 걸 때 사용)
 
-                                    // 게시물 목록 가져오기
-                                    if(isset($unum)){
-                                        $sql2 = mq("SELECT * FROM board WHERE email='".$category."' AND unum='".$unum."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
-                                    } else if(isset($lang)){
-                                        $sql2 = mq("SELECT * FROM board WHERE category='".$category."' AND sub_ctgr='".$lang."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list");
+                                    // 게시물, 댓글 목록 가져오기
+                                    if(isset($unum)){                                        
+                                        $sql2 = mq("SELECT * FROM reply WHERE email='".$category."' AND unum='".$unum."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                                                           
                                     } else {
-                                        $sql2 = mq("SELECT * FROM board WHERE category='".$category."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                        // $sql2 = mq("SELECT * FROM board WHERE category='".$category."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
                                     }
 
-                                    $post_count = 0;
-                                    while($board = $sql2->fetch_array()){
-                                        include "headpiece.php";
-                                        $title=$board["title"];
-                                        /* 글자수가 60이 넘으면 ... 처리해주기 */
-                                        if(strlen($title)>60){
-                                            $title=str_replace($board["title"],mb_substr($board["title"],0,60,"utf-8")."...",$board["title"]);
+                                    while($reply = $sql2->fetch_array()){
+                                        $content=$reply["content"];
+                                        /* 글자수가 30이 넘으면 ... 처리해주기 */
+                                        if(strlen($content)>30){
+                                            $content=str_replace($reply["content"],mb_substr($reply["content"],0,30,"utf-8")."...",$reply["content"]);
                                         }
+
+                                        // 각 댓글이 달려있는 원문의 정보를 가져옴(댓글 DB에 저장된 원문의 고유 번호(con_num)를 이용함)
+                                        $sql3 = mq("SELECT * FROM board WHERE num='".$reply['con_num']."'");
+                                        $ori_post = mysqli_fetch_array($sql3);
                                         
                                         /* 댓글 수 구하기 */
-                                        $sql3 = mq("SELECT
-                                                        *
-                                                    FROM
-                                                        reply_ahn
-                                                    WHERE
-                                                        con_num='".$board['num']."'
-                                                ");
-                                        $rep_count = mysqli_num_rows($sql3); // 레코드의 수(댓글의 수)                                        
+                                        // $sql3 = mq("SELECT
+                                        //                 *
+                                        //             FROM
+                                        //                 reply
+                                        //             WHERE
+                                        //                 con_num='".$board['num']."'
+                                        //         ");
+                                        // $rep_count = mysqli_num_rows($sql3); // 레코드의 수(댓글의 수)
                                     ?>
 
-									<tbody>                                        
-										<tr>                                                                                  
-                                            <td width="70" class="text-center"><?=$board['num'];?></td>
-                                            <td width="100" class="text-center"><?=$sub_ctgr;?></td>
-                                            <td width="270">
-                                            <!-- 비밀 글 가져오기 -->	 
+									<tbody>
+										<tr>                                           
+                                            <td width="70" class="text-center"><?=$reply['num'];?></td>
+                                            <td width="300" class="text-center"><?=$reply["content"];?></td>
+                                            <td width="70">
+                                            <!-- 비밀 글 가져오기 -->
                                             <?php 
                                                 // $lockimg="<img src='./img/lock.png' alt='lock' title='lock' width='18' height='18'>";
-                                                $lockimg="※";
-                                                if($board['wsecret']=="1"){ // lock_post 값이 1이면 잠금
-                                                    if($board['depth']>0) {                                                        
-                                                        // if($board['depth']>1){
-                                                            // echo "<img height=1 width=" . $board['depth']*10 . ">└";
-                                                            // echo "<img height=1 width='10'>└";
-                                                        // } else {
-                                                            echo "└";
-                                                        // }                                                    
-                                                    }
+                                                // $lockimg="※";
+                                                if($ori_post['wsecret']=="1"){ // lock_post 값이 1이면 잠금
                                             ?>                                                
-                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check="<?=$role?>" data-num="<?=$board['num']?>" data-user="<?=$board['email']?>">[<?=$headpiece?>] <?=$title?> <?=$lockimg?></span>
+                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check="<?=$role?>" data-num="<?=$ori_post['num']?>">원문 보기 ▶</span>
                                             <!-- 일반 글 가져오기 -->
                                             <?php                                                     
-                                                }else{	// 아니면 공개 글
-                                                    if($board['depth']>0) {                                                        
-                                                        // if($board['depth']>1){
-                                                            // echo "<img height=1 width=" . $board['depth']*10 . ">└";
-                                                            // echo "<img height=1 width=10>└";
-                                                        // } else {
-                                                            echo "└";
-                                                        // }                                                    
-                                                    }
+                                                }else{                                                 
                                             ?>
-                                                <span class="read_check" style="cursor:pointer" data-action="./read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></span>
-                                                <?php if($rep_count>0) {?>
-                                                <span style="color:blue;">[<?=$rep_count?>]</span></td>                                                    
+                                                <span class="read_check" style="cursor:pointer" data-action="./read.php?num=<?=$ori_post['num']?>">원문 보기 ▶</span></td>                                                
                                             <?php                       
-                                                    }                             
                                                 }
-                                            ?>
-                                            <td width="70" class="text-center"><?=$board["writer"];?></td>
-                                            <td width="100" class="text-center"><?=$board["wdate"];?></td>
-                                            <td width="50" class="text-center"><?=$board["views"];?></td>
-                                            
+                                            ?>                                            
+                                            <td width="90" class="text-center"><?=$reply["wdate"];?></td>                                                                            
 										</tr>
                                     </tbody>
                                     <?php
-                                    $post_count++;
-                                    }                                                                                                            
-                                    ?>
-                                </table>
-                                <?php                                    
-                                    if($post_count == 0) {
-                                    ?>                                    
-                                            <div class="d-flex align-items-center justify-content-center" style="height: 25vh;">
-                                            <p class="text-center">작성된 게시물이 없습니다.</p>
-                                            </div>                                                                                       
-                                    <?php
                                     }
                                     ?>
-                                <div class="row justify-content-end">                                                                        
-                                    <?php
-                                        if($role == "ADMIN") {
-                                    ?>
-                                    <form action="write.php" method="POST">
-                                        <input type="hidden" name="category" value="<?=$category?>"/>
-                                        <button type="submit" class="btn-lg">글쓰기</button>
-                                    </form>
-                                    <?php } ?>
+                                </table>
+                                <div class="row justify-content-end">                                    
+                                    <a href="write.php"><button type="button" class="btn-lg">글쓰기</button></a>
                                 </div>
                                 <br/>
 
@@ -227,7 +203,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                             
                                             for($i = $block_start; $i <= $block_end; $i++){
                                                 if($page == $i){
-                                                    echo "<li class='page-item'><a class='page-link' disabled><b style='color: #df7366;'> $i </b></a></li>";
+                                                    echo "<b> $i </b>";
                                                 } else {
                                                     if(isset($unum)){
                                                         echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&unum=$unum&page=$i'> $i </a></li>";
@@ -271,7 +247,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                 <option value="content">내용</option>
                                             </select>
                                             <input type="text" name="search" size="70" required="required" style="display: inline-block; width: 70%;">
-                                            <button type="submit" style="padding: 0.65em 2em 0.65em 2em;">검색</button>
+                                            <button type="button" style="padding: 0.65em 2em 0.65em 2em;">검색</button>
                                         </form>
                                     </div>
                                 </div>
@@ -283,7 +259,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 				<!-- </div> -->
 
 			<!-- Footer -->
-				<div class="mt-4" id="footer">
+				<div  class="mt-4"id="footer">
                     <?php include_once "../fragments/footer.php"; ?>
 				</div>
 
@@ -304,41 +280,10 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
-            <script src="/bootstrap/bootstrap.bundle.min.js"></script>    
-
-            
+            <script src="/bootstrap/bootstrap.bundle.min.js"></script>
 
         <!-- 게시물 읽기 페이지 이동 기능-->
-            <script>            
-                // $(function(){
-                //     $(".read_check").click(function(){
-                //         var action_url = $(this).attr("data-action");
-                //         $(location).attr("href", action_url);
-                //     });
-                // });
-            </script>
-
-        <!-- 비밀글 모달 창 관련 이벤트-->
             <script>
-                // 비밀글 클릭시 모달창을 띄우는 이벤트
-                $(function(){
-                    $(".lock_check").click(function(){
-                        var user = $(this).attr("data-user");
-                        // 관리자 계정일 경우 바로 해당 글로 이동
-                        if($(this).attr("data-check")=="ADMIN") {
-                            var action_url = $(this).attr("data-action")+$(this).attr("data-num");
-                            $(location).attr("href", action_url);                            
-                        } else if(user == "<?=$useremail?>") {
-                            // 일반 사용자일 경우 사용자 이메일과 게시물 작성한 사용자의 이메일 대조하여 일치하면 해당 글로 이동
-                            var action_url = $(this).attr("data-action")+$(this).attr("data-num");
-                            $(location).attr("href", action_url);
-                        } else {
-                            $("#modal_div").modal();
-                        }
-                    });
-                });
-            
-                // 일반 글 클릭시 해당 num의 read 페이지로 이동하는 이벤트
                 $(function(){
                     $(".read_check").click(function(){
                         var action_url = $(this).attr("data-action");
@@ -346,5 +291,36 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                     });
                 });
             </script>
+
+        <!-- 비밀글 모달 창 관련 이벤트-->
+            <script>
+                // 비밀글 클릭시 모달창을 띄우는 이벤트
+                $(function(){
+                    $(".lock_check").click(function(){
+                        // 관리자 계정일 경우 바로 해당 글로 이동
+                        if($(this).attr("data-check")=="ADMIN") {
+                            var action_url = $(this).attr("data-action")+$(this).attr("data-num");
+                            $(location).attr("href", action_url);
+                        }
+                        $("#modal_div").modal();
+                        //주소에 data-num(num)값을 더하기
+                        var action_url = $("#modal_form").attr("data-action")+$(this).attr("data-num");
+                        console.log($(this).attr("data-check"));
+                        console.log(action_url);
+                        $("#modal_form").attr("action",action_url);                        
+                    });
+                });
+            
+                // 일반 글 클릭시 해당 num의 read 페이지로 이동하는 이벤트
+                $(function(){
+                    $(".read_check").click(function(){
+                        var action_url = $(this).attr("data-action");
+                        console.log(action_url);
+                        $(location).attr("href", action_url);
+                    });
+                });
+            </script>
+
+
 	</body>
 </html>

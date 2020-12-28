@@ -2,14 +2,14 @@
     include "../db_con.php";
     
 	$bno = $_GET['num'];
-	$sql = mq("SELECT in_num, depth, category FROM board WHERE num = $bno");
+	$sql = mq("SELECT in_num, depth, category FROM board_ahn WHERE num = $bno");
 	$fetch = ($sql->fetch_array());	
 	$category = $fetch['category'];
 
 	/* 받아온 num값을 선택해서 게시글 삭제 */
 	mq("DELETE 
         FROM 
-        board 
+        board_ahn 
         WHERE 
         num='".$bno."'
 		");

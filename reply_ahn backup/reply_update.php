@@ -5,7 +5,7 @@
     $num = $_POST['rno']; // 댓글 고유 번호 통해서 내용 수정
 	// $date = date('Y-m-d H:i:s');	
 	$sql = mq("UPDATE
-					reply
+					reply_ahn
                 SET
 					content = '".$_POST['rep_con']."'					
                 WHERE
