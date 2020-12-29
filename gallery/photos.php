@@ -25,7 +25,7 @@ if(mysqli_num_rows($q) != 0) {
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link rel="stylesheet" href="gal_assets/style.css?ver=3">
+		<link rel="stylesheet" href="gal_assets/style.css">
 		<?php include_once "../fragments/head.php"; ?>
 		<link rel="stylesheet" href="/assets/css/jquery-ui.css" />		
 
@@ -240,6 +240,6 @@ if(mysqli_num_rows($q) != 0) {
 		<!-- 사진 불러오기 & 사진 확대 창 띄우는 스크립트-->
 			<script src="gal_assets/unpkg.js"></script>
 			<script src="gal_assets/masonry.js"></script>
-			<script src="gal_assets/photo_lightbox.js?ver=1"></script>
+			<script src="gal_assets/photo_lightbox.js?ver=2"></script>
 	</body>
 </html>

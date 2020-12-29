@@ -1,12 +1,12 @@
 // phptos.php에서 사진 클릭 시 브라우저 화면 전체에 꽉 차게 사진 나오는 기능
-$(window).on('load', function() {    
+$(window).on('load', function() {
     
     $(document).on("click","#pt_section div img", function(){      
       $(".lightbox").fadeIn(300);
       $(".lightbox").append("<img src='" + $(this).attr("src") + "' alt='" + $(this).attr("alt") + "' />");
       $(".filter").css("background-image", "url(" + $(this).attr("src") + ")");
       $(".title").append("<h1 id='photo_title'>" + $(this).attr("alt") + "</h1>");
-      $("html").css("overflow", "hidden"); // 사진 확대 시 우측 스크롤 숨김
+      $("html").css("overflow", "hidden"); // 사진 확대 시 우측 스크롤 숨김      
       if ($(this).parent().is(":last-child")) {
         $(".arrowr").css("display", "none");
         $(".arrowl").css("display", "block");
@@ -16,6 +16,11 @@ $(window).on('load', function() {
       } else {
         $(".arrowr").css("display", "block");
         $(".arrowl").css("display", "block");
+      }
+
+      if($(this).parent().is(":last-child") && $(this).parent().is(":first-child")) {
+        $(".arrowr").css("display", "none");
+        $(".arrowl").css("display", "none");
       }
     });
 
@@ -49,12 +54,6 @@ $(window).on('load', function() {
       // $(".title").html("<h1>" + newAlt + "</h1>");
       $("#photo_title").text(newAlt);
 
-      // if (!search.next().is(":last-child")) {
-      //   $(".arrowl").css("display", "block");
-      // } else {
-      //   $(".arrowr").css("display", "none");
-      // }
-
       if (search.next().is(":last-child")) {
         $(".arrowr").css("display", "none");
         $(".arrowl").css("display", "block");
@@ -79,12 +78,6 @@ $(window).on('load', function() {
       $(".filter").css("background-image", "url(" + newImage + ")");
       // $(".title").html("<h1>" + newAlt + "</h1>");
       $("#photo_title").text(newAlt);
-
-      // if (!search.prev().is(":first-child")) {
-      //   $(".arrowr").css("display", "block");
-      // } else {
-      //   $(".arrowl").css("display", "none");
-      // }
 
       if (search.prev().is(":last-child")) {
         $(".arrowr").css("display", "none");
