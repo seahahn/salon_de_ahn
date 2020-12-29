@@ -3,11 +3,7 @@
     $db_pw="SalonDeAhn930121!";
     $db_name="salon_de_ahn";
     $db_domain="salondeahn.me";
-
-    // $db_id="root";
-    // $db_pw="0121";
-    // $db_name="salon_de_ahn";
-    // $db_domain="localhost";
+    
     $db=mysqli_connect($db_domain,$db_id,$db_pw,$db_name);
 
     function mq($sql){
