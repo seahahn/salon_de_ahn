@@ -5,7 +5,6 @@ bootstrap
 chatting/class
 chatting/js
 chatting/vendor
-chatting/class
 chatting/composer.json
 chatting/composer.lock
 PHPMailer
