@@ -9,4 +9,8 @@ chatting/composer.json
 chatting/composer.lock
 PHPMailer
 test
+<<<<<<< HEAD
 db_con.php
+=======
+db_con.php
+>>>>>>> 993ea8ca4bf60401ffbe515ce7a18a28bcd279ec
