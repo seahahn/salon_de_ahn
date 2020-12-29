@@ -1,3 +1,7 @@
+.vscode
+assets
+aws
+bootstrap
 chatting/class
 chatting/js
 chatting/vendor
@@ -5,4 +9,5 @@ chatting/class
 chatting/composer.json
 chatting/composer.lock
 PHPMailer
+test
 db_con.php
