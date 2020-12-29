@@ -1,12 +1,12 @@
-# .vscode
-# assets
-# aws
-# bootstrap
-# chatting/class
-# chatting/js
-# chatting/vendor
-# chatting/composer.json
-# chatting/composer.lock
-# PHPMailer
-# test
-# db_con.php
+.vscode
+assets
+aws
+bootstrap
+chatting/class
+chatting/js
+chatting/vendor
+chatting/composer.json
+chatting/composer.lock
+PHPMailer
+test
+db_con.php
