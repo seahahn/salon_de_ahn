@@ -41,12 +41,12 @@
                 
                 // 사진첩 제목과 날짜, 설명
 				$title = $_POST['title'][$i];
-				$title_key = $_POST['title_key'][$i];
+				$title_key = str_replace(" ", "_", $_POST['title_key'][$i]);
 				$rcday = $_POST['rcday'][$i];
 				$caption = $_POST['caption'][$i];
 				
 				// S3에 파일 업로드
-				$s3path = "albumThumbnails/";				
+				$s3path = "albumThumbnails/";
 				$bucket = $s3->bucket;
 
 				// $exist = $s3->exist($bucket, $s3path.$title_key.'/');

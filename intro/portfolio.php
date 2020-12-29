@@ -1,10 +1,13 @@
 <?php
 include_once "../util/config.php";
 include_once "../db_con.php";
+include_once "../s3.php";
+$s3 = new aws_s3;
+$url = $s3->url;
 
-$pj = $_GET['pj'];
-$sql = mq("SELECT * FROM pj WHERE pjcode='".$pj."'");
-$board = $sql->fetch_array();
+$num = $_GET['num'];
+$sql = mq("SELECT * FROM pj WHERE num='".$num."'");
+$pj = $sql->fetch_array();
 ?>
 
 <!DOCTYPE HTML>
@@ -33,21 +36,24 @@ $board = $sql->fetch_array();
 							<div class="col" id="content">
                                 <!-- 글 내용 영역 -->								
                                 <!-- 글 불러오기 -->
-                                <div id="board_read">
-                                    <h3><?=$board['title']?></h3>                                                                        
+                                <div id="board_read">                                    
+                                    <h2><?=$pj['title']?></h2>
+                                    <a class="pl-1 float-right" href="it_dev_portfolio.php"><button type="button" class="btn-lg">목록</button></a>
+                                    <p><?=$pj['caption']?></p>                                    
                                     <table class="table table-striped" style="text-align: center; border: 1px solid #ddddda; min-height: 200px;">
                                         <thead>                                                                                                                                    
                                         </thead>	
                                         <tbody>                                                                                      
                                             <tr>
-                                                <video class="my-5 col-12" src="<?= $board['videopath']?>" controls></video>
+                                                <video class="my-2 col-12" src="<?=$url.$pj['videopath']?>" controls></video>
                                             </tr>
                                             <tr>                                                
-                                                <td colspan="2" style="min-height: 200px; text-align: left;"><?=$board['caption']?></td>
+                                                <td colspan="2" style="min-height: 200px; text-align: left;"><?=$pj['content']?></td>
                                             </tr>                                            
                                         </tbody>
                                     </table>                                    
                                 </div>
+                                <a class="pl-1 float-right" href="it_dev_portfolio.php"><button type="button" class="btn-lg">목록</button></a>
 							</div>											
                         </div>																	
 					</div>

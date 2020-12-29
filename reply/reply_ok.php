@@ -70,4 +70,15 @@
 		wdate ='".$date."'
 		");
 	}
+
+	$sql = mq("SELECT 
+					* 
+                    FROM 
+					board 
+                    WHERE 
+					num='".$bno."'
+			");
+	$board = $sql->fetch_array();
+	$rep_count = $board['rep_num']+1; // 기존에 게시물에 달린 댓글 수에 1을 더한 값을 넣어줌
+	mq("UPDATE board SET rep_num='".$rep_count."' WHERE num='".$board["num"]."'");
 ?>

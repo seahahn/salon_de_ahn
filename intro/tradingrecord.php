@@ -9,11 +9,7 @@ if(isset($_GET["page"])){
     $page = 1;
 }
 
-// 사용자가 클릭한 항목에 맞는 카테고리 값을 GET으로 받아서 해당하는 게시물만 보여줌
-// 마이페이지에서 '내가 쓴 글'을 클릭한 경우, 카테고리 값으로 사용자의 이메일 주소를 가져옴
 $category = "tradingrecord";
-// 마이페이지로부터 사용자 고유번호를 전달받음. 카테고리로 전달된 이메일 주소와 사용자의 고유 번호 둘 다 일치하는 게시물만 가져오기 위함 (탈퇴 후 동일 메일로 재가입 시에(동일인이든 타인이든) 이전 계정의 게시물을 볼 수 없도록 하게 만듦)
-// if(isset($_GET["unum"])) $unum = $_GET["unum"];
 ?>
 
 <!DOCTYPE HTML>
@@ -24,7 +20,7 @@ $category = "tradingrecord";
 -->
 <html>
 	<head>
-        <?php include_once "../fragments/head.php"; ?>             
+        <?php include_once "../fragments/head.php"; ?>
 	</head>
 	<body class="right-sidebar is-preload">
 		<div id="page-wrapper">

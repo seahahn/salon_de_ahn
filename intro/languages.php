@@ -7,6 +7,11 @@
 <html>
 	<head>
 		<?php include_once "../fragments/head.php"; ?>
+		<style media="screen and (min-width: 1680px)">			
+			#intro_img {
+				padding: 0 40px 0 0;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -24,10 +29,10 @@
 						<p class="mb-5">영어 OPIc IH(2019.03.16), 중국어 OPIc NM(2019.06.23), 러시아어 X, 독일어 X...
 						</p>
 					</header>
-					<article id="main" class="container special">
+					<article id="main" class="container special" style="height: auto;">
 						<div class="row">
-						<img class="col" src="" alt="languages" style=" display: inline; width: 50%; height: 50%;"/></a>
-						<p class="col mr-3">
+						<img id="intro_img" class="col-12 col-lg-5 col-md-6 col-sm-12 col-12-mobile" src="https://salon-de-ahn.s3.ap-northeast-2.amazonaws.com/images/hannah-wright-ZzWsHbu2y80-unsplash.jpg" alt="languages" style=" display: inline; width: 50%; height: 50%;"/></a>
+						<p class="col-12 col-lg-7 col-md-6 col-sm-12 col-12-mobile">
 							외국어 학습에 관심을 갖기 시작한 것은 군 복무 시절부터였습니다.
 							카투사(KATUSA, Korean Augmentation to The US Army)로서 일단 영어 능력은 필수였기에 영어는 복무 초기부터 꾸준히 학습해야만 했습니다.
 							이와 더불어 함께 복무하고 있던 미군 친구들 중에 영어 외에도 다른 언어를 구사하는 친구들이 여럿 있었기에 이들의 언어에도 관심을 갖게 되었습니다.

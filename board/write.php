@@ -5,14 +5,14 @@ include_once "../login/login_check.php";
 
 if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게시물 목록에서 답글이 원글 아래 붙게 정렬하기 위한 변수들 초기화
     $num = $_GET['num'];
-    $sql = mq("SELECT in_num, depth, category, title FROM board WHERE num = $num"); // $ 게시물의 내부 번호(in_num)를 가져옴. 답글 작성 시 원글 바로 밑에 정렬할 수 있게 만들기 위한 번호임
+    $sql = mq("SELECT in_num, depth, category, title, sub_ctgr, headpiece FROM board WHERE num = $num"); // $ 게시물의 내부 번호(in_num)를 가져옴. 답글 작성 시 원글 바로 밑에 정렬할 수 있게 만들기 위한 번호임
     $fetch = ($sql->fetch_array());
     $in_num = $fetch['in_num'];
     $depth = $fetch['depth'];
     $category = $fetch['category'];
     $ori_title = $fetch['title'];
-    $sub_ctgr = '';
-    $headpiece = '';
+    $sub_ctgr = $fetch['sub_ctgr'];
+    $headpiece = $fetch['headpiece'];
 } else if(isset($_POST['category'])) {
     $category = $_POST['category'];
     $sub_ctgr = '';
@@ -169,7 +169,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
             <script src="/bootstrap/bootstrap.bundle.js"></script>
             <script src="/bootstrap/bootstrap.bundle.min.js"></script>
 
-        <!-- HTML 텍스트 에디터(Summernote) 추가-->
+        <!-- HTML 텍스트 에디터(CKEDITOR) 추가-->
             <script>
                 // Replace the <textarea id="editor1"> with a CKEditor 4
                 // instance, using default configuration.

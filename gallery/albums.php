@@ -12,7 +12,7 @@ $row = mysqli_num_rows($q); // 사진첩 총 갯수 불러오기
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="gal_assets/blur.css"/>
 		<link rel="stylesheet" href="/bootstrap/bootstrap_custom.css"/>	
-		<link rel="stylesheet" href="/assets/css/main_custom.css" />				
+		<link rel="stylesheet" href="/assets/css/main_custom.css" />
 		<link rel="stylesheet" href="/assets/css/jquery-ui.css" />
 		<style>
 			.loadmore {

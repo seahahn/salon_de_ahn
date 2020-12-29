@@ -3,6 +3,14 @@
 	include_once "../db_con.php";
 	include_once "../s3.php";
 
+	if($role != 'ADMIN') {
+		echo '
+			<script>
+				alert("관리자만 작성 가능합니다.");
+				history.go(-1);
+			</script>';
+	}
+
 	// S3 객체 생성 후 경로 설정 및 버킷 정보 가져오기
 	$s3 = new aws_s3;
 	$s3path = "audios/";

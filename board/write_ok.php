@@ -1,6 +1,11 @@
 <?php
 	include "../util/config.php";
 	include "../db_con.php";
+	include_once "../s3.php";
+	$s3 = new aws_s3;
+	$s3path = "board_files/";
+	$bucket = $s3->bucket;
+	$url = $s3->url;
 	
 	$max_in_num_result = mq("SELECT MAX(in_num) FROM board");
 	$max_in_num_fetch = mysqli_fetch_row($max_in_num_result);
@@ -61,41 +66,25 @@
 				// 파일 권한 변경 (생략가능_추후 변경할 수 있게 권한 변경함) 
 				chmod($baseDownFolder.$tmp_filename, 0755);	
 
+				$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$tmp_filename);
+
 				mq("INSERT filesave SET
 				filename_real = '".$real_filename."',
 				filename_tmp = '".$tmp_filename."',
-				filepath = '".$baseDownFolder.$tmp_filename."'
+				filepath = '".$s3path.$tmp_filename."'
 				");
 
-				$filepath_array[$i] = $baseDownFolder.$tmp_filename;
+				$filepath_array[$i] = $s3path.$tmp_filename;
+
+				if(!unlink($baseDownFolder.$tmp_filename)) {
+					echo "file delete failed.\n";
+				}
 			}			
 		}
-	} 
-
-	// if(strpos($_FILES['file']['type'], 'image') == 0) {
-		// print_r($_FILES['files']['error']) ;
-	// if($_FILES['files'] != 'undefined') {
-	// 	if($_FILES['files']['name'] > 0 ) { 
-	// 		if ($_FILES['files']['name']) {
-	// 			if (!$_FILES['files']['error']) {
-	// 				$name = md5(rand(100, 200));
-	// 				$ext = pathinfo($_FILES['files']['name'], PATHINFO_EXTENSION);
-	// 				$filename = $name.
-	// 				'.'.$ext;
-	// 				$destination = '/assets/images/'.$filename; //change this directory
-	// 				$location = $_FILES["files"]["tmp_name"];
-	// 				move_uploaded_file($location, $destination);
-	// 				echo '127.0.0.1/image/'.$filename; //change this URL
-	// 			} else {
-	// 				echo $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['files']['error'];
-	// 			}
-	// 		}
-	// 	}
-	// }
+	}
 
 	// 첨부파일 경로를 담은 배열을 직렬화하여 문자열 형태로 바꿈. 그리고 해당 게시물 첨부파일 경로 테이블에 넣음
-	$filepath_array_str = serialize($filepath_array);
-	// echo $filepath_array_str;	
+	$filepath_array_str = serialize($filepath_array);	
 	
 	// DB 저장
 	if(isset($_POST['in_num'])) { //답글인 경우

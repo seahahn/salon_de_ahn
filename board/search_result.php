@@ -161,7 +161,7 @@
                                                 ");
 
                                         while($board = $sql2->fetch_array()){
-                                            include "headpiece.php";
+                                            include_once "../fragments/headpiece.php";
                                             $title=$board["title"];
                                             /* 글자수가 30이 넘으면 ... 처리해주기 */
                                             if(strlen($title)>30){

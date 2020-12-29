@@ -1,6 +1,11 @@
 <?php
 	include "../util/config.php";
 	include "../db_con.php";
+	include_once "../s3.php";
+	$s3 = new aws_s3;
+	$s3path = "files/";
+	$bucket = $s3->bucket;
+	$url = $s3->url;
 
 	$bno = $_POST['num']; // $bno(hidden)에 num값을 받아와 넣음	    
 	$category = $_POST['category']; // 게시물 수정 시 카테고리 선택한 것 받아옴
@@ -14,8 +19,6 @@
 	}else{
 		$wsecret = '0';
 	}
-
-	// 첨부파일이 존재한다면 실행
 
 	$filepath_array = array();
 	// if(strpos($_FILES['files']['type'], 'image') != 0){ // 이미지를 제외한 파일 형식만 별도 첨부 가능
@@ -44,13 +47,19 @@
 				// 파일 권한 변경 (생략가능_추후 변경할 수 있게 권한 변경함) 
 				chmod($baseDownFolder.$tmp_filename, 0755);	
 
+				$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$tmp_filename);
+
 				mq("INSERT filesave SET
 				filename_real = '".$real_filename."',
 				filename_tmp = '".$tmp_filename."',
-				filepath = '".$baseDownFolder.$tmp_filename."'
+				filepath = '".$s3path.$tmp_filename."'
 				");
 
-				$filepath_array[$i] = $baseDownFolder.$tmp_filename;
+				$filepath_array[$i] = $s3path.$tmp_filename;
+
+				if(!unlink($baseDownFolder.$tmp_filename)) {
+					echo "file delete failed.\n";
+				}
 			}			
 		}
 	}

@@ -7,6 +7,11 @@
 <html>
 	<head>
 		<?php include_once "../fragments/head.php"; ?>
+		<style media="screen and (min-width: 1680px)">			
+			#intro_img {
+				padding: 0 40px 0 0;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -24,10 +29,10 @@
 						<p class="mb-5">일희일비하지 않고, 오면 오고 가면 가는대로, 잔잔한 호수와 같은 마음으로 거래하기
 						</p>
 					</header>
-					<article id="main" class="container special">
+					<article id="main" class="container special" style="height: auto;">
 						<div class="row">
-						<img class="col" src="" alt="finance" style=" display: inline; width: 50%; height: 50%;"/></a>
-						<p class="col mr-3">
+						<img id="intro_img" class="col-12 col-lg-6 col-md-6 col-sm-12 col-12-mobile" src="https://salon-de-ahn.s3.ap-northeast-2.amazonaws.com/images/money-3382555_1920.jpg" alt="finance" style=" display: inline; width: 50%; height: 50%;"/></a>
+						<p class="col-12 col-lg-6 col-md-6 col-sm-12 col-12-mobile">
 							금융 거래, 그 중에서도 주식을 처음 접한 것은 중학교 3학년, 만 15세 즈음이었습니다.
 							그때는 주식 거래보다는 경제, 경영 쪽에 관심이 있던 터라 기업의 지배구조 및 순환출자를 알게 되면서 주식이라는 것을 알게 되었습니다.
 							<br/><br/>

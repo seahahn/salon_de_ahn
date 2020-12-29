@@ -3,6 +3,14 @@ include_once "../util/config.php";
 include_once "../db_con.php";
 include_once "../login/login_check.php";
 
+if($role != 'ADMIN') {
+    echo '
+        <script>
+            alert("관리자만 작성 가능합니다.");
+            history.go(-1);
+        </script>';
+}
+
 $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 	/* 받아온 num값을 선택해서 게시글 정보 가져오기 */
 	$sql = mq("SELECT 

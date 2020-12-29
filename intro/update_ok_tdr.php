@@ -2,6 +2,14 @@
 	include "../util/config.php";
 	include "../db_con.php";
 
+	if($role != 'ADMIN') {
+		echo '
+			<script>
+				alert("관리자만 작성 가능합니다.");
+				history.go(-1);
+			</script>';
+	}
+
 	$bno = $_POST['num']; // $bno(hidden)에 num값을 받아와 넣음	    
 	
 	$category = $_POST['category'];

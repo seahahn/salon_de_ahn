@@ -1,6 +1,14 @@
 <?php
 	include "../util/config.php";
 	include "../db_con.php";
+
+	if($role != 'ADMIN') {
+		echo '
+			<script>
+				alert("관리자만 작성 가능합니다.");
+				history.go(-1);
+			</script>';
+	}
 	
 	$max_in_num_result = mq("SELECT MAX(in_num) FROM board_ahn");
 	$max_in_num_fetch = mysqli_fetch_row($max_in_num_result);

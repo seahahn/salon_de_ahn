@@ -1,6 +1,9 @@
 <?php
 include_once "../util/config.php";
 include_once "../db_con.php";
+include_once "../s3.php";
+$s3 = new aws_s3;
+$url = $s3->url;
 
 $category = "it_dev_portfolio";
 ?>
@@ -28,19 +31,46 @@ $category = "it_dev_portfolio";
 					<div class="container">			                        
                         <br/>                       
                         <?php include_once "./ctgr_explain.php" ?>
+                        <a href="write_itpf.php"><button type="button" class="btn-sm">포트폴리오 작성하기</button></a>
                         <div class="row my-5"> <!-- 메인 글 영역-->
-                            <div class="col">
-                                <video class="my-2" src="../video/stocking.mp4" width="640px" height="360px" controls></video>
+                            <!-- <div class="col-12 col-lg-6 col-md-12 col-sm-12 col-12-mobile">
+                                <video class="p-2" src="../video/stocking.mp4" width="100%" height="70%" controls></video>
                                 <img src="">
                                 <h3 class="my-2 read_check" style="cursor:pointer" data-action="./portfolio.php?pj=stocking"></a>기초 자바 작품 - Stocking</h3>
                                 <p>기초 자바 작품 - Stocking</p>
                             </div>
-                            <div class="col">
-                                <video class="my-2"src="" width="640px" height="360px" controls>비디오 준비중...</video>
+                            <div class="col-12 col-lg-6 col-md-12 col-sm-12 col-12-mobile">
+                                <video class="p-2" src="" width="100%" height="70%" controls>비디오 준비중...</video>
                                 <img src="">                                
                                 <h3 class="my-2 read_check" style="cursor:pointer" data-action="./portfolio.php?pj=cvr">(비디오 준비중) 기초 안드로이드 작품 - Cyclic Voca Review</h3>
                                 <p>기초 안드로이드 작품 - Cyclic Voca Review</p>
-                            </div>																		
+                            </div> -->
+                            
+                            <?php
+                            $sql = mq("SELECT * FROM pj ORDER BY num DESC");
+                            while($pf = $sql->fetch_array()){
+                                if($pf['videopath'] == '') {
+                                    $vdx = '(비디오 준비중) ';
+                                } else {
+                                    $vdx = '';
+                                }
+                            ?>
+                            <div class="col-12 col-lg-6 col-md-12 col-sm-12 col-12-mobile">
+                                <video class="p-2" src="<?=$url.$pf['videopath']?>" width="100%" height="70%" controls>비디오 준비중...</video>
+                                <h3 class="my-2 read_check" style="cursor:pointer" data-action="./portfolio.php?num=<?=$pf['num']?>"><?=$vdx.$pf['title']?></h3>
+                                <p><?=$pf['caption']?></p>
+                                <?php
+                                if($role == "ADMIN") {
+                                ?>
+                                    <a class="pl-1" href="update_itpf.php?num=<?=$pf['num']?>"><button type="button" class="btn-lg">수정하기</button></a>
+                                    <a class="pl-1" href="delete_article_itpf.php?num=<?=$pf['num']?>"><button type="button" class="btn-lg">삭제하기</button></a>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                            <?php
+                            }
+                            ?>
 						</div>																	
 					</div>
 										

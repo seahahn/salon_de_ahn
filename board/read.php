@@ -1,6 +1,9 @@
 <?php
 include_once "../util/config.php";
 include_once "../db_con.php";
+include_once "../s3.php";
+$s3 = new aws_s3;
+$url = $s3->url;
 
 $bno = $_GET['num']; // $bno에 num값을 받아와 넣음     
 	
@@ -36,46 +39,8 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
         ");
         setcookie("read_".$bno.$board_class, $bno.$board_class, time() + 60 * 60 * 24);
     }    
-    /* 조회수 올리기 끝 */   
-
-    //최근 게시물 목록에 지금 보는 게시물 집어넣기    
-    // $count = 0;
-    // $recent = $_SERVER['REQUEST_URI'];
-    // $recenthp = $board['headpiece'];
-    // $recenttitle = $board['title'];
-    // for($i=5; $i>0; $i--){        
-    //     if(!isset($_COOKIE['recent_'.$i])) {                        
-    //         setcookie("recent_".$i, $recent, time() + 60 * 60 * 24);
-    //         setcookie("recenthp_".$i, $recenthp, time() + 60 * 60 * 24);           
-    //         setcookie("recenttitle_".$i, $recenttitle, time() + 60 * 60 * 24);
-    //         // if($i<=4) $i_ = $i+1;
-    //         // if(isset($i_) && $_COOKIE['recent_'.$i] == $_COOKIE['recent_'.$i_]) {
-    //         //     setcookie("recent_".$i, '', -1);
-    //         //     setcookie("recenthp_".$i, '', -1);           
-    //         //     setcookie("recenttitle_".$i, '', -1);
-    //         //     break;
-    //         // }
-    //         break;
-    //     }
-    //     $count++;
-    // }
-
-    // if($count == 5) {
-    //     for($i=1; $i<5; $i++){
-    //         $num = $i+1;
-    //         $curl = $_COOKIE["recent_".$num];
-    //         $chp = $_COOKIE["recenthp_".$num];
-    //         $ctitle = $_COOKIE["recenttitle_".$num];            
-    //         setcookie("recent_".$i, $curl, time() + 60 * 60 * 24);
-    //         setcookie("recenthp_".$i, $chp, time() + 60 * 60 * 24);           
-    //         setcookie("recenttitle_".$i, $ctitle, time() + 60 * 60 * 24);
-    //     }
-    //     setcookie("recent_".$count, $recent, time() + 60 * 60 * 24);
-    //     setcookie("recenthp_".$i, $recenthp, time() + 60 * 60 * 24);           
-    //     setcookie("recenttitle_".$count, $recenttitle, time() + 60 * 60 * 24);
-    // }
-    
-    include_once "headpiece.php";
+    /* 조회수 올리기 끝 */    
+    include_once "../fragments/headpiece.php";
 ?>
 
 <!DOCTYPE HTML>
@@ -132,19 +97,16 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                         }                                                        
                                                         
                                                         for($i=0; $i<count($filepath_array);$i++){
-                                                            $filename_result = mq("SELECT filename_real, filename_tmp FROM filesave WHERE filepath='".$filepath_array[$i]."'");                                                            
-                                                            $filename_fetch = mysqli_fetch_array($filename_result);
-                                                            $filename_tmp = $filename_fetch[1];
-                                                            $filename_real = $filename_fetch[0];                                                            
+                                                            $filename_result = mq("SELECT * FROM filesave WHERE filepath='".$filepath_array[$i]."'");
+                                                            $fetch = mysqli_fetch_array($filename_result);
+                                                            $filename_real = $fetch['filename_real'];
+                                                            $filename_tmp = $fetch['filename_tmp'];
+                                                            $filepath = $fetch['filepath'];
                                                             $filename = str_replace(" ","_", $filename_real);                                                            
-                                                            $filepath = "/file/";                                                            
-                                                            // echo "<form class='col-12 float-left' style='text-align: initial;' method='get' action='./download.php'>
-                                                            // <input type='hidden' name='filename_tmp' value=$filename_tmp/>
-                                                            // <input type='hidden' name='filename_real' value=$filename_real/>
-                                                            // <input type='hidden' name='filepath' value=$filepath/>
-                                                            // <button type='submit' class='btn'>$filename_real</button></form><br/>";
 
-                                                            echo "<a class='col-12 float-left' style='text-align: initial;' href=./download.php?dir=$filepath&file=$filename_tmp&name=$filename>$filename_real</a><br/>";
+                                                            echo "<a class='col-12 float-left' style='text-align: initial;' href=../file/download.php?dir=$filepath&file=$filename_tmp&name=$filename>$filename_real</a><br/>";
+                                                            // echo "<a class='col-12 float-left' style='text-align: initial;' href='$url$filepath'>$filename_real</a><br/>";
+                                                            
                                                         }
                                                     ?>
                                                     </div>
@@ -152,23 +114,6 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!-- 목록, 수정, 삭제 -->
-                                    <!-- <form class="row justify-content-between" method="GET" action="update.php">
-                                        <div class="col">                                            
-                                            <a href="write.php"><button type="button" class="btn-lg">글쓰기</button></a>
-                                            <a href="write.php?num=<?=$board['num']?>"><button type="button" class="btn-lg">답글</button></a>                                             -->
-                                            <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
-                                            <!-- <?php                                             
-                                                //if($useremail==$board['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
-                                            ?>
-                                            <a href="update.php?num=<?=$board['num']?>"><button type="button" value="<?=$bno?>" class="btn-lg">수정</button></a>
-                                            <a href="delete_article.php?num=<?=$board['num']?>"><button type="button" value="<?=$bno?>" class="btn-lg">삭제</button></a>                                    
-                                            <?php //} ?>
-                                        </div>
-                                        <div class="col d-flex justify-content-end">
-                                            <a href="board_list.php"><button type="button" class="btn-lg">목록</button></a>
-                                        </div>                                                                                                      
-                                    </form>                                     -->
                                 </div>
 							</div>											
                         </div>

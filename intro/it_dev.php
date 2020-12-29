@@ -7,6 +7,11 @@
 <html>
 	<head>
 		<?php include_once "../fragments/head.php"; ?>
+		<style media="screen and (min-width: 1680px)">			
+			#intro_img {
+				padding: 0 40px 0 0;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -21,13 +26,13 @@
 				<section id="banner">
 					<header>
 						<h2>소개글 - <strong>IT 개발자</strong>로서</h2>
-						<p class="mb-5">소통하는 개발자, 틀림을 받아들이고 다름을 인정하는 개발자, 세상에 도움을 주는 개발자, 성장하는 개발자
+						<p class="mb-5 mx-3">소통하는 개발자, 틀림을 받아들이고 다름을 인정하는 개발자, 세상에 도움을 주는 개발자, 성장하는 개발자
 						</p>
 					</header>
-					<article id="main" class="container special">
+					<article id="main" class="container special" style="height: auto;">
 						<div class="row">
-						<img class="col" src="" alt="it_dev" style=" display: inline; width: 50%; height: 50%;"/></a>
-						<p class="col mr-3">
+						<img id="intro_img" class="col-12 col-lg-5 col-md-6 col-sm-12 col-12-mobile" src="https://salon-de-ahn.s3.ap-northeast-2.amazonaws.com/images/desktop-1149231_1920.jpg" alt="it_dev" style=" display: inline;"/></a>
+						<p class="col-12 col-lg-7 col-md-6 col-sm-12 col-12-mobile">
 							저는 2020년 8월 5일부터 IT 개발 공부를 시작하였습니다. 이때부터 지금까지 서울에 위치한 '팀노바'라는 훌륭한 개발자 양성 교육기관에서 공부를 하고 있습니다.
 							<br/><br/>
 							처음 5주간은 JAVA를 배우면서 코드를 어떻게 쓰는지, 프로그램은 어떻게 만들어지는지에 대한 기본적인 내용을 배웠고,

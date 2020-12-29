@@ -37,7 +37,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
         setcookie("read_".$bno.$board_class, $bno.$board_class, time() + 60 * 60 * 24);
     }    
 	/* 조회수 올리기 끝 */
-include_once "headpiece.php";
+include_once "../fragments/headpiece.php";
 ?>
 
 <!DOCTYPE HTML>
@@ -88,49 +88,28 @@ include_once "headpiece.php";
                                                     <div class="row justify-content-start">
                                                     <p class="col-12" style="margin-bottom: 0px;"><b>첨부파일 목록</b></p>
                                                     <?php
-                                                        $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");                                                        
+                                                        $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");
                                                         while($row = mysqli_fetch_assoc($sql)){
                                                             $filepath_array = unserialize($row['att_file']);
                                                         }                                                        
                                                         
                                                         for($i=0; $i<count($filepath_array);$i++){
-                                                            $filename_result = mq("SELECT filename_real, filename_tmp FROM filesave WHERE filepath='".$filepath_array[$i]."'");                                                            
-                                                            $filename_fetch = mysqli_fetch_array($filename_result);
-                                                            $filename_tmp = $filename_fetch[1];
-                                                            $filename_real = $filename_fetch[0];                                                            
-                                                            $filename = str_replace(" ","_", $filename_real);                                                            
-                                                            $filepath = "/file/";                                                            
-                                                            // echo "<form class='col-12 float-left' style='text-align: initial;' method='get' action='./download.php'>
-                                                            // <input type='hidden' name='filename_tmp' value=$filename_tmp/>
-                                                            // <input type='hidden' name='filename_real' value=$filename_real/>
-                                                            // <input type='hidden' name='filepath' value=$filepath/>
-                                                            // <button type='submit' class='btn'>$filename_real</button></form><br/>";
+                                                            $filename_result = mq("SELECT * FROM filesave WHERE filepath='".$filepath_array[$i]."'");                                                            
+                                                            $fetch = mysqli_fetch_array($filename_result);                                                            
+                                                            $filename_real = $fetch['filename_real'];     
+                                                            $filename_tmp = $fetch['filename_tmp'];
+                                                            $filepath = $fetch['filepath'];
+                                                            $filename = str_replace(" ","_", $filename_real);
 
-                                                            echo "<a class='col-12 float-left' style='text-align: initial;' href=./download.php?dir=$filepath&file=$filename_tmp&name=$filename>$filename_real</a><br/>";
+                                                            echo "<a class='col-12 float-left' style='text-align: initial;' href=../file/download.php?dir=$filepath&file=$filename_tmp&name=$filename>$filename_real</a><br/>";
+                                                            
                                                         }
                                                     ?>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
-                                    <!-- 목록, 수정, 삭제 -->
-                                    <!-- <form class="row justify-content-between" method="GET" action="update.php">
-                                        <div class="col">                                            
-                                            <a href="write.php"><button type="button" class="btn-lg">글쓰기</button></a>
-                                            <a href="write.php?num=<?=$board['num']?>"><button type="button" class="btn-lg">답글</button></a>                                             -->
-                                            <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
-                                            <!-- <?php                                             
-                                                //if($useremail==$board['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
-                                            ?>
-                                            <a href="update.php?num=<?=$board['num']?>"><button type="button" value="<?=$bno?>" class="btn-lg">수정</button></a>
-                                            <a href="delete_article.php?num=<?=$board['num']?>"><button type="button" value="<?=$bno?>" class="btn-lg">삭제</button></a>                                    
-                                            <?php //} ?>
-                                        </div>
-                                        <div class="col d-flex justify-content-end">
-                                            <a href="board_list.php"><button type="button" class="btn-lg">목록</button></a>
-                                        </div>                                                                                                      
-                                    </form>                                     -->
+                                    </table>                                    
                                 </div>
 							</div>											
                         </div>
@@ -149,7 +128,7 @@ include_once "headpiece.php";
                                     $sql2=mq("SELECT
                                         *
                                     FROM
-                                        reply_ahn
+                                        reply
                                     WHERE
                                         con_num='".$bno."'
                                     ORDER BY
@@ -228,7 +207,7 @@ include_once "headpiece.php";
                                             </div>
                                             <!-- body -->
                                             <div class="modal-body">
-                                                <form method="post" id="modal_form1" action="/reply_ahn/reply_delete.php">
+                                                <form method="post" id="modal_form1" action="/reply/reply_delete.php">
                                                     <input type="hidden" name="r_no" id="r_no" value="<?=$reply['num']?>"/>
                                                     <input type="hidden" name="b_no" value="<?=$bno;?>">            
                                                     <script>console.log((<?=$reply['num'];?>));</script>
@@ -334,7 +313,7 @@ include_once "headpiece.php";
                         $('#rep_con_new').val().replace(/\n/g, "<br>");
 
                         $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
-                            url : "../reply_ahn/reply_ok.php",
+                            url : "../reply/reply_ok.php",
                             type : "post",                            
                             data : {
                                 "bno" : $(".bno").val(),
@@ -404,7 +383,7 @@ include_once "headpiece.php";
 
                         $(rep_ans).click(function(){
                             $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
-                                url : "../reply_ahn/reply_ok.php",
+                                url : "../reply/reply_ok.php",
                                 type : "post",                            
                                 data : {
                                     "in_num" : in_num,
@@ -457,7 +436,7 @@ include_once "headpiece.php";
 
                         $(rep_edit).click(function(){
                             $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
-                                url : "../reply_ahn/reply_update.php",
+                                url : "../reply/reply_update.php",
                                 type : "post",                            
                                 data : {                                
                                     "rno" : num,
@@ -476,5 +455,14 @@ include_once "headpiece.php";
             </script>
             <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
             <script>autosize($('.rep_con'));</script>
+
+        <!-- 첨부파일명 클릭 시 다운로드 기능 구현-->
+            <script>
+                // $(".download").on("click", function() {
+                //     <?php
+                //     $s3->download($bucket, )
+                //     ?>
+                // });
+            </script>
 	</body>
 </html>

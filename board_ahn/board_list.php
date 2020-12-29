@@ -15,6 +15,8 @@ $category = $_GET["ctgr"];
 // 마이페이지로부터 사용자 고유번호를 전달받음. 카테고리로 전달된 이메일 주소와 사용자의 고유 번호 둘 다 일치하는 게시물만 가져오기 위함 (탈퇴 후 동일 메일로 재가입 시에(동일인이든 타인이든) 이전 계정의 게시물을 볼 수 없도록 하게 만듦)
 if(isset($_GET["unum"])) $unum = $_GET["unum"];
 
+if(isset($_GET["hp"])) $hp = $_GET["hp"]; // 언어 학습 카테고리에서 소분류로 언어 선택한 경우 그 값을 받아옴
+
 if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에서 소분류로 언어 선택한 경우 그 값을 받아옴
 ?>
 
@@ -80,6 +82,8 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                     // 페이징 구현
                                     if(isset($unum)){
                                         $sql = mq("SELECT * FROM board WHERE email='".$category."' AND unum='".$unum."'");
+                                    } else if(isset($hp)) {
+                                        $sql = mq("SELECT * FROM board WHERE category='".$category."' AND headpiece='".$hp."'");
                                     } else if(isset($lang)) {
                                         $sql = mq("SELECT * FROM board WHERE category='".$category."' AND sub_ctgr='".$lang."'");
                                     } else {
@@ -103,6 +107,8 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                     // 게시물 목록 가져오기
                                     if(isset($unum)){
                                         $sql2 = mq("SELECT * FROM board WHERE email='".$category."' AND unum='".$unum."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                    } else if(isset($hp)) {
+                                        $sql2 = mq("SELECT * FROM board WHERE category='".$category."' AND headpiece='".$hp."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list");
                                     } else if(isset($lang)){
                                         $sql2 = mq("SELECT * FROM board WHERE category='".$category."' AND sub_ctgr='".$lang."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list");
                                     } else {
@@ -111,7 +117,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 
                                     $post_count = 0;
                                     while($board = $sql2->fetch_array()){
-                                        include "headpiece.php";
+                                        include_once "../fragments/headpiece.php";
                                         $title=$board["title"];
                                         /* 글자수가 60이 넘으면 ... 처리해주기 */
                                         if(strlen($title)>60){
@@ -122,7 +128,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                         $sql3 = mq("SELECT
                                                         *
                                                     FROM
-                                                        reply_ahn
+                                                        reply
                                                     WHERE
                                                         con_num='".$board['num']."'
                                                 ");
@@ -132,7 +138,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 									<tbody>                                        
 										<tr>                                                                                  
                                             <td width="70" class="text-center"><?=$board['num'];?></td>
-                                            <td width="100" class="text-center"><?=$sub_ctgr;?></td>
+                                            <td width="100" class="text-center" style="font-size: 1rem;"><?=$sub_ctgr;?></td>
                                             <td width="270">
                                             <!-- 비밀 글 가져오기 -->	 
                                             <?php 

@@ -3,6 +3,14 @@ include_once "../util/config.php";
 include_once "../db_con.php";
 include_once "../login/login_check.php";
 
+if($role != 'ADMIN') {
+    echo '
+        <script>
+            alert("관리자만 작성 가능합니다.");
+            history.go(-1);
+        </script>';
+}
+
 if(isset($_GET["leng"])) $lang = $_GET["lang"];
 ?>
 

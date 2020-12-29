@@ -44,10 +44,11 @@ class aws_s3 {
     }
 
     // S3 버킷에서 파일 다운로드
-    public function download($bucket, $keyname) {
+    public function download($bucket, $keyname, $filename) {
         $result = $this->s3Client->getObject([
             'Bucket' => $bucket, // 다운로드 할 객체의 버킷명
-            'Key' => $keyname // (버킷 제외) 저장된 S3 폴더 경로+파일명
+            'Key' => $keyname, // (버킷 제외) 저장된 S3 폴더 경로+파일명
+            'SaveAs' => fopen($filename, 'w') // 임시로 S3에서 파일 저장. 사용자가 파일 다운로드하고서 삭제됨
         ]);
 
         return $result['Body'];

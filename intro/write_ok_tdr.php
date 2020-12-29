@@ -2,6 +2,14 @@
 	include "../util/config.php";
 	include "../db_con.php";
 
+	if($role != 'ADMIN') {
+		echo '
+			<script>
+				alert("관리자만 작성 가능합니다.");
+				history.go(-1);
+			</script>';
+	}
+
 	$category = $_POST['category'];
 	$item = $_POST['item'];
 	$content = $_POST['content'];

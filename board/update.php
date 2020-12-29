@@ -103,22 +103,23 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                         <button type="button" id="fileAdd" class="btn-sm">첨부파일 추가</button>
                                                         <ul id="fileList"></ul>
                                                         <?php
-                                                        $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");                                                        
+                                                        $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");
                                                         while($row = mysqli_fetch_assoc($sql)){
                                                             $filepath_array = unserialize($row['att_file']);
                                                         }                                                        
                                                         
                                                         for($i=0; $i<count($filepath_array);$i++){
-                                                            $filename_result = mq("SELECT filename_real, filename_tmp FROM filesave WHERE filepath='".$filepath_array[$i]."'");                                                            
-                                                            $filename_fetch = mysqli_fetch_array($filename_result);
-                                                            $filename_tmp = $filename_fetch[1];
-                                                            $filename_real = $filename_fetch[0];                                                            
+                                                            $filename_result = mq("SELECT * FROM filesave WHERE filepath='".$filepath_array[$i]."'");                                                            
+                                                            $fetch = mysqli_fetch_array($filename_result);
+                                                            $filename_tmp = $fetch['filename_tmp'];
+                                                            $filename_real = $fetch['filename_real'];
+                                                            $filepath = $fetch['filepath'];
                                                             $filename = str_replace(" ","_", $filename_real);                                                            
                                                             // $filepath = "/file/";
                                                             echo "<input type='hidden' name='old_files[]' value=$filepath_array[$i]><span>$filename_real </span><button type='button' class='btn-sm btnRemoveOld'>첨부 취소</button><br/>";
                                                             // echo "<input type='file' class='col-8 btn-sm' id='fileUpload' name='upload[]'><button type='button' class='btn-sm btnRemove'>첨부 취소</button><br/>";
                                                         }
-                                                    ?>
+                                                        ?>
                                                     </td>
                                                 </tr>
                                             </tbody>

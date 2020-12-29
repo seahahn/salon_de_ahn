@@ -1,5 +1,13 @@
 <?php
-    include "../db_con.php";
+	include "../db_con.php";
+	
+	if($role != 'ADMIN') {
+		echo '
+			<script>
+				alert("관리자만 작성 가능합니다.");
+				history.go(-1);
+			</script>';
+	}
     
 	$bno = $_GET['num'];
 	$sql = mq("SELECT in_num, depth, category FROM board_ahn WHERE num = $bno");
