@@ -16,13 +16,13 @@
 	$s3path = "photos/";
 	$bucket = $s3->bucket;
 
-	$filepath_array = array();
-	$folder = $_POST['folder']; // 사진이 들어가 있는 사진첩 제목
-
 	// 사진 제목과 설명
 	$num = $_POST['photo_no_edit'];
 	$title = $_POST['title'];
 	$caption = $_POST['caption'];
+	$folder = $_POST['folder']; // 수정할 때 선택한 사진첩 키
+
+	$filepath_array = array();
 
 	if(!$_FILES['photoEdit']['name'][0] == '') {
 		if(count($_FILES['photoEdit']['name']) > 0 ) { 
@@ -78,14 +78,29 @@
 				}
 			}			
 		}
-	}	
+	} else {
+		$sql = mq("SELECT 
+				* 
+				FROM
+				photosave
+				WHERE 
+				num='".$num."'
+			");
+		$photo = $sql->fetch_array();
+		$tmp_filename = $photo['filename_tmp'];
+		$filepath = $photo['filepath'];
+		$s3->copy($bucket, $folder.'/'.$tmp_filename, $filepath);
 
-	// DB에 사진 제목, 날짜, 설명과 함께 S3 경로 업로드
-	mq("UPDATE photosave SET	
-	title = '".$title."',
-	caption = '".$caption."'
-	WHERE num = '".$num."'
-	");
+		// DB에 사진 제목, 날짜, 설명과 함께 S3 경로 업로드
+		mq("UPDATE photosave SET	
+		title = '".$title."',
+		caption = '".$caption."',
+		folder = '".$folder."'
+		WHERE num = '".$num."'
+		");
+	}
+
+	
 ?>
 <form action="photos_delmode.php" method="get" name="move">
 	<input type="hidden" name="folder" value="<?=$folder?>">

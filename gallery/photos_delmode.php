@@ -59,7 +59,7 @@ $url = $s3->url;
 				?>
 			</div>
 			
-			<form class="grid-container m-4" id="photos" name="photos" action="photo_delete.php" method="post" enctype="multipart/form-data">
+			<form class="grid-container m-4" style="grid-template-rows: none;" id="photos" name="photos" action="photo_delete.php" method="post" enctype="multipart/form-data">
 				<!-- <button type="button" class="btn btn-sm" id="del_modal">사진 삭제하기</button> -->
 				<input type="hidden" name="folder" value="<?=$folder?>">
 
@@ -71,7 +71,7 @@ $url = $s3->url;
 					<!-- <a class="location-title" href="javascript:document.gotophotos.submit();"><?=$f['title']?></a> -->
 					<div class="location-image" data-num="<?=$f['num']?>" data-title="<?=$f['title']?>" data-cap="<?=$f['caption']?>">
 						<!-- <a href="javascript:document.gotophotos.submit();"> -->
-							<img width="300" height="169" src="<?=$url.$f['filepath']?>" alt="<?=$f['title']?>">
+							<img src="<?=$url.$f['filepath']?>" alt="<?=$f['title']?>">
 						<!-- </a> -->
 						<input type="checkbox" class="photo" name="photo[]" value="<?=$f['num']?>" style="z-index: 1;
 						position: absolute;
