@@ -61,7 +61,8 @@
                             <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$disc?>">토론</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$exp?>">경험 공유</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$info?>">정보 공유</a></li>
-                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$qna?>">Q & A</a></li>                            
+                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$qna?>">Q & A</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$talk?>">잡담</a></li>
                         </ul>
                     </li>                    
                 </ul>
@@ -81,6 +82,7 @@
                             <li><a href="/board/board_list.php?ctgr=<?=$finance?>&hp=<?=$exp?>">경험 공유</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$finance?>&hp=<?=$info?>">정보 공유</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$finance?>&hp=<?=$qna?>">Q & A</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$finance?>&hp=<?=$talk?>">잡담</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -114,6 +116,7 @@
                             <li><a href="/board/board_list.php?ctgr=<?=$languages?>&hp=<?=$exp?>">경험 공유</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$languages?>&hp=<?=$info?>">정보 공유</a></li>
                             <li><a href="/board/board_list.php?ctgr=<?=$languages?>&hp=<?=$qna?>">Q & A</a></li>
+                            <li><a href="/board/board_list.php?ctgr=<?=$languages?>&hp=<?=$talk?>">잡담</a></li>
                         </ul>
                     </li>
                 </ul>

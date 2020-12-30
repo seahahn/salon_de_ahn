@@ -117,7 +117,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 
                                     $post_count = 0;
                                     while($board = $sql2->fetch_array()){
-                                        include_once "../fragments/headpiece.php";
+                                        include "../fragments/headpiece.php";
                                         $title=$board["title"];
                                         /* 글자수가 60이 넘으면 ... 처리해주기 */
                                         if(strlen($title)>60){

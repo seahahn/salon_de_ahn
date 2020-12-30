@@ -16,20 +16,26 @@
 	$s3path = "audios/";
 	$bucket = $s3->bucket;
 
+	$query = mq("SELECT * FROM langrecord");
+	$exists = (mysqli_num_rows($query));
+	
+	if($exists == 0)	{
+		mq("ALTER TABLE langrecord AUTO_INCREMENT = 1"); // 게시판에 게시물 없는 경우 auto_increment 값 초기화
+	}
+
 	$filepath_array = array();		
 	
 	if($_FILES) {
-		echo '<script>console.log("작동확인");</script>';
 		if(count($_FILES['record']['name']) > 0 ) { 
 			$baseDownFolder = "../audios/";
 
 			for($i = 0; $i < count($_FILES['record']['name']); $i++){
 				// 실제 녹음 파일명 
-				$real_filename = $_FILES['record']['name'][$i]; 
+				$real_filename = $_FILES['record']['name'][$i];
 
 				// 녹음 파일 확장자 체크 
 				$nameArr = explode(".", $real_filename);
-				$extension = $nameArr[sizeof($nameArr) - 1]; 
+				$extension = $nameArr[sizeof($nameArr) - 1];
 
 				// 임시 녹음 파일명 (현재시간_랜덤수.파일 확장자) - 녹음 파일명 중복될 경우를 대비해 임시 녹음 파일명을 덧붙여 저장하려함 
 				$tmp_filename = time() . '_' . mt_rand(0,99999) . '.' . strtolower($extension); 
@@ -44,22 +50,31 @@
 				// 녹음 파일 언어 분류, 기록 분류, 기록명과 기록일
 				$lang = $_POST['lang'][$i];
 				switch ($lang) {
-					case '영어' :
+					case 'English' :
 						$lang_key = 'en';
 						break;
-					case '중국어' :
+					case 'Chinese' :
 						$lang_key = 'cn';
 						break;
-					case '러시아어' :
+					case 'Russian' :
 						$lang_key = 'ru';
 						break;
-					case '독일어' :
+					case 'German' :
 						$lang_key = 'ge';
 						break;
 				}
 				$ctgr = $_POST['ctgr'][$i];
-                $title = $_POST['title'][$i];
-				$date = $_POST['date'][$i];				
+				if($_POST['title'][$i] != '') {
+					$title = $_POST['title'][$i];
+				} else {
+					$real_filename = pathinfo($real_filename, PATHINFO_FILENAME); // 확장자 제외한 파일명만 기록명으로 씀
+					$title = $real_filename;
+				}
+				if($_POST['date'][$i] != '') {
+					$date = $_POST['date'][$i];	
+				} else {
+					$date = substr($real_filename, 0, 9);
+				}
 				
 				// $exist = $s3->exist($bucket, $s3path.$lang.'/'.$ctgr.'/');
 				// if(!$exist) {
@@ -77,6 +92,10 @@
 				filename_tmp = '".$tmp_filename."',
 				filepath = '".$s3path.$lang_key.'/'.$tmp_filename."'
 				");
+
+				if(!unlink($baseDownFolder.$tmp_filename)) {
+					echo "file delete failed.\n";
+				}
 			}			
 		}
 
@@ -103,9 +122,32 @@
                 
                 // 녹음 파일 언어 분류, 기록 분류, 기록명과 기록일
 				$lang = $_POST['langs'];
+				switch ($lang) {
+					case 'English' :
+						$lang_key = 'en';
+						break;
+					case 'Chinese' :
+						$lang_key = 'cn';
+						break;
+					case 'Russian' :
+						$lang_key = 'ru';
+						break;
+					case 'German' :
+						$lang_key = 'ge';
+						break;
+				}
 				$ctgr = $_POST['ctgrs'];
-                $title = $_POST['titles'];
-				$date = $_POST['dates'];
+				if($_POST['titles'] != '') { 
+					$title = $_POST['titles']; 
+				} else {
+					$real_filename = pathinfo($real_filename, PATHINFO_FILENAME); // 확장자 제외한 파일명만 기록명으로 씀
+					$title = $real_filename;
+				}
+				if($_POST['dates'] != '') {
+					$date = $_POST['dates'];
+				} else {
+					$date = substr($real_filename, 0, 9);
+				}
 
 				// $exist = $s3->exist($bucket, $s3path.$lang.'/'.$ctgr.'/');
 				// if(!$exist) {
@@ -123,6 +165,10 @@
 				filename_tmp = '".$tmp_filename."',
 				filepath = '".$s3path.$lang_key.'/'.$tmp_filename."'
 				");
+
+				if(!unlink($baseDownFolder.$tmp_filename)) {
+					echo "file delete failed.\n";
+				}
 			}			
 		}
 	}	

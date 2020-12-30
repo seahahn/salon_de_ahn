@@ -110,14 +110,14 @@
         <option value="backend" <?php if($sub_ctgr == 'backend') echo 'selected'?>>백엔드</option>
         <option value="ds" <?php if($sub_ctgr == 'ds') echo 'selected'?>>데이터 사이언스</option>
         <option value="bc" <?php if($sub_ctgr == 'bc') echo 'selected'?>>블록체인</option>
-        <option value="embed" <?php if($sub_ctgr == 'embed') echo 'selected'?>>임베디드</option>
+        <option value="embed" <?php if($sub_ctgr == 'embed') echo 'selected'?>>임베디드</option>        
     <?php } ?>
     <?php                
     if(strpos($category, "finance") !== false) { ?>
         <option value="none_subctgr" <?php if($sub_ctgr == '') echo 'selected'?> disabled>분류 선택</option>
-        <option value="stock" <?php if($sub_ctgr == 'stock') echo 'selected'?>>주식</option>
-        <option value="future" <?php if($sub_ctgr == 'future') echo 'selected'?>>선물</option>
-        <option value="option" <?php if($sub_ctgr == 'option') echo 'selected'?>>옵션</option>
+        <option value="stocks" <?php if($sub_ctgr == 'stocks') echo 'selected'?>>주식</option>
+        <option value="futures" <?php if($sub_ctgr == 'futures') echo 'selected'?>>선물</option>
+        <option value="options" <?php if($sub_ctgr == 'options') echo 'selected'?>>옵션</option>
         <option value="fx" <?php if($sub_ctgr == 'fx') echo 'selected'?>>외환</option>
     <?php } ?>
     <?php                
@@ -135,6 +135,7 @@
         <option value="now">현재</option>
         <option value="future">미래</option>
     <?php } ?>
+    <option value="etc" <?php if($sub_ctgr == 'etc') echo 'selected'?>>기타(etc)</option>
 </select>
 <select class="custom-select col" name="headpiece" id="headpiece">
     <option value="none_headpiece" <?php if($headpiece == '') echo 'selected'?> disabled>말머리</option>    
@@ -142,6 +143,7 @@
     <option value="exp" <?php if($headpiece == 'exp') echo 'selected'?>>경험 공유</option>
     <option value="info" <?php if($headpiece == 'info') echo 'selected'?>>정보 공유</option>
     <option value="qna" <?php if($headpiece == 'qna') echo 'selected'?>>Q & A</option>
+    <option value="talk" <?php if($headpiece == 'talk') echo 'selected'?>>잡담</option>
 </select>
 
 <!-- 게시물 대분류에 따른 소분류, 말머리 바꾸기-->

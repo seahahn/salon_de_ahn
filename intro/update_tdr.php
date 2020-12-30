@@ -109,6 +109,9 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td><input type="text" class="form-control" placeholder="종목명" name="item" id="item" value="<?=$board['item']?>" required="required"></td>
+                                                </tr>
+                                                <tr>
                                                     <td>
                                                         <div class="d-flex">
                                                             <span class="pos_input">진입 포인트 : </span><input type="text" class="form-control col mx-2" placeholder="진입 당시의 가격" value="<?=$board['in_pos']?>" name="in_pos" id="in_pos" required>
@@ -131,9 +134,6 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td><input type="text" class="form-control" placeholder="종목명" name="item" id="item" value="<?=$board['item']?>" required="required"></td>
-                                                </tr>                                                
                                                 <tr>
                                                     <td><textarea class="form-control" placeholder="글 내용" name="content" id="ucontent" style="height: 350px" required><?=$board['content']?></textarea></td>
                                                     <!-- <td><textarea id="summernote" name="content"><?=$board['content']?></textarea></td> -->
@@ -207,6 +207,17 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                 // Replace the <textarea id="editor1"> with a CKEditor 4
                 // instance, using default configuration.
                 CKEDITOR.replace( 'ucontent' );
+            </script>
+        <!-- 손익 자동 계산 기능 -->
+            <script>
+                $("#in_pos").on("propertychange change keyup paste input", function() {
+                    var pl = ($("#out_pos").val() - $("#in_pos").val()) / $("#in_pos").val() * 100;
+                    $("#pl").val(pl.toFixed(2));
+                });
+                $("#out_pos").on("propertychange change keyup paste input", function() {
+                    var pl = ($("#out_pos").val() - $("#in_pos").val()) / $("#in_pos").val() * 100;
+                    $("#pl").val(pl.toFixed(2));
+                });
             </script>
 
 	</body>

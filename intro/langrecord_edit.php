@@ -15,16 +15,16 @@ $rec_num = $_POST['edit_num'];
 
 $lang = $_POST['lang_input'];
 switch ($lang) {
-  case '영어' :
+  case 'English' :
     $lang_key = 'en';
     break;
-  case '중국어' :
+  case 'Chinese' :
     $lang_key = 'cn';
     break;
-  case '러시아어' :
+  case 'Russian' :
     $lang_key = 'ru';
     break;
-  case '독일어' :
+  case 'German' :
     $lang_key = 'ge';
     break;
 }
@@ -58,8 +58,7 @@ $sql2 = mq("UPDATE
                 lang_key = '".$lang_key."',
                 ctgr = '".$ctgr."',
                 title = '".$title."',
-                wdate = '".$date."',
-                filepath = '".$s3path.$lang_key.'/'.$tmp_filename."'
+                wdate = '".$date."'
                 WHERE
                 num='".$rec_num."'
         ");

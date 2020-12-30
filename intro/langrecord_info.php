@@ -13,6 +13,7 @@ $sql = mq("SELECT
 $rec = $sql->fetch_array();
 
 $ret['lang'] = $rec['lang'];
+$ret['lang_key'] = $rec['lang_key'];
 $ret['ctgr'] = $rec['ctgr'];
 $ret['title'] = $rec['title'];
 $ret['date'] = $rec['wdate'];

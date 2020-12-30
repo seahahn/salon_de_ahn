@@ -103,6 +103,9 @@ if($role != 'ADMIN') {
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td><input type="text" class="form-control" placeholder="종목명" name="item" id="item" required></td>
+                                                </tr>
+                                                <tr>
                                                     <td>
                                                         <div class="d-flex">
                                                             <span class="pos_input">진입 포인트 : </span><input type="text" class="form-control col mx-2" placeholder="진입 당시의 가격" name="in_pos" id="in_pos" required>
@@ -124,9 +127,6 @@ if($role != 'ADMIN') {
                                                             <span class="pos_input">손익 : </span><input type="text" class="form-control col mx-2" placeholder="% 또는 pips" name="pl" id="pl" required>
                                                         </div>
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="text" class="form-control" placeholder="종목명" name="item" id="item" required></td>
                                                 </tr>
                                                 <tr>	
                                                     <td><textarea class="form-control" placeholder="글 내용" name="content" id="ucontent" style="height: 350px" required></textarea></td>
@@ -221,6 +221,17 @@ if($role != 'ADMIN') {
                         closeText: '닫기',  // 닫기 버튼 패널
                         dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
                     });
+                });
+            </script>
+        <!-- 손익 자동 계산 기능 -->
+            <script>
+                $("#in_pos").on("propertychange change keyup paste input", function() {
+                    var pl = ($("#out_pos").val() - $("#in_pos").val()) / $("#in_pos").val() * 100;
+                    $("#pl").val(pl.toFixed(2));
+                });
+                $("#out_pos").on("propertychange change keyup paste input", function() {
+                    var pl = ($("#out_pos").val() - $("#in_pos").val()) / $("#in_pos").val() * 100;
+                    $("#pl").val(pl.toFixed(2));
                 });
             </script>
 	</body>

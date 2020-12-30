@@ -23,13 +23,13 @@ switch($board['sub_ctgr']) {
         $sub_ctgr = '임베디드';
         break;
 
-    case 'stock' :
+    case 'stocks' :
         $sub_ctgr = '주식';
         break;
-    case 'future' :
+    case 'futures' :
         $sub_ctgr = '선물';
         break;
-    case 'option' :
+    case 'options' :
         $sub_ctgr = '옵션';
         break;
     case 'fx' :
@@ -57,6 +57,10 @@ switch($board['sub_ctgr']) {
         break;
     case 'future' :
         $sub_ctgr = '미래';
+        break;
+
+    case 'etc' :
+        $sub_ctgr = '기타(etc)';
         break;
 }
 
@@ -93,6 +97,9 @@ switch($board['headpiece']) {
         break;
     case 'qna' :
         $headpiece = 'Q & A';
+        break;
+    case 'talk' :
+        $headpiece = '잡담';
         break;
 
     case 'idea' :

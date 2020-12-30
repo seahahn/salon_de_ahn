@@ -13,6 +13,11 @@ CKEDITOR.editorConfig = function( config ) {
 	config.enterMode = CKEDITOR.ENTER_BR;
 	config.font_names = '맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;' + config.font_names; 
 	config.filebrowserImageUploadUrl = '/image/imageUpload.php';
+	config.extraPlugins = 'uploadimage';
+	config.extraPlugins = 'uploadwidget';
+	config.extraPlugins = 'notificationaggregator';
+	config.extraPlugins = 'filetools';
+	config.extraPlugins = 'notification';
 
 	config.toolbarGroups = [
 		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },

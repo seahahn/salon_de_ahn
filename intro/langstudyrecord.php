@@ -30,6 +30,7 @@ $url = $s3->url;
 <html>
 	<head>
         <?php include_once "../fragments/head.php"; ?>             
+        <link rel="stylesheet" href="/assets/css/jquery-ui.css" />
         <!-- 파일 업로드 기능 -->            
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
         <script type="text/javascript">
@@ -40,19 +41,43 @@ $url = $s3->url;
                     <input type="file" accept="audio/*" class="col-8 btn-sm" id="fileUpload" name="record[]">\
                     <button type="button" class="btn-sm btnRemove">첨부 취소</button><br/>\
                     <div class="d-flex">\
-					<input type="text" class="form-control form-control-sm col" placeholder="언어" name="lang[]">\
-                    <input type="text" class="form-control form-control-sm col" placeholder="분류" name="ctgr[]">\
+                    <select class="custom-select col" name="lang[]">\
+                        <option selected disabled>언어</option>\
+                        <option value="English">영어</option>\
+                        <option value="Chinese">중국어</option>\
+                        <option value="Russian">러시아어</option>\
+                        <option value="German">독일어</option>\
+                    </select>\
+                    <select class="custom-select col" name="ctgr[]">\
+                        <option selected disabled>분류</option>\
+                        <option value="book">교재 녹음</option>\
+                        <option value="exam">시험 문제 답하기</option>\
+                        <option value="freetalk">자유 발화</option>\
+                    </select>\
                     <input type="text" class="form-control form-control-sm col" placeholder="기록명" name="title[]">\
-                    <input type="text" class="form-control form-control-sm col" placeholder="기록일" name="date[]">\
+                    <input type="text" class="form-control form-control-sm col date" placeholder="기록일" name="date[]">\
 					</div>\
                     </div>'
                 );
+                // <input type="text" class="form-control form-control-sm col" placeholder="언어" name="lang[]">\
+                // <input type="text" class="form-control form-control-sm col" placeholder="분류" name="ctgr[]">\
                 $(".btnRemove").on('click', function(){
                     // $(this).prev().remove();
                     // $(this).next().remove();
                     $(this).siblings().remove();
                     $(this).remove();
                 });                            
+                $( ".date" ).datepicker({  
+					nextText: '다음 달', // next 아이콘의 툴팁.
+					prevText: '이전 달', // prev 아이콘의 툴팁.
+					changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+					changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+					yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+					showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
+					currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
+					closeText: '닫기',  // 닫기 버튼 패널
+					dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				});
             });
 
             $("#filesAdd").click(function(){ // 사진 여러 장 업로드
@@ -61,13 +86,26 @@ $url = $s3->url;
 					<input type="file" accept="audio/*" class="col-8 btn-sm" id="filesUpload" name="records[]" multiple>\
 					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
 					<div class="d-flex">\
-					<input type="text" class="form-control form-control-sm col" placeholder="언어(여러 개 공통)" name="langs">\
-                    <input type="text" class="form-control form-control-sm col" placeholder="분류(여러 개 공통)" name="ctgrs">\
+                    <select class="custom-select col" name="langs" id="langs">\
+                        <option selected disabled>언어(여러 개 공통)</option>\
+                        <option value="English">영어</option>\
+                        <option value="Chinese">중국어</option>\
+                        <option value="Russian">러시아어</option>\
+                        <option value="German">독일어</option>\
+                    </select>\
+                    <select class="custom-select col" name="ctgrs">\
+                        <option selected disabled>분류(여러 개 공통)</option>\
+                        <option value="book">교재 녹음</option>\
+                        <option value="exam">시험 문제 답하기</option>\
+                        <option value="freetalk">자유 발화</option>\
+                    </select>\
                     <input type="text" class="form-control form-control-sm col" placeholder="기록명(여러 개 공통)" name="titles">\
-                    <input type="text" class="form-control form-control-sm col" placeholder="기록일(여러 개 공통)" name="dates">\
+                    <input type="text" class="form-control form-control-sm col date" placeholder="기록일(여러 개 공통)" name="dates">\
 					</div>\
 					</div>'
                 );
+                // <input type="text" class="form-control form-control-sm col" placeholder="언어(여러 개 공통)" name="langs">\
+                // <input type="text" class="form-control form-control-sm col" placeholder="분류(여러 개 공통)" name="ctgrs">\
                 $(".btnRemove").on('click', function(){
                     // $(this).prev().remove();
 					// $(this).next().remove();					
@@ -75,6 +113,17 @@ $url = $s3->url;
 					$(this).remove();
 					
                 });                            
+                $( ".date" ).datepicker({  
+					nextText: '다음 달', // next 아이콘의 툴팁.
+					prevText: '이전 달', // prev 아이콘의 툴팁.
+					changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+					changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+					yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+					showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
+					currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
+					closeText: '닫기',  // 닫기 버튼 패널
+					dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				});
             });
         });
         </script>
@@ -103,8 +152,21 @@ $url = $s3->url;
                                 <form name="edit" id="edit" action="langrecord_edit.php" method="POST">
                                     <input id="edit_num" name="edit_num" type="hidden" value="">
                                     <div class="d-flex">                                        
-                                        <input type="text" class="form-control form-control-sm col" placeholder="언어" name="lang_input" id="lang_input" value="">
-                                        <input type="text" class="form-control form-control-sm col" placeholder="분류" name="ctgr_input" id="ctgr_input" value="">
+                                        <!-- <input type="text" class="form-control form-control-sm col" placeholder="언어" name="lang_input" id="lang_input" value="">
+                                        <input type="text" class="form-control form-control-sm col" placeholder="분류" name="ctgr_input" id="ctgr_input" value=""> -->
+                                        <select class="custom-select col" name="lang_input">
+                                            <option selected disabled>언어</option>
+                                            <option value="English">영어</option>
+                                            <option value="Chinese">중국어</option>
+                                            <option value="Russian">러시아어</option>
+                                            <option value="German">독일어</option>
+                                        </select>
+                                        <select class="custom-select col" name="ctgr_input">
+                                            <option selected disabled>분류</option>
+                                            <option value="book">교재 녹음</option>
+                                            <option value="exam">시험 문제 답하기</option>
+                                            <option value="freetalk">자유 발화</option>
+                                        </select>
                                     </div>                                    
                                     <input type="text" class="form-control form-control-sm col" placeholder="기록명" name="title_input" id="title_input" value="">
                                     <input type="text" class="form-control form-control-sm col" placeholder="기록일" name="date_input" id="date_input" value="">
@@ -169,13 +231,14 @@ $url = $s3->url;
 
                                     // 게시물 목록 가져오기
                                     if(isset($lang)){
-                                        $sql2 = mq("SELECT * FROM langrecord WHERE lang_key='".$lang."' ORDER BY wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                        $sql2 = mq("SELECT * FROM langrecord WHERE lang_key='".$lang."' ORDER BY num DESC, wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
                                     } else {
-                                        $sql2 = mq("SELECT * FROM langrecord ORDER BY wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                        $sql2 = mq("SELECT * FROM langrecord ORDER BY num DESC, wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
                                     }
 
                                     $post_count = 0;
                                     while($board = $sql2->fetch_array()){
+                                        include "lsr_fragment.php";
                                         $title=$board["title"];
                                         /* 글자수가 50이 넘으면 ... 처리해주기 */
                                         if(strlen($title)>50){
@@ -198,8 +261,8 @@ $url = $s3->url;
                                             }
                                             ?>
                                             <td width="40" class="text-center align-middle"><?=$board['num'];?></td>
-                                            <td width="60" id="lang_<?=$board['num'];?>" value="<?=$board['lang'];?>" class="text-center align-middle" style="font-size: 1rem;"><?=$board['lang'];?></td>
-                                            <td width="80" id="ctgr_<?=$board['num'];?>" value="<?=$board['ctgr'];?>" class="text-center align-middle" style="font-size: 1rem;"><?=$board['ctgr'];?></td>
+                                            <td width="60" id="lang_<?=$board['num'];?>" class="text-center align-middle" style="font-size: 1rem;"><?=$langrc?></td>
+                                            <td width="80" id="ctgr_<?=$board['num'];?>" class="text-center align-middle" style="font-size: 1rem;"><?=$ctgr?></td>
                                             <td width="300" id="title_<?=$board['num'];?>" value="<?=$board['title'];?>" class="align-middle" style="font-size: 1rem;"><?=$title?></td>
                                             <td width="50" class="align-middle">
                                                 <audio class="" src="<?=$url.$board['filepath']?>" controls></audio>
@@ -301,7 +364,7 @@ $url = $s3->url;
                                 </nav>
 
                                 <!-- 페이징 하단 게시물 검색 -->
-                                <div class="row justify-content-center">
+                                <!-- <div class="row justify-content-center">
                                     <div id="search_box">
                                         <form action="search_result.php" method="get">
                                             <select class="custom-select" name="search_category" style="display: inline-block; width: 12%;">
@@ -309,11 +372,11 @@ $url = $s3->url;
                                                 <option value="writer">글쓴이</option>
                                                 <option value="content">내용</option>
                                             </select>
-                                            <input type="text" name="search" size="70" required="required" style="display: inline-block; width: 70%;">
+                                            <input type="text" name="search" size="70" placeholder="게시판 검색" required="required" style="display: inline-block; width: 70%;">
                                             <button type="submit" style="padding: 0.65em 2em 0.65em 2em;">검색</button>
                                         </form>
                                     </div>
-                                </div>
+                                </div> -->
 
 							</div>											
 						</div>																	
@@ -338,6 +401,7 @@ $url = $s3->url;
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
             <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+            <script src="/assets/js/jquery-ui.js"></script>
 
         <!-- Bootstrap Stripts-->
 			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
@@ -361,14 +425,23 @@ $url = $s3->url;
                             data : {
                                 "num" : num
                             },                            
-                            success : function(data){
-                                $("#lang_input").attr("value", data.lang);
-                                $("#ctgr_input").attr("value", data.ctgr);
+                            success : function(data){                                
                                 $("#title_input").attr("value", data.title);
                                 $("#date_input").attr("value", data.date);
                             }
                         });
-                        
+
+                        $( "#date_input" ).datepicker({  
+                            nextText: '다음 달', // next 아이콘의 툴팁.
+                            prevText: '이전 달', // prev 아이콘의 툴팁.
+                            changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+                            changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+                            yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+                            showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
+                            currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
+                            closeText: '닫기',  // 닫기 버튼 패널
+                            dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+                        });
                     });
                 });
             </script>

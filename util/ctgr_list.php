@@ -13,6 +13,7 @@ $disc = "disc";
 $exp = "exp";
 $info = "info";
 $qna = "qna";
+$talk = "talk";
 
 $daily_life = "daily_life";
 $daily_life_share = "daily_life_share";

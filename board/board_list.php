@@ -117,7 +117,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 
                                     $post_count = 0;
                                     while($board = $sql2->fetch_array()){
-                                        include_once "../fragments/headpiece.php";
+                                        include "../fragments/headpiece.php";
                                         $title=$board["title"];
                                         /* 글자수가 60이 넘으면 ... 처리해주기 */
                                         if(strlen($title)>60){
@@ -137,8 +137,8 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 
 									<tbody>                                        
 										<tr>                                                                                  
-                                            <td width="70" class="text-center"><?=$board['num'];?></td>
-                                            <td width="100" class="text-center" style="font-size: 1rem;"><?=$sub_ctgr;?></td>
+                                            <td width="70" class="text-center"><?=$board['num']?></td>
+                                            <td width="100" class="text-center" style="font-size: 1rem;"><?php if($board['sub_ctgr']) echo $sub_ctgr; ?></td>
                                             <td width="270">
                                             <!-- 비밀 글 가져오기 -->	 
                                             <?php 

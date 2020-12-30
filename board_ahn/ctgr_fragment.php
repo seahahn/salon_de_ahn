@@ -32,9 +32,9 @@
     <?php                
     if(strpos($category, "finance_usefulinfo") !== false) { ?>
         <option value="none_subctgr" <?php if($sub_ctgr == '') echo 'selected'?> disabled>분류 선택</option>
-        <option value="stock" <?php if($sub_ctgr == 'stock') echo 'selected'?>>주식</option>
-        <option value="future" <?php if($sub_ctgr == 'future') echo 'selected'?>>선물</option>
-        <option value="option" <?php if($sub_ctgr == 'option') echo 'selected'?>>옵션</option>
+        <option value="stocks" <?php if($sub_ctgr == 'stocks') echo 'selected'?>>주식</option>
+        <option value="futures" <?php if($sub_ctgr == 'futures') echo 'selected'?>>선물</option>
+        <option value="options" <?php if($sub_ctgr == 'options') echo 'selected'?>>옵션</option>
         <option value="fx" <?php if($sub_ctgr == 'fx') echo 'selected'?>>외환</option>
     <?php } ?>
     <?php                
