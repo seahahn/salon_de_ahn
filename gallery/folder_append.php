@@ -10,7 +10,7 @@ $url = $s3->url;
 $start = $_POST['start'];
 $list = $_POST['list'];
 
-$q = mq("SELECT * FROM photofolder WHERE num>0 ORDER BY num DESC LIMIT {$start}, {$list}");
+$q = mq("SELECT * FROM photofolder WHERE num>0 ORDER BY rcday DESC LIMIT {$start}, {$list}");
 while($f = mysqli_fetch_array($q)){
 ?>
     <article class="location-listing">
@@ -18,10 +18,12 @@ while($f = mysqli_fetch_array($q)){
             <input type="hidden" name="folder" value="<?=$f['title_key']?>">
         </form>
         <!-- <a class="location-title" href="photos.php?folder=<?=$f['title']?>"><?=$f['title']?></a> -->
-        <a class="location-title" href="javascript:document.gotophotos_<?=$f['title_key']?>.submit();"><?=$f['title']?></a>
-        <div class="location-image" data-num="<?=$f['num']?>">
-            <a href="javascript:document.gotophotos.submit();">
-                <img width="300" height="169" src="<?=$url.$f['thumb']?>" alt="<?=$f['title']?>">
+        <a class="location-title text-center" href="javascript:document.gotophotos_<?=$f['title_key']?>.submit();"><?=$f['title']?></a>
+        <div class="location-image h-100" data-num="<?=$f['num']?>" data-title="<?=$f['title']?>" data-day="<?=$f['rcday']?>" data-cap="<?=$f['caption']?>" data-thumb="<?=$f['thumb']?>">
+            <a style="vertical-align:middle;" href="javascript:document.gotophotos_<?=$f['title_key']?>.submit();">
+                <img src="<?=$url.$f['thumb']?>" alt="<?=$f['title']?>" style="height: 100%;
+                width: 100%;
+                object-fit: cover;">
             </a>
             <?php if($role == 'ADMIN') {
             echo '<button class="btn del_album" style="z-index: 1;
@@ -51,8 +53,15 @@ while($f = mysqli_fetch_array($q)){
     /* 사진첩 수정 이벤트 */
     $(".edit_album").click(function(){
         num = $(this).parent().data("num");
-        console.log(num);
+        title = $(this).parent().data("title");
+        day = $(this).parent().data("day");
+        cap = $(this).parent().data("cap");
+        thumb = $(this).parent().data("thumb");
         $("#album_no_edit").attr("value", num);
+        $("#title_edit").attr("value", title);
+        $("#rcday_edit").attr("value", day);
+        $("#caption_edit").attr("value", cap);
+        $("#thumb_edit").attr("value", thumb);
         $("#album_modal_edit").modal();
     });
 </script>

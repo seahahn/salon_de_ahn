@@ -69,7 +69,7 @@ $url = $s3->url;
 				?>			
 				<article class="location-listing">
 					<!-- <a class="location-title" href="javascript:document.gotophotos.submit();"><?=$f['title']?></a> -->
-					<div class="location-image" data-num="<?=$f['num']?>">
+					<div class="location-image" data-num="<?=$f['num']?>" data-title="<?=$f['title']?>" data-cap="<?=$f['cap']?>">
 						<!-- <a href="javascript:document.gotophotos.submit();"> -->
 							<img width="300" height="169" src="<?=$url.$f['filepath']?>" alt="<?=$f['title']?>">
 						<!-- </a> -->
@@ -129,8 +129,8 @@ $url = $s3->url;
 									<input type="hidden" name="photo_no_edit" id="photo_no_edit" value="">
 									<input type="file" accept="image/*" class="col-8 btn-sm" id="photoEdit" name="photoEdit[]">
 									<div class="d-flex flex-wrap">
-									<input type="text" class="form-control form-control-sm col-12 mb-1" placeholder="제목" name="title[]">									
-									<input type="text" class="form-control form-control-sm col-12 mb-1" placeholder="설명" name="caption[]">
+									<input type="text" class="form-control form-control-sm col-12 mb-1" placeholder="제목" id="title_edit" name="title[]">									
+									<input type="text" class="form-control form-control-sm col-12 mb-1" placeholder="설명" id="caption_edit" name="caption[]">
 									<!-- <input type="text" class="form-control form-control-sm col-12 mb-1" placeholder="사진첩" name="folder[]"> -->
 									<span class="col-4">사진첩 선택 :</span><select class="custom-select col-8" name="folder" id="folder">
 										<?php
@@ -188,7 +188,11 @@ $url = $s3->url;
 				/* 사진첩 수정 이벤트 */
 				$(".edit_photo").click(function(){
 					num = $(this).parent().data("num");
+					title = $(this).parent().data("title");
+					cap = $(this).parent().data("cap");
 					$("#photo_no_edit").attr("value", num);
+					$("#title_edit").attr("value", title);
+					$("#caption_edit").attr("value", cap);
 					$("#photo_modal_edit").modal();
 				});
 			</script>

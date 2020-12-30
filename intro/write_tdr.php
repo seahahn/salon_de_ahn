@@ -196,17 +196,8 @@ if($role != 'ADMIN') {
                 CKEDITOR.replace( 'ucontent' );
             </script>
 
-        <!-- 게시판 분류 선택 여부 검증 후 선택 안했으면 alert 띄우기 -->
+        <!-- 진입/청산일 날짜 선택 기능 -->
             <script>
-                // function check_ctgr(){
-                //     if($("#category").val() == "none_category"){                        
-                //         alert("게시판 분류를 선택해주세요.");
-                //         return;
-                //     }
-
-                //     document.write.submit();
-                // }
-
                 $(function() {
                     $( "#in_date" ).datepicker({  
                         nextText: '다음 달', // next 아이콘의 툴팁.

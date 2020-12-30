@@ -12,9 +12,18 @@
 	}
 
 	$s3 = new aws_s3;
+
+	// 사진첩 고유 번호와 제목, 날짜, 설명
+	$num = $_POST['album_no_edit'];
+	$title = $_POST['title'];
+	$q = mq("SELECT * FROM photofolder WHERE num = '".$num."'");
+	$f = mysqli_fetch_array($q);
+	$title_key = $f['title_key'];
+	$rcday = $_POST['rcday'];
+	$caption = $_POST['caption'];
 	
-	$filepath_array = array();
-	if($_FILES) {
+	// $filepath_array = array();
+	if(!$_FILES['folderEdit']['name'][0] == '') {
 		if(count($_FILES['folderEdit']['name']) > 0 ) { 
 			$baseDownFolder = "../image/";
 
@@ -38,17 +47,6 @@
 
 				// 파일 권한 변경 (생략가능_추후 변경할 수 있게 권한 변경함) 
                 chmod($baseDownFolder.$tmp_filename, 0755);
-                
-				// 사진첩 고유 번호와 제목, 날짜, 설명
-				$num = $_POST['album_no_edit'];
-				$title = $_POST['title'][$i];
-				$q = mq("SELECT * FROM photofolder WHERE num = '".$num."'");
-				$f = mysqli_fetch_array($q);
-				$title_key = $f['title_key'];
-				$rcday = $_POST['rcday'][$i];
-				$caption = $_POST['caption'][$i];
-				echo $num;
-				print_r($f);
 				
 				// S3에 파일 업로드
 				$s3path = "albumThumbnails/";
@@ -75,6 +73,13 @@
 			}			
 		}
 	}	
+
+	mq("UPDATE photofolder SET				
+                title = '".$title."',
+				rcday = '".$rcday."',
+                caption = '".$caption."'
+				WHERE num = '".$num."'
+				");
 ?>
 	<script>
 		alert("사진첩 수정 완료");

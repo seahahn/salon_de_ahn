@@ -20,12 +20,12 @@
 
 			for($i = 0; $i < count($_FILES['folders']['name']); $i++){
 				// 실제 파일명 
-				$real_filename = $_FILES['folders']['name'][$i]; 
+				$real_filename = $_FILES['folders']['name'][$i];
 
 				// 파일 확장자 체크 
 				$nameArr = explode(".", $real_filename);
-				$extension = $nameArr[sizeof($nameArr) - 1]; 
-
+				$extension = $nameArr[sizeof($nameArr) - 1];
+				
 				// 임시 파일명 (현재시간_랜덤수.파일 확장자) - 파일명 중복될 경우를 대비해 임시파일명을 덧붙여 저장하려함 
 				$tmp_filename = time() . '_' . mt_rand(0,99999) . '.' . strtolower($extension); 
 
@@ -42,6 +42,7 @@
                 // 사진첩 제목과 날짜, 설명
 				$title = $_POST['title'][$i];
 				$title_key = str_replace(" ", "_", $_POST['title_key'][$i]);
+				$title_key = str_replace(".", "_", $title_key);
 				$rcday = $_POST['rcday'][$i];
 				$caption = $_POST['caption'][$i];
 				
