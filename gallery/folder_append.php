@@ -28,13 +28,13 @@ while($f = mysqli_fetch_array($q)){
             <?php if($role == 'ADMIN') {
             echo '<button class="btn del_album" style="z-index: 1;
             position: absolute;
-            top: 0px;
-            right: 0px;
+            top: 0;
+            right: 0;
             font-size: 2rem;">X</button>
             <button class="btn edit_album" style="z-index: 1;
             position: absolute;
-            top: 0px;
-            right: 15%;
+            top: 0;
+            left: 0;
             font-size: 2rem;">수정</button>';
             } ?>
         </div>        

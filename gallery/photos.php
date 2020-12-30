@@ -238,7 +238,7 @@ if(mysqli_num_rows($q) != 0) {
 				$( window ).resize( function () {
 					// 창 사이즈 변경 시 위아래 이미지 사이 간격 다시 계산하여 재배치함
 					resizeAllMasonryItems();
-				})
+				});
 			</script>
 			<script src="gal_assets/unpkg.js"></script>
 			<script src="gal_assets/masonry.js"></script>

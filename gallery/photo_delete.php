@@ -34,7 +34,7 @@ if($role != 'ADMIN') {
             ");
   }
 ?>
-<form action="photos.php" method="post" name="move">
+<form action="photos_delmode.php" method="get" name="move">
 	<input type="hidden" name="folder" value="<?=$folder?>">
 </form>
 <script>
