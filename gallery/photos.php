@@ -13,21 +13,17 @@ $album_q = mq("SELECT * FROM photofolder WHERE title_key = '".$folder."'");
 $album = mysqli_fetch_array($album_q); // 사진첩 이름과 함께 설명을 불러오기 위함
 $q = mq("SELECT * FROM photosave WHERE folder = '".$folder."'");
 if(mysqli_num_rows($q) != 0) {
-	$row = mysqli_num_rows($q); // 해당 사진첩의 사진 총 갯수 불러오기
+	$total = mysqli_num_rows($q); // 해당 사진첩의 사진 총 갯수 불러오기
 } else {
 	$row = 0; // 없으면 올린 사진 없다는 문구가 화면 중앙에 나오도록 함
 }
-
-// $s3 = new aws_s3;
-// $bucket = $s3->bucket;
-// $url = $s3->url;
 ?>
 <!DOCTYPE HTML>
 <html>
 	<head>
 		<link rel="stylesheet" href="gal_assets/style.css">
-		<?php include_once "../fragments/head.php"; ?>
-		<link rel="stylesheet" href="/assets/css/jquery-ui.css" />		
+		<?php include_once "../fragments/head.php"; ?>		
+		<!-- <link rel="stylesheet" href="/assets/css/jquery-ui.css" /> -->
 
 		<!-- 사진 업로드 기능 -->            
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
@@ -112,7 +108,7 @@ if(mysqli_num_rows($q) != 0) {
 				<?php
 				$q = mq("SELECT * FROM photosave WHERE folder='".$folder."' ORDER BY num ASC LIMIT 10");
 				if(mysqli_num_rows($q) != 0) {
-					$row = mysqli_num_rows($q); // 해당 사진첩의 사진 총 갯수 불러오기
+					$row = mysqli_num_rows($q); // 해당 사진첩의 사진 10개까지만 불러오기
 				} else {
 					$row = 0;
 				}
@@ -197,7 +193,7 @@ if(mysqli_num_rows($q) != 0) {
 
 		<!-- 사진 더보기 버튼 동작 이벤트-->
 			<script>
-				if(11 < <?=$row?>) {
+				if(11 < <?=$total?>) {
 					$('#loadmore').css("display", "block"); // 다 불러왔으면 더보기 버튼 안 보이게 만듦				
 				}
 
@@ -205,7 +201,7 @@ if(mysqli_num_rows($q) != 0) {
 				<?php
 				$q = mq("SELECT * FROM photosave WHERE folder='".$folder."' ORDER BY num ASC LIMIT 11, 99999");
 				if(mysqli_num_rows($q) != 0) {
-					$row = mysqli_num_rows($q); // 해당 사진첩의 사진 총 갯수 불러오기
+					$row = mysqli_num_rows($q); // 해당 사진첩의 사진 11번째부터 나머지 다 불러오기
 				} else {
 					$row = 0;
 				}
@@ -221,9 +217,9 @@ if(mysqli_num_rows($q) != 0) {
 				?>
 				var i = 0;
 				var limit = 10;
-
+				
 				function append_list() {
-						while(i < limit) {					
+						while(i < limit) {
 							$('#pt_section').append( $(items[i]) );
 							i++;
 							if(i >= items.length) {
@@ -238,8 +234,15 @@ if(mysqli_num_rows($q) != 0) {
 			</script>
 			
 		<!-- 사진 불러오기 & 사진 확대 창 띄우는 스크립트-->
+			<script>
+				$( window ).resize( function () {
+					// 창 사이즈 변경 시 위아래 이미지 사이 간격 다시 계산하여 재배치함
+					resizeAllMasonryItems();
+				})
+			</script>
 			<script src="gal_assets/unpkg.js"></script>
 			<script src="gal_assets/masonry.js"></script>
 			<script src="gal_assets/photo_lightbox.js?ver=2"></script>
+			
 	</body>
 </html>

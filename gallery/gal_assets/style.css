@@ -3,7 +3,7 @@
  * Reference: http://meyerweb.com/eric/tools/css/reset/
  */
 
-html, body, div, span, applet, object, iframe,
+/* html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -59,14 +59,14 @@ a {
 
 code, pre, samp {
   font-family: monospace;
-}
+} */
 
 /**
  * BASIC TYPE
  */
 
-img, video {
-  max-width: 100%;
+/* img, video {
+  max-width: 100%;  
   vertical-align: middle;
 }
 
@@ -93,13 +93,13 @@ h3 {
 
 h4 {
   font-size: 1em;
-}
+} */
 
 /**
  * BOX HACKING
  */
 
-html {
+/* html {
   box-sizing: border-box;
 }
 
@@ -123,31 +123,48 @@ body {
   max-width: 960px;
   margin-right: auto;
   margin-left: auto;
-}
+} */
 .masonry {
   display: grid;
-  grid-template-columns: repeat(1, minmax(100px,1fr));
+  grid-template-columns: repeat(1, minmax(100%,1fr));
   grid-gap: 5px;
   grid-auto-rows: 0;
 }
-@media only screen and (max-width: 1023px) and (min-width: 768px) {
+@media only screen and (max-width: 840px) and (min-width: 737px) {
   .masonry {
-    grid-template-columns: repeat(2, minmax(100px,1fr));
+    grid-template-columns: repeat(2, minmax(50%,1fr));
   }
 }
-@media only screen and (min-width: 1024px) {
+@media only screen and (max-width: 1280px) and (min-width: 841px) {
   .masonry {
-    grid-template-columns: repeat(5, minmax(100px,1fr));
+    grid-template-columns: repeat(3, minmax(33.333333%,1fr));
+  }
+}
+@media only screen and (max-width: 1680px) and (min-width: 1281px) {
+  .masonry {
+    grid-template-columns: repeat(4, minmax(25%,1fr));
+  }
+}
+@media only screen and (min-width: 1681px) {
+  .masonry {
+    grid-template-columns: repeat(5, minmax(20%,1fr));
   }
 }
 .masonry-item, .masonry-content {
   border-radius: 5px;
   overflow: hidden;
-  cursor: pointer;
+  cursor: pointer;  
+  height: fit-content !important;
+}
+.masonry-content {
+  height: auto !important;
+  max-width: 100%;
 }
 .masonry-item {
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, .3));
   transition: filter .25s ease-in-out;
+  /* height: fit-content !important;
+  width: fit-content !important; */
 }
 .masonry-item:hover {
   filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, .3));

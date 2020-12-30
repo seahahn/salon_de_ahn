@@ -29,7 +29,7 @@ function resizeMasonryItem(item){
     var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
 
     /* Set the spanning as calculated above (S) */
-    item.style.gridRowEnd = 'span '+rowSpan;
+    item.style.gridRowEnd = 'span '+rowSpan;    
     if(gridImagesAsContent) {
       item.querySelector('img.masonry-content').style.height = item.getBoundingClientRect().height + "px";
     }
@@ -54,7 +54,7 @@ function resizeAllMasonryItems(){
    * each list-item (i.e. each masonry item)
    */
   if( allItems ) {
-    for(var i=0;i>allItems.length;i++){
+    for(var i=0;i<allItems.length;i++){
       resizeMasonryItem(allItems[i]);
     }
   }
