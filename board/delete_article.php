@@ -1,5 +1,6 @@
 <?php
-	include "../db_con.php";
+	include_once "../util/config.php";
+	include_once "../db_con.php";
 	include_once "../s3.php";
 	$s3 = new aws_s3;
 	$s3path = "board_files/";
@@ -10,6 +11,16 @@
 	$sql = mq("SELECT * FROM board WHERE num = '".$bno."'");
 	$fetch = ($sql->fetch_array());	
 	$category = $fetch['category'];
+	$board_class = $fetch['board_class'];
+
+	if($board_class == "private" && $role != "ADMIN"){
+        echo '
+        <script>
+            alert("관리자만 작성 가능합니다.");
+            history.go(-1);
+		</script>';
+		return;
+    }
 
 	$sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");
 	while($row = mysqli_fetch_assoc($sql)){
@@ -35,4 +46,14 @@
 	<script>
 		alert("삭제되었습니다.");
 	</script>
+<?php
+	if($board_class == "private"){
+?>
+	<meta http-equiv="refresh" content="0 url=../board_ahn/board_list.php?ctgr=<?=$category?>">
+<?php
+	} else {
+?>
 	<meta http-equiv="refresh" content="0 url=./board_list.php?ctgr=<?=$category?>">
+<?php
+	}
+?>

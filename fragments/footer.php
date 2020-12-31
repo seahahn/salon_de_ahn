@@ -83,6 +83,7 @@ $lockimg="※";
         </div>
 
     </div>
+    <?php include_once "../fragments/tbbtn.php" ?>
 </div>
 
 <!-- 비밀 글 모달창 양식 구현-->

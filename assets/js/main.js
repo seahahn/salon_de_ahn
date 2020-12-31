@@ -215,3 +215,13 @@
 		});
 
 })(jQuery);
+
+var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+$( '#tothetop' ).on('click', function() {
+	var htmloffset = $( 'html' ).offset();
+	$( 'html, body' ).animate( { scrollTop : htmloffset.top }, 400 );
+});
+$( '#tothebtm' ).on('click', function() {
+	var htmloffset = $( 'html' ).offset();
+	$( 'html, body' ).animate( {scrollTop: $(document).height() + $(window).height() - $("#footer").height()}, 400 );
+});

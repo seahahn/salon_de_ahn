@@ -51,39 +51,11 @@
                 <!-- 비밀 글 모달창 구현 끝-->
 
 			<!-- Main -->
-				<!-- <div class="wrapper style1"> -->
-					<div class="container">			
-                        <!-- <div class="row">
-							<nav class="navbar navbar-expand-lg navbar-light bg-light flex-fill">
-								<a class="col navbar-brand" href="#">카테고리 목록</a>
-								<button class="col-3 navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-									aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-							
-								<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-										<li class="nav-item">
-											<a class="nav-link" href="#">글 목록 <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#">의견/정보 공유</a>
-										</li>										
-									</ul>
-									<form class="form-inline my-2 my-lg-0">
-										<input class="form-control mr-sm-2" type="search" placeholder="Search">
-										<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-									</form>
-								</div>
-							</nav>
-						</div>									 -->
-                        <br/>                       
+					<div class="container">
+                        <br/>
 
 						<div class="row"> <!-- 메인 글 영역-->
                             <div class="col" id="board_area">
-
-
-
                             <!-- 출력을 위해서 form의 title, name, content 값을 제목, 글쓴이, 내용으로 변경하기 위한 조건문 -->
                                 <?php 
                                     if($search_category == 'title'){
@@ -161,14 +133,14 @@
                                                 ");
 
                                         while($board = $sql2->fetch_array()){
-                                            include_once "../fragments/headpiece.php";
+                                            include "../fragments/headpiece.php";
                                             $title=$board["title"];
                                             /* 글자수가 30이 넘으면 ... 처리해주기 */
                                             if(strlen($title)>30){
                                                 $title=str_replace($board["title"],mb_substr($board["title"],0,30,"utf-8")."...",$board["title"]);
                                             }
 
-                                            if($board["board_class"] == "public"){
+                                            // if($board["board_class"] == "public"){
                                                 $sql3 = mq("SELECT 
                                                             * 
                                                         FROM 
@@ -177,16 +149,16 @@
                                                             con_num='".$board['num']."'
                                                     ");
                                                 $rep_count = mysqli_num_rows($sql3);
-                                            } else if($board["board_class"] == "private") {
-                                                $sql3 = mq("SELECT 
-                                                            * 
-                                                        FROM 
-                                                            reply_ahn
-                                                        WHERE 
-                                                            con_num='".$board['num']."'
-                                                    ");
-                                                $rep_count = mysqli_num_rows($sql3);
-                                            }
+                                            // } else if($board["board_class"] == "private") {
+                                            //     $sql3 = mq("SELECT 
+                                            //                 * 
+                                            //             FROM 
+                                            //                 reply_ahn
+                                            //             WHERE 
+                                            //                 con_num='".$board['num']."'
+                                            //         ");
+                                            //     $rep_count = mysqli_num_rows($sql3);
+                                            // }
                                     ?>
 
 									<tbody>

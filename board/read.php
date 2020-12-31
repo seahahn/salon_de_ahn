@@ -65,7 +65,8 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 			<!-- Main -->
 				<!-- <div class="wrapper style1"> -->
 					<div class="container">
-                        <br/>                       
+                        
+                        <br/>
                         <?php include_once "./ctgr_explain.php" ?>
 						<div class="row"> <!-- 메인 글 영역-->
 							<div class="col" id="content">
@@ -310,7 +311,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                     $("#rep_btn").click(function(){
                         if(session == "") {
                             alert('로그인 후 이용해주세요!');
-                            location.href='/login/login.php';
+                            location.href='/member/login.php';
                             return;
                         }
                         $('#rep_con_new').val().replace(/\n/g, "<br>");
@@ -359,7 +360,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                     $(".dat_ans_btn").click(function(){ // 사용자가 선택한 댓글의 답글 쓰기 버튼                        
                         if(session == "") {
                             alert('로그인 후 이용해주세요!');
-                            location.href='/login/login.php';
+                            location.href='/member/login.php';
                             return;
                         }
 

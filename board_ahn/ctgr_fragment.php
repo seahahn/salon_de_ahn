@@ -1,12 +1,3 @@
-
-<?php
-    // if(isset($_POST['category'])){ // 글 읽기 상태에서 글쓰기 누른 경우. 읽던 글의 카테고리 선택하게 함
-    //     $category = $_POST['category'];
-    // }
-    // if(isset($_POST['num'])) {
-    //     $category = $_POST['category'];
-    // }
-?>    
 <select class="custom-select col-8 mr-2" name="category" id="category" onchange="itemChange()">
     <option value="none_category" disabled>게시판 분류</option> <!-- 마이페이지 내가 쓴 글 목록에서 글쓰기 누른 경우는 이게 초기값으로 지정됨(해당되는 카테고리가 없기 때문)-->
     <option disabled>- IT 개발 -</option>        

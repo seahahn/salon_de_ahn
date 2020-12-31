@@ -1,7 +1,7 @@
 <?php
 include_once "../util/config.php";
 include_once "../db_con.php";
-include_once "../login/login_check.php";
+include_once "../member/login_check.php";
 
 $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
 	/* 받아온 num값을 선택해서 게시글 정보 가져오기 */
@@ -17,6 +17,14 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
     $depth = $board['depth']; // 1 이상이면 답글임. 답글인 경우 카테고리 고정을 위해서 정보 가져옴
     $sub_ctgr = $board['sub_ctgr'];
     $headpiece = $board['headpiece'];
+    $board_class = $board['board_class'];
+    if($board_class == "private" && $role != "ADMIN"){
+        echo '
+        <script>
+            alert("관리자만 작성 가능합니다.");
+            history.go(-1);
+        </script>';
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -87,7 +95,15 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex">                                                        
-                                                            <?php include_once "./ctgr_fragment.php"; ?>                                                        
+                                                            <?php
+                                                            if($board['board_class'] == "public") {
+                                                                echo '<script>console.log("public");</script>';
+                                                                include_once "./ctgr_fragment.php";
+                                                            } else {
+                                                                echo '<script>console.log("private");</script>';
+                                                                include_once "../board_ahn/ctgr_fragment.php";
+                                                            }
+                                                            ?>
                                                         </div>
                                                     </td>
                                                 </tr>

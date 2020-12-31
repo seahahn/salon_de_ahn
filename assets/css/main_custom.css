@@ -3139,3 +3139,7 @@ input, select, textarea {
 					}
 
 	}
+
+	/* TOP, BOTTOM 버튼 */
+#tothetop { position: fixed; bottom: 7rem; right: 3rem; cursor: pointer; z-index:10; }
+#tothebtm { position: fixed; bottom: 2rem; right: 3rem; cursor: pointer; z-index:10; }

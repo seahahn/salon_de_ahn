@@ -30,10 +30,7 @@
         <?php }?>        
 
         <?php                                                                
-        } else if(isset($_GET['num'])) { // 글 읽기 상태에서 답글 누른 경우. 읽던 글의 카테고리 선택 후 고정되게 함            
-        ?>
-        <!-- <option selected value="<?=$category?>"><?=$category?></option> -->        
-        <?php
+        } else if(isset($_GET['num'])) { // 글 읽기 상태에서 답글 누른 경우. 읽던 글의 카테고리 선택 후 고정되게 함
         $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
         /* 받아온 num값을 선택해서 게시글 정보 가져오기 */
         $sql = mq("SELECT 
@@ -44,7 +41,7 @@
                         num='$bno'
                 ");
         $board = $sql->fetch_array();	
-        $category = $board['category'];                        
+        $category = $board['category'];
             switch ($category){
                 case 'it_dev': 
         ?>            
@@ -69,37 +66,7 @@
             }
         ?>                                                                
         <?php
-        } 
-        // else { // 그 외 경우. ex) 마이페이지 내가 쓴 글 목록에서 글쓰기 누른 경우 등
-        ?>
-        <!-- // <option selected>게시판 분류</option>
-        // <option disabled>- IT 개발 -</option>
-        // <option value="it_dev_learnings">IT - 학습 내용</option>
-        // <option value="it_dev_usefulinfo">IT - 유용한 정보</option>
-        // <option value="it_dev_discussion">IT - 토론</option>
-        // <option value="it_dev_recordshare">IT - 경험 공유</option>
-        // <option value="it_dev_infoshare">IT - 정보 공유</option>
-        // <option value="it_dev_qna">IT - Q & A</option>
-        // <option disabled></option>
-        // <option disabled>- 금융 -</option>
-        // <option value="finance_usefulinfo">금융 - 유용한 정보</option>
-        // <option value="finance_discussion">금융 - 토론</option>
-        // <option value="finance_recordshare">금융 - 경험 공유</option>
-        // <option value="finance_infoshare">금융 - 정보 공유</option>
-        // <option value="finance_qna">금융 - Q & A</option>
-        // <option disabled></option>
-        // <option disabled>- 언어 학습 -</option>
-        // <option value="languages_usefuldata">언어 학습 - 학습 자료</option>
-        // <option value="languages_discussion">언어 학습 - 토론</option>
-        // <option value="languages_recordshare">언어 학습 - 경험 공유</option>
-        // <option value="languages_infoshare">언어 학습 - 정보 공유</option>
-        // <option value="languages_qna">언어 학습 - Q & A</option>
-        // <option disabled></option>
-        // <option disabled>- 일상 -</option>
-        // <option value="daily_life">일상 기록</option>
-        // <option value="daily_life_share">자유 주제 글</option>         -->
-        <?php
-        // }
+        }
         ?>
     </select>
     <select class="custom-select col mr-2" name="sub_ctgr" id="sub_ctgr">        

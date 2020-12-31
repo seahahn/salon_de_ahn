@@ -1,6 +1,6 @@
 <?php
 include_once "../util/config.php";
-include_once "../login/login_check.php";
+include_once "../member/login_check.php";
 
 $session = $usernickname;
 ?>

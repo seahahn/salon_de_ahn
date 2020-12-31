@@ -48,8 +48,7 @@ include_once "../fragments/headpiece.php";
 -->
 <html>
 	<head>
-        <?php include_once "../fragments/head.php"; ?>
-        <!-- <link rel="stylesheet" href="/bootstrap/bootstrap_custom.css"/> -->        
+        <?php include_once "../fragments/head.php"; ?>        
 	</head>
 	<body class="right-sidebar is-preload">
 		<div id="page-wrapper">
@@ -60,223 +59,224 @@ include_once "../fragments/headpiece.php";
 				</div>
 
 			<!-- Main -->
-				<!-- <div class="wrapper style1"> -->
-					<div class="container">                        
-                        <br/>                       
-                        <?php include_once "./ctgr_explain.php" ?>
-						<div class="row"> <!-- 메인 글 영역-->
-							<div class="col" id="content">
-                                <!-- 글 내용 영역 -->								
-                                <!-- 글 불러오기 -->
-                                <div id="board_read">
-                                    <h3>[<?=$sub_ctgr.' - '.$headpiece?>] <?=$board['title']?></h3>
-                                    <div><?=$board['writer']?></div>
-                                    <div class="row justify-content-start">                                        
-                                        <div class="col-2"><?=$board['wdate']?></div>
-                                        <div class="co1-1">조회 <?=$views?></div>
-                                    </div>
+                <div class="container">
+                    
+                    <br/>                       
+                    <?php include_once "./ctgr_explain.php" ?>
+                    <!-- 메인 글 영역 -->
+                    <!-- <div class="row"> -->
+                        <div class="d-flex flex-column">
+                            <!-- 글 내용 영역 -->								
+                            <!-- 글 불러오기 -->
+                            <!-- <div class="row" id="board_read"> -->
+                                <h3>[<?=$sub_ctgr.' - '.$headpiece?>] <?=$board['title']?></h3>
+                                <p><?=$board['writer']?></p>
+                                <div class="d-flex justify-content-start">                                        
+                                    <div class="mr-3"><?=$board['wdate']?></div>
+                                    <div class="">조회 <?=$views?></div>
+                                </div>
 
-                                    <table class="table table-striped" style="text-align: center; border: 1px solid #ddddda; min-height: 200px;">
-                                        <thead>                                                                                                                                    
-                                        </thead>	
-                                        <tbody>                                                                                      
-                                            <tr>                                                
-                                                <td colspan="2" style="min-height: 200px; text-align: left;"><?=$board['content']?></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="row justify-content-start">
-                                                    <p class="col-12" style="margin-bottom: 0px;"><b>첨부파일 목록</b></p>
-                                                    <?php
-                                                        $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");
-                                                        while($row = mysqli_fetch_assoc($sql)){
-                                                            $filepath_array = unserialize($row['att_file']);
-                                                        }                                                        
+                                <table class="table table-striped" style="word-break:break-all; text-align: center; border: 1px solid #ddddda; min-height: 200px;">
+                                    <thead>                                                                                                                                    
+                                    </thead>	
+                                    <tbody>                                                                                      
+                                        <tr>                                                
+                                            <td colspan="2" style="min-height: 200px; text-align: left;"><?=$board['content']?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex flex-column justify-content-start">
+                                                <p class="col" style="margin-bottom: 0px;"><b>첨부파일 목록</b></p>
+                                                <?php
+                                                    $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");
+                                                    while($row = mysqli_fetch_assoc($sql)){
+                                                        $filepath_array = unserialize($row['att_file']);
+                                                    }                                                        
+                                                    
+                                                    for($i=0; $i<count($filepath_array);$i++){
+                                                        $filename_result = mq("SELECT * FROM filesave WHERE filepath='".$filepath_array[$i]."'");                                                            
+                                                        $fetch = mysqli_fetch_array($filename_result);                                                            
+                                                        $filename_real = $fetch['filename_real'];     
+                                                        $filename_tmp = $fetch['filename_tmp'];
+                                                        $filepath = $fetch['filepath'];
+                                                        $filename = str_replace(" ","_", $filename_real);
+
+                                                        echo "<a class='col float-left' style='text-align: initial;' href=../file/download.php?dir=$filepath&file=$filename_tmp&name=$filename>$filename_real</a><br/>";
                                                         
-                                                        for($i=0; $i<count($filepath_array);$i++){
-                                                            $filename_result = mq("SELECT * FROM filesave WHERE filepath='".$filepath_array[$i]."'");                                                            
-                                                            $fetch = mysqli_fetch_array($filename_result);                                                            
-                                                            $filename_real = $fetch['filename_real'];     
-                                                            $filename_tmp = $fetch['filename_tmp'];
-                                                            $filepath = $fetch['filepath'];
-                                                            $filename = str_replace(" ","_", $filename_real);
+                                                    }
+                                                ?>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>                                    
+                            <!-- </div> -->
+                        </div>											
+                    <!-- </div> -->
 
-                                                            echo "<a class='col-12 float-left' style='text-align: initial;' href=../file/download.php?dir=$filepath&file=$filename_tmp&name=$filename>$filename_real</a><br/>";
-                                                            
-                                                        }
-                                                    ?>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>                                    
-                                </div>
-							</div>											
-                        </div>
-
-                    <!-- </div> 컨테이너 끝-->
-                <!-- </div> -->
-                
-                <!-- 댓글 불러오기 -->
-                    <!-- <div class="container"> -->
-                        <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray; margin-left: inherit;">댓글목록</h3>
-                        <div class="row justify-content-start">
-                            <div class="col-12 reply_view">
-                                
-                                <!-- 댓글 목록 불러오기-->
-                                <?php 
-                                    $sql2=mq("SELECT
-                                        *
-                                    FROM
-                                        reply
-                                    WHERE
-                                        con_num='".$bno."'
-                                    ORDER BY
-                                        in_num ASC, wdate ASC
-                                    ");
-                                    while($reply=$sql2->fetch_array()){
-                                ?>
-                                
-                                <!-- 개별 댓글 쭉 보여주는 영역 (댓글 내용, 작성일, (작성자 본인일 경우) 수정, 삭제 버튼)-->
-                                <div class="row dat_view">
-                                    <?php
-                                        if($reply['depth']>0) { // 댓글의 답글(대댓글)일 경우 왼쪽에 여백을 두어 윗 댓글의 답글임을 구분하게 만듦
-                                            echo "
-                                                <img height=1 width=" . $reply['depth']*30 . ">
-                                                ";
+                <!-- </div> 컨테이너 끝-->
+            <!-- </div> -->
+            
+            <!-- 댓글 불러오기 -->
+                <!-- <div class="container"> -->
+                    <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray; margin-left: inherit;">댓글목록</h3>
+                    <div class="row justify-content-start">
+                        <div class="col-12 reply_view">
+                            
+                            <!-- 댓글 목록 불러오기-->
+                            <?php 
+                                $sql2=mq("SELECT
+                                    *
+                                FROM
+                                    reply
+                                WHERE
+                                    con_num='".$bno."'
+                                ORDER BY
+                                    in_num ASC, wdate ASC
+                                ");
+                                while($reply=$sql2->fetch_array()){
+                            ?>
+                            
+                            <!-- 개별 댓글 쭉 보여주는 영역 (댓글 내용, 작성일, (작성자 본인일 경우) 수정, 삭제 버튼)-->
+                            <div class="row dat_view">
+                                <?php
+                                    if($reply['depth']>0) { // 댓글의 답글(대댓글)일 경우 왼쪽에 여백을 두어 윗 댓글의 답글임을 구분하게 만듦
+                                        echo "
+                                            <img height=1 width=" . $reply['depth']*30 . ">
+                                            ";
+                                    }
+                                ?>                                                                        
+                                <div name="reply_area_<?=$reply['num']?>" id="reply_area_<?=$reply['num']?>" class="reply_area col" data-num="<?=$reply['num']?>" data-innum="<?=$reply['in_num']?>" data-depth="<?=$reply['depth']?>" data-writer="<?=$reply['writer']?>">
+                                    <div><b><?=$reply['writer']?></b></div>
+                                    <div class="dap_to comt_edit">
+                                        <?php 
+                                        $ori_writer = $reply['ori_writer'];
+                                        if($ori_writer != '') {
+                                        echo "<a href='#reply_area_$reply[ori_reply]'>".$reply['ori_writer']." 님에게</a>";
                                         }
-                                    ?>                                                                        
-                                    <div name="reply_area_<?=$reply['num']?>" id="reply_area_<?=$reply['num']?>" class="reply_area col" data-num="<?=$reply['num']?>" data-innum="<?=$reply['in_num']?>" data-depth="<?=$reply['depth']?>" data-writer="<?=$reply['writer']?>">
-                                        <div><b><?=$reply['writer']?></b></div>
-                                        <div class="dap_to comt_edit">
-                                            <?php 
-                                            $ori_writer = $reply['ori_writer'];
-                                            if($ori_writer != '') {
-                                            echo "<a href='#reply_area_$reply[ori_reply]'>".$reply['ori_writer']." 님에게</a>";
-                                            }
-                                            ?>
-                                            <p style="white-space: pre-line;"><?=$reply['content']?></p>
-                                        </div>
-                                        <div class="row justify-content-between">
-                                            <div class="rep_me dap_to">
-                                                <span class="align-middle"><?=$reply['wdate']?></span>
-                                                <?php if(($reply['email'] != 'deleted')){ ?>
-                                                <button class="btn dat_ans_btn">답글 쓰기</button>
-                                                <?php } ?>
-                                            </div>                                        
-                                            <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
-                                            <?php                                             
-                                                if($useremail==$reply['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
-                                            ?>
-                                            <div id="dat_edit" class="rep_me rep_menu">
-                                                <button class="btn dat_edit_btn" id="edit_btn" data-num="<?=$reply['num']?>">수정</button>
-                                                <button class="btn dat_del_btn">삭제</button>
-                                            </div>
-                                            <?php
-                                                }
-                                            ?>
-                                        </div>
-
-                                        <!-- 답글 쓰기 버튼 누르면 나오는 영역-->
-                                        <div id="ans_reply_<?=$reply['num']?>" data-num="<?=$reply['num']?>" class="row ans_reply" style="margin-top:10px; display:none">
-                                            <input type="hidden" name="rno" value="<?=$reply['num']?>"/>
-                                            <textarea class="col rep_con" name="content" id="rep_con_ans_<?=$reply['num']?>" placeholder="<?=$reply['writer']?> 님에게"></textarea>
-                                            <button class="rep_btn" id="rep_ans_cancel_<?=$reply['num']?>" data-num="<?=$reply['num']?>">취소</button>
-                                            <button class="rep_btn" id="rep_ans_<?=$reply['num']?>">등록</button>
-                                        </div>  
-                                        <!-- 수정 버튼 누르면 나오는 영역-->
-                                        <div id="edit_reply_<?=$reply['num']?>" data-num="<?=$reply['num']?>" class="row edit_reply" style="margin-top:10px; display:none">
-                                            <input type="hidden" name="rno" value="<?=$reply['num']?>"/>
-                                            <textarea class="col rep_con" name="content" id="rep_con_edit_<?=$reply['num']?>"><?=$reply['content']?></textarea>
-                                            <button class="rep_btn" id="rep_edit_cancel_<?=$reply['num']?>" data-num="<?=$reply['num']?>">취소</button>
-                                            <button class="rep_btn" id="rep_edit_<?=$reply['num']?>">수정</button>
-                                        </div>
-                                    </div>         
-                                </div>
-
-                                <!-- 댓글 삭제 모달창 구현(회원) -->
-                                <div class="modal fade" id="rep_modal_del">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <!-- header -->
-                                            <div class="modal-header">
-                                                <!-- header title -->
-                                                <h4 class="modal-title"><b>댓글 삭제</b></h4>
-                                                <!-- 닫기(x) 버튼 -->
-                                                <button type="button" class="close" data-dismiss="modal">X</button>                                                
-                                            </div>
-                                            <!-- body -->
-                                            <div class="modal-body">
-                                                <form method="post" id="modal_form1" action="/reply/reply_delete.php">
-                                                    <input type="hidden" name="r_no" id="r_no" value="<?=$reply['num']?>"/>
-                                                    <input type="hidden" name="b_no" value="<?=$bno;?>">            
-                                                    <script>console.log((<?=$reply['num'];?>));</script>
-                                                    <p>삭제하시겠습니까?<br/> <input type="submit" class="btn-sm float-right" value="확인" /></p>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 댓글 삭제 모달창 구현 끝 -->                            
-                                <?php } ?>                                
-                                
-                                <!-- 댓글 달기 -->
-                                <div class="row dat_ins dat_view rep_area">
-                                    <input type="hidden" name="bno" class="bno" value="<?=$bno?>">
-                                    <input type="hidden" name="dat_mail" id="dat_mail" class="dat_mail" value="<?=$useremail?>"">
-                                    <input type="hidden" name="dat_user" id="dat_user" class="dat_user" value="<?=$usernickname?>">                                    
-                                    <!-- <div class="row justify-content-start"> -->
-                                    <?php 
-                                        if($useremail != "") {                                            
-                                    ?>                                    
-                                    
-                                    <div class="col-12 dat_ins dat_name"><b><?=$usernickname?></b></div>
-                                    <textarea class="col rep_con rep_textarea" name="content" id="rep_con_new" placeholder="댓글을 남겨보세요."></textarea>
-                                    <button class="rep_btn" id="rep_btn">댓글 달기</button>
-                                    
-                                    <?php 
-                                        } else {
-                                    ?>
-                                    <textarea class="col rep_con rep_textarea" name="content" id="rep_con_new" placeholder="로그인 후 이용가능합니다." disabled></textarea>
-                                    <button class="rep_btn" id="rep_btn" disabled>댓글 달기</button>
-                                    <?php 
-                                        }
-                                    ?>                                                                       
-                                    <!-- </div> -->
-                                </div>
-
-                                <!-- 목록, 수정, 삭제 -->
-                                <div class="row justify-content-between" method="POST" action="update.php">
-                                    <div class="row col-auto">
-                                        <?php
-                                            if($role == "ADMIN") {
                                         ?>
-                                        <form action="write.php" method="POST" class="pl-0">
-                                            <input type="hidden" name="category" value="<?=$board['category']?>"/>
-                                            <a class="a_padding"><button type="submit" class="col-auto mr-auto btn-lg">글쓰기</button></a>
-                                        </form>
-                                        <!-- <a href="write.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" class="col-auto mr-auto btn-lg">답글</button></a>                                         -->
-                                        <?php } ?>
+                                        <p style="white-space: pre-line;"><?=$reply['content']?></p>
+                                    </div>
+                                    <div class="row justify-content-between">
+                                        <div class="rep_me dap_to">
+                                            <span class="align-middle"><?=$reply['wdate']?></span>
+                                            <?php if(($reply['email'] != 'deleted')){ ?>
+                                            <button class="btn dat_ans_btn">답글 쓰기</button>
+                                            <?php } ?>
+                                        </div>                                        
                                         <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
                                         <?php                                             
-                                            if($useremail==$board['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
+                                            if($useremail==$reply['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
                                         ?>
-                                        <a href="update.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">수정</button></a>
-                                        <a href="delete_article.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">삭제</button></a>                                    
-                                        <?php } ?>
+                                        <div id="dat_edit" class="rep_me rep_menu">
+                                            <button class="btn dat_edit_btn" id="edit_btn" data-num="<?=$reply['num']?>">수정</button>
+                                            <button class="btn dat_del_btn">삭제</button>
+                                        </div>
+                                        <?php
+                                            }
+                                        ?>
                                     </div>
-                                    <div class="col-auto d-flex justify-content-end">
-                                        <a href="board_list.php?ctgr=<?=$board['category']?>"><button type="button" class="btn-lg">목록</button></a>
-                                    </div>                                                                                                      
-                                </div>
 
+                                    <!-- 답글 쓰기 버튼 누르면 나오는 영역-->
+                                    <div id="ans_reply_<?=$reply['num']?>" data-num="<?=$reply['num']?>" class="row ans_reply" style="margin-top:10px; display:none">
+                                        <input type="hidden" name="rno" value="<?=$reply['num']?>"/>
+                                        <textarea class="col rep_con" name="content" id="rep_con_ans_<?=$reply['num']?>" placeholder="<?=$reply['writer']?> 님에게"></textarea>
+                                        <button class="rep_btn" id="rep_ans_cancel_<?=$reply['num']?>" data-num="<?=$reply['num']?>">취소</button>
+                                        <button class="rep_btn" id="rep_ans_<?=$reply['num']?>">등록</button>
+                                    </div>  
+                                    <!-- 수정 버튼 누르면 나오는 영역-->
+                                    <div id="edit_reply_<?=$reply['num']?>" data-num="<?=$reply['num']?>" class="row edit_reply" style="margin-top:10px; display:none">
+                                        <input type="hidden" name="rno" value="<?=$reply['num']?>"/>
+                                        <textarea class="col rep_con" name="content" id="rep_con_edit_<?=$reply['num']?>"><?=$reply['content']?></textarea>
+                                        <button class="rep_btn" id="rep_edit_cancel_<?=$reply['num']?>" data-num="<?=$reply['num']?>">취소</button>
+                                        <button class="rep_btn" id="rep_edit_<?=$reply['num']?>">수정</button>
+                                    </div>
+                                </div>         
                             </div>
+
+                            <!-- 댓글 삭제 모달창 구현(회원) -->
+                            <div class="modal fade" id="rep_modal_del">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <!-- header -->
+                                        <div class="modal-header">
+                                            <!-- header title -->
+                                            <h4 class="modal-title"><b>댓글 삭제</b></h4>
+                                            <!-- 닫기(x) 버튼 -->
+                                            <button type="button" class="close" data-dismiss="modal">X</button>                                                
+                                        </div>
+                                        <!-- body -->
+                                        <div class="modal-body">
+                                            <form method="post" id="modal_form1" action="/reply/reply_delete.php">
+                                                <input type="hidden" name="r_no" id="r_no" value="<?=$reply['num']?>"/>
+                                                <input type="hidden" name="b_no" value="<?=$bno;?>">            
+                                                <script>console.log((<?=$reply['num'];?>));</script>
+                                                <p>삭제하시겠습니까?<br/> <input type="submit" class="btn-sm float-right" value="확인" /></p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 댓글 삭제 모달창 구현 끝 -->                            
+                            <?php } ?>                                
+                            
+                            <!-- 댓글 달기 -->
+                            <div class="row dat_ins dat_view rep_area">
+                                <input type="hidden" name="bno" class="bno" value="<?=$bno?>">
+                                <input type="hidden" name="dat_mail" id="dat_mail" class="dat_mail" value="<?=$useremail?>"">
+                                <input type="hidden" name="dat_user" id="dat_user" class="dat_user" value="<?=$usernickname?>">                                    
+                                <!-- <div class="row justify-content-start"> -->
+                                <?php 
+                                    if($useremail != "") {                                            
+                                ?>                                    
+                                
+                                <div class="col-12 dat_ins dat_name"><b><?=$usernickname?></b></div>
+                                <textarea class="col rep_con rep_textarea" name="content" id="rep_con_new" placeholder="댓글을 남겨보세요."></textarea>
+                                <button class="rep_btn" id="rep_btn">댓글 달기</button>
+                                
+                                <?php 
+                                    } else {
+                                ?>
+                                <textarea class="col rep_con rep_textarea" name="content" id="rep_con_new" placeholder="로그인 후 이용가능합니다." disabled></textarea>
+                                <button class="rep_btn" id="rep_btn" disabled>댓글 달기</button>
+                                <?php 
+                                    }
+                                ?>                                                                       
+                                <!-- </div> -->
+                            </div>
+
+                            <!-- 목록, 수정, 삭제 -->
+                            <div class="row justify-content-between" method="POST" action="update.php">
+                                <div class="row col-auto">
+                                    <?php
+                                        if($role == "ADMIN") {
+                                    ?>
+                                    <form name="write" action="write.php" method="POST" class="pl-0">
+                                        <input type="hidden" name="category" value="<?=$board['category']?>"/>                                            
+                                    </form>
+                                    <a class="a_padding"><button type="button" onclick="javascript:document.write.submit()" class="col-auto mr-auto btn-lg">글쓰기</button></a>
+                                    <!-- <a href="write.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" class="col-auto mr-auto btn-lg">답글</button></a>                                         -->
+                                    <?php } ?>
+                                    <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
+                                    <?php                                             
+                                        if($useremail==$board['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
+                                    ?>
+                                    <a href="update.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">수정</button></a>
+                                    <a href="delete_article.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">삭제</button></a>                                    
+                                    <?php } ?>
+                                </div>
+                                <div class="col-auto d-flex justify-content-end">
+                                    <a href="board_list.php?ctgr=<?=$board['category']?>"><button type="button" class="btn-lg">목록</button></a>
+                                </div>                                                                                                      
+                            </div>
+
                         </div>
                     </div>
-                    <!-- 댓글 불러오기 끝 -->
+                </div>
+                <!-- 댓글 불러오기 끝 -->
 
 			<!-- Footer -->
-				<div  class="mt-4"id="footer">
+				<div  class="mt-4" id="footer">
                     <?php include_once "../fragments/footer.php"; ?>
 				</div>
 
@@ -455,14 +455,5 @@ include_once "../fragments/headpiece.php";
             </script>
             <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
             <script>autosize($('.rep_con'));</script>
-
-        <!-- 첨부파일명 클릭 시 다운로드 기능 구현-->
-            <script>
-                // $(".download").on("click", function() {
-                //     <?php
-                //     $s3->download($bucket, )
-                //     ?>
-                // });
-            </script>
 	</body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 include_once "../util/config.php";
 include_once "../db_con.php";
-include_once "../login/login_check.php";
+include_once "../member/login_check.php";
 
 if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게시물 목록에서 답글이 원글 아래 붙게 정렬하기 위한 변수들 초기화
     $num = $_GET['num'];

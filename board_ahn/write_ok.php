@@ -106,7 +106,8 @@
 		wdate ='".$date."',
 		content = '".$content."',  		
 		wsecret = '".$wsecret."',
-		att_file = '".$filepath_array_str."'		
+		att_file = '".$filepath_array_str."',
+		board_class = 'private'
 		");
 	} else { // 일반적인 글 작성인 경우
 		$mq = mq("INSERT board SET
@@ -121,7 +122,8 @@
 		wdate ='".$date."',
 		content = '".$content."',  		
 		wsecret = '".$wsecret."',
-		att_file = '".$filepath_array_str."'		
+		att_file = '".$filepath_array_str."',
+		board_class = 'private'
 		");				
 	}
 	

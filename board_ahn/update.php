@@ -1,7 +1,7 @@
 <?php
 include_once "../util/config.php";
 include_once "../db_con.php";
-include_once "../login/login_check.php";
+include_once "../member/login_check.php";
 
 if($role != 'ADMIN') {
     echo '
@@ -72,54 +72,30 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                     <?php include_once "../fragments/header.php"; ?>
 				</div>
 
-			<!-- Main -->
-				<!-- <div class="wrapper style1"> -->
+			<!-- Main -->				
 					<div class="container">
-                        <!-- <div class="row">
-							<nav class="navbar navbar-expand-lg navbar-light bg-light flex-fill">
-								<a class="col navbar-brand" href="#">카테고리 목록</a>
-								<button class="col-3 navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-									aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-							
-								<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-									<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-										<li class="nav-item">
-											<a class="nav-link" href="#">글 목록 <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#">의견/정보 공유</a>
-										</li>										
-									</ul>
-									<form class="form-inline my-2 my-lg-0">
-										<input class="form-control mr-sm-2" type="search" placeholder="Search">
-										<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-									</form>
-								</div>
-							</nav>
-						</div>									 -->
                         <br/>                       
 
 						<div class="row"> <!-- 메인 글 영역-->
 							<div class="col" id="content">
                                 <!-- 글 수정 영역 -->
-								
-
                                 <div id="board_write">
                                     <form action="update_ok.php" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="num" value="<?=$bno?>" />
                                         <table class="table table-striped" style="border: 1px solid #ddddda">
                                             <thead>
-                                                <!-- <tr>
-                                                    <th colspan="2" style="background-color: #eeeeee; text-align: center;"><h3>글 수정하기</h3></th>
-                                                </tr> -->
                                             </thead>	
                                             <tbody>                                                
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex">                                                        
-                                                            <?php include_once "./ctgr_fragment.php"; ?>                                                        
+                                                            <?php 
+                                                            if($board['board_class'] != "public") {
+                                                                include_once "./ctgr_fragment.php";
+                                                            } else {
+                                                                include_once "../board/ctgr_fragment.php";
+                                                            }
+                                                            ?>
                                                         </div>
                                                     </td>
                                                 </tr>

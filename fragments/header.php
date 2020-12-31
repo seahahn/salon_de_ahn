@@ -133,20 +133,20 @@
             <?php
                 if(!$useremail){ // 로그인 하지 않은 경우
             ?>
-            <li><a href="/login/login.php">Login</a>
+            <li><a href="/member/login.php">Login</a>
                 <ul>
-                    <li><a href="/login/login.php">Login</a></li>
-                    <li><a href="/login/register.php">Register</a></li>
+                    <li><a href="/member/login.php">Login</a></li>
+                    <li><a href="/member/register.php">Register</a></li>
                 </ul>
             </li>
             <?php
             } else { // 로그인한 경우
                 $logged = $useremail."(".$usernickname.")";
             ?>
-            <li><a href="/login/mypage.php">My Page</a>
+            <li><a href="/member/mypage.php">My Page</a>
                 <ul>
-                    <li><a href="/login/mypage.php"><?=$logged?></a></li>
-                    <li><a href="/login/logout.php">Logout</a></li>
+                    <li><a href="/member/mypage.php"><?=$logged?></a></li>
+                    <li><a href="/member/logout.php">Logout</a></li>
                 </ul>
             </li>
             <?php

@@ -73,7 +73,12 @@
 				if($_POST['date'][$i] != '') {
 					$date = $_POST['date'][$i];	
 				} else {
-					$date = substr($real_filename, 0, 9);
+					$date = str_replace(".","-", $real_filename);
+					$date = str_replace(" ","", $date);
+					$date = substr($date, 0, 10);
+					// 추출한 문자열 맨 뒷부분이 숫자가 아니면 빼주기
+					if(!is_numeric(substr($date, 9, 10))) $date = substr($date, 0, 9);
+					if(!is_numeric(substr($date, 8, 9))) $date = substr($date, 0, 8);
 				}
 				
 				// $exist = $s3->exist($bucket, $s3path.$lang.'/'.$ctgr.'/');
@@ -146,7 +151,12 @@
 				if($_POST['dates'] != '') {
 					$date = $_POST['dates'];
 				} else {
-					$date = substr($real_filename, 0, 9);
+					$date = str_replace(".","-", $real_filename);
+					$date = str_replace(" ","", $date);
+					$date = substr($date, 0, 10);
+					// 추출한 문자열 맨 뒷부분이 숫자가 아니면 빼주기
+					if(!is_numeric(substr($date, 9, 10))) $date = substr($date, 0, 9);
+					if(!is_numeric(substr($date, 8, 9))) $date = substr($date, 0, 8);
 				}
 
 				// $exist = $s3->exist($bucket, $s3path.$lang.'/'.$ctgr.'/');

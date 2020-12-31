@@ -8,4 +8,5 @@ chatting/composer.json
 chatting/composer.lock
 PHPMailer
 test
+trash
 db_con.php

@@ -119,9 +119,9 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                     while($board = $sql2->fetch_array()){
                                         include "../fragments/headpiece.php";
                                         $title=$board["title"];
-                                        /* 글자수가 60이 넘으면 ... 처리해주기 */
-                                        if(strlen($title)>60){
-                                            $title=str_replace($board["title"],mb_substr($board["title"],0,60,"utf-8")."...",$board["title"]);
+                                        /* 글자수가 40이 넘으면 ... 처리해주기 */
+                                        if(strlen($title)>40){
+                                            $title=str_replace($board["title"],mb_substr($board["title"],0,40,"utf-8")."...",$board["title"]);
                                         }
                                         
                                         /* 댓글 수 구하기 */
@@ -169,7 +169,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                             ?>
                                                 <span class="read_check" style="cursor:pointer" data-action="./read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></span>
                                                 <?php if($rep_count>0) {?>
-                                                <span style="color:blue;">[<?=$rep_count?>]</span></td>                                                    
+                                                <span style="color:blue;">[<?=$board['rep_num']?>]</span></td>                                                    
                                             <?php                       
                                                     }                             
                                                 }
