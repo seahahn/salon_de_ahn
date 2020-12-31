@@ -11,6 +11,5 @@
             $ret['check'] = true;
         }
     }
-    
     echo json_encode($ret);
 ?>

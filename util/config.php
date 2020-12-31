@@ -5,15 +5,21 @@
 		$useremail = $_SESSION["useremail"];
 	}else{
 		$useremail = "";
-	}if (isset($_SESSION["usernickname"])){
+	}
+	
+	if (isset($_SESSION["usernickname"])){
 		$usernickname = $_SESSION["usernickname"];
 	}else{
 		$usernickname = "";
-	}if (isset($_SESSION["role"])){ // 사용자, 관리자 구분 용도
+	}
+	
+	if (isset($_SESSION["role"])){ // 사용자, 관리자 구분 용도
 		$role = $_SESSION["role"];
 	}else{
 		$role = "";
-	}if (isset($_SESSION["num"])){ // 사용자, 관리자 구분 용도
+	}
+	
+	if (isset($_SESSION["num"])){ // DB상의 사용자 고유 번호
 		$usernum = $_SESSION["num"];
 	}else{
 		$usernum = "";

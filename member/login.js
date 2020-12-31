@@ -1,4 +1,5 @@
 function check_input() {
+    // 로그인 창에서 Login 버튼 클릭 시 작동시킬 기능
     if (!document.loginSbmt.email.value){
         alert("이메일을 입력해주세요.");
         document.loginSbmt.email.focus();
@@ -11,9 +12,5 @@ function check_input() {
         return;
     }
 
-    // var rememberInfo = document.getElementById('rememberInfo');
-    // $(rememberInfo).prop("checked");
-
     document.loginSbmt.submit();
 }
-

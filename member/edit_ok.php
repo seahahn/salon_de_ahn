@@ -7,7 +7,6 @@ if(!empty($_POST['password'])){
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 }
 
-
 if(isset($password)){
     mq("UPDATE user set                
     pw = '$password',
@@ -29,5 +28,4 @@ echo "
     alert('정보 수정이 완료되었습니다.');
     location.href = '../index.php';
     </script>";
-    
 ?>

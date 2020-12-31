@@ -11,9 +11,9 @@ require "../PHPMailer/src/Exception.php";
 $email = $_POST['email']; // 사용자가 입력한 본인의 이메일
 $rdnum = generateRandomString(12); // 무작위 12자리 임시 비밀번호 생성
 $password = password_hash($rdnum, PASSWORD_DEFAULT); // 임시 비밀번호 암호화
-mq("UPDATE user SET pw = '$password' WHERE email = '$email'");
+mq("UPDATE user SET pw = '$password' WHERE email = '".$email."'");
 
-$getNickname  = mq("SELECT nickname FROM user WHERE email = '$email'"); // 받는사람 닉네임
+$getNickname  = mq("SELECT nickname FROM user WHERE email = '".$email."'"); // 받는사람 닉네임
 $row = $getNickname->fetch_row();
 $nickname = (string)$row[0];
 
@@ -37,14 +37,13 @@ try {
     $mail -> setFrom("salon.de.ahn.noreply@gmail.com", "no-reply");
 
     // 받는 메일    
-    $mail -> addAddress("$email", "receive01");
+    $mail -> addAddress("$email", "$nickname");
     
     // 첨부파일
     // $mail -> addAttachment("./test.zip");
 
     // 메일 내용
     $mail -> isHTML(true);                                               // HTML 태그 사용 여부
-    //$mail -> Subject = "Salon de Ahn - <?=$nameTo 님의 임시 비밀번호입니다";              // 메일 제목
     $mail -> Subject = "Salon de Ahn - $nickname 님의 임시 비밀번호입니다";              // 메일 제목
     $mail -> Body = "안녕하세요 $nickname 님.<br/>요청하신 임시 비밀번호입니다.<br/>$rdnum<br/><br/>임시 비밀번호로 로그인 후, 비밀번호를 꼭 변경해주세요.";    // 메일 내용
 
@@ -72,6 +71,7 @@ try {
 }
 
 function generateRandomString($length) {
+    // 임시 비밀번호 생성하는 함수
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
     $charactersLength = strlen($characters); 
     $randomString = ''; 
