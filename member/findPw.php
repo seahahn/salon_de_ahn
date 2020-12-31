@@ -11,7 +11,7 @@
             </div>
 
             <!-- 메인 영역-->
-            <div class="container">
+            <div class="container py-5 my-5">
                 <div class="row">
                     <div class="col-3"></div>
                     <fieldset class="col" style="width:250px;">                        
@@ -24,6 +24,9 @@
                             </div>                            
                             <br/>
                             <button class="col mb-3" type="button" onclick="check_input()">임시 비밀번호 전송</button>
+                            <div>
+                            <a href="./login.php"><button type="button">Go Back</button></a>                            
+                            </div>
                         </form>
                     </fieldset>
                     <div class="col-3"></div>

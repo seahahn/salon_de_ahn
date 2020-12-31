@@ -32,14 +32,14 @@
                                 <input type="password" class="form-control" name="pw_confirm" id="pw_confirm">
                                 <span id="pw_check_msg" data-check="0"></span>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="infoAgree" id="infoAgree">
+                            <div class="form-check d-flex align-content-center">
+                                <input class="form-check-input align-self-center mt-0" type="checkbox" name="infoAgree" id="infoAgree">
                                 <label class="form-check-label" for="infoAgree">
                                     <a href="personalinfoagree.php" target="_blank">개인정보처리방침</a>에 동의합니다.
                                 </label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="serviceAgree" id="serviceAgree">
+                            <div class="form-check d-flex align-content-center">
+                                <input class="form-check-input align-self-center mt-0" type="checkbox" name="serviceAgree" id="serviceAgree">
                                 <label class="form-check-label" for="serviceAgree">
                                     <a href="serviceagree.php" target="_blank">서비스 이용약관</a>에 동의합니다.
                                 </label>

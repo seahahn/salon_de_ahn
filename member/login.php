@@ -45,8 +45,8 @@ if(isset($_COOKIE['cookieemail'])){
                                 <input type="checkbox" class="custom-control-input" name="rememberInfo" id="rememberInfo" <?=$checked?>>
                                 <label class="custom-control-label" for="rememberInfo">Remember me !</label>
                             </div> -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="rememberInfo" id="rememberInfo" <?=$checked?>>
+                            <div class="form-check d-flex align-content-center">
+                                <input class="form-check-input align-self-center mt-0" type="checkbox" name="rememberInfo" id="rememberInfo" <?=$checked?>>
                                 <label class="form-check-label" for="rememberInfo">
                                     아이디 저장하기
                                 </label>
