@@ -1,15 +1,11 @@
 <?php
 if(isset($_COOKIE['cookieemail'])){
-    // echo '들어옴';
-    $cookieemail = $_COOKIE['cookieemail'];
-    // $cookiepw = $_COOKIE['cookiepw'];
+    $cookieemail = $_COOKIE['cookieemail'];    
     $rememberInfo = $_COOKIE['rememberInfo'];
     if($rememberInfo == 'on') $checked = 'checked';
-    
+
 } else {
-    // echo '없음';
     $cookieemail = '';
-    // $cookiepw = '';
     $rememberInfo = '';
     $checked = '';
 }    
