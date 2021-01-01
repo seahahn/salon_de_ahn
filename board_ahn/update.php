@@ -132,15 +132,15 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <div class="row justify-content-between">
+                                        <div class="d-flex justify-content-between">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" value="1" id="wsecret" name="wsecret">
-                                                <label class="custom-control-label" for="wsecret">비밀글</label>
+                                                <input type="checkbox" class="custom-control-input align-middle" value="1" id="wsecret" name="wsecret">
+                                                <label class="custom-control-label" for="wsecret">비밀글 여부</label>
                                             </div>
-                                            <div class="row justify-content-end">
+                                            <div class="d-flex justify-content-end p-0">
                                                 <a href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg ml-1 px-3">목록</button></a>
-                                                <a class="a_nopadding"><button type="button" class="btn-lg ml-1 px-3" onclick="history.go(-1);">취소</button></a>
-                                                <a class="a_nopadding"><button type="submit" class="btn-lg ml-1 px-3">수정하기</button></a>
+                                                <a><button type="button" class="btn-lg ml-1 px-3" onclick="history.go(-1);">취소</button></a>
+                                                <a><button type="submit" class="btn-lg ml-1 px-3">수정</button></a>
                                             </div>
                                         </div>
                                     </form>

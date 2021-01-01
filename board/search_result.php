@@ -32,7 +32,7 @@
                 
                 <!-- 비밀 글 모달창 양식 구현-->
                 <div class="modal fade" id="modal_div">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <!-- header -->
                             <div class="modal-header">
@@ -168,8 +168,8 @@
                                             <td width="270">
                                             <!-- 비밀 글 가져오기 -->	 
                                             <?php 
-                                                // $lockimg="<img src='./img/lock.png' alt='lock' title='lock' width='18' height='18'>";
-                                                $lockimg="※";
+                                                $lockimg="<img class='align-middle' src='../images/black_lock.png' alt='lock' title='lock' width='6%' height='auto'>";
+                                                // $lockimg="※";
                                                 if($board['wsecret']=="1"){ // lock_post 값이 1이면 잠금
                                                     if($board['depth']>0) {                                                        
                                                         // if($board['depth']>1){
@@ -179,7 +179,10 @@
                                                         // }                                                    
                                                     }
                                             ?>                                                
-                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check=<?=$role?> data-num="<?=$board['num']?>">[<?=$headpiece?>] <?=$title?> <?=$lockimg?></span>
+                                                <div class="d-inline"><span class="lock_check align-middle" style="cursor:pointer" data-action="./read.php?num=" data-check=<?=$role?> data-num="<?=$board['num']?>" data-user="<?=$board['email']?>">[<?=$headpiece?>] <?=$title?></span><?=$lockimg?></div>
+                                                <?php if($rep_count>0) { ?>
+                                                <span class="align-middle" style="color:blue;">[<?=$board['rep_num']?>]</span></td>
+                                                <?php } ?>
                                             <!-- 일반 글 가져오기 -->
                                             <?php                                                     
                                                 }else{	// 아니면 공개 글
@@ -256,16 +259,16 @@
                                 </nav>
 
                                 <!-- 페이징 하단 게시물 검색 -->
-                                <div class="row justify-content-center">
+                                <div class="d-flex justify-content-center">
                                     <div id="search_box">
-                                        <form action="search_result.php" method="get">
-                                            <select class="custom-select" name="search_category" style="display: inline-block; width: 12%;">
+                                        <form class="d-flex justify-content-center align-items-center" action="search_result.php" method="get">
+                                            <select class="custom-select d-inline-block col-2" name="search_category">
                                                 <option value="title" <?php if($search_category == 'title') echo 'selected';?>>제목</option>
                                                 <option value="writer" <?php if($search_category == 'writer') echo 'selected';?>>글쓴이</option>
                                                 <option value="content" <?php if($search_category == 'content') echo 'selected';?>>내용</option>
                                             </select>
-                                            <input type="text" name="search" size="70" required="required" style="display: inline-block; width: 70%;" value="<?=$search;?>">
-                                            <button type="submit" style="padding: 0.65em 2em 0.65em 2em;">검색</button>
+                                            <input class="d-inline-block col-7 px-2 py-2" type="text" size="70" name="search" required="required" value="<?=$search;?>">
+                                            <button class="d-inline-block col-1 px-2 py-0" type="submit" style="padding: 0.65em 2em 0.65em 2em;">검색</button>
                                         </form>
                                     </div>
                                 </div>
@@ -315,15 +318,18 @@
                 // 비밀글 클릭시 모달창을 띄우는 이벤트
                 $(function(){
                     $(".lock_check").click(function(){
+                        var user = $(this).attr("data-user");
                         // 관리자 계정일 경우 바로 해당 글로 이동
                         if($(this).attr("data-check")=="ADMIN") {
                             var action_url = $(this).attr("data-action")+$(this).attr("data-num");
+                            $(location).attr("href", action_url);                            
+                        } else if(user == "<?=$useremail?>") {
+                            // 일반 사용자일 경우 사용자 이메일과 게시물 작성한 사용자의 이메일 대조하여 일치하면 해당 글로 이동
+                            var action_url = $(this).attr("data-action")+$(this).attr("data-num");
                             $(location).attr("href", action_url);
+                        } else {
+                            $("#modal_div").modal();
                         }
-                        $("#modal_div").modal();
-                        //주소에 data-num(num)값을 더하기
-                        var action_url = $("#modal_form").attr("data-action")+$(this).attr("data-num");
-                        $("#modal_form").attr("action",action_url);
                     });
                 });
             

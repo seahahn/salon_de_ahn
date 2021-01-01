@@ -2,21 +2,21 @@
 	include "../util/config.php";
 	include "../db_con.php";
 	include_once "../s3.php";
-	$s3 = new aws_s3;
-	$s3path = "board_files/";
-	$bucket = $s3->bucket;
-	$url = $s3->url;
+
+	$s3 = new aws_s3; // s3 객체 생성
+	$s3path = "board_files/"; // s3 버킷 내에 파일 저장할 폴더 경로
+	$bucket = $s3->bucket; // 버킷 이름
+	$url = $s3->url; // 내 s3 url
 	
-	$max_in_num_result = mq("SELECT MAX(in_num) FROM board");
+	$max_in_num_result = mq("SELECT MAX(in_num) FROM board"); // 현재 맨 나중에 작성된 글의 내부 번호(게시물 정렬을 위해서 별도로 만든 번호. 고유 번호 아님) 불러옴
 	$max_in_num_fetch = mysqli_fetch_row($max_in_num_result);
-	$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000+1000;
+	$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000+1000; // 맨 처음에 작성된 게시물의 내부 번호는 1000. 그 다음은 2000, 3000 이런 식으로 번호가 들어감
 
-	$category = $_POST['category'];
-	$sub_ctgr = $_POST['sub_ctgr'];
-	$headpiece = $_POST['headpiece'];
-	// $board_class = $_POST['board_class'];
+	$category = $_POST['category']; // 게시판 대분류
+	$sub_ctgr = $_POST['sub_ctgr']; // 게시판 소분류
+	$headpiece = $_POST['headpiece']; // 게시물 말머리
 
-	$unum = $_POST['unum'];
+	$unum = $_POST['unum']; // 글 작성한 사용자의 DB내 고유 번호
 	$email = $useremail;
 	$nickname = $usernickname;
 	$date = date('Y-m-d H:i:s');	
@@ -37,13 +37,11 @@
 	}	
 
 	// 첨부파일이 존재한다면 실행
+	// 첨부파일 없는 경우 에러 출력되지만 글 작성은 정상적으로 이루어짐
 	$filepath_array = array();
-	// print_r($_FILES['files']['type']);
-	// print_r(strpos($_FILES['files']['type'], "image"));
-	// if(strpos($_FILES['file']['type'], 'image') != 0){ // 이미지를 제외한 파일 형식만 별도 첨부 가능
 	if($_FILES) {
 		if(count($_FILES['upload']['name']) > 0 ) { 
-			$baseDownFolder = "../file/";
+			$baseDownFolder = "../file/"; // 로컬 컴퓨터 내에 임시로 파일 저장해둘 위치
 
 			for($i = 0; $i < count($_FILES['upload']['name']); $i++){
 				// 실제 파일명 
@@ -56,9 +54,6 @@
 				// 임시 파일명 (현재시간_랜덤수.파일 확장자) - 파일명 중복될 경우를 대비해 임시파일명을 덧붙여 저장하려함 
 				$tmp_filename = time() . '_' . mt_rand(0,99999) . '.' . strtolower($extension); 
 
-				// 저장 파일명 (실제파일명@@@임시파일명) 
-				// $thumbnail_file = $real_filename . '@@@' . $tmp_filename;
-
 				if(!move_uploaded_file($_FILES["upload"]["tmp_name"][$i], $baseDownFolder.$tmp_filename) ) {
 					echo 'upload error';
 				}
@@ -66,6 +61,7 @@
 				// 파일 권한 변경 (생략가능_추후 변경할 수 있게 권한 변경함) 
 				chmod($baseDownFolder.$tmp_filename, 0755);	
 
+				// 첨부파일 s3에 저장
 				$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$tmp_filename);
 
 				mq("INSERT filesave SET
@@ -76,6 +72,7 @@
 
 				$filepath_array[$i] = $s3path.$tmp_filename;
 
+				// s3에 파일 저장 및 DB에 파일 정보 저장한 후 로컬에 저장시켰던 파일 삭제
 				if(!unlink($baseDownFolder.$tmp_filename)) {
 					echo "file delete failed.\n";
 				}

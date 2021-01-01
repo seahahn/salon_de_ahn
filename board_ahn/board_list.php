@@ -142,8 +142,8 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                             <td width="270">
                                             <!-- 비밀 글 가져오기 -->	 
                                             <?php 
-                                                // $lockimg="<img src='./img/lock.png' alt='lock' title='lock' width='18' height='18'>";
-                                                $lockimg="※";
+                                                $lockimg="<img class='align-middle' src='../images/black_lock.png' alt='lock' title='lock' width='6%' height='auto'>";
+                                                // $lockimg="※";
                                                 if($board['wsecret']=="1"){ // lock_post 값이 1이면 잠금
                                                     if($board['depth']>0) {                                                        
                                                         // if($board['depth']>1){
@@ -154,7 +154,10 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                         // }                                                    
                                                     }
                                             ?>                                                
-                                                <span class="lock_check" style="cursor:pointer" data-action="./read.php?num=" data-check="<?=$role?>" data-num="<?=$board['num']?>" data-user="<?=$board['email']?>">[<?=$headpiece?>] <?=$title?> <?=$lockimg?></span>
+                                                <div class="d-inline"><span class="lock_check align-middle" style="cursor:pointer" data-action="./read.php?num=" data-check=<?=$role?> data-num="<?=$board['num']?>" data-user="<?=$board['email']?>">[<?=$headpiece?>] <?=$title?></span><?=$lockimg?></div>
+                                                <?php if($rep_count>0) { ?>
+                                                <span class="align-middle" style="color:blue;">[<?=$board['rep_num']?>]</span></td>
+                                                <?php } ?>
                                             <!-- 일반 글 가져오기 -->
                                             <?php                                                     
                                                 }else{	// 아니면 공개 글
@@ -268,16 +271,16 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                 </nav>
 
                                 <!-- 페이징 하단 게시물 검색 -->
-                                <div class="row justify-content-center">
+                                <div class="d-flex justify-content-center">
                                     <div id="search_box">
-                                        <form action="search_result.php" method="get">
-                                            <select class="custom-select" name="search_category" style="display: inline-block; width: 12%;">
+                                        <form class="d-flex justify-content-center align-items-center" action="search_result.php" method="get">
+                                            <select class="custom-select d-inline-block col-2" name="search_category">
                                                 <option value="title">제목</option>
                                                 <option value="writer">글쓴이</option>
                                                 <option value="content">내용</option>
                                             </select>
-                                            <input type="text" name="search" size="70" required="required" style="display: inline-block; width: 70%;">
-                                            <button type="submit" style="padding: 0.65em 2em 0.65em 2em;">검색</button>
+                                            <input class="d-inline-block col-7 px-2 py-2" type="text" name="search" size="70" required="required">
+                                            <button class="d-inline-block col-1 px-2 py-0" type="submit">검색</button>
                                         </form>
                                     </div>
                                 </div>
