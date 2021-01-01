@@ -21,7 +21,6 @@
 	}
 
 	$filepath_array = array();
-	// if(strpos($_FILES['files']['type'], 'image') != 0){ // 이미지를 제외한 파일 형식만 별도 첨부 가능
 	if(isset($_FILES['upload'])){
 		if(count($_FILES['upload']['name']) > 0 ) {
 			$baseDownFolder = "../file/";
@@ -35,13 +34,10 @@
 				$extension = $nameArr[sizeof($nameArr) - 1]; 
 
 				// 임시 파일명 (현재시간_랜덤수.파일 확장자) - 파일명 중복될 경우를 대비해 임시파일명을 덧붙여 저장하려함 
-				$tmp_filename = time() . '_' . mt_rand(0,99999) . '.' . strtolower($extension); 
-
-				// 저장 파일명 (실제파일명@@@임시파일명) 
-				// $thumbnail_file = $real_filename . '@@@' . $tmp_filename;
+				$tmp_filename = time() . '_' . mt_rand(0,99999) . '.' . strtolower($extension);
 
 				if(!move_uploaded_file($_FILES["upload"]["tmp_name"][$i], $baseDownFolder.$tmp_filename) ) {
-					echo 'upload error';
+					echo 'upload error'; // 이 경우 파일이 저장되는 폴더의 권한 체크해보기
 				}
 
 				// 파일 권한 변경 (생략가능_추후 변경할 수 있게 권한 변경함) 
@@ -96,6 +92,6 @@
 ?>
 	<script>
 		alert("수정되었습니다.");
-		location.href = '/board/read.php?num=<?=$bno?>';
+		// location.href = '/board/read.php?num=<?=$bno?>';
 	</script>
-	<!-- <meta http-equiv="refresh" content="0 url=./read.php?num=<?=$bno?>"> -->
+	<meta http-equiv="refresh" content="0 url=./read.php?num=<?=$bno?>">

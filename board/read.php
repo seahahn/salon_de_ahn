@@ -108,7 +108,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                                     $filepath = $fetch['filepath'];
                                                     $filename = str_replace(" ","_", $filename_real);                                                            
 
-                                                    echo "<a class='col-12 float-left' style='text-align: initial;' href=../file/download.php?dir=$filepath&file=$filename_tmp&name=$filename>$filename_real</a><br/>";
+                                                    echo "<a class='col-12 float-left py-1 border-0' style='text-align: initial;' href=../file/download.php?dir=$filepath&file=$filename_tmp&name=$filename>$filename_real</a>";
                                                 }
                                                 ?>
                                             </div>
@@ -249,23 +249,23 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                         </div>
 
                         <!-- 목록, 수정, 삭제 -->
-                        <div class="row justify-content-between" method="POST" action="update.php">
-                            <div class="row col-auto">
+                        <div class="d-flex justify-content-between" method="POST" action="update.php">
+                            <div class="d-flex align-content-start col-auto px-0">
                                 <form action="write.php" method="POST" class="pl-0">
                                     <input type="hidden" name="category" value="<?=$board['category']?>"/>
-                                    <a class="a_padding"><button type="submit" class="col-auto mr-auto btn-lg recent">글쓰기</button></a>
+                                    <button type="submit" class="col-auto mr-auto btn-lg">글쓰기</button>
                                 </form>
-                                    <a href="write.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" class="col-auto mr-auto btn-lg recent">답글</button></a>                                        
+                                    <a class="mx-1" href="write.php?num=<?=$board['num']?>" class=""><button type="button" class="col-auto mr-auto btn-lg">답글</button></a>
                                 <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
                                 <?php                                             
                                     if($useremail==$board['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
                                 ?>
-                                <a href="update.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg recent">수정</button></a>
-                                <a href="delete_article.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">삭제</button></a>                                    
+                                <a href="update.php?num=<?=$board['num']?>"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">수정</button></a>
+                                <a class="mx-1" href="delete_article.php?num=<?=$board['num']?>"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">삭제</button></a>                                    
                                 <?php } ?>
                             </div>
-                            <div class="col-auto d-flex justify-content-end">
-                                <a href="board_list.php?ctgr=<?=$board['category']?>"><button type="button" class="btn-lg recent">목록</button></a>
+                            <div class="col-auto d-flex justify-content-end p-0">
+                                <a href="board_list.php?ctgr=<?=$board['category']?>"><button type="button" class="btn-lg">목록</button></a>
                             </div>                                                                                                      
                         </div>
 

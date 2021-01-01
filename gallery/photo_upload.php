@@ -43,11 +43,7 @@
                 // 사진 제목과 설명
                 $title = $_POST['title'][$i];
 				$caption = $_POST['caption'][$i];
-				
-				// $exist = $s3->exist($bucket, $s3path.$folder.'/');
-				// if(!$exist) {
-				// 	$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$folder.'/');
-				// }
+
 				$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$folder.'/'.$tmp_filename);
 
 				// DB에 사진 제목, 날짜, 설명과 함께 S3 경로 업로드

@@ -8,7 +8,7 @@
 		$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000;
 	} else {
 		$max_in_num = ceil($max_in_num_fetch[0]/1000)*1000+1000;
-	}	
+	}
 	
 	$unum = $_POST['unum'];
 	$bno = $_POST['bno'];
@@ -71,13 +71,7 @@
 		");
 	}
 
-	$sql = mq("SELECT 
-					* 
-                    FROM 
-					board 
-                    WHERE 
-					num='".$bno."'
-			");
+	$sql = mq("SELECT * FROM board WHERE num='".$bno."'");
 	$board = $sql->fetch_array();
 	$rep_count = $board['rep_num']+1; // 기존에 게시물에 달린 댓글 수에 1을 더한 값을 넣어줌
 	mq("UPDATE board SET rep_num='".$rep_count."' WHERE num='".$board["num"]."'");

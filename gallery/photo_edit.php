@@ -44,12 +44,8 @@
 				}
 
 				// 파일 권한 변경 (생략가능_추후 변경할 수 있게 권한 변경함) 
-                chmod($baseDownFolder.$tmp_filename, 0755);	
+				chmod($baseDownFolder.$tmp_filename, 0755);	
 				
-				// $exist = $s3->exist($bucket, $s3path.$folder.'/');
-				// if(!$exist) {
-				// 	$s3->put($bucket, $baseDownFolder.$tmp_filename, $s3path.$folder.'/');
-				// }
 				$sql = mq("SELECT 
 						* 
 						FROM

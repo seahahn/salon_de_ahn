@@ -4,22 +4,20 @@ if(basename($_SERVER['PHP_SELF']) == "index.php"){
 } else {
     include_once "../db_con.php";
 }
-
-$lockimg="※";
 ?>
 
 <div class="container">
     <div class="d-flex flex-wrap">
-        <!-- 최근 게시물 5개 / 최고 조회수 TOP5 게시물 -->
+        <!-- 댓글수 TOP 5 게시물 / 조회수 TOP 5 게시물 보여주기-->
         <table class="table col-12 col-lg-6 col-md-12 col-sm-12 col-12-mobile mb-4">
             <thead>
                 <tr>                        
-                    <th scope="col" class="text-center text-white">댓글수 TOP5 게시물</th>
+                    <th scope="col" class="text-center text-white">댓글수 TOP 5 게시물</th>
                 </tr>
             </thead>
             <tbody>
             <?php
-            $sql = mq("SELECT * FROM board WHERE rep_num>=1 AND wsecret=0 UNION SELECT * FROM board_ahn WHERE rep_num>=1 AND wsecret=0 ORDER BY rep_num DESC LIMIT 5");
+            $sql = mq("SELECT * FROM board WHERE rep_num>=1 AND wsecret=0 ORDER BY rep_num DESC LIMIT 5");
             while($board = $sql->fetch_array()) {
                 include "headpiece.php";
                 $title=$board["title"];
@@ -37,13 +35,13 @@ $lockimg="※";
         <table class="table col-12 col-lg-6 col-md-12 col-sm-12 col-12-mobile mb-4">
             <thead>
                 <tr>                       
-                    <th scope="col" class="text-center text-white">조회수 TOP5 게시물</th>
+                    <th scope="col" class="text-center text-white">조회수 TOP 5 게시물</th>
                 </tr>
             </thead>
             <tbody>
             
             <?php
-            $sql2 = mq("SELECT * FROM board WHERE wsecret=0 UNION SELECT * FROM board_ahn WHERE wsecret=0 ORDER BY views DESC LIMIT 5");
+            $sql2 = mq("SELECT * FROM board WHERE wsecret=0 ORDER BY views DESC LIMIT 5");
             
             while($board = $sql2->fetch_array()) {
                 include "headpiece.php";
@@ -57,12 +55,10 @@ $lockimg="※";
                     <a class="text-white" href="../board/read.php?num=<?=$board['num']?>">[<?=$sub_ctgr.' - '.$headpiece?>] <?=$title?></a>                    
                 </td></tr>
             <?php } ?>
-                            
             </tbody>
         </table>
 
-        <div class="col-12">            
-
+        <div class="col-12">
             <!-- Contact -->
                 <section class="contact">
                     <header>
@@ -105,13 +101,13 @@ $lockimg="※";
     </div>
 </div>
 <!-- 비밀 글 모달창 구현 끝-->
+
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script>
     // 비밀글 클릭시 모달창을 띄우는 이벤트
     $(function(){
         $(".lock_check").click(function(){
             var user = $(this).attr("data-user");
-            console.log(user);
             // 관리자 계정일 경우 바로 해당 글로 이동
             if($(this).attr("data-check")=="ADMIN") {
                 var action_url = $(this).attr("data-action")+$(this).attr("data-num");

@@ -22,8 +22,7 @@ if(mysqli_num_rows($q) != 0) {
 <html>
 	<head>
 		<link rel="stylesheet" href="gal_assets/style.css">
-		<?php include_once "../fragments/head.php"; ?>		
-		<!-- <link rel="stylesheet" href="/assets/css/jquery-ui.css" /> -->
+		<?php include_once "../fragments/head.php"; ?>
 
 		<!-- 사진 업로드 기능 -->            
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
@@ -175,7 +174,7 @@ if(mysqli_num_rows($q) != 0) {
 			</footer>			
 	</div>
 
-		<!-- Scripts -->			
+		<!-- Main Scripts -->			
 			<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
@@ -184,9 +183,9 @@ if(mysqli_num_rows($q) != 0) {
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
-			<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 			
-		<!-- Bootstrap Stripts-->
+		<!-- Other Stripts-->
+			<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
 			<script src="/bootstrap/bootstrap.bundle.min.js"></script>			

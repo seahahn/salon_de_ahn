@@ -12,7 +12,6 @@ $(function(){
 				"rep_con" : $(".rep_con").val(),
 			},
 			success : function(data){
-//				$(".reply_view").html(data);
 				alert("댓글이 작성되었습니다");
 				location.reload();
 			}
@@ -22,7 +21,6 @@ $(function(){
 
 /* 댓글 삭제 이벤트 */
 	$(".dat_del_btn").click(function(){
-		
 		console.log("댓글 삭제?");
 		$("#rep_modal_del").modal();
 		

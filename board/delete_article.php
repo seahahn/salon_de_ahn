@@ -35,12 +35,19 @@
 		$s3->delete($bucket, $filepath);
 	}
 
-	/* 받아온 num값을 선택해서 게시글 삭제 */
+	/* 받아온 num값을 선택해서 게시글 및 게시글에 달린 댓글 삭제 */
 	mq("DELETE 
         FROM 
         board 
         WHERE 
         num='".$bno."'
+		");
+	
+	mq("DELETE 
+        FROM 
+        reply 
+        WHERE 
+        con_num='".$bno."'
 		");
 ?>
 	<script>

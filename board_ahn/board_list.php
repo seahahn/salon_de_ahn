@@ -140,10 +140,12 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                             <td width="70" class="text-center"><?=$board['num'];?></td>
                                             <td width="100" class="text-center" style="font-size: 1rem;"><?=$sub_ctgr;?></td>
                                             <td width="270">
-                                            <!-- 비밀 글 가져오기 -->	 
                                             <?php 
                                                 $lockimg="<img class='align-middle' src='../images/black_lock.png' alt='lock' title='lock' width='6%' height='auto'>";
-                                                // $lockimg="※";
+                                                $attfile="<img class='align-middle' src='../images/attfile.png' alt='attfile' title='attfile' width='4%' height='auto'>";
+                                                $rep="<span class='align-middle' style='color:blue;'>[$board[rep_num]]</span>";
+                                                $att = substr($board['att_file'], 2, 1); // 첨부파일 경로 저장된 배열에서 첨부파일의 개수를 가져옴
+                                                // 비밀글 가져오기
                                                 if($board['wsecret']=="1"){ // lock_post 값이 1이면 잠금
                                                     if($board['depth']>0) {                                                        
                                                         // if($board['depth']>1){
@@ -155,10 +157,11 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                     }
                                             ?>                                                
                                                 <div class="d-inline"><span class="lock_check align-middle" style="cursor:pointer" data-action="./read.php?num=" data-check=<?=$role?> data-num="<?=$board['num']?>" data-user="<?=$board['email']?>">[<?=$headpiece?>] <?=$title?></span><?=$lockimg?></div>
-                                                <?php if($rep_count>0) { ?>
-                                                <span class="align-middle" style="color:blue;">[<?=$board['rep_num']?>]</span></td>
-                                                <?php } ?>
-                                            <!-- 일반 글 가져오기 -->
+                                                <?php 
+                                                if($att > 0) echo $attfile;
+                                                if($rep_count>0) echo $rep;
+                                                ?>
+                                                </td>
                                             <?php                                                     
                                                 }else{	// 아니면 공개 글
                                                     if($board['depth']>0) {                                                        
@@ -170,13 +173,14 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                         // }                                                    
                                                     }
                                             ?>
-                                                <span class="read_check" style="cursor:pointer" data-action="./read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></span>
-                                                <?php if($rep_count>0) {?>
-                                                <span style="color:blue;">[<?=$board['rep_num']?>]</span></td>
-                                            <?php                       
-                                                    }                             
-                                                }
-                                            ?>
+                                                <div class="d-inline"><span class="read_check align-middle" style="cursor:pointer" data-action="./read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></span></div>
+                                                <?php
+                                                if($att > 0) echo $attfile;
+                                                if($rep_count>0) echo $rep;
+                                                ?>
+                                                </td>
+                                                <?php
+                                                } ?>
                                             <td width="70" class="text-center"><?=$board["writer"];?></td>
                                             <td width="100" class="text-center"><?=$board["wdate"];?></td>
                                             <td width="50" class="text-center"><?=$board["views"];?></td>

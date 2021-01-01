@@ -114,9 +114,11 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                                     </tbody>
                                 </table>                                       
                                 <div class="d-flex justify-content-end">
-                                    <div class="custom-control custom-checkbox">                                                
-                                        <input type="checkbox" class="custom-control-input align-middle" value="1" id="wsecret" name="wsecret">
-                                        <label class="custom-control-label" for="wsecret">비밀글 여부</label>
+                                    <div class="form-check d-flex align-content-center">
+                                        <input class="form-check-input align-self-center mt-0" type="checkbox" value="1" name="wsecret" id="wsecret">
+                                        <label class="form-check-label" for="wsecret">
+                                            <span class="align-middle">비밀글 여부</span>
+                                        </label>
                                     </div>
                                     <div class="col d-flex justify-content-end">
                                         <?php if(isset($in_num)){ ?> <!-- 답글 누르고 들어온 경우-->

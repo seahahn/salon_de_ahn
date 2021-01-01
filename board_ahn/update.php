@@ -133,9 +133,11 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                             </tbody>
                                         </table>
                                         <div class="d-flex justify-content-between">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input align-middle" value="1" id="wsecret" name="wsecret">
-                                                <label class="custom-control-label" for="wsecret">비밀글 여부</label>
+                                            <div class="form-check d-flex align-content-center">
+                                                <input class="form-check-input align-self-center mt-0" type="checkbox" value="1" name="wsecret" id="wsecret">
+                                                <label class="form-check-label" for="wsecret">
+                                                    <span class="align-middle">비밀글 여부</span>
+                                                </label>
                                             </div>
                                             <div class="d-flex justify-content-end p-0">
                                                 <a href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg ml-1 px-3">목록</button></a>

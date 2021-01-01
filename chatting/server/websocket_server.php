@@ -30,12 +30,14 @@ class Chat implements MessageComponentInterface {
 		$conn->send(json_encode(array("type"=>$user_num_type,"msg"=>$user_num)));
 		$count = 0;
 		foreach($this->clients as $client) {			
-			if($users[$user_res]==$users[$client->resourceId]) {						
-				$count++;						
+			if($users[$user_res]==$users[$client->resourceId]) {
+				// 사용자가 동일한 계정으로 채팅을 창 2개 띄워서 들어올 때 인원수가 늘어나는 것을 방지하기 위해 필요한 과정
+				$count++;
 			}
 		}
 		if($count >=2) {
-			
+			// $count가 2 이상이라는 말은 한 사용자가 2개 이상의 창을 띄워서 채팅을 들어왔다는 것
+			// 따라서 이 경우에는 채팅 참여 인원의 변동을 다른 사용자에게 전달하지 않는다
 		} else {
 			foreach($this->clients as $client) {
 				if($conn!=$client) {
@@ -59,7 +61,9 @@ class Chat implements MessageComponentInterface {
 		
 		if($double == 1) {
 			// 사용자가 동일한 계정으로 2개 이상의 창에서 채팅방 들어온 경우 동일 계정으로 접속했다는 안내 팝업 이후 메인화면으로 보냄
-			// 다만 이와 같이 if문으로 구분해놓지 않은 경우, 동일 계정으로 2개 이상 들어왔다가 나가면 퇴장 메세지가 출력됨
+			// 다만 이와 같이 if문으로 구분해놓지 않은 경우, 동일 계정으로 2개 이상 들어왔다가 나가면 퇴장했다는 메세지가 출력됨
+			// 이 말은, A가 채팅방에 이미 들어온 상태에서 또 다른 창을 열어 동일한 계정으로 채팅방에 들어왔다가 안내 팝업 이후에 나가게 되면
+			// 기존에 채팅방에 들어왔던 A가 여전히 있음에도 "A님이 퇴장하셨습니다" 라는 문구가 출력된다는 것임
 		} else {
 			foreach($this->clients as $client) {
 				if($conn!=$client) {
@@ -140,7 +144,7 @@ class Chat implements MessageComponentInterface {
 					break;
 				}				
 				
-			case 'user_init':				
+			case 'user_init': // 채팅방 사용자 목록 맨 위에 사용자 본인의 닉네임을 고정시킴
 				$user_list_myid = $user_id;
 				$count = 0;
 				foreach($this->clients as $client) {										
@@ -150,10 +154,10 @@ class Chat implements MessageComponentInterface {
 				}
 				if($count >=2) {
 				} else {
-					$from->send(json_encode(array("type"=>$type,"msg"=>$user_list_myid))); // 채팅방 사용자 목록 맨 위에 사용자 본인의 닉네임을 고정시킴				
+					$from->send(json_encode(array("type"=>$type,"msg"=>$user_list_myid)));
 				}				
 				break;
-			case 'user_list_set':
+			case 'user_list_set': // 사용자가 채팅 첫 접속 시 이미 접속 중인 다른 사용자들의 닉네임을 우측 하단 영역 사용자 닉네임 아래에 출력하는 부분
 				$count = 0;
 				foreach($this->clients as $client) {										
 					if($users[$from_id]==$users[$client->resourceId]) {						
@@ -162,7 +166,7 @@ class Chat implements MessageComponentInterface {
 				}
 				if($count >=2) {
 				} else {
-					foreach($this->clients as $client){ // 사용자가 채팅 첫 접속 시 이미 접속 중인 다른 사용자들의 닉네임을 출력하는 부분											
+					foreach($this->clients as $client){
 						$each_user_res = $client->resourceId;
 						$each_user_id = $users[$each_user_res];
 						$user_list_id = "<p id=".$each_user_res." class='m-1 pl-1 border-bottom' style='font-size: 1.25rem;'><b>".$each_user_id."</b></p>";
@@ -172,7 +176,7 @@ class Chat implements MessageComponentInterface {
 					}
 				}				
 				break;
-			case 'user_list_in':				
+			case 'user_list_in': // 다른 사용자 접속 시 채팅창 우측 하단 현재 접속한 사용자 목록에 들어온 사용자 닉네임 추가하는 부분
 				$user_list_id = "<p id=".$from_id." class='m-1 pl-1 border-bottom'><b>".$user_id."</b></p>";		
 				$count = 0;
 				foreach($this->clients as $client) {										

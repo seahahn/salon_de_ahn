@@ -10,9 +10,6 @@
         include_once "../util/ctgr_list.php";
     }
 ?>
-
-<!-- Header 내부 -->
-
 <!-- Inner -->
     <?php
         if(basename($_SERVER['PHP_SELF']) == "index.php"){ // 메인 페이지는 중앙에 버튼과 함께 사이트 제목 표시함

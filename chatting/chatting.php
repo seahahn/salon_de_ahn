@@ -2,7 +2,7 @@
 include_once "../util/config.php";
 include_once "../member/login_check.php";
 
-$session = $usernickname;
+$session = $usernickname; // 채팅 닉네임 = 사용자 정보에 설정된 닉네임
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,9 +46,11 @@ $session = $usernickname;
 			<?php include_once "../fragments/footer.php"; ?>
 		</div>
 
+	<!-- 채팅 기능 구현 -->
 	<script type="text/javascript">
 		jQuery(function($){
-			// Websocket
+			// Websocket 객체 생성(웹소켓 프로토콜://도메인:포트번호/)
+			// HTTP일때는 ws, HTTPS일때는 wss로 하여 보안 수준을 동일하게 맞춰줘야 함
 			var websocket_server = new WebSocket("wss://salondeahn.me:777/");
 
 			websocket_server.onopen = function(e) { // 사용자 접속 시 서버에 사용자 정보 전달
@@ -151,23 +153,20 @@ $session = $usernickname;
 		
 	</script>
 
-	<!-- Scripts -->
-	<script src="/assets/js/jquery.min.js"></script>
-			<script src="/assets/js/jquery.dropotron.min.js"></script>
-			<script src="/assets/js/jquery.scrolly.min.js"></script>
-			<script src="/assets/js/jquery.scrollex.min.js"></script>
-			<script src="/assets/js/browser.min.js"></script>
-			<script src="/assets/js/breakpoints.min.js"></script>
-			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
-            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+	<!-- Main Scripts -->
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.dropotron.min.js"></script>
+		<script src="/assets/js/jquery.scrolly.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
 
-        <!-- Bootstrap Stripts-->
-			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-            <script src="/bootstrap/bootstrap.bundle.js"></script>
-            <script src="/bootstrap/bootstrap.bundle.min.js"></script>
-
-	
+	<!-- Other Stripts-->
+		<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="/bootstrap/bootstrap.bundle.js"></script>
+		<script src="/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -49,10 +49,7 @@ $url = $s3->url;
 					if($role == "ADMIN") {
 				?>							
 					<form action="photo_delete.php" method="post" enctype="multipart/form-data">
-						<!-- <button type="submit" class="btn-sm">사진첩 등록하기</button>
-						<button type="button" id="folderAdd" class="btn-sm">사진첩 만들기</button> -->
 						<button type="button" class="btn-sm" id="del_photo" name="del_photo">사진 삭제하기</button>
-						<!-- <ul id="folderList"></ul> -->
 					</form>
 				<?php
 					}
@@ -60,7 +57,6 @@ $url = $s3->url;
 			</div>
 			
 			<form class="grid-container m-4" style="grid-template-rows: none;" id="photos" name="photos" action="photo_delete.php" method="post" enctype="multipart/form-data">
-				<!-- <button type="button" class="btn btn-sm" id="del_modal">사진 삭제하기</button> -->
 				<input type="hidden" name="folder" value="<?=$folder?>">
 
 			<?php
@@ -68,11 +64,8 @@ $url = $s3->url;
 					while($f = mysqli_fetch_array($q)){
 				?>			
 				<article class="location-listing">
-					<!-- <a class="location-title" href="javascript:document.gotophotos.submit();"><?=$f['title']?></a> -->
 					<div class="location-image" data-num="<?=$f['num']?>" data-title="<?=$f['title']?>" data-cap="<?=$f['caption']?>">
-						<!-- <a href="javascript:document.gotophotos.submit();"> -->
-							<img src="<?=$url.$f['filepath']?>" alt="<?=$f['title']?>">
-						<!-- </a> -->
+						<img src="<?=$url.$f['filepath']?>" alt="<?=$f['title']?>">
 						<input type="checkbox" class="photo" name="photo[]" value="<?=$f['num']?>" style="z-index: 1;
 						position: absolute;
 						top: 0px;
@@ -160,7 +153,7 @@ $url = $s3->url;
 		</footer>			
 	</div>
 
-		<!-- Scripts -->
+		<!-- Main Scripts -->
 			<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
@@ -169,10 +162,10 @@ $url = $s3->url;
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
+			
+		<!-- Other Stripts-->			
 			<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 			<script src="/assets/js/jquery-ui.js"></script>
-			
-		<!-- Bootstrap Stripts-->			
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
 			<script src="/bootstrap/bootstrap.bundle.min.js"></script>		
