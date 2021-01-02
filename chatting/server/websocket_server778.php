@@ -8,7 +8,7 @@ use Ratchet\WebSocket\WsServer;
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 class Chat implements MessageComponentInterface {
-	protected $runMode = 'P'; // P-운영모드(터미널에 로그 출력 X), D-개발모드(터미널에 로그 출력 O)
+	protected $runMode = 'D'; // P-운영모드(터미널에 로그 출력 X), D-개발모드(터미널에 로그 출력 O)
 	protected $clients;
 	protected $users;
 	protected $double = 0; // 사용자가 동일한 계정으로 창 2개 띄워서 채팅방 2개 같이 입장한 경우 1로 바뀜
@@ -209,7 +209,7 @@ class Chat implements MessageComponentInterface {
     }
 }
 
-$wsPort = 777; //웹소켓 서버 포트 지정
+$wsPort = 778; //웹소켓 서버 포트 지정
 // SSL 인증서를 지정하는 부분
 $loop = React\EventLoop\Factory::create();
 $webSock = new React\Socket\Server('0.0.0.0:'.$wsPort, $loop);

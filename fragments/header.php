@@ -62,6 +62,7 @@
                             <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$talk?>">잡담</a></li>
                         </ul>
                     </li>                    
+                    <li><a href="/chatting/chatting_it.php">IT 분야 채팅방</a></li>
                 </ul>
             </li>
             <li><a href="/intro/finance.php">Finance</a>
