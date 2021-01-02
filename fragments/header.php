@@ -62,7 +62,7 @@
                             <li><a href="/board/board_list.php?ctgr=<?=$it_dev?>&hp=<?=$talk?>">잡담</a></li>
                         </ul>
                     </li>                    
-                    <li><a href="/chatting/chatting_it.php">IT 분야 채팅방</a></li>
+                    <li><a href="/chatting/chatting.php?ctgr=it">IT 주제 채팅방</a></li>
                 </ul>
             </li>
             <li><a href="/intro/finance.php">Finance</a>
@@ -83,6 +83,7 @@
                             <li><a href="/board/board_list.php?ctgr=<?=$finance?>&hp=<?=$talk?>">잡담</a></li>
                         </ul>
                     </li>
+                    <li><a href="/chatting/chatting.php?ctgr=fin">금융 주제 채팅방</a></li>
                 </ul>
             </li>
             <li><a href="/intro/languages.php">Language Studies</a>
@@ -117,6 +118,7 @@
                             <li><a href="/board/board_list.php?ctgr=<?=$languages?>&hp=<?=$talk?>">잡담</a></li>
                         </ul>
                     </li>
+                    <li><a href="/chatting/chatting.php?ctgr=ls">언어 학습 주제 채팅방</a></li>
                 </ul>
             </li>
             <li><a href="/board_ahn/board_list.php?ctgr=<?=$daily_life?>">Daily Life</a>
@@ -124,8 +126,9 @@
                     <li><a href="/board_ahn/board_list.php?ctgr=<?=$daily_life?>">일상 기록</a></li>
                     <li><a href="/board/board_list.php?ctgr=<?=$daily_life_share?>">자유게시판</a></li>
                     <li><a href="/gallery/albums.php">일상 사진 모음</a></li>
+                    <li><a href="/chatting/chatting.php?ctgr=dl">일상 나눔 채팅방</a></li>
                 </ul>
-            </li>            
+            </li>
             <li><a href="/chatting/chatting.php">Chatting</a></li>
 
             <?php

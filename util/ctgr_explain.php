@@ -83,23 +83,4 @@ switch ($category){
 <?php
         break;
 }
-?>                                                                
-
-<!-- <option value="it_dev_learnings">IT - 학습 내용</option>
-<option value="it_dev_usefulinfo">IT - 유용한 정보</option>
-<option value="it_dev_discussion">IT - 토론</option>
-<option value="it_dev_recordshare">IT - 경험 공유</option>
-<option value="it_dev_infoshare">IT - 정보 공유</option>
-<option value="it_dev_qna">IT - Q & A</option>
-<option value="finance_usefulinfo">금융 - 유용한 정보</option>
-<option value="finance_discussion">금융 - 토론</option>
-<option value="finance_recordshare">금융 - 경험 공유</option>
-<option value="finance_infoshare">금융 - 정보 공유</option>
-<option value="finance_qna">금융 - Q & A</option>
-<option value="languages_usefuldata">언어 학습 - 학습 자료</option>
-<option value="languages_discussion">언어 학습 - 토론</option>
-<option value="languages_recordshare">언어 학습 - 경험 공유</option>
-<option value="languages_infoshare">언어 학습 - 정보 공유</option>
-<option value="languages_qna">언어 학습 - Q & A</option>
-<option value="daily_life">일상 기록</option>
-<option value="daily_life_share">자유 주제 글</option> -->
+?>

@@ -2,6 +2,35 @@
 include_once "../util/config.php";
 include_once "../member/login_check.php";
 
+if(isset($_GET['ctgr'])) { 
+	$category=$_GET['ctgr'];
+} else {
+	$category = '';
+}
+
+switch ($category){
+	case 'it': 
+	$port=778;
+	break; 
+
+	case 'fin': 
+	$port=779;
+	break; 
+
+	case 'ls': 
+	$port=780;
+	break; 
+
+	case 'dl': 
+	$port=781;
+	break; 
+
+	default : 
+	$port=777;
+	break; 
+}
+        
+
 $session = $usernickname; // 채팅 닉네임 = 사용자 정보에 설정된 닉네임
 ?>
 <!DOCTYPE html>
@@ -19,10 +48,18 @@ $session = $usernickname; // 채팅 닉네임 = 사용자 정보에 설정된 �
 		<div id="header">
 			<?php include_once "../fragments/header.php"; ?>
 		</div>
-		<div class="wrapper style1 h-50 m-1">
-			<div class="contanier h-100">
+		<div class="wrapper d-flex flex-column h-75 m-1 p-0">
+			<div class="contanier h-75">
+				<div class="d-flex">
+				<div class="col-2"></div>
+				<div class="col p-0 mt-5">
+				<?php include_once "./ctgr_explain.php" ?>
+				</div>
+				<div class="col-2"></div>
+				</div>
 				<div class="row h-90 m-1">
 					<div class="col-2"></div>
+					<?php include_once "./ctgr_explain.php" ?>
 					<div class="col border border-dark bg-light h-100 p-4" id="chat_output" style="overflow-y: scroll;"></div>
 					<div class="col-2 border border-dark bg-light h-100 p-1 d-flex flex-column" id="chat_userlist">
 						<p class="border-bottom border-dark m-1">현재 접속 인원 : <span id="user_num">0</span> 명</p>
@@ -51,7 +88,7 @@ $session = $usernickname; // 채팅 닉네임 = 사용자 정보에 설정된 �
 		jQuery(function($){
 			// Websocket 객체 생성(웹소켓 프로토콜://도메인:포트번호/)
 			// HTTP일때는 ws, HTTPS일때는 wss로 하여 보안 수준을 동일하게 맞춰줘야 함
-			var websocket_server = new WebSocket("wss://salondeahn.me:777/");
+			var websocket_server = new WebSocket("wss://salondeahn.me:<?=$port?>/");
 
 			websocket_server.onopen = function(e) { // 사용자 접속 시 서버에 사용자 정보 전달
 				websocket_server.send(					
