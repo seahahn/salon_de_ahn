@@ -48,7 +48,7 @@ $session = $usernickname; // 채팅 닉네임 = 사용자 정보에 설정된 �
 		<div id="header">
 			<?php include_once "../fragments/header.php"; ?>
 		</div>
-		<div class="wrapper d-flex flex-column h-75 m-1 p-0">
+		<div class="wrapper d-flex flex-column h-100 m-1 p-0">
 			<div class="contanier h-75">
 				<div class="d-flex">
 				<div class="col-2"></div>
