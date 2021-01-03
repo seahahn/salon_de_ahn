@@ -22,7 +22,7 @@ $mail = new PHPMailer(true);
 try {
 
     // 서버세팅
-    $mail -> SMTPDebug = 2;    // 디버깅 설정
+    $mail -> SMTPDebug = false;    // 디버깅 설정
     $mail -> isSMTP();        // SMTP 사용 설정
 
     $mail -> Host = "smtp.gmail.com";                // email 보낼때 사용할 서버를 지정
@@ -67,7 +67,7 @@ try {
     </script>";
 
 } catch (Exception $e) {
-    // echo "Message could not be sent. Mailer Error : ", $mail -> ErrorInfo;
+    echo "Message could not be sent. Mailer Error : ", $mail -> ErrorInfo;
 }
 
 function generateRandomString($length) {
