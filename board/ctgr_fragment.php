@@ -1,4 +1,4 @@
-    <select class="custom-select col-8 mr-2 p-0" name="category" id="category" <?php if(isset($_GET['num'])) echo 'readonly';?>>
+    <select class="custom-select col-8 mr-2 p-0" name="category" id="category" onchange="itemChange()" <?php if(isset($_GET['num'])) echo 'readonly';?>>
         <?php
         if(isset($_POST['category'])){ // 글 읽기 상태에서 글쓰기 누른 경우. 읽던 글의 카테고리 선택하게 함
             $category = $_POST['category'];
@@ -124,21 +124,25 @@ function itemChange() {
         '<option value="backend">백엔드</option>',
         '<option value="ds">데이터 사이언스</option>',
         '<option value="bc">블록체인</option>',
-        '<option value="embed">임베디드</option>'];
+        '<option value="embed">임베디드</option>',
+        '<option value="etc">기타(etc)</option>'];
     var sub_fin = ['<option selected disabled>분류 선택</option>',
         '<option value="stock">주식</option>',
         '<option value="future">선물</option>',
         '<option value="option">옵션</option>',
-        '<option value="fx">외환</option>'];
+        '<option value="fx">외환</option>',
+        '<option value="etc">기타(etc)</option>'];
     var sub_lan = ['<option selected disabled>언어 선택</option>',
         '<option value="en">영어</option>',
         '<option value="cn">중국어</option>',
         '<option value="ru">러시아어</option>',
-        '<option value="ge">독일어</option>'];
+        '<option value="ge">독일어</option>',
+        '<option value="etc">기타(etc)</option>'];
     var sub_dai = ['<option selected disabled>주제 선택</option>',
         '<option value="past">과거</option>',
         '<option value="now">현재</option>',
-        '<option value="future">미래</option>'];   
+        '<option value="future">미래</option>',
+        '<option value="etc">기타(etc)</option>'];   
 
     if(selectCtgr == "it_dev") {
         sub = sub_dev;        
