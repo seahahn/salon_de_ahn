@@ -44,7 +44,7 @@ $url = $s3->url;
 					<input type="hidden" name="folder" value="<?=$folder?>">
 				</form>
 				<button type="button" class="btn-lg" onclick="javascript:document.goback.submit();">◀ 뒤로</button>
-				<h2>My memories</h2>
+				<h2><?=$album['title']?></h2>
 				<?php 
 					if($role == "ADMIN") {
 				?>							
@@ -174,7 +174,7 @@ $url = $s3->url;
 				/* 사진 삭제 이벤트 */
 				$("#del_photo").click(function(){
 					num = $(this).parent().data("num");
-					$("#photo_no_del").attr("value", num);
+					// $("#photo_no_del").attr("value", num);
 					$("#photo_modal_del").modal();
 				});
 

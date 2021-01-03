@@ -31,7 +31,12 @@ $category = "it_dev_portfolio";
 					<div class="container">			                        
                         <br/>                       
                         <?php include_once "./ctgr_explain.php" ?>
-                        <a href="write_itpf.php"><button type="button" class="btn-sm">포트폴리오 작성하기</button></a>
+                        <?php if($role == 'ADMIN') {
+                        ?>
+                            <a href="write_itpf.php"><button type="button" class="btn-sm">포트폴리오 작성하기</button></a>
+                        <?php
+                        }
+                        ?>
                         <div class="row my-5"> <!-- 메인 글 영역-->
                             <!-- <div class="col-12 col-lg-6 col-md-12 col-sm-12 col-12-mobile">
                                 <video class="p-2" src="../video/stocking.mp4" width="100%" height="70%" controls></video>

@@ -185,7 +185,7 @@
 
 .loadmore {
   padding: 10px;
-  background: #ddd;
+  background: #333;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -198,5 +198,6 @@
 }
 
 .loadmore:hover {
-  background: #333;
+  background: #ddd;
+  color: #333;
 }

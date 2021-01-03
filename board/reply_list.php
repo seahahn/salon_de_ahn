@@ -63,13 +63,13 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="text-center">번호</th>
+                                        <th scope="col" class="text-center"></th>
                                         <th scope="col" class="text-center">댓글</th>
                                         <th scope="col" class="text-center">원문 보기</th>
                                         <th scope="col" class="text-center">작성일</th>
                                     </tr>
                                 </thead>
-
+                                <form id="replys" name="replys" action="../reply/reply_deletes.php" method="post" enctype="multipart/form-data">
                                 <?php
                                 // 페이징 구현
                                 $sql = mq("SELECT * FROM reply WHERE email='".$category."' AND unum='".$unum."'");
@@ -105,7 +105,7 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
 
                                 <tbody>
                                     <tr>                                           
-                                        <td width="70" class="text-center"><?=$reply['num'];?></td>
+                                        <td width="70" class="text-center"><input type="checkbox" name="reply[]" value="<?=$reply['num'];?>"></td>
                                         <td width="300" class="text-center"><?=$reply["content"];?></td>
                                         <td width="70">
                                         <!-- 비밀 글 가져오기 -->
@@ -127,9 +127,11 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                                 <?php
                                 }
                                 ?>
+                            </form>
                             </table>
                             <div class="row justify-content-end">                                    
-                                <a href="write.php"><button type="button" class="btn-lg">글쓰기</button></a>
+                                <a class="a_nopadding"><button type="button" class="btn-lg" id="del_reply" name="del_reply">선택 삭제</button></a>
+                                <a class="a_nopadding" href="write.php"><button type="button" class="btn-lg">글쓰기</button></a>
                             </div>
                             <br/>
 
@@ -213,6 +215,26 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                     </div>
                 </div>
 
+            <!-- 댓글 삭제 모달창 구현 -->
+			<div class="modal fade" id="reply_modal_del">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<!-- header -->
+						<div class="modal-header">
+							<!-- header title -->
+							<h4 class="modal-title"><b>댓글 삭제</b></h4>
+							<!-- 닫기(x) 버튼 -->
+							<button type="button" class="close" data-dismiss="modal">X</button>                                                
+						</div>
+						<!-- body -->
+						<div class="modal-body">							
+							<p>선택한 댓글들을 삭제하시겠습니까?<br/> <button type="button" class="btn-sm float-right" onclick="document.replys.submit()">확인</button></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 댓글 모달창 구현 끝 -->
+
         <!-- Footer -->
             <div  class="mt-4"id="footer">
                 <?php include_once "../fragments/footer.php"; ?>
@@ -264,6 +286,12 @@ if(isset($_GET["unum"])) $unum = $_GET["unum"];
                         $(location).attr("href", action_url);
                     });
                 });
+
+                /* 댓글 삭제 이벤트 */
+				$("#del_reply").click(function(){
+					num = $(this).parent().data("num");
+					$("#reply_modal_del").modal();
+				});
             </script>
 
 
