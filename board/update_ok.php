@@ -97,4 +97,4 @@
 		alert("수정되었습니다.");
 		// location.href = '/board/read.php?num=<?=$bno?>';
 	</script>
-	<!-- <meta http-equiv="refresh" content="0 url=./read.php?num=<?=$bno?>"> -->
+	<meta http-equiv="refresh" content="0 url=./read.php?num=<?=$bno?>">
