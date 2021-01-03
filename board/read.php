@@ -154,7 +154,7 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
                                 <div class="dap_to comt_edit">
                                     <?php 
                                     $ori_writer = $reply['ori_writer'];
-                                    if($ori_writer != '') {
+                                    if($ori_writer != '' && $reply['email'] != 'deleted') {
                                     echo "<a href='#reply_area_$reply[ori_reply]'>".$reply['ori_writer']." 님에게</a>";
                                     }
                                     ?>

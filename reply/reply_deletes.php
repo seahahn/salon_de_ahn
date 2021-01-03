@@ -59,4 +59,4 @@
 <script>
 	alert("선택하신 댓글이 삭제 되었습니다.");					
 </script>
-<!-- <meta http-equiv="refresh" content="0 url=../board/reply_list.php?ctgr=<?=$useremail?>&unum=<?=$usernum?>"> -->
+<meta http-equiv="refresh" content="0 url=../board/reply_list.php?ctgr=<?=$useremail?>&unum=<?=$usernum?>">
