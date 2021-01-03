@@ -103,7 +103,7 @@ $sql = mq("SELECT
                                         <div class="row justify-content-end">                                            
                                             <div class="col d-flex justify-content-end">                                                
                                                 <button type="button" class="btn-lg" onclick="document.update.submit()">수정하기</button>
-                                                <a class="pl-1" href=""><button type="button" class="btn-lg">목록</button></a>
+                                                <a class="pl-1" href="it_dev_portfolio.php"><button type="button" class="btn-lg">목록</button></a>
                                             </div>
                                         </div>
                                     </form>
