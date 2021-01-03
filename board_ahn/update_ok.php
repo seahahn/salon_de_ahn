@@ -66,10 +66,13 @@
 	// }
 
 	if(isset($_POST['old_files'])) {
-		$old_filepath_array = $_POST['old_files'];
+		for($i = 0; $i < count($_POST['old_files']); $i++){
+			$old_filepath_array[$i] = $_POST['old_files'][$i];
+		}
 		// print_r($old_filepath_array) ;
+		// print_r($filepath_array) ;
 
-		$filepath_array_result = $old_filepath_array + $filepath_array;
+		$filepath_array_result = array_merge($old_filepath_array, $filepath_array);
 		// print_r($filepath_array_result);
 	} else {
 		$filepath_array_result = $filepath_array;

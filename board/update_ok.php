@@ -61,15 +61,18 @@
 	}
 	// }
 
+	$old_filepath_array = array();
 	if(isset($_POST['old_files'])) {
-		$old_filepath_array = $_POST['old_files'];
+		for($i = 0; $i < count($_POST['old_files']); $i++){
+			$old_filepath_array[$i] = $_POST['old_files'][$i];
+		}
 		// print_r($old_filepath_array) ;
+		// print_r($filepath_array) ;
 
-		$filepath_array_result = $old_filepath_array + $filepath_array;
+		$filepath_array_result = array_merge($old_filepath_array, $filepath_array);
 		// print_r($filepath_array_result);
 	} else {
 		$filepath_array_result = $filepath_array;
-		// print_r($filepath_array_result);
 	}
 
 	$filepath_array_str = serialize($filepath_array_result);
@@ -83,7 +86,7 @@
 			sub_ctgr = '".$sub_ctgr."',
 			headpiece = '".$headpiece."',
             title='".$_POST['title']."',
-			content='".$_POST['content']."',            
+			content='".$_POST['content']."',
             wsecret = '".$wsecret."',
 			att_file = '".$filepath_array_str."'
         WHERE 
@@ -94,4 +97,4 @@
 		alert("수정되었습니다.");
 		// location.href = '/board/read.php?num=<?=$bno?>';
 	</script>
-	<meta http-equiv="refresh" content="0 url=./read.php?num=<?=$bno?>">
+	<!-- <meta http-equiv="refresh" content="0 url=./read.php?num=<?=$bno?>"> -->
