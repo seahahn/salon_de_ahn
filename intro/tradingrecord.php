@@ -201,21 +201,21 @@ $category = "tradingrecord";
                                             if ($page <= 1){
                                                 // 빈 값
                                             } else {                                                
-                                                echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=1' aria-label='Previous'>처음</a></li>";                                                
+                                                echo "<li class='page-item'><a class='page-link' href='/intro/tradingrecord.php?ctgr=$category&page=1' aria-label='Previous'>처음</a></li>";                                                
                                             }
                                             
                                             if ($page <= 1){
                                                 // 빈 값
                                             } else {
                                                 $pre = $page - 1;                                                
-                                                echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$pre'>◀ 이전 </a></li>";                                                
+                                                echo "<li class='page-item'><a class='page-link' href='/intro/tradingrecord.php?ctgr=$category&page=$pre'>◀ 이전 </a></li>";                                                
                                             }
                                             
                                             for($i = $block_start; $i <= $block_end; $i++){
                                                 if($page == $i){
                                                     echo "<li class='page-item'><a class='page-link' disabled><b style='color: #df7366;'> $i </b></a></li>";
                                                 } else {                                                    
-                                                    echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$i'> $i </a></li>";                                                    
+                                                    echo "<li class='page-item'><a class='page-link' href='/intro/tradingrecord.php?ctgr=$category&page=$i'> $i </a></li>";                                                    
                                                 }
                                             }
                                             
@@ -223,13 +223,13 @@ $category = "tradingrecord";
                                                 // 빈 값
                                             } else {
                                                 $next = $page + 1;                                                
-                                                echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$next'> 다음 ▶</a></li>";                                                
+                                                echo "<li class='page-item'><a class='page-link' href='/intro/tradingrecord.php?ctgr=$category&page=$next'> 다음 ▶</a></li>";                                                
                                             }
                                             
                                             if($page >= $total_page){
                                                 // 빈 값
                                             } else {                                                
-                                                echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$total_page'>마지막</a>";                                                
+                                                echo "<li class='page-item'><a class='page-link' href='/intro/tradingrecord.php?ctgr=$category&page=$total_page'>마지막</a>";                                                
                                             }
                                         ?>                                        
                                     </ul>                                                                  
