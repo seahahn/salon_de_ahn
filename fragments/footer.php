@@ -102,7 +102,7 @@ if(basename($_SERVER['PHP_SELF']) == "index.php"){
 </div>
 <!-- 비밀 글 모달창 구현 끝-->
 
-<script src="assets/js/jquery-3.5.1.js"></script>
+<script src="/assets/js/jquery-3.5.1.js"></script>
 <script>
     // 비밀글 클릭시 모달창을 띄우는 이벤트
     $(function(){
