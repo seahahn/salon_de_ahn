@@ -9,7 +9,7 @@ if(isset($_COOKIE['cookieemail'])){
     $cookieemail = '';
     $rememberInfo = '';
     $checked = '';
-}    
+}
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -30,7 +30,7 @@ if(isset($_COOKIE['cookieemail'])){
                         <form name="loginSbmt" id="loginSbmt" method="POST" action="login_ok.php">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" id="email" value="<?=$cookieemail?>">                                                                
+                                <input type="email" name="email" class="form-control" id="email" value="<?=$cookieemail?>">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
@@ -55,7 +55,7 @@ if(isset($_COOKIE['cookieemail'])){
                                 <div class="col">
                                     <a href="findPw.php">Find Password</a>
                                 </div>
-                            </div>                        
+                            </div>
                         </form>
                     </fieldset>
                 </div>
@@ -76,12 +76,12 @@ if(isset($_COOKIE['cookieemail'])){
 			<script src="/assets/js/browser.min.js"></script>
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
-            <script src="login.js"></script>-->
+			<script src="/assets/js/main.js"></script>-->
 
-        <!-- Other Stripts-->
-            <!--<script src="/assets/js/jquery-3.5.1.js"></script>			
+            <!-- Other Stripts-->
+            <!--<script src="/assets/js/jquery-3.5.1.js"></script>
 			<script src="/assets/js/popper.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>-->
+            <script src="login.js"></script>
     </body>
 </html>
