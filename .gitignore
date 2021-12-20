@@ -1,13 +1,13 @@
 .vscode
-aws
-bootstrap
-chatting/class
-chatting/js
-chatting/vendor
-chatting/composer.json
-chatting/composer.lock
-member/send_mail.php
-PHPMailer
-test
-trash
-db_con.php
+# aws
+# bootstrap
+# chatting/class
+# chatting/js
+# chatting/vendor
+# chatting/composer.json
+# chatting/composer.lock
+# member/send_mail.php
+# PHPMailer
+# test
+# trash
+# db_con.php
