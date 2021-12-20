@@ -28,12 +28,12 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
 -->
 <html>
 	<head>
-        <?php include_once "../fragments/head.php"; ?>        
+        <?php include_once "../fragments/head.php"; ?>
 
-        <!-- 파일 업로드 기능 -->            
+        <!-- 파일 업로드 기능 -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
         <script type="text/javascript">
-        $(document).ready (function(){            
+        $(document).ready (function(){
             $("#fileAdd").click(function(){
                 $("#fileList").append(
                     '<input type="file" class="col-8 btn-sm" id="fileUpload" name="upload[]">\
@@ -43,7 +43,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                     $(this).prev().remove();
                     $(this).next().remove();
                     $(this).remove();
-                });                            
+                });
             });
         });
         </script>
@@ -57,8 +57,8 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
             </div>
 
         <!-- Main -->
-            <div class="container">                        
-                <br/>                       
+            <div class="container">
+                <br/>
 
                 <div class="row"> <!-- 메인 글 영역-->
                     <div class="col" id="content">
@@ -66,8 +66,8 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                         <div id="board_write">
                             <form name="write" id="write" action="write_ok.php" method="post" enctype="multipart/form-data">
                                 <table class="table table-striped" style="border: 1px solid #ddddda">
-                                    <thead>                                                
-                                    </thead>	
+                                    <thead>
+                                    </thead>
                                     <tbody>
                                         <tr>
                                             <td>
@@ -80,7 +80,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                                         <tr>
                                             <td><input type="text" class="form-control" placeholder="글 제목" name="title" id="title" value="<?php if(isset($num)) { echo 'RE:#'.$num.' | '.$ori_title; } ?>" required></td>
                                         </tr>
-                                        <tr>	
+                                        <tr>
                                             <td><textarea class="form-control" placeholder="글 내용" name="content" id="ucontent" style="height: 350px" required></textarea></td>
                                         </tr>
                                         <tr>
@@ -90,7 +90,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>                                       
+                                </table>
                                 <div class="d-flex justify-content-end">
                                     <div class="form-check d-flex align-content-center">
                                         <input class="form-check-input align-self-center mt-0" type="checkbox" value="1" name="wsecret" id="wsecret">
@@ -106,38 +106,39 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                                         <input type="hidden" name="unum" value="<?=$usernum?>"/> <!-- 게시물을 작성한 사용자의 고유 번호-->
                                         <?php if(isset($_GET['num'])) {;?>
                                         <input type="hidden" name="category" value="<?=$category?>"/> <!-- 게시물의 카테고리. 사용자가 답글로 눌러서 들어올 경우 상단의 select가 비활성화되어 값이 안 넘어가기에 별도로 만들어서 넘겨줌 -->
-                                        <?php } ?>                                                
+                                        <?php } ?>
                                         <button type="button" class="btn-lg" onclick="check_ctgr()">글쓰기</button>
                                         <a class="pl-1" href="board_list.php?ctgr=<?=$category?>"><button type="button" class="btn-lg">목록</button></a>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                    </div>											
-                </div>																	
+                    </div>
+                </div>
             </div>
-				
+
         <!-- Footer -->
             <div  class="mt-4"id="footer">
                 <?php include_once "../fragments/footer.php"; ?>
             </div>
 		</div>
 
+        <?php include_once "../fragments/scripts.php"; ?>
 		<!-- Main Scripts -->
-            <script src="/assets/js/jquery.min.js"></script>
+            <!--<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>
 			<script src="/assets/js/browser.min.js"></script>
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
-            <script src="/assets/js/main.js"></script>            
-            
+            <script src="/assets/js/main.js"></script>-->
+
         <!-- Other Stripts-->
-            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+            <!--<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
-            <script src="/bootstrap/bootstrap.bundle.min.js"></script>
+            <script src="/bootstrap/bootstrap.bundle.min.js"></script>-->
 
         <!-- HTML 텍스트 에디터(CKEDITOR) 추가-->
             <script>
@@ -153,7 +154,7 @@ if(isset($_GET['num'])){ // 글읽기에서 '답글' 버튼 누른 경우. 게�
                         alert("게시판 분류를 선택해주세요.");
                         return;
                     }
-                    if($("#sub_ctgr option:selected").val() == "none_subctgr"){                        
+                    if($("#sub_ctgr option:selected").val() == "none_subctgr"){
                         alert("게시판 소분류를 선택해주세요.");
                         return;
                     }

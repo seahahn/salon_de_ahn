@@ -28,7 +28,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 -->
 <html>
 	<head>
-        <?php include_once "../fragments/head.php"; ?>             
+        <?php include_once "../fragments/head.php"; ?>
 	</head>
 	<body class="right-sidebar is-preload">
 		<div id="page-wrapper">
@@ -37,13 +37,13 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 				<div class="mb-4" id="header">
                     <?php include_once "../fragments/header.php"; ?>
                 </div>
-                
+
                 <!-- 비밀 글 모달창 양식 구현-->
                 <div class="modal fade modal-center" id="modal_div">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <!-- header -->
-                            <div class="modal-header">                                
+                            <div class="modal-header">
                                 <!-- header title -->
                                 <h4 class="modal-title"><b>비밀글입니다.</b></h4>
                                 <!-- 닫기(x) 버튼 -->
@@ -60,8 +60,8 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 
 			<!-- Main -->
 				<!-- <div class="wrapper style1"> -->
-					<div class="container">			                        
-                        <br/>                       
+					<div class="container">
+                        <br/>
                         <?php include_once "./ctgr_explain.php" ?>
 						<div class="row"> <!-- 메인 글 영역-->
 							<div class="col-12" id="content">
@@ -70,7 +70,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 									<thead>
 										<tr>
 											<th scope="col" class="text-center">번호</th>
-                                            <th scope="col" class="text-center">분류</th>                                            
+                                            <th scope="col" class="text-center">분류</th>
 											<th scope="col" class="text-center">제목</th>
 											<th scope="col" class="text-center">작성자</th>
                                             <th scope="col" class="text-center">작성일</th>
@@ -106,13 +106,13 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 
                                     // 게시물 목록 가져오기
                                     if(isset($unum)){
-                                        $sql2 = mq("SELECT * FROM board WHERE email='".$category."' AND unum='".$unum."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                        $sql2 = mq("SELECT * FROM board WHERE email='".$category."' AND unum='".$unum."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴
                                     } else if(isset($hp)) {
                                         $sql2 = mq("SELECT * FROM board WHERE category='".$category."' AND headpiece='".$hp."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list");
                                     } else if(isset($lang)){
                                         $sql2 = mq("SELECT * FROM board WHERE category='".$category."' AND sub_ctgr='".$lang."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list");
                                     } else {
-                                        $sql2 = mq("SELECT * FROM board WHERE category='".$category."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                        $sql2 = mq("SELECT * FROM board WHERE category='".$category."' ORDER BY in_num DESC, wdate ASC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴
                                     }
 
                                     $post_count = 0;
@@ -123,7 +123,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                         if(strlen($title)>40){
                                             $title=str_replace($board["title"],mb_substr($board["title"],0,40,"utf-8")."...",$board["title"]);
                                         }
-                                        
+
                                         /* 댓글 수 구하기 */
                                         $sql3 = mq("SELECT
                                                         *
@@ -132,45 +132,45 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                     WHERE
                                                         con_num='".$board['num']."'
                                                 ");
-                                        $rep_count = mysqli_num_rows($sql3); // 레코드의 수(댓글의 수)                                        
+                                        $rep_count = mysqli_num_rows($sql3); // 레코드의 수(댓글의 수)
                                     ?>
 
-									<tbody>                                        
-										<tr>                                                                                  
+									<tbody>
+										<tr>
                                             <td width="70" class="text-center"><?=$board['num'];?></td>
                                             <td width="100" class="text-center" style="font-size: 1rem;"><?=$sub_ctgr;?></td>
                                             <td width="270">
-                                            <?php 
+                                            <?php
                                                 $lockimg="<img class='align-middle' src='../images/black_lock.png' alt='lock' title='lock' width='6%' height='auto'>";
                                                 $attfile="<img class='align-middle' src='../images/attfile.png' alt='attfile' title='attfile' width='4%' height='auto'>";
                                                 $rep="<span class='align-middle' style='color:blue;'>[$board[rep_num]]</span>";
                                                 $att = substr($board['att_file'], 2, 1); // 첨부파일 경로 저장된 배열에서 첨부파일의 개수를 가져옴
                                                 // 비밀글 가져오기
                                                 if($board['wsecret']=="1"){ // lock_post 값이 1이면 잠금
-                                                    if($board['depth']>0) {                                                        
+                                                    if($board['depth']>0) {
                                                         // if($board['depth']>1){
                                                             // echo "<img height=1 width=" . $board['depth']*10 . ">└";
                                                             // echo "<img height=1 width='10'>└";
                                                         // } else {
                                                             echo "└";
-                                                        // }                                                    
+                                                        // }
                                                     }
-                                            ?>                                                
+                                            ?>
                                                 <div class="d-inline"><span class="lock_check align-middle" style="cursor:pointer" data-action="./read.php?num=" data-check=<?=$role?> data-num="<?=$board['num']?>" data-user="<?=$board['email']?>">[<?=$headpiece?>] <?=$title?></span><?=$lockimg?></div>
-                                                <?php 
+                                                <?php
                                                 if($att > 0) echo $attfile;
                                                 if($rep_count>0) echo $rep;
                                                 ?>
                                                 </td>
-                                            <?php                                                     
+                                            <?php
                                                 }else{	// 아니면 공개 글
-                                                    if($board['depth']>0) {                                                        
+                                                    if($board['depth']>0) {
                                                         // if($board['depth']>1){
                                                             // echo "<img height=1 width=" . $board['depth']*10 . ">└";
                                                             // echo "<img height=1 width=10>└";
                                                         // } else {
                                                             echo "└";
-                                                        // }                                                    
+                                                        // }
                                                     }
                                             ?>
                                                 <div class="d-inline"><span class="read_check align-middle" style="cursor:pointer" data-action="./read.php?num=<?=$board['num']?>">[<?=$headpiece?>] <?=$title?></span></div>
@@ -184,24 +184,24 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                             <td width="70" class="text-center"><?=$board["writer"];?></td>
                                             <td width="100" class="text-center"><?=$board["wdate"];?></td>
                                             <td width="50" class="text-center"><?=$board["views"];?></td>
-                                            
+
 										</tr>
                                     </tbody>
                                     <?php
                                     $post_count++;
-                                    }                                                                                                            
+                                    }
                                     ?>
                                 </table>
-                                <?php                                    
+                                <?php
                                     if($post_count == 0) {
-                                    ?>                                    
+                                    ?>
                                             <div class="d-flex align-items-center justify-content-center" style="height: 25vh;">
                                             <p class="text-center">작성된 게시물이 없습니다.</p>
-                                            </div>                                                                                       
+                                            </div>
                                     <?php
                                     }
                                     ?>
-                                <div class="row justify-content-end">                                                                        
+                                <div class="row justify-content-end">
                                     <?php
                                         if($role == "ADMIN") {
                                     ?>
@@ -226,7 +226,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                     echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=1' aria-label='Previous'>처음</a></li>";
                                                 }
                                             }
-                                            
+
                                             if ($page <= 1){
                                                 // 빈 값
                                             } else {
@@ -237,7 +237,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                     echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$pre'>◀ 이전 </a></li>";
                                                 }
                                             }
-                                            
+
                                             for($i = $block_start; $i <= $block_end; $i++){
                                                 if($page == $i){
                                                     echo "<li class='page-item'><a class='page-link' disabled><b style='color: #df7366;'> $i </b></a></li>";
@@ -249,7 +249,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                     }
                                                 }
                                             }
-                                            
+
                                             if($page >= $total_page){
                                                 // 빈 값
                                             } else {
@@ -260,7 +260,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                     echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$next'> 다음 ▶</a></li>";
                                                 }
                                             }
-                                            
+
                                             if($page >= $total_page){
                                                 // 빈 값
                                             } else {
@@ -270,8 +270,8 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                                     echo "<li class='page-item'><a class='page-link' href='/board/board_list.php?ctgr=$category&page=$total_page'>마지막</a>";
                                                 }
                                             }
-                                        ?>                                        
-                                    </ul>                                                                  
+                                        ?>
+                                    </ul>
                                 </nav>
 
                                 <!-- 페이징 하단 게시물 검색 -->
@@ -289,10 +289,10 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                                     </div>
                                 </div>
 
-							</div>											
-						</div>																	
+							</div>
+						</div>
 					</div>
-										
+
 				<!-- </div> -->
 
 			<!-- Footer -->
@@ -302,8 +302,9 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 
 		</div>
 
+        <?php include_once "../fragments/scripts.php"; ?>
 		<!-- Scripts -->
-            <script src="/assets/js/jquery.min.js"></script>
+            <!--<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>
@@ -311,18 +312,18 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
-            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>-->
 
         <!-- Bootstrap Stripts-->
 			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
-            <script src="/bootstrap/bootstrap.bundle.min.js"></script>    
+            <script src="/bootstrap/bootstrap.bundle.min.js"></script>-->
 
-            
+
 
         <!-- 게시물 읽기 페이지 이동 기능-->
-            <script>            
+            <script>
                 // $(function(){
                 //     $(".read_check").click(function(){
                 //         var action_url = $(this).attr("data-action");
@@ -340,7 +341,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                         // 관리자 계정일 경우 바로 해당 글로 이동
                         if($(this).attr("data-check")=="ADMIN") {
                             var action_url = $(this).attr("data-action")+$(this).attr("data-num");
-                            $(location).attr("href", action_url);                            
+                            $(location).attr("href", action_url);
                         } else if(user == "<?=$useremail?>") {
                             // 일반 사용자일 경우 사용자 이메일과 게시물 작성한 사용자의 이메일 대조하여 일치하면 해당 글로 이동
                             var action_url = $(this).attr("data-action")+$(this).attr("data-num");
@@ -350,7 +351,7 @@ if(isset($_GET["lang"])) $lang = $_GET["lang"]; // 언어 학습 카테고리에
                         }
                     });
                 });
-            
+
                 // 일반 글 클릭시 해당 num의 read 페이지로 이동하는 이벤트
                 $(function(){
                     $(".read_check").click(function(){

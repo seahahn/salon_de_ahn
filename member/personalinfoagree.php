@@ -102,9 +102,9 @@
 개인정보를 처리하는 데이터베이스시스템에 대한 접근권한의 부여,변경,말소를 통하여 개인정보에 대한 접근통제를 위하여 필요한 조치를 하고 있으며 침입차단시스템을 이용하여 외부로부터의 무단 접근을 통제하고 있습니다.</p>
 
 
-
+	<?php include_once "../fragments/scripts.php"; ?>
         <!-- Scripts -->
-			<script src="/assets/js/jquery.min.js"></script>
+			<!--<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>
@@ -112,16 +112,16 @@
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
-            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>           
-            
+            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>-->
+
 
 			<!-- Bootstrap Stripts-->
 			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
-            <script src="/bootstrap/bootstrap.bundle.min.js"></script>
+            <script src="/bootstrap/bootstrap.bundle.min.js"></script>-->
 
-            
+
 
     </body>
 </html>

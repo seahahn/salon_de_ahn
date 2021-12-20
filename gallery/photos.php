@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once "../util/config.php";
 include_once "../db_con.php";
 include_once "../s3.php";
@@ -24,12 +24,12 @@ if(mysqli_num_rows($q) != 0) {
 		<link rel="stylesheet" href="gal_assets/style.css">
 		<?php include_once "../fragments/head.php"; ?>
 
-		<!-- 사진 업로드 기능 -->            
+		<!-- 사진 업로드 기능 -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
         <script type="text/javascript">
-        $(document).ready (function(){            
+        $(document).ready (function(){
             $("#fileAdd").click(function(){ // 사진 한 장씩 업로드
-                $("#fileList").append(					
+                $("#fileList").append(
 					'<div>\
 					<input type="file" accept="image/*" class="col-8 btn-sm" id="fileUpload" name="photos[]">\
 					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
@@ -41,14 +41,14 @@ if(mysqli_num_rows($q) != 0) {
                 );
                 $(".btnRemove").on('click', function(){
                     // $(this).prev().remove();
-					// $(this).next().remove();					
+					// $(this).next().remove();
 					$(this).siblings().remove();
 					$(this).remove();
-                });                            
+                });
 			});
-			
+
 			$("#filesAdd").click(function(){ // 사진 여러 장 업로드
-                $("#fileList").append(					
+                $("#fileList").append(
 					'<div>\
 					<input type="file" accept="image/*" class="col-8 btn-sm" id="filesUpload" name="photos_multi[]" multiple>\
 					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
@@ -60,16 +60,16 @@ if(mysqli_num_rows($q) != 0) {
                 );
                 $(".btnRemove").on('click', function(){
                     // $(this).prev().remove();
-					// $(this).next().remove();					
+					// $(this).next().remove();
 					$(this).siblings().remove();
 					$(this).remove();
-					
-                });                            
+
+                });
             });
 		});
 		</script>
 
-		
+
 	</head>
 	<body id="body" class="is-preload-0 is-preload-1 is-preload-2" style="overflow-x: hidden;">
 	<div id="page-wrapper">
@@ -77,20 +77,20 @@ if(mysqli_num_rows($q) != 0) {
 		<div id="header">
 			<?php include_once "../fragments/header.php"; ?>
 		</div>
-		
-		<div class="container">			
-			
-			
+
+		<div class="container">
+
+
 			<header class="clearfix mt-3">
 				<button onclick ="location.href='albums.php'" type="button" class="btn-lg">◀ 뒤로</button>
 				<p class="m-0 mt-3"><?=$album['title']?></p>
-				
+
 				<span class="m-0"><?=$album['caption']?><br/><?=$album['rcday']?></span>
-				
+
 			</header>
-			<?php 
+			<?php
 			if($role == "ADMIN") {
-			?>							
+			?>
 				<form action="photo_upload.php" method="post" enctype="multipart/form-data">
 					<input type="hidden" id="folder" name="folder" value="<?=$album['title_key']?>">
 					<button type="submit" class="btn-sm">사진 업로드하기</button>
@@ -123,18 +123,18 @@ if(mysqli_num_rows($q) != 0) {
 				}
 				?>
 			</div>
-			
+
 		<!-- 올린 사진이 없는 경우-->
 			<?php
 			if($row == 0) {
 			?>
 				<div class="d-flex align-items-center justify-content-center" style="height: 40vh;">
 				<p class="text-center" style="font-size: 2rem;">아직 올라온 사진이 없네요</p>
-				</div>						
+				</div>
 			<?php
 			}
 			?>
-				
+
 			<div id="loadmore" class="loadmore" onclick="append_list()">사진 더보기</div>
 		</div>
 		<div class="lightbox">
@@ -171,29 +171,30 @@ if(mysqli_num_rows($q) != 0) {
 			<!-- Footer -->
 			<footer id="footer" class="m-0">
 				<?php include_once "../fragments/footer.php"; ?>
-			</footer>			
+			</footer>
 	</div>
 
-		<!-- Main Scripts -->			
-			<script src="/assets/js/jquery.min.js"></script>
+	<?php include_once "../fragments/scripts.php"; ?>
+		<!-- Main Scripts -->
+			<!--<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>
 			<script src="/assets/js/browser.min.js"></script>
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
-			
+			<script src="/assets/js/main.js"></script>-->
+
 		<!-- Other Stripts-->
-			<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+			<!--<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
-			<script src="/bootstrap/bootstrap.bundle.min.js"></script>			
+			<script src="/bootstrap/bootstrap.bundle.min.js"></script>-->
 
 		<!-- 사진 더보기 버튼 동작 이벤트-->
 			<script>
 				if(11 < <?=$total?>) {
-					$('#loadmore').css("display", "block"); // 다 불러왔으면 더보기 버튼 안 보이게 만듦				
+					$('#loadmore').css("display", "block"); // 다 불러왔으면 더보기 버튼 안 보이게 만듦
 				}
 
 				var items = [];
@@ -216,7 +217,7 @@ if(mysqli_num_rows($q) != 0) {
 				?>
 				var i = 0;
 				var limit = 10;
-				
+
 				function append_list() {
 						while(i < limit) {
 							$('#pt_section').append( $(items[i]) );
@@ -227,11 +228,11 @@ if(mysqli_num_rows($q) != 0) {
 							}
 						}
 						limit += 10; // 더 불러올 사진 개수
-					
+
 					waitForImages();
 				}
 			</script>
-			
+
 		<!-- 사진 불러오기 & 사진 확대 창 띄우는 스크립트-->
 			<script>
 				$( window ).resize( function () {
@@ -242,6 +243,6 @@ if(mysqli_num_rows($q) != 0) {
 			<script src="gal_assets/unpkg.js"></script>
 			<script src="gal_assets/masonry.js"></script>
 			<script src="gal_assets/photo_lightbox.js?ver=2"></script>
-			
+
 	</body>
 </html>

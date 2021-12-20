@@ -29,12 +29,12 @@ $url = $s3->url;
 -->
 <html>
 	<head>
-        <?php include_once "../fragments/head.php"; ?>             
+        <?php include_once "../fragments/head.php"; ?>
         <link rel="stylesheet" href="/assets/css/jquery-ui.css" />
-        <!-- 파일 업로드 기능 -->            
+        <!-- 파일 업로드 기능 -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
         <script type="text/javascript">
-        $(document).ready (function(){            
+        $(document).ready (function(){
             $("#fileAdd").click(function(){
                 $("#fileList").append(
                     '<div>\
@@ -66,14 +66,14 @@ $url = $s3->url;
                     // $(this).next().remove();
                     $(this).siblings().remove();
                     $(this).remove();
-                });                            
-                $( ".date" ).datepicker({  
+                });
+                $( ".date" ).datepicker({
 					nextText: '다음 달', // next 아이콘의 툴팁.
 					prevText: '이전 달', // prev 아이콘의 툴팁.
 					changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
 					changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
 					yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
-					showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
+					showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다.
 					currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
 					closeText: '닫기',  // 닫기 버튼 패널
 					dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
@@ -81,7 +81,7 @@ $url = $s3->url;
             });
 
             $("#filesAdd").click(function(){ // 사진 여러 장 업로드
-                $("#fileList").append(					
+                $("#fileList").append(
 					'<div>\
 					<input type="file" accept="audio/*" class="col-8 btn-sm" id="filesUpload" name="records[]" multiple>\
 					<button type="button" class="btn-sm btnRemove">첨부 취소</button>\
@@ -108,18 +108,18 @@ $url = $s3->url;
                 // <input type="text" class="form-control form-control-sm col" placeholder="분류(여러 개 공통)" name="ctgrs">\
                 $(".btnRemove").on('click', function(){
                     // $(this).prev().remove();
-					// $(this).next().remove();					
+					// $(this).next().remove();
 					$(this).siblings().remove();
 					$(this).remove();
-					
-                });                            
-                $( ".date" ).datepicker({  
+
+                });
+                $( ".date" ).datepicker({
 					nextText: '다음 달', // next 아이콘의 툴팁.
 					prevText: '이전 달', // prev 아이콘의 툴팁.
 					changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
 					changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
 					yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
-					showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
+					showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다.
 					currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
 					closeText: '닫기',  // 닫기 버튼 패널
 					dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
@@ -134,14 +134,14 @@ $url = $s3->url;
 			<!-- Header -->
 				<div class="mb-4" id="header">
                     <?php include_once "../fragments/header.php"; ?>
-                </div>              
+                </div>
 
                 <!-- 녹음 기록 정보 수정 모달창 양식 구현-->
                 <div class="modal fade modal-center" id="modal_div">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <!-- header -->
-                            <div class="modal-header">                                
+                            <div class="modal-header">
                                 <!-- header title -->
                                 <h4 class="modal-title"><b>녹음 기록 정보 수정</b></h4>
                                 <!-- 닫기(x) 버튼 -->
@@ -151,7 +151,7 @@ $url = $s3->url;
                             <div class="modal-body">
                                 <form name="edit" id="edit" action="langrecord_edit.php" method="POST">
                                     <input id="edit_num" name="edit_num" type="hidden" value="">
-                                    <div class="d-flex">                                        
+                                    <div class="d-flex">
                                         <!-- <input type="text" class="form-control form-control-sm col" placeholder="언어" name="lang_input" id="lang_input" value="">
                                         <input type="text" class="form-control form-control-sm col" placeholder="분류" name="ctgr_input" id="ctgr_input" value=""> -->
                                         <select class="custom-select col" name="lang_input">
@@ -167,7 +167,7 @@ $url = $s3->url;
                                             <option value="exam">시험 문제 답하기</option>
                                             <option value="freetalk">자유 발화</option>
                                         </select>
-                                    </div>                                    
+                                    </div>
                                     <input type="text" class="form-control form-control-sm col" placeholder="기록명" name="title_input" id="title_input" value="">
                                     <input type="text" class="form-control form-control-sm col" placeholder="기록일" name="date_input" id="date_input" value="">
                                     <button type="button" class="btn-sm float-right" onclick="document.edit.submit();">수정</button>
@@ -177,11 +177,11 @@ $url = $s3->url;
                     </div>
                 </div>
                 <!-- 녹음 기록 정보 수정 모달창 구현 끝-->
-                
+
 			<!-- Main -->
 				<!-- <div class="wrapper style1"> -->
-					<div class="container">			                        
-                        <br/>                       
+					<div class="container">
+                        <br/>
                         <?php include_once "./ctgr_explain.php" ?>
 						<div class="row"> <!-- 메인 글 영역-->
 							<div class="col-12" id="content">
@@ -203,7 +203,7 @@ $url = $s3->url;
 											<th scope="col" class="text-center">분류</th>
                                             <th scope="col" class="text-center">기록명</th>
                                             <th scope="col" class="text-center">녹음 파일</th>
-                                            <th scope="col" class="text-center">기록일</th>                                            
+                                            <th scope="col" class="text-center">기록일</th>
 										</tr>
                                     </thead>
 
@@ -231,9 +231,9 @@ $url = $s3->url;
 
                                     // 게시물 목록 가져오기
                                     if(isset($lang)){
-                                        $sql2 = mq("SELECT * FROM langrecord WHERE lang_key='".$lang."' ORDER BY num DESC, wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                        $sql2 = mq("SELECT * FROM langrecord WHERE lang_key='".$lang."' ORDER BY num DESC, wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴
                                     } else {
-                                        $sql2 = mq("SELECT * FROM langrecord ORDER BY num DESC, wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴                                   
+                                        $sql2 = mq("SELECT * FROM langrecord ORDER BY num DESC, wdate DESC LIMIT $page_start, $list"); // $page_start를 시작으로 $list의 수만큼 보여주도록 가져옴
                                     }
 
                                     $post_count = 0;
@@ -243,10 +243,10 @@ $url = $s3->url;
                                         /* 글자수가 50이 넘으면 ... 처리해주기 */
                                         if(strlen($title)>50){
                                             $title=str_replace($board["title"],mb_substr($board["title"],0,50,"utf-8")."...",$board["title"]);
-                                        }                                        
+                                        }
                                     ?>
 
-									<tbody>                                        
+									<tbody>
 										<tr>
                                             <?php
                                             if($role == "ADMIN") {
@@ -266,32 +266,32 @@ $url = $s3->url;
                                             <td width="300" id="title_<?=$board['num'];?>" value="<?=$board['title'];?>" class="align-middle" style="font-size: 1rem;"><?=$title?></td>
                                             <td width="50" class="align-middle">
                                                 <audio class="" src="<?=$url.$board['filepath']?>" controls></audio>
-                                            </td>                                            
-                                            <td width="90" id="date_<?=$board['num'];?>" value="<?=$board['wdate'];?>" class="text-center align-middle"><?=$board["wdate"];?></td>                                            
-                                            
+                                            </td>
+                                            <td width="90" id="date_<?=$board['num'];?>" value="<?=$board['wdate'];?>" class="text-center align-middle"><?=$board["wdate"];?></td>
+
 										</tr>
                                     </tbody>
                                     <?php
                                     $post_count++;
-                                    }                                                                                                            
+                                    }
                                     ?>
                                 </table>
                                 </form>
-                                <?php                                    
+                                <?php
                                     if($post_count == 0) {
-                                    ?>                                    
+                                    ?>
                                             <div class="d-flex align-items-center justify-content-center" style="height: 25vh;">
                                             <p class="text-center">작성된 게시물이 없습니다.</p>
-                                            </div>                                                                                       
+                                            </div>
                                     <?php
                                     }
                                     ?>
-                                
-                                <div class="row justify-content-between">                                
+
+                                <div class="row justify-content-between">
                                     <?php
                                         if($role == "ADMIN") {
                                     ?>
-                                        <form action="langrecord_upload.php" method="POST" enctype="multipart/form-data">                                            
+                                        <form action="langrecord_upload.php" method="POST" enctype="multipart/form-data">
                                             <button type="submit" class="btn-sm p-2">녹음파일 업로드하기</button>
                                             <button type="button" id="fileAdd" class="btn-sm p-2">녹음파일 추가</button>
                                             <button type="button" id="filesAdd" class="btn-sm p-2">녹음파일 여러 개 추가</button>
@@ -315,7 +315,7 @@ $url = $s3->url;
                                                     echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&page=1' aria-label='Previous'>처음</a></li>";
                                                 }
                                             }
-                                            
+
                                             if ($page <= 1){
                                                 // 빈 값
                                             } else {
@@ -326,7 +326,7 @@ $url = $s3->url;
                                                     echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&page=$pre'>◀ 이전 </a></li>";
                                                 }
                                             }
-                                            
+
                                             for($i = $block_start; $i <= $block_end; $i++){
                                                 if($page == $i){
                                                     echo "<li class='page-item'><a class='page-link' disabled><b style='color: #df7366;'> $i </b></a></li>";
@@ -338,7 +338,7 @@ $url = $s3->url;
                                                     }
                                                 }
                                             }
-                                            
+
                                             if($page >= $total_page){
                                                 // 빈 값
                                             } else {
@@ -349,7 +349,7 @@ $url = $s3->url;
                                                     echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&page=$next'> 다음 ▶</a></li>";
                                                 }
                                             }
-                                            
+
                                             if($page >= $total_page){
                                                 // 빈 값
                                             } else {
@@ -359,8 +359,8 @@ $url = $s3->url;
                                                     echo "<li class='page-item'><a class='page-link' href='/intro/langstudyrecord.php?ctgr=$category&page=$total_page'>마지막</a>";
                                                 }
                                             }
-                                        ?>                                        
-                                    </ul>                                                                  
+                                        ?>
+                                    </ul>
                                 </nav>
 
                                 <!-- 페이징 하단 게시물 검색 -->
@@ -378,10 +378,10 @@ $url = $s3->url;
                                     </div>
                                 </div> -->
 
-							</div>											
-						</div>																	
+							</div>
+						</div>
 					</div>
-										
+
 				<!-- </div> -->
 
 			<!-- Footer -->
@@ -391,8 +391,9 @@ $url = $s3->url;
 
 		</div>
 
+        <?php include_once "../fragments/scripts.php"; ?>
 		<!-- Scripts -->
-            <script src="/assets/js/jquery.min.js"></script>
+            <!--<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>
@@ -400,23 +401,23 @@ $url = $s3->url;
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
-            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-            <script src="/assets/js/jquery-ui.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>-->
 
-        <!-- Bootstrap Stripts-->
+            <!-- Bootstrap Stripts-->
 			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
-            <script src="/bootstrap/bootstrap.bundle.min.js"></script>     
+            <script src="/bootstrap/bootstrap.bundle.min.js"></script>-->
+            <script src="/assets/js/jquery-ui.js"></script>
 
         <!-- 녹음 기록 정보 수정 모달창 띄우는 이벤트-->
             <script>
                 $(function(){
                     $(".edit").click(function(){
-                        var num = $(this).val();                        
-                        $("#modal_div").modal();                        
-                        $("#edit_num").attr("value", num);                        
-                        
+                        var num = $(this).val();
+                        $("#modal_div").modal();
+                        $("#edit_num").attr("value", num);
+
                         $.ajax({
                             url : "./langrecord_info.php",
                             type : "POST",
@@ -424,20 +425,20 @@ $url = $s3->url;
                             dataType : "JSON",
                             data : {
                                 "num" : num
-                            },                            
-                            success : function(data){                                
+                            },
+                            success : function(data){
                                 $("#title_input").attr("value", data.title);
                                 $("#date_input").attr("value", data.date);
                             }
                         });
 
-                        $( "#date_input" ).datepicker({  
+                        $( "#date_input" ).datepicker({
                             nextText: '다음 달', // next 아이콘의 툴팁.
                             prevText: '이전 달', // prev 아이콘의 툴팁.
                             changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
                             changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
                             yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
-                            showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
+                            showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다.
                             currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
                             closeText: '닫기',  // 닫기 버튼 패널
                             dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.

@@ -2,16 +2,16 @@
 include_once "../util/config.php";
 include_once "../db_con.php";
 
-$bno = $_GET['num']; // $bno에 num값을 받아와 넣음     
-	
+$bno = $_GET['num']; // $bno에 num값을 받아와 넣음
+
 	/* 받아온 num값을 선택해서 게시글 정보 가져오기 */
-	$sql = mq("SELECT 
-				 * 
-                FROM 
-                    board 
-                WHERE 
+	$sql = mq("SELECT
+				 *
+                FROM
+                    board
+                WHERE
                     num='".$bno."'
-			"); 
+			");
     $board = $sql->fetch_array();
     $board_class = $board['board_class'];
     $category = $board['category'];
@@ -19,23 +19,23 @@ $bno = $_GET['num']; // $bno에 num값을 받아와 넣음
     /* 조회수 올리기  */
     $views = $board['views'];
     if(empty($_COOKIE["read_".$bno.$board_class])){
-        $views = mysqli_fetch_array(mq("SELECT 
-                                        * 
-                                    FROM 
-                                        board 
-                                    WHERE 
+        $views = mysqli_fetch_array(mq("SELECT
+                                        *
+                                    FROM
+                                        board
+                                    WHERE
                                         num ='".$bno."'
                                     "));
         $views = $views['views'] + 1;
-        mq("UPDATE 
-                board 
-            SET 
-                views = '".$views."' 
-            WHERE 
+        mq("UPDATE
+                board
+            SET
+                views = '".$views."'
+            WHERE
                 num = '".$bno."'
         ");
         setcookie("read_".$bno.$board_class, $bno.$board_class, time() + 60 * 60 * 24);
-    }    
+    }
 	/* 조회수 올리기 끝 */
 include_once "../fragments/headpiece.php";
 ?>
@@ -48,7 +48,7 @@ include_once "../fragments/headpiece.php";
 -->
 <html>
 	<head>
-        <?php include_once "../fragments/head.php"; ?>        
+        <?php include_once "../fragments/head.php"; ?>
 	</head>
 	<body class="right-sidebar is-preload">
 		<div id="page-wrapper">
@@ -60,27 +60,27 @@ include_once "../fragments/headpiece.php";
 
 			<!-- Main -->
                 <div class="container">
-                    
-                    <br/>                       
+
+                    <br/>
                     <?php include_once "./ctgr_explain.php" ?>
                     <!-- 메인 글 영역 -->
                     <!-- <div class="row"> -->
                         <div class="d-flex flex-column">
-                            <!-- 글 내용 영역 -->								
+                            <!-- 글 내용 영역 -->
                             <!-- 글 불러오기 -->
                             <!-- <div class="row" id="board_read"> -->
                                 <h3>[<?=$sub_ctgr.' - '.$headpiece?>] <?=$board['title']?></h3>
                                 <p><?=$board['writer']?></p>
-                                <div class="d-flex justify-content-start">                                        
+                                <div class="d-flex justify-content-start">
                                     <div class="mr-3"><?=$board['wdate']?></div>
                                     <div class="">조회 <?=$views?></div>
                                 </div>
 
                                 <table class="table table-striped" style="word-break:break-all; text-align: center; border: 1px solid #ddddda; min-height: 200px;">
-                                    <thead>                                                                                                                                    
-                                    </thead>	
-                                    <tbody>                                                                                      
-                                        <tr>                                                
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
                                             <td colspan="2" style="min-height: 200px; text-align: left;"><?=$board['content']?></td>
                                         </tr>
                                         <tr>
@@ -91,40 +91,40 @@ include_once "../fragments/headpiece.php";
                                                     $sql = mq("SELECT att_file FROM board WHERE num='".$bno."'");
                                                     while($row = mysqli_fetch_assoc($sql)){
                                                         $filepath_array = unserialize($row['att_file']);
-                                                    }                                                        
-                                                    
+                                                    }
+
                                                     for($i=0; $i<count($filepath_array);$i++){
-                                                        $filename_result = mq("SELECT * FROM filesave WHERE filepath='".$filepath_array[$i]."'");                                                            
-                                                        $fetch = mysqli_fetch_array($filename_result);                                                            
-                                                        $filename_real = $fetch['filename_real'];     
+                                                        $filename_result = mq("SELECT * FROM filesave WHERE filepath='".$filepath_array[$i]."'");
+                                                        $fetch = mysqli_fetch_array($filename_result);
+                                                        $filename_real = $fetch['filename_real'];
                                                         $filename_tmp = $fetch['filename_tmp'];
                                                         $filepath = $fetch['filepath'];
                                                         $filename = str_replace(" ","_", $filename_real);
 
                                                         echo "<a class='col-12 float-left py-1 border-0' style='text-align: initial;' href=../file/download.php?dir=$filepath&file=$filename_tmp&name=$filename>$filename_real</a>";
-                                                        
+
                                                     }
                                                 ?>
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>                                    
+                                </table>
                             <!-- </div> -->
-                        </div>											
+                        </div>
                     <!-- </div> -->
 
                 <!-- </div> 컨테이너 끝-->
             <!-- </div> -->
-            
+
             <!-- 댓글 불러오기 -->
                 <!-- <div class="container"> -->
                     <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray; margin-left: inherit;">댓글목록</h3>
                     <div class="row justify-content-start">
                         <div class="col-12 reply_view">
-                            
+
                             <!-- 댓글 목록 불러오기-->
-                            <?php 
+                            <?php
                                 $sql2=mq("SELECT
                                     *
                                 FROM
@@ -136,7 +136,7 @@ include_once "../fragments/headpiece.php";
                                 ");
                                 while($reply=$sql2->fetch_array()){
                             ?>
-                            
+
                             <!-- 개별 댓글 쭉 보여주는 영역 (댓글 내용, 작성일, (작성자 본인일 경우) 수정, 삭제 버튼)-->
                             <div class="row dat_view">
                                 <?php
@@ -145,11 +145,11 @@ include_once "../fragments/headpiece.php";
                                             <img height=1 width=" . $reply['depth']*30 . ">
                                             ";
                                     }
-                                ?>                                                                        
+                                ?>
                                 <div name="reply_area_<?=$reply['num']?>" id="reply_area_<?=$reply['num']?>" class="reply_area col" data-num="<?=$reply['num']?>" data-innum="<?=$reply['in_num']?>" data-depth="<?=$reply['depth']?>" data-writer="<?=$reply['writer']?>">
                                     <div><b><?=$reply['writer']?></b></div>
                                     <div class="dap_to comt_edit">
-                                        <?php 
+                                        <?php
                                         $ori_writer = $reply['ori_writer'];
                                         if($ori_writer != '') {
                                         echo "<a href='#reply_area_$reply[ori_reply]'>".$reply['ori_writer']." 님에게</a>";
@@ -163,9 +163,9 @@ include_once "../fragments/headpiece.php";
                                             <?php if(($reply['email'] != 'deleted')){ ?>
                                             <button class="btn dat_ans_btn">답글 쓰기</button>
                                             <?php } ?>
-                                        </div>                                        
+                                        </div>
                                         <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
-                                        <?php                                             
+                                        <?php
                                             if($useremail==$reply['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
                                         ?>
                                         <div id="dat_edit" class="rep_me rep_menu">
@@ -183,7 +183,7 @@ include_once "../fragments/headpiece.php";
                                         <textarea class="col rep_con" name="content" id="rep_con_ans_<?=$reply['num']?>" placeholder="<?=$reply['writer']?> 님에게"></textarea>
                                         <button class="rep_btn" id="rep_ans_cancel_<?=$reply['num']?>" data-num="<?=$reply['num']?>">취소</button>
                                         <button class="rep_btn" id="rep_ans_<?=$reply['num']?>">등록</button>
-                                    </div>  
+                                    </div>
                                     <!-- 수정 버튼 누르면 나오는 영역-->
                                     <div id="edit_reply_<?=$reply['num']?>" data-num="<?=$reply['num']?>" class="row edit_reply" style="margin-top:10px; display:none">
                                         <input type="hidden" name="rno" value="<?=$reply['num']?>"/>
@@ -191,7 +191,7 @@ include_once "../fragments/headpiece.php";
                                         <button class="rep_btn" id="rep_edit_cancel_<?=$reply['num']?>" data-num="<?=$reply['num']?>">취소</button>
                                         <button class="rep_btn" id="rep_edit_<?=$reply['num']?>">수정</button>
                                     </div>
-                                </div>         
+                                </div>
                             </div>
 
                             <!-- 댓글 삭제 모달창 구현(회원) -->
@@ -203,13 +203,13 @@ include_once "../fragments/headpiece.php";
                                             <!-- header title -->
                                             <h4 class="modal-title"><b>댓글 삭제</b></h4>
                                             <!-- 닫기(x) 버튼 -->
-                                            <button type="button" class="close" data-dismiss="modal">X</button>                                                
+                                            <button type="button" class="close" data-dismiss="modal">X</button>
                                         </div>
                                         <!-- body -->
                                         <div class="modal-body">
                                             <form method="post" id="modal_form1" action="/reply/reply_delete.php">
                                                 <input type="hidden" name="r_no" id="r_no" value="<?=$reply['num']?>"/>
-                                                <input type="hidden" name="b_no" value="<?=$bno;?>">            
+                                                <input type="hidden" name="b_no" value="<?=$bno;?>">
                                                 <script>console.log((<?=$reply['num'];?>));</script>
                                                 <p>삭제하시겠습니까?<br/> <input type="submit" class="btn-sm float-right" value="확인" /></p>
                                             </form>
@@ -217,31 +217,31 @@ include_once "../fragments/headpiece.php";
                                     </div>
                                 </div>
                             </div>
-                            <!-- 댓글 삭제 모달창 구현 끝 -->                            
-                            <?php } ?>                                
-                            
+                            <!-- 댓글 삭제 모달창 구현 끝 -->
+                            <?php } ?>
+
                             <!-- 댓글 달기 -->
                             <div class="row dat_ins dat_view rep_area">
                                 <input type="hidden" name="bno" class="bno" value="<?=$bno?>">
                                 <input type="hidden" name="dat_mail" id="dat_mail" class="dat_mail" value="<?=$useremail?>"">
-                                <input type="hidden" name="dat_user" id="dat_user" class="dat_user" value="<?=$usernickname?>">                                    
+                                <input type="hidden" name="dat_user" id="dat_user" class="dat_user" value="<?=$usernickname?>">
                                 <!-- <div class="row justify-content-start"> -->
-                                <?php 
-                                    if($useremail != "") {                                            
-                                ?>                                    
-                                
+                                <?php
+                                    if($useremail != "") {
+                                ?>
+
                                 <div class="col-12 dat_ins dat_name"><b><?=$usernickname?></b></div>
                                 <textarea class="col rep_con rep_textarea" name="content" id="rep_con_new" placeholder="댓글을 남겨보세요."></textarea>
                                 <button class="rep_btn" id="rep_btn">댓글 달기</button>
-                                
-                                <?php 
+
+                                <?php
                                     } else {
                                 ?>
                                 <textarea class="col rep_con rep_textarea" name="content" id="rep_con_new" placeholder="로그인 후 이용가능합니다." disabled></textarea>
                                 <button class="rep_btn" id="rep_btn" disabled>댓글 달기</button>
-                                <?php 
+                                <?php
                                     }
-                                ?>                                                                       
+                                ?>
                                 <!-- </div> -->
                             </div>
 
@@ -252,22 +252,22 @@ include_once "../fragments/headpiece.php";
                                         if($role == "ADMIN") {
                                     ?>
                                     <form name="write" action="write.php" method="POST" class="pl-0">
-                                        <input type="hidden" name="category" value="<?=$board['category']?>"/>                                            
+                                        <input type="hidden" name="category" value="<?=$board['category']?>"/>
                                     </form>
                                     <a class="mr-1"><button type="button" onclick="javascript:document.write.submit()" class="col-auto mr-auto btn-lg">글쓰기</button></a>
                                     <!-- <a href="write.php?num=<?=$board['num']?>" class="a_nopadding"><button type="button" class="col-auto mr-auto btn-lg">답글</button></a>                                         -->
                                     <?php } ?>
                                     <!-- 자신의 글만 수정, 삭제 할 수 있도록 설정-->
-                                    <?php                                             
+                                    <?php
                                         if($useremail==$board['email'] || $role=="ADMIN"){ // 본인 아이디거나, 관리자 계정이거나
                                     ?>
                                     <a href="update.php?num=<?=$board['num']?>"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">수정</button></a>
-                                    <a class="mx-1" href="delete_article.php?num=<?=$board['num']?>"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">삭제</button></a>                                    
+                                    <a class="mx-1" href="delete_article.php?num=<?=$board['num']?>"><button type="button" value="<?=$bno?>" class="col-auto mr-auto btn-lg">삭제</button></a>
                                     <?php } ?>
                                 </div>
                                 <div class="col-auto d-flex justify-content-end p-0">
                                     <a href="board_list.php?ctgr=<?=$board['category']?>"><button type="button" class="btn-lg">목록</button></a>
-                                </div>                                                                                                      
+                                </div>
                             </div>
 
                         </div>
@@ -282,22 +282,23 @@ include_once "../fragments/headpiece.php";
 
 		</div>
 
+        <?php include_once "../fragments/scripts.php"; ?>
 		<!-- Scripts -->
-            <script src="/assets/js/jquery.min.js"></script>
+            <!--<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
 			<script src="/assets/js/jquery.scrollex.min.js"></script>
 			<script src="/assets/js/browser.min.js"></script>
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
-            <script src="/assets/js/main.js"></script>            
-            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+            <script src="/assets/js/main.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>-->
 
         <!-- Bootstrap Stripts-->
 			<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="/bootstrap/bootstrap.bundle.js"></script>
-            <script src="/bootstrap/bootstrap.bundle.min.js"></script>                    
+            <script src="/bootstrap/bootstrap.bundle.min.js"></script>-->
 
         <!-- 댓글 작성 기능-->
             <script>
@@ -314,22 +315,22 @@ include_once "../fragments/headpiece.php";
 
                         $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
                             url : "../reply/reply_ok.php",
-                            type : "post",                            
+                            type : "post",
                             data : {
                                 "bno" : $(".bno").val(),
                                 "unum" : <?=$usernum?>,
                                 "dat_mail" : $(".dat_mail").val(),
-                                "dat_user" : $(".dat_user").val(),				
+                                "dat_user" : $(".dat_user").val(),
                                 "rep_con" : $("#rep_con_new").val()
                             },
-                            success : function(data){                
+                            success : function(data){
                                 console.log($("#rep_con_new").val());
                                 // alert("댓글이 작성되었습니다");
                                 location.reload();
-                                
+
                             }
                         });
-                    });                    
+                    });
 
                 /* 댓글 삭제 이벤트 */
                     $(".dat_del_btn").click(function(){
@@ -339,15 +340,15 @@ include_once "../fragments/headpiece.php";
                         console.log(num);
                         console.log($("#r_no").attr("value"));
                         $("#rep_modal_del").modal();
-                        
+
                     });
-                    
-                        
+
+
                 });
 
                 /* 답글 작성 이벤트*/
-                $(document).ready(function(){                    
-                    $(".dat_ans_btn").click(function(){ // 사용자가 선택한 댓글의 답글 쓰기 버튼                        
+                $(document).ready(function(){
+                    $(".dat_ans_btn").click(function(){ // 사용자가 선택한 댓글의 답글 쓰기 버튼
                         if(session == "") {
                             alert('로그인 후 이용해주세요!');
                             location.href='/login/login.php';
@@ -379,12 +380,12 @@ include_once "../fragments/headpiece.php";
                             function(){ans_reply.addClass('show')}
                             );
                         });
-                        
+
 
                         $(rep_ans).click(function(){
                             $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
                                 url : "../reply/reply_ok.php",
-                                type : "post",                            
+                                type : "post",
                                 data : {
                                     "in_num" : in_num,
                                     "unum" : <?=$usernum?>,
@@ -396,19 +397,19 @@ include_once "../fragments/headpiece.php";
                                     "dat_mail" : $(".dat_mail").val(),
                                     "dat_user" : $(".dat_user").val()
                                 },
-                                success : function(data){                
+                                success : function(data){
                                     console.log($(".rep_con").val());
                                     // alert("댓글이 수정되었습니다");
                                     location.reload();
-                                    
+
                                 }
                             });
                         });
-                    });       
+                    });
                 });
-                
+
                 /* 댓글 수정 이벤트 */
-                $(document).ready(function(){                    
+                $(document).ready(function(){
                     $(".dat_edit_btn").click(function(){ // 사용자가 선택한 댓글 수정 버튼
                         num = $(this).parent().parent().parent().data("num"); // 선택한 수정 버튼이 있는 댓글의 번호
                         $("#rno").attr("value", num); // DB로 댓글 번호 전달하기 위해서 input value 값 변경
@@ -432,26 +433,26 @@ include_once "../fragments/headpiece.php";
                             function(){edit_reply.addClass('show')}
                             );
                         });
-                        
+
 
                         $(rep_edit).click(function(){
                             $.ajax({				//비동기통신방법, 객체로 보낼때{}사용
                                 url : "../reply/reply_update.php",
-                                type : "post",                            
-                                data : {                                
+                                type : "post",
+                                data : {
                                     "rno" : num,
                                     "rep_con" : $("#rep_con_edit_"+num).val()
                                 },
-                                success : function(data){                
+                                success : function(data){
                                     console.log($(".rep_con").val());
                                     // alert("댓글이 수정되었습니다");
                                     location.reload();
-                                    
+
                                 }
                             });
                         });
-                    });       
-                });                       
+                    });
+                });
             </script>
             <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
             <script>autosize($('.rep_con'));</script>
