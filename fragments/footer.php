@@ -79,7 +79,7 @@ if(basename($_SERVER['PHP_SELF']) == "index.php"){
         </div>
 
     </div>
-    <?php include_once "../fragments/tbbtn.php" ?>
+    <?php include_once "tbbtn.php" ?>
 </div>
 
 <!-- 비밀 글 모달창 양식 구현-->
@@ -102,7 +102,7 @@ if(basename($_SERVER['PHP_SELF']) == "index.php"){
 </div>
 <!-- 비밀 글 모달창 구현 끝-->
 
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="assets/js/jquery-3.5.1.js"></script>
 <script>
     // 비밀글 클릭시 모달창을 띄우는 이벤트
     $(function(){
