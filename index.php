@@ -10,7 +10,7 @@ include_once "./db_con.php";
 -->
 <html>
 	<head>
-		<?php include_once "./fragments/head.php"; ?>
+		<?php include_once "fragments/head.php"; ?>
 		<style media="screen and (min-width: 1680px)">			
 			#intro_img {
 				padding: 0 0 0 40px;
@@ -127,11 +127,11 @@ include_once "./db_con.php";
 			<!-- Footer -->
 			<!-- 맨 아래 어두운 바탕 영역에 있는 것들-->
 				<div id="footer">
-					<?php include_once "/fragments/footer.php"; ?>
+					<?php include_once "fragments/footer.php"; ?>
 				</div>
 		</div>
 
-		<?php include_once "/fragments/scripts.php"; ?>
+		<?php include_once "fragments/scripts.php"; ?>
 		<!-- Scripts -->
 			<!-- <script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.dropotron.min.js"></script>
