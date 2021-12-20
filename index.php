@@ -89,7 +89,7 @@ include_once "./db_con.php";
 							</article>
 							<article class="col-12 col-lg-3 col-md-6 col-sm-12 special">
 								<a href="/intro/finance.php" class="image featured">								
-									<img src="https://salon-de-ahn.s3.ap-northeast-2.amazonaws.com/images/money-2724241_640.jpg" alt="" style=""/>
+									<img src="https://salon-de-ahn.s3.ap-northeast-2.amazonaws.com/images/money-2724241_640.jpg" alt="" />
 								</a>								
 								<header>
 									<h3><a href="/intro/finance.php">금융</a></h3>
