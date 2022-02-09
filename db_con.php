@@ -2,12 +2,12 @@
     // $db_id="ahn";
     // $db_pw="SalonDeAhn930121!";
     // $db_name="salon_de_ahn";
-    // $db_domain="salondeahn.me";
+    // $db_domain="salondeahn.me"; $_SERVER['DB_USERID']
 
-    $db_id="h48k3s6czvuv4kkw";
-    $db_pw="rpx7h5svuakegvy3";
-    $db_name="tc8q2rjfpkbo9wlc";
-    $db_domain="dcrhg4kh56j13bnu.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+    $db_id=$_SERVER['DB_USERID'];
+    $db_pw=$_SERVER['DB_PW'];
+    $db_name=$_SERVER['DB_NAME'];
+    $db_domain=$_SERVER['DB_HOST'];
     
     $db=mysqli_connect($db_domain,$db_id,$db_pw,$db_name);
 
