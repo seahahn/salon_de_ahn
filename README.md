@@ -18,7 +18,7 @@
 
 ## 주요 기능 (이미지 클릭 시 시연 영상으로 이동)
 
-[![Salon de Ahn - 작품 소개, HTTPS, AWS 사용, 회원 관련 기능]()](https://youtu.be/sADWNA3sC8g)
+[![Salon de Ahn - 작품 소개, HTTPS, AWS 사용, 회원 관련 기능](https://user-images.githubusercontent.com/73585246/161051549-38690971-bfcd-4a3f-a8f5-18a92d0c44dd.PNG)](https://youtu.be/sADWNA3sC8g)
 
 ### 0. 도메인 연결, HTTPS 적용, AWS EC2 & S3 사용 (-> Free Tier 만료로 인해 Heroku로 이동)
 
@@ -50,9 +50,9 @@
 
 1-5. 마이페이지 '내가 쓴 게시물', '내가 쓴 댓글' 보기
 
-[![Salon de Ahn - 개인 기록(IT개발 포트폴리오, 금융 거래 기록, 언어 학습 기록)]()](https://youtu.be/d8MTVkS1BHE)
+[![Salon de Ahn - 개인 기록(IT개발 포트폴리오, 금융 거래 기록, 언어 학습 기록)](https://user-images.githubusercontent.com/73585246/161051549-38690971-bfcd-4a3f-a8f5-18a92d0c44dd.PNG)](https://youtu.be/d8MTVkS1BHE)
 
-[![Salon de Ahn - 게시판(게시물 작성, 수정, 삭제, 댓글 작성, 수정, 삭제]()](https://youtu.be/yTkspLIcsIw)
+[![Salon de Ahn - 게시판(게시물 작성, 수정, 삭제, 댓글 작성, 수정, 삭제](https://user-images.githubusercontent.com/73585246/161051549-38690971-bfcd-4a3f-a8f5-18a92d0c44dd.PNG)](https://youtu.be/yTkspLIcsIw)
 
 ### 2. 게시판
 
@@ -72,7 +72,8 @@
 
 2-6. 쿠키를 이용한 조회수 조작 방지(24시간 이내에는 동일 게시물 다시 조회해도 조회수 변동 없음)
 
-[![Project Salon de Ahn]()](https://youtu.be/h9Nmjbjv-Go)
+[![Project Salon de Ahn](https://user-images.githubusercontent.com/73585246/161051610-d06d222a-0d5d-4f96-bce0-5d89d58794c7.jpg)](https://youtu.be/h9Nmjbjv-Go)
+
 
 ### 3. 채팅
 
