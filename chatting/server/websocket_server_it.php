@@ -8,28 +8,28 @@ use Ratchet\WebSocket\WsServer;
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 class Chat implements MessageComponentInterface {
-	protected $runMode = 'D'; // P-운영모드(터미널에 로그 출력 X), D-개발모드(터미널에 로그 출력 O)
+	protected $runMode = 'P'; // P-운영모드(터미널에 로그 출력 X), D-개발모드(터미널에 로그 출력 O)
 	protected $clients;
 	protected $users;
 	protected $double = 0; // 사용자가 동일한 계정으로 창 2개 띄워서 채팅방 2개 같이 입장한 경우 1로 바뀜
 
 	public function __construct() {
 		$this->clients = new \SplObjectStorage;
-		$this->conlog("Constructed.");
+		$this->conlog("IT Chatting Server Constructed.");
 	}
 
 	public function onOpen(ConnectionInterface $conn) { // 사용자가 채팅 접속 시 발생하는 이벤트
 		global $users;
 		$user_res = $conn->resourceId;
-		$this->clients->attach($conn);				
-		$this->conlog("New connection! ({$conn->resourceId})\n");						
-		
+		$this->clients->attach($conn);
+		$this->conlog("New connection! ({$conn->resourceId})\n");
+
 		// 사용자 접속 시 채팅창 우측 상단 "전체 접속 인원" 숫자에 현재 접속한 사용자 수 보내는 부분
 		$user_num_type = 'user_num';
 		$user_num = count($this->clients); // 현재 접속한 사용자 수
 		$conn->send(json_encode(array("type"=>$user_num_type,"msg"=>$user_num)));
 		$count = 0;
-		foreach($this->clients as $client) {			
+		foreach($this->clients as $client) {
 			if($users[$user_res]==$users[$client->resourceId]) {
 				// 사용자가 동일한 계정으로 채팅을 창 2개 띄워서 들어올 때 인원수가 늘어나는 것을 방지하기 위해 필요한 과정
 				$count++;
@@ -50,7 +50,7 @@ class Chat implements MessageComponentInterface {
 	public function onClose(ConnectionInterface $conn) { // 사용자가 채팅 종료 시 발생하는 이벤트
 		global $users;
 		global $double;
-		$this->clients->detach($conn);		
+		$this->clients->detach($conn);
 		$this->conlog("Connection {$conn->resourceId} has disconnected\n");
 		$user_res = $conn->resourceId;
 
@@ -58,7 +58,7 @@ class Chat implements MessageComponentInterface {
 		$type = 'noti_out';
 		$noti = "<span id='".$user_res."out' style='color:#999'><b>".$users[$user_res]."</b>님이 퇴장하셨습니다.</span><br>";
 		$conn->send(json_encode(array("type"=>$type,"msg"=>$noti)));
-		
+
 		if($double == 1) {
 			// 사용자가 동일한 계정으로 2개 이상의 창에서 채팅방 들어온 경우 동일 계정으로 접속했다는 안내 팝업 이후 메인화면으로 보냄
 			// 다만 이와 같이 if문으로 구분해놓지 않은 경우, 동일 계정으로 2개 이상 들어왔다가 나가면 퇴장했다는 메세지가 출력됨
@@ -67,11 +67,11 @@ class Chat implements MessageComponentInterface {
 		} else {
 			foreach($this->clients as $client) {
 				if($conn!=$client) {
-					$client->send(json_encode(array("type"=>$type,"msg"=>$noti)));					
+					$client->send(json_encode(array("type"=>$type,"msg"=>$noti)));
 				}
 			}
 			$double = 0;
-		}	
+		}
 
 		// 사용자 접속 해제 시 채팅창 우측 상단 "전체 접속 인원" 숫자에 현재 접속한 사용자 수 보내는 부분
 		$user_num_type = 'user_num';
@@ -85,16 +85,16 @@ class Chat implements MessageComponentInterface {
 
 		// 사용자 접속 해제 시 채팅창 우측 하단 "전체 접속 인원" 아래에 현재 접속한 사용자 목록에 나간 사용자 닉네임 삭제하는 부분
 		$user_list_type = 'user_list_out';
-		$user_list_id = '#'.$user_res.'';		
+		$user_list_id = '#'.$user_res.'';
 		$conn->send(json_encode(array("type"=>$user_list_type,"msg"=>$user_list_id)));
 		foreach($this->clients as $client) {
 			if($conn!=$client) {
 				$client->send(json_encode(array("type"=>$user_list_type,"msg"=>$user_list_id)));
 			}
-		}		
+		}
 	}
 
-	public function onMessage(ConnectionInterface $from,  $data) {	// 사용자가 채팅에서 메세지 전송 시 발생하는 이벤트		
+	public function onMessage(ConnectionInterface $from,  $data) {	// 사용자가 채팅에서 메세지 전송 시 발생하는 이벤트
 		$from_id = $from->resourceId;
 		$data = json_decode($data);
 		$type = $data->type;
@@ -102,12 +102,12 @@ class Chat implements MessageComponentInterface {
 		global $users;
 		global $double;
 		switch ($type) {
-			case 'chat': // 사용자가 채팅에서 메세지 전송 시 발생하는 이벤트					
+			case 'chat': // 사용자가 채팅에서 메세지 전송 시 발생하는 이벤트
 				$numRecv = count($this->clients) - 1; // 현재 채팅방에 있는 사용자 수(보낸 사람 1명 제외)
-				
+
 				$chat_msg = $data->chat_msg;
 				$response_from = "<span style='color:#999'><b>".$user_id.":</b> ".$chat_msg."</span><br>"; // 보낸 메세지
-				$response_to = "<b>".$user_id."</b>: ".$chat_msg."<br>"; // 받은 메세지								
+				$response_to = "<b>".$user_id."</b>: ".$chat_msg."<br>"; // 받은 메세지
 				$this->conlog(sprintf('Connection "%s" sending message "%s" to %s other connection%s'."\n", $from_id, $chat_msg, $numRecv, $numRecv == 1 ? '' : 's'));
 				// Output
 				$from->send(json_encode(array("type"=>$type,"msg"=>$response_from))); // 사용자 본인이 보낸 메세지이므로 본인에게 보여야 함
@@ -119,21 +119,21 @@ class Chat implements MessageComponentInterface {
 					}
 				}
 				break;
-			case 'noti_in': // 사용자 접속 시 전체 사용자 채팅창에 "~님이 입장하셨습니다." 메시지 출력하는 부분				
+			case 'noti_in': // 사용자 접속 시 전체 사용자 채팅창에 "~님이 입장하셨습니다." 메시지 출력하는 부분
 				$users[$from_id] = $user_id;
-				$type_double = 'double';				
+				$type_double = 'double';
 				$count = 0;
-				foreach($this->clients as $client) {										
-					if($users[$from_id]==$users[$client->resourceId]) {						
-						$count++;						
-					}					
+				foreach($this->clients as $client) {
+					if($users[$from_id]==$users[$client->resourceId]) {
+						$count++;
+					}
 				}
 				if($count >=2) { // 사용자가 동일한 계정으로 2개 이상의 창에서 채팅방 들어온 경우 동일 계정 접속했다는 안내 팝업 이후 메인화면으로 보냄
 					$from->send(json_encode(array("type"=>$type_double,"msg"=>"")));
 					$double = 1;
-					
+
 					break;
-				} else {					
+				} else {
 					$noti = "<span style='color:#999'><b>".$user_id."</b>님이 입장하셨습니다.</span><br>";
 					$from->send(json_encode(array("type"=>$type,"msg"=>$noti)));
 					foreach($this->clients as $client) {
@@ -142,27 +142,27 @@ class Chat implements MessageComponentInterface {
 						}
 					}
 					break;
-				}				
-				
+				}
+
 			case 'user_init': // 채팅방 사용자 목록 맨 위에 사용자 본인의 닉네임을 고정시킴
 				$user_list_myid = $user_id;
 				$count = 0;
-				foreach($this->clients as $client) {										
-					if($users[$from_id]==$users[$client->resourceId]) {						
-						$count++;						
-					}					
+				foreach($this->clients as $client) {
+					if($users[$from_id]==$users[$client->resourceId]) {
+						$count++;
+					}
 				}
 				if($count >=2) {
 				} else {
 					$from->send(json_encode(array("type"=>$type,"msg"=>$user_list_myid)));
-				}				
+				}
 				break;
 			case 'user_list_set': // 사용자가 채팅 첫 접속 시 이미 접속 중인 다른 사용자들의 닉네임을 우측 하단 영역 사용자 닉네임 아래에 출력하는 부분
 				$count = 0;
-				foreach($this->clients as $client) {										
-					if($users[$from_id]==$users[$client->resourceId]) {						
-						$count++;						
-					}					
+				foreach($this->clients as $client) {
+					if($users[$from_id]==$users[$client->resourceId]) {
+						$count++;
+					}
 				}
 				if($count >=2) {
 				} else {
@@ -174,22 +174,22 @@ class Chat implements MessageComponentInterface {
 							$from->send(json_encode(array("type"=>$type,"msg"=>$user_list_id)));
 						}
 					}
-				}				
+				}
 				break;
 			case 'user_list_in': // 다른 사용자 접속 시 채팅창 우측 하단 현재 접속한 사용자 목록에 들어온 사용자 닉네임 추가하는 부분
-				$user_list_id = "<p id=".$from_id." class='m-1 pl-1 border-bottom'><b>".$user_id."</b></p>";		
+				$user_list_id = "<p id=".$from_id." class='m-1 pl-1 border-bottom'><b>".$user_id."</b></p>";
 				$count = 0;
-				foreach($this->clients as $client) {										
-					if($users[$from_id]==$users[$client->resourceId]) {						
-						$count++;						
-					}					
+				foreach($this->clients as $client) {
+					if($users[$from_id]==$users[$client->resourceId]) {
+						$count++;
+					}
 				}
 				if($count >=2) {
 					break;
 				} else {
 					foreach($this->clients as $client) {
-						if($from!=$client) {				
-							$client->send(json_encode(array("type"=>$type,"msg"=>$user_list_id)));						
+						if($from!=$client) {
+							$client->send(json_encode(array("type"=>$type,"msg"=>$user_list_id)));
 						}
 					}
 					break;
@@ -211,18 +211,22 @@ class Chat implements MessageComponentInterface {
 
 $wsPort = 778; //웹소켓 서버 포트 지정
 // SSL 인증서를 지정하는 부분
-$loop = React\EventLoop\Factory::create();
-$webSock = new React\Socket\Server('0.0.0.0:'.$wsPort, $loop);
-$webSock = new React\Socket\SecureServer($webSock, $loop, [
-    'local_cert' => '/etc/letsencrypt/live/salondeahn.me/cert.pem', // 인증서 파일 지정
-    'local_pk' => '/etc/letsencrypt/live/salondeahn.me/privkey.pem', // 비공개 키 파일 지정
-    'allow_self_signed' => TRUE,
-    'verify_peer' => FALSE
-]);
+// $loop = React\EventLoop\Factory::create();
+// $webSock = new React\Socket\Server('0.0.0.0:'.$wsPort, $loop);
+// $webSock = new React\Socket\SecureServer($webSock, $loop, [
+//     'local_cert' => '/etc/letsencrypt/live/salondeahn.me/cert.pem', // 인증서 파일 지정
+//     'local_pk' => '/etc/letsencrypt/live/salondeahn.me/privkey.pem', // 비공개 키 파일 지정
+//     'allow_self_signed' => TRUE,
+//     'verify_peer' => FALSE
+// ]);
 
-$server = new IoServer(
+$server = IoServer::factory(
 	new HttpServer(new WsServer(new Chat())),
-	$webSock, $loop
+	$wsPort
 );
+// $server = new IoServer(
+// 	new HttpServer(new WsServer(new Chat())),
+// 	$webSock, $loop
+// );
 $server->run();
 ?>

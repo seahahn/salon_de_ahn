@@ -88,7 +88,7 @@ $session = $usernickname; // 채팅 닉네임 = 사용자 정보에 설정된 �
 		jQuery(function($){
 			// Websocket 객체 생성(웹소켓 프로토콜://도메인:포트번호/)
 			// HTTP일때는 ws, HTTPS일때는 wss로 하여 보안 수준을 동일하게 맞춰줘야 함
-			var websocket_server = new WebSocket("wss://salondeahn.me:<?=$port?>/");
+			var websocket_server = new WebSocket("wss://<?=$_SERVER['SERVER_NAME']?>:<?=$port?>/");
 
 			websocket_server.onopen = function(e) { // 사용자 접속 시 서버에 사용자 정보 전달
 				websocket_server.send(					
