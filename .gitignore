@@ -10,6 +10,6 @@
 # PHPMailer
 test
 trash
-vendor
+/vendor
 # db_con.php
 salon_de_ahn.sql
