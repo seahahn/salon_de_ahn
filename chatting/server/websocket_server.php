@@ -212,7 +212,7 @@ class Chat implements MessageComponentInterface {
 $wsPort = 777; //웹소켓 서버 포트 지정
 // SSL 인증서를 지정하는 부분
 $loop = React\EventLoop\Factory::create();
-$webSock = new React\Socket\Server($loop);
+// $webSock = new React\Socket\Server($loop);
 // $opts = array(
 // 	'socket' => array(
 // 			'bindto' => '0.0.0.0:'.$wsPort,
