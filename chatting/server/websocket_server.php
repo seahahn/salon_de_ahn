@@ -211,29 +211,29 @@ class Chat implements MessageComponentInterface {
 
 $wsPort = 777; //웹소켓 서버 포트 지정
 // SSL 인증서를 지정하는 부분
-// $loop = React\EventLoop\Factory::create();
-// $webSock = new React\Socket\Server($loop);
+$loop = React\EventLoop\Factory::create();
+$webSock = new React\Socket\Server($loop);
 // $opts = array(
 // 	'socket' => array(
 // 			'bindto' => '0.0.0.0:'.$wsPort,
 // 	),
 // );
 // $webSock = new React\Socket\Server($loop, $opts);
-// $webSock = new React\Socket\Server('0.0.0.0:'.$wsPort, $loop);
-// $webSock = new React\Socket\SecureServer($webSock, $loop, [
-//     'local_cert' => '/etc/letsencrypt/live/salondeahn.me/cert.pem', // 인증서 파일 지정
-//     'local_pk' => '/etc/letsencrypt/live/salondeahn.me/privkey.pem', // 비공개 키 파일 지정
-//     'allow_self_signed' => TRUE,
-//     'verify_peer' => FALSE
-// ]);
+$webSock = new React\Socket\Server('0.0.0.0:'.$wsPort, $loop);
+$webSock = new React\Socket\SecureServer($webSock, $loop, [
+    'local_cert' => '/etc/letsencrypt/live/salondeahn.me/cert.pem', // 인증서 파일 지정
+    'local_pk' => '/etc/letsencrypt/live/salondeahn.me/privkey.pem', // 비공개 키 파일 지정
+    'allow_self_signed' => TRUE,
+    'verify_peer' => FALSE
+]);
 
-$server = IoServer::factory(
-	new HttpServer(new WsServer(new Chat())),
-	$wsPort
-);
-// $server = new IoServer(
+// $server = IoServer::factory(
 // 	new HttpServer(new WsServer(new Chat())),
-// 	$webSock, $loop
+// 	$wsPort
 // );
+$server = new IoServer(
+	new HttpServer(new WsServer(new Chat())),
+	$webSock, $loop
+);
 $server->run();
 ?>
