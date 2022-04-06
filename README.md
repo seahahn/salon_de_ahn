@@ -60,12 +60,12 @@
 
 **<개인 기록(IT개발 포트폴리오, 금융 거래 기록, 언어 학습 기록)>**
   
-[![Salon de Ahn - 개인 기록(IT개발 포트폴리오, 금융 거래 기록, 언어 학습 기록)](https://user-images.githubusercontent.com/73585246/161051549-38690971-bfcd-4a3f-a8f5-18a92d0c44dd.PNG)](https://youtu.be/d8MTVkS1BHE)
+[![Salon de Ahn - 개인 기록(IT개발 포트폴리오, 금융 거래 기록, 언어 학습 기록)](https://user-images.githubusercontent.com/73585246/161982412-4ce6bf81-06e5-4ad4-9aaa-85ef1e9e38ef.png)](https://youtu.be/d8MTVkS1BHE)
   
   
 **<게시판(게시물 작성, 수정, 삭제, 댓글 작성, 수정, 삭제>**
   
-[![Salon de Ahn - 게시판(게시물 작성, 수정, 삭제, 댓글 작성, 수정, 삭제](https://user-images.githubusercontent.com/73585246/161051549-38690971-bfcd-4a3f-a8f5-18a92d0c44dd.PNG)](https://youtu.be/yTkspLIcsIw)
+[![Salon de Ahn - 게시판(게시물 작성, 수정, 삭제, 댓글 작성, 수정, 삭제](https://user-images.githubusercontent.com/73585246/161982918-5f419eb9-dc2a-47fc-8f1b-1e58062f3113.png)](https://youtu.be/yTkspLIcsIw)
 
 ### 2. 게시판
 
