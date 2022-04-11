@@ -38,7 +38,7 @@
 
 ### 1. HTTPS 적용, AWS 사용, 회원 관련 기능
 
-- 시연 영상 : https://youtu.be/sADWNA3sC8g
+- 시연 영상 : https://youtu.be/LdlCZwUjQzM
 
 #### 1) 도메인 연결, HTTPS 적용, AWS EC2 & S3 사용
 
@@ -98,8 +98,8 @@
 
 ### 2. 게시판
 
-- 시연 영상(IT개발 포트폴리오, 금융 거래 기록, 언어 학습 기록) : https://youtu.be/d8MTVkS1BHE
-- 시연 영상(게시판 게시물 작성, 수정, 삭제, 댓글 작성, 수정, 삭제) : https://youtu.be/yTkspLIcsIw
+- 시연 영상(IT개발 포트폴리오, 금융 거래 기록, 언어 학습 기록) : https://youtu.be/ILUoVP0a5aw
+- 시연 영상(게시판 게시물 작성, 수정, 삭제, 댓글 작성, 수정, 삭제) : https://youtu.be/Bp66xztm_1g
 
 #### 1) 게시물 및 답글 작성, 수정, 삭제 & 첨부파일 추가, 수정, 삭제
 
@@ -138,7 +138,7 @@
 
 ### 3. 채팅 & 갤러리
 
-- 시연 영상 : https://youtu.be/h9Nmjbjv-Go
+- 시연 영상 : https://youtu.be/_MvM6lF1tec
 
 #### 1) PHP Ratchet 활용한 웹소켓 채팅 구현
 
